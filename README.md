@@ -4,8 +4,8 @@
   <tr>
     <td align=center>🐨</td>
     <td align=center>🦊</td>
-    <td align=center>🐱</td>
     <td align=center>🐰</td>
+    <td align=center>🐭</td>
   </tr>
   <tr>
     <td align=center><a href="https://github.com/Arkingco">박기선 @kipark</a></td>
