@@ -17,7 +17,7 @@
 
 <br>
 
-## 팀 Notion
+## Docs
 - [팀 노션 ](https://www.notion.so/MINISHELL-2ae7c7929c674345bbd33cf27b098a6f)
 
 <br>
