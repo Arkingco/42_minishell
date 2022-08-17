@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 14:39:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:29:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,7 @@ void	ft_free_envp(char **envp);
 
 // env.c
 void	env(void);
+
+// pwd.c
+void	pwd(void);
 #endif

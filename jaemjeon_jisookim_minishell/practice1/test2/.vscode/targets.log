@@ -7,13 +7,14 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 
 # This program built for i386-apple-darwin11.3.0
  
-make: *** No rule to make target `main.o', needed by `minishell'.  Stop.
 
-
-# Make data base, printed on Wed Aug 17 14:50:23 2022
+# Make data base, printed on Wed Aug 17 22:30:04 2022
 
 # Variables
 
+ 
+# environment
+VSCODE_GIT_ASKPASS_MAIN = /Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -27,7 +28,7 @@ ELECTRON_NO_ATTACH_CONSOLE = 1
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/testing_minishell/test2
+CURDIR := /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/practice1/test2
 # makefile
 SHELL = /bin/sh
 # environment
@@ -41,21 +42,23 @@ MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 8)
 NAME_LIBFT = ${DIR_LIBFT}/libft.a
 # environment
+VSCODE_INJECTION = 1
+# environment
 __CFBundleIdentifier = com.microsoft.VSCode
 # environment
-INFOPATH = /opt/homebrew/share/info:
+INFOPATH = /opt/homebrew/share/info:/opt/homebrew/share/info:
 # environment
 P9K_SSH = 0
 # environment
 MAIL = jaemjeon@student.42.fr
 # environment
-VSCODE_CWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/testing_minishell/test2
+VSCODE_CWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/practice1/test2
 # environment
-PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS
+PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS:/opt/homebrew/bin:/opt/homebrew/sbin
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = 8D456611-B937-44B9-8501-CE59F1B7FC6D
+ZDOTDIR = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/vscode-zsh
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
@@ -64,16 +67,16 @@ ELECTRON_RUN_AS_NODE = 1
 SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vCpYBuziyT/Listeners
 # automatic
 %F = $(notdir $%)
-# makefile (from `Makefile', line 20)
+# makefile (from `Makefile', line 21)
 OBJS = ${SRCS:.c=.o}
 # environment
-PWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/testing_minishell/test2
+PWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/practice1/test2
 # environment
 HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
-MANPATH = /opt/homebrew/share/man::
+MANPATH = /opt/homebrew/share/man:/usr/share/man:/usr/local/share/man:/Applications/Wireshark.app/Contents/Resources/share/man:/opt/homebrew/share/man:
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
@@ -97,15 +100,17 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
+MAKELEVEL := 0
+# environment
 XPC_FLAGS = 0x0
 # environment
 COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
-# environment
-LC_TERMINAL = iTerm2
+# default
+MAKECMDGOALS := all
 # makefile (from `Makefile', line 10)
-SRCS = main.c init.c main_loop.c env.c signal_action.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c util_1.c
+SRCS = main.c init.c main_loop.c env.c pwd.c signal_action.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c util_1.c
 # environment
 SHLVL = 3
 # makefile (from `Makefile', line 1)
@@ -116,10 +121,6 @@ MAKE_VERSION := 3.81
 USER = jaemjeon
 # makefile
 .DEFAULT_GOAL := all
-# default
-MAKECMDGOALS := all
-# environment
-TERM_SESSION_ID = w0t0p1:66E3BDA5-72A7-437B-B68F-1BE5D9EFEF0B
 # makefile (from `Makefile', line 2)
 NAME = minishell
 # environment
@@ -129,7 +130,9 @@ LESS = -R
 # default
 MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # environment
-TERM_PROGRAM = iTerm.app
+VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
+# environment
+TERM_PROGRAM = vscode
 # default
 .VARIABLES := 
 # environment
@@ -139,6 +142,8 @@ TMPDIR = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/
 # environment
 VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.70.1-main.sock
 # environment
+VSCODE_GIT_ASKPASS_NODE = /Applications/Visual Studio Code.app/Contents/Frameworks/Code Helper.app/Contents/MacOS/Code Helper
+# environment
 MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
@@ -147,13 +152,11 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 3.4.16
+TERM_PROGRAM_VERSION = 1.70.1
 # environment
 NVM_DIR = /Users/jaemjeon/.nvm
 # environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.8332660.8332666.F6829A94-7A30-4AB9-BBDD-43C8D6DA5E04
-# environment
-LC_TERMINAL_VERSION = 3.4.16
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.8332660.8332666.C8877FEB-4258-4922-8B04-90E63567F37D
 # environment
 HOMEBREW_PREFIX = /opt/homebrew
 # automatic
@@ -161,29 +164,23 @@ HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p1:66E3BDA5-72A7-437B-B68F-1BE5D9EFEF0B
-# environment
 HOMEBREW_REPOSITORY = /opt/homebrew
-# environment
-COLORFGBG = 15;0
 # environment
 __CF_USER_TEXT_ENCODING = 0x1F5:0x3:0x33
 # environment
 COMMAND_MODE = unix2003
+# environment
+GIT_ASKPASS = /Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
 # default
 MAKEFILES := 
 # automatic
 <F = $(notdir $<)
-# environment
-ITERM_PROFILE = Default
 # environment
 PAGER = less
 # environment
 LC_ALL = C
 # makefile (from `Makefile', line 7)
 DIR_LIBFT = ./libft
-# environment
-SECURITYSESSIONID = 186a5
 # environment
 P9K_TTY = old
 # automatic
@@ -193,29 +190,30 @@ SUFFIXES :=
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
-MAKELEVEL := 0
+VSCODE_GIT_IPC_HANDLE = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/vscode-git-fb4859d8ca.sock
 # environment
 LANG = C
 # environment
 TERM = xterm-256color
 # environment
-_P9K_TTY = /dev/ttys003
+_P9K_TTY = /dev/ttys002
 # environment
 VSCODE_PID = 62213
 # environment
 NVM_RC_VERSION = 
 # variable set hash-table stats:
-# Load=95/1024=9%, Rehash=0, Collisions=9/128=7%
+# Load=94/1024=9%, Rehash=0, Collisions=8/127=6%
 
 # Pattern-specific Variable Values
 
 # No pattern-specific variable values.
+ 
 
 # Directories
 
-# . (device 16777234, inode 8691305): 17 files, no impossibilities.
+# . (device 16777234, inode 8703678): 29 files, no impossibilities.
 
-# 17 files, no impossibilities in 1 directories.
+# 29 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -225,9 +223,12 @@ NVM_RC_VERSION =
 
 # Not a target:
 env_list_adt_1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 init.c:
@@ -240,22 +241,25 @@ all: minishell
 #  Command-line target.
 #  Implicit rule search has not been done.
 #  File does not exist.
-#  File has not been updated.
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 util_1.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 .PHONY: all clean fclean bonus re
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
- 
 # Not a target:
 main.c:
 #  Implicit rule search has not been done.
@@ -264,9 +268,12 @@ main.c:
 
 # Not a target:
 env_list_adt_2.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 .SUFFIXES:
@@ -283,11 +290,17 @@ main_loop.c:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-17 14:43:55
+#  Last modified 2022-08-17 22:29:46
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+pwd.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 env.c:
@@ -301,27 +314,32 @@ env_list_adt_1.c:
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: main.o init.o main_loop.o env.o signal_action.o env_list_adt_1.o env_list_adt_2.o env_list_adt_3.o util_1.o libft/libft.a
+minishell: main.o init.o main_loop.o env.o pwd.o signal_action.o env_list_adt_1.o env_list_adt_2.o env_list_adt_3.o util_1.o libft/libft.a
 #  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-08-17 22:29:53
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 25):
+#  commands to execute (from `Makefile', line 26):
 	${CC} -lreadline ${CFLAGS} -o ${NAME} ${OBJS} ${NAME_LIBFT}
 	
 
 # Not a target:
 signal_action.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 libft/libft.a:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 28):
+#  Last modified 2022-08-17 22:29:53
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 29):
 	make -C ${DIR_LIBFT} all
 	
 
@@ -331,11 +349,11 @@ bonus:
 #  File does not exist.
 #  File has not been updated.
 
-.c.o: main.c init.c main_loop.c env.c signal_action.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c util_1.c
+.c.o: main.c init.c main_loop.c env.c pwd.c signal_action.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c util_1.c
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 31):
+#  commands to execute (from `Makefile', line 32):
 	${CC} ${CFLAGS} -c $^
 	
 
@@ -350,7 +368,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 38):
+#  commands to execute (from `Makefile', line 39):
 	rm -f ${NAME}
 	
 
@@ -368,9 +386,12 @@ env_list_adt_2.c:
 
 # Not a target:
 env_list_adt_3.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 re: fclean all
 #  Phony target (prerequisite of .PHONY).
@@ -383,16 +404,20 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 34):
+#  commands to execute (from `Makefile', line 35):
 	rm -f ${OBJS}
 	make -C ${DIR_LIBFT} fclean
 	
 
 # Not a target:
 init.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+ 
 
 # Not a target:
 signal_action.c:
@@ -403,16 +428,20 @@ signal_action.c:
 # Not a target:
 main.o:
 #  Implicit rule search has been done.
-#  File does not exist.
-#  File has not been updated.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 main_loop.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # Not a target:
 env_list_adt_3.c:
@@ -421,13 +450,25 @@ env_list_adt_3.c:
 #  File has not been updated.
 
 # Not a target:
+pwd.o:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
 env.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
+#  Implicit rule search has been done.
+#  Last modified 2022-08-17 22:29:52
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
 
 # files hash-table stats:
-# Load=30/1024=3%, Rehash=0, Collisions=0/71=0%
+# Load=32/1024=3%, Rehash=0, Collisions=0/75=0%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -439,6 +480,6 @@ env.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Aug 17 14:50:23 2022
+# Finished Make data base on Wed Aug 17 22:30:04 2022
 
  

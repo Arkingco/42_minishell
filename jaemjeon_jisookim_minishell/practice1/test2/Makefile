@@ -11,6 +11,7 @@ SRCS = main.c				\
 	   init.c				\
 	   main_loop.c			\
 	   env.c				\
+	   pwd.c				\
 	   signal_action.c		\
 	   env_list_adt_1.c		\
 	   env_list_adt_2.c		\

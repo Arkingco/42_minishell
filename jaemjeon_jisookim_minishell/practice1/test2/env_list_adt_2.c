@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 04:12:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/17 22:25:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	*ft_getenv(char *key)
 	envlst = g_global.lst_env;
 	while (envlst != NULL)
 	{
-		if (ft_strncmp(envlst->key, key, INT_MAX))
+		if (ft_strncmp(envlst->key, key, INT_MAX) == 0)
 			return (envlst->value);
 		envlst = envlst->next;
 	}

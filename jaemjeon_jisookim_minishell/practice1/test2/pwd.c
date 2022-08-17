@@ -1,28 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 03:43:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 22:30:12 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/17 22:28:06 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/17 22:29:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	loop_get_commandline(void)
+void	pwd(void)
 {
-	char	*line;
+	char	*pwd_value;
 
-	while (1)
-	{
-		line = readline("MINISHELL : ");
-		if (line == NULL)
-			ft_error(0, "exit");
-		pwd();
-		add_history(line);
-		free(line);
-	}
+	pwd_value = ft_getenv("PWD");
+	if (pwd_value == NULL)
+		return ;
+	printf("%s\n", pwd_value);
 }
