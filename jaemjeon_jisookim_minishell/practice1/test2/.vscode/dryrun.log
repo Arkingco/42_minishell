@@ -1,0 +1,15 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/testing_minishell/test2'
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c main.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c init.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c main_loop.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c env.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c signal_action.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c env_list_adt_1.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c env_list_adt_2.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c env_list_adt_3.c
+gcc -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -c util_1.c
+make -C ./libft all
+gcc -lreadline -g -L /opt/homebrew/Cellar/readline/8.1.2/lib -I /opt/homebrew/Cellar/readline/8.1.2/include -o minishell main.o init.o main_loop.o env.o signal_action.o env_list_adt_1.o env_list_adt_2.o env_list_adt_3.o util_1.o ./libft/libft.a
+make: Leaving directory `/Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/testing_minishell/test2'
+ 
