@@ -1,0 +1,5 @@
+make --dry-run --keep-going --print-directory
+make: Entering directory `/Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/practice1/test2'
+make: Nothing to be done for `all'.
+make: Leaving directory `/Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/practice1/test2'
+ 

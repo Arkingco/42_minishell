@@ -1,0 +1,39 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaemjeon/42seoul/libft_submit'
+gcc -Wall -Wextra -Werror -c ft_memset.c
+gcc -Wall -Wextra -Werror -c ft_bzero.c
+gcc -Wall -Wextra -Werror -c ft_memcpy.c
+gcc -Wall -Wextra -Werror -c ft_memmove.c
+gcc -Wall -Wextra -Werror -c ft_memchr.c
+gcc -Wall -Wextra -Werror -c ft_memcmp.c
+gcc -Wall -Wextra -Werror -c ft_strlen.c
+gcc -Wall -Wextra -Werror -c ft_isalpha.c
+gcc -Wall -Wextra -Werror -c ft_isdigit.c
+gcc -Wall -Wextra -Werror -c ft_isalnum.c
+gcc -Wall -Wextra -Werror -c ft_isascii.c
+gcc -Wall -Wextra -Werror -c ft_isprint.c
+gcc -Wall -Wextra -Werror -c ft_toupper.c
+gcc -Wall -Wextra -Werror -c ft_tolower.c
+gcc -Wall -Wextra -Werror -c ft_strchr.c
+gcc -Wall -Wextra -Werror -c ft_strrchr.c
+gcc -Wall -Wextra -Werror -c ft_strncmp.c
+gcc -Wall -Wextra -Werror -c ft_strlcpy.c
+gcc -Wall -Wextra -Werror -c ft_strlcat.c
+gcc -Wall -Wextra -Werror -c ft_strnstr.c
+gcc -Wall -Wextra -Werror -c ft_atoi.c
+gcc -Wall -Wextra -Werror -c ft_calloc.c
+gcc -Wall -Wextra -Werror -c ft_strdup.c
+gcc -Wall -Wextra -Werror -c ft_substr.c
+gcc -Wall -Wextra -Werror -c ft_strjoin.c
+gcc -Wall -Wextra -Werror -c ft_strtrim.c
+gcc -Wall -Wextra -Werror -c ft_split.c
+gcc -Wall -Wextra -Werror -c ft_itoa.c
+gcc -Wall -Wextra -Werror -c ft_strmapi.c
+gcc -Wall -Wextra -Werror -c ft_striteri.c
+gcc -Wall -Wextra -Werror -c ft_putchar_fd.c
+gcc -Wall -Wextra -Werror -c ft_putstr_fd.c
+gcc -Wall -Wextra -Werror -c ft_putendl_fd.c
+gcc -Wall -Wextra -Werror -c ft_putnbr_fd.c
+ar rs libft.a ft_memset.o ft_bzero.o ft_memcpy.o ft_memmove.o ft_memchr.o ft_memcmp.o ft_strlen.o ft_isalpha.o ft_isdigit.o ft_isalnum.o ft_isascii.o ft_isprint.o ft_toupper.o ft_tolower.o ft_strchr.o ft_strrchr.o ft_strncmp.o ft_strlcpy.o ft_strlcat.o ft_strnstr.o ft_atoi.o ft_calloc.o ft_strdup.o ft_substr.o ft_strjoin.o ft_strtrim.o ft_split.o ft_itoa.o ft_strmapi.o ft_striteri.o ft_putchar_fd.o ft_putstr_fd.o ft_putendl_fd.o ft_putnbr_fd.o
+make: Leaving directory `/Users/jaemjeon/42seoul/libft_submit'
+ 
