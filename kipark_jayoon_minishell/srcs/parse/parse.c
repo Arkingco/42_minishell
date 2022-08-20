@@ -3,19 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/19 16:52:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/08/20 11:17:08 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parse.h"
 #include "libft.h"
 
-int	return_end_index(char *str, int i)
+static int	get_word_token_end_index(char *readline, int i, t_metacharacter t_meta_type)
 {
-	
+	if (t_meta_type == M_NOT) // word 받는 부분
+	{
+		while (!ft_isspace(readline[i]) && readline[i] != '\0')
+			++i;
+		return (i);
+	}
+	else					// 쿼터 받는 부분
+	{
+		while (readline[i] != t_meta_type)
+			++i;
+		return (i);
+	}
+	return (i);
 }
 
 int	is_metacharacter(char c)
@@ -33,33 +45,46 @@ static int	pass_ifs(char *readline, int i)
 	return (i);
 }
 
-static int	get_token_type(char *str, int i, t_token_type *t_type)
+static int	get_token_type_of_redirection_or_pipe(char *readline, int i, \
+	t_metacharacter t_meta_type)
 {
-	if (str[i] == M_DOUBLE_QUOTE)
-		t_type = T_DOUBLE_QUOTE;
-	else if (str[i] == M_SINGLE_QUOTE)
+
+}
+static int	get_token_type(char *readline, int i, t_token_type *t_type)
+{
+	int length;
+
+	length = 0;
+	if (readline[i] == M_DOUBLE_QUOTE)
 	{
-		t_type = M_SINGLE_QUOTE;
-		while (str[i + 1] != M_SINGLE_QUOTE)
-		{
-			
-		}
+		*t_type = T_DOUBLE_QUOTE;
+		return (get_word_token_end_index(readline, i, M_DOUBLE_QUOTE)); // ifs 신경 안쓰고 자기랑 같은 쿼터가 나올 때 까지 받아야함
 	}
-	else if (str[i] == M_INPUT_REDIRECTION)
+	else if (readline[i] == M_SINGLE_QUOTE)
 	{
-		t_type = M_INPUT_REDIRECTION;
+		*t_type = T_SINGLE_QUOTE;
+		return (get_word_token_end_index(readline, i, M_SINGLE_QUOTE)); // ifs 신경 안쓰고 자기랑 같은 쿼터가 나올 때 까지 받아야함
 	}
-	else if (str[i] == M_OUTPUT_REDIRECTION)
+	else if (readline[i] == M_INPUT_REDIRECTION)
 	{
-		t_type = M_OUTPUT_REDIRECTION;
+		
+		length = get_token_type_of_redirection_or_pipe;
+		if (length == 1)
+			*t_type = T_INPUT_REDIRECTION;
+		if (length == 2)
+			*t_type = T_APPEND_REDIRECTION;
 	}
-	else if (str[i] == M_PIPE)
+	else if (readline[i] == M_OUTPUT_REDIRECTION)
 	{
-		t_type = M_PIPE;
+		*t_type = M_OUTPUT_REDIRECTION;
+	}
+	else if (readline[i] == M_PIPE)
+	{
+		*t_type = M_PIPE;
 	}
 }
 
-void	read_readline(char *readline)
+static void	read_readline(char *readline)
 {
 	int				start;
 	int				i;
@@ -70,19 +95,16 @@ void	read_readline(char *readline)
 	while (readline[i] != '\0')
 	{
 		start = pass_ifs(readline, i);
-		if (is_metacharacter(readline[i]))
-			get_token_type(readline, i, &t_type);
-		else
-		{
-			i = get_word_token_end_index(readline, i)
-			i++;
-		}
+		if (is_metacharacter(readline[i])) // | ' " > < >> <<
+			i = get_token_type(readline, i, &t_type);
+		else // words
+			i = get_word_token_end_index(readline, i, M_NOT); // ifs 신경 쓰고 처리 해야함
 		if (ft_isspace(readline[i + 1]))
-			token_add_list(set_token ,ft_substr(readline, start, i));
+			token_add_list(token_head ,ft_substr(readline, start, i));
 	}
 }
 
 void	*tokenize(char *readline)
 {
-	read_readline()
+	read_readline(readline);
 }
