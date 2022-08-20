@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/19 14:59:09 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/08/20 14:27:39 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,12 @@
 #include <readline/history.h>
 #include "prompt.h"
 #include "minishell.h"
+#include "parse.h"
 
 int main(void)
 {
 	char	*line;
+	t_token *token;
 	
 	init_terminal();
 	while (1)
@@ -28,10 +30,10 @@ int main(void)
 		if (line)
 		{
 			
-			tokenize();
-			set_parse_list();
-			syntax_analysis();
-			execute();
+			token = tokenize(line);
+			// set_parse_list();
+			// syntax_analysis();
+			// execute();
 			
 			add_history(line);
 			free(line);

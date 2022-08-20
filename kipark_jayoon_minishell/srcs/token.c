@@ -1,0 +1,45 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   token.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
+/*   Updated: 2022/08/20 14:34:38 by kipark           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "parse.h"
+#include <stdlib.h>
+#include <stdio.h>
+
+void	init_token_dummy_node(t_token *token_head)
+{
+	token_head->next = NULL;
+	token_head->str = NULL;
+	token_head->type = T_NULL;
+}
+
+t_token *new_token_node(t_token_type token_type, char *token_str)
+{
+	t_token *new_token;
+
+	new_token = malloc(sizeof(t_token));
+	if (new_token == NULL)
+		printf("Token ERROR");
+	init_token_dummy_node(new_token);
+	new_token->type = token_type;
+	new_token->str = token_str;
+	return (new_token);
+}
+void	token_add_list(t_token *token_head, t_token_type token_type, \
+															char *token_str)
+{
+	t_token	*curr;
+
+	curr = token_head;
+	while (curr->next != NULL)
+		curr = curr->next;
+	curr->next = new_token_node(token_type, token_str);
+}

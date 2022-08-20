@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
+#    By: kipark <kipark@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:13:32 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/16 15:17:25 by jayoon           ###   ########.fr        #
+#    Updated: 2022/08/20 14:30:03 by kipark           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ LIBFT_DIR	=	./libft/
 
 SRCS_NAME	=	main.c 				\
 				init_terminal.c		\
-				exit_terminal.c
+				exit_terminal.c		\
+				parse.c		\
+				token.c \
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o)
 
@@ -49,16 +51,16 @@ endif
 all: $(NAME)
 
 $(NAME): $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 $(LIBFT):
 	@make -C $(LIBFT_DIR)
 
 $(OBJS_DIR):
-	@mkdir $(OBJS_DIR)
+	mkdir $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	@$(CC) $(CFLAGS) $(CPPFLAGS) $(INCS_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(INCS_FLAGS) -c $< -o $@
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
