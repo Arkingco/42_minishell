@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/21 18:08:38 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:10:41 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ static void	read_readline(char *rl, t_token *token_head)
 	while (rl[end] != '\0')
 	{
 		end = pass_ifs(rl, end);
+		if (rl[end] == '\0')
+			break ;
 		start = end;
 		if (is_metachar_not_include_quote(rl[end]))
 			end = set_meta_token_type_return_end_index(rl, end, &t_type);
