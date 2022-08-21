@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/20 14:32:17 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 14:40:42 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef enum e_metacharacter
 	M_INPUT_REDIR 		= '<',
 	M_OUTPUT_REDIR 		= '>',
 	M_PIPE 				= '|',
+	M_WORD				= 0,
 }	t_metacharacter;
 
 typedef enum e_token_type
@@ -56,5 +57,6 @@ t_token	*tokenize(char *readline);
 void	init_token_dummy_node(t_token *token_head);
 void	token_add_list(t_token *token_head, t_token_type token_type, \
 															char *token_str);
+void	print_token_list(t_token *token_head);
 
 #endif
