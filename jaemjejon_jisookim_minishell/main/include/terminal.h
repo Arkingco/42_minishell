@@ -1,22 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   terminal.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:39:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/20 11:39:58 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/21 19:14:21 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:14:45 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef VAR_TERMINAL_H
+ # define VAR_TERMINAL_H
 
-extern t_global	g_global;
+// signal_action.c
+void	set_signal_action(void);
 
-void	make_token_list(char *line)
-{
-	//
-	// thanks to kipark_jajoon!!
-	//
-}
+#endif

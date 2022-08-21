@@ -1,15 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   var_parse.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:48:25 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/20 11:54:05 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/21 18:11:43 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:12:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// util_1.c
-void	ft_error(int exit_status, char *message);
-void	ft_free_envp(char **envp);
+#ifndef VAR_PARSE_H
+ # define VAR_PARSE_H
+
+
+
+#endif

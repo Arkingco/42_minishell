@@ -1,28 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_loop.c                                        :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 03:43:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/19 14:45:29 by jisookim         ###   ########.fr       */
+/*   Created: 2022/08/21 19:15:12 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:15:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef VAR_BUILT_INL_H
+ # define VAR_BUILT_INL_H
 
-void	loop_get_commandline(void)
-{
-	char	*line;
+// pwd.c
+void	pwd(void);
 
-	while (1)
-	{
-		line = readline("MINISHELL : ");
-		if (line == NULL)
-			ft_error(0, "exit");
-		parsing(line);
-		add_history(line);
-		free(line);
-	}
-}
+#endif

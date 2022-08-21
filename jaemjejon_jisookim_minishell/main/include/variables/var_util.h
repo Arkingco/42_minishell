@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   var_util.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 16:42:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 12:40:57 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/21 18:11:37 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:14:03 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef VAR_UTIL_H
+ # define VAR_UTIL_H
 
-t_global	g_global;
+//main_loop.c
+void	loop_get_commandline(void);
 
-int	main(int argc, char *argv[], char *envp[])
-{
-	init(argc, envp);
-	loop_get_commandline();
-	return (0);
-}
+// init.c
+void	init(int argc, char *envp[]);
+void	init_env_lst(char *envp[]);
+void	update_shlvl(void);
+
+#endif

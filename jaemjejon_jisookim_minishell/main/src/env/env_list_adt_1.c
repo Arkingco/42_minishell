@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 03:55:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 00:28:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:31:59 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/variables/var_base_struct.h"
 
 extern t_global g_global;
 
-void	ft_env_lstadd_back(t_envlst **lst, t_envlst *new)
+void	ft_env_lstadd_back(t_envlst **lst, t_envlst *new_list)
 {
 	if (*lst == NULL)
-		*lst = new;
+		*lst = new_list;
 	else
-		(ft_env_lstlast(*lst))->next = new;
+		(ft_env_lstlast(*lst))->next = new_list;
 }
 
 int	ft_env_lstsize(t_envlst *lst)

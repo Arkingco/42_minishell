@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   signal_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/13 18:56:17 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/16 21:55:02 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:30:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/variables/var_base_struct.h"
 
 void sigint_handler(int signo)
 {

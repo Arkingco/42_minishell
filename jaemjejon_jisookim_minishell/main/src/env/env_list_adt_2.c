@@ -3,30 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 22:25:23 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:38:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/variables/var_base_struct.h"
+#include "../../include/variables/var_define.h"
 
 extern t_global g_global;
-
-// t_envlst	*ft_env_lstdup(t_envlst *lst)
-// {
-// 	t_envlst	*new_lst;
-
-// 	if (lst == NULL)
-// 		return (NULL);
-// 	while (lst != NULL)
-// 	{
-// 		ft_env_lstadd_back(&new_lst, ft_env_lstnew(lst->key, lst->value));
-// 		lst = lst->next;
-// 	}
-// 	return (new_lst);
-// }
 
 t_envlst	*ft_getenv_lst(char *key)
 {

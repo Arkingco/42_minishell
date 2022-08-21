@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   signal.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:37:54 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/20 12:00:13 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/21 19:34:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef SIGNAL_H
+# define SIGNAL_H
 
-extern t_global	g_global;
+// signal_action.c
+void	set_signal_action(void);
+void	sigint_handler(int signo);
 
-void	parsing(char *line)
-{
-	make_token_list(line);
-	make_cmd_list();
-}
+#endif

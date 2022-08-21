@@ -1,17 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_token.c                                      :+:      :+:    :+:   */
+/*   var_define.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/19 16:21:52 by jisookim          #+#    #+#             */
-/*   Updated: 2022/08/20 11:53:31 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/21 18:13:23 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:05:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef VAR_DEFINE_H
+ # define VAR_DEFINE_H
 
-extern t_global	g_global;
+# define TRUE 1
+# define FALSE 0
+# define INT_MAX 2147483647
+# define GET 0
+# define SET 1
 
+# define INPUT 0
+# define OUTPUT 1
 
+#endif

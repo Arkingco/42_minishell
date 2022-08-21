@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:49 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 03:48:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/21 19:40:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/variables/var_base_struct.h"
+#include "../../include/variables/var_define.h"
 
 extern t_global	g_global;
 

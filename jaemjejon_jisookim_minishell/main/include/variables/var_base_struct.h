@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   var_base_struct.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/20 13:38:26 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/21 19:02:03 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/21 19:04:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#ifndef VAR_BASE_STRUCT_H
+ # define VAR_BASE_STRUCT_H
 
 # include <dirent.h>
 # include <stdio.h>
@@ -20,38 +20,9 @@
 # include <readline/readline.h>
 # include <signal.h>
 
-# include "./libft/libft.h"
-# include "./parse.h"
-# include "./tokenize.h"
-# include "./env.h"
-# include "./util.h"
+# include "../libft/libft.h"
 
-# define TRUE 1
-# define FALSE 0
-# define INT_MAX 2147483647
-# define GET 0
-# define SET 1
-
-# define INPUT 0
-# define OUTPUT 1
-
-enum	e_token
-{
-	E_WORD = 0,
-	E_REDIRECT,
-	E_PIPE,
-	E_NULL
-};
-
-enum	e_redirect
-{
-	E_REDI_R = 0,
-	E_REDI_L,
-	E_REDI_RR,
-	E_REDI_LL
-};
-
-typedef struct s_token
+typedef struct s_token // to do : value 초기화, redirect_type = 0
 {
 	int				type;
 	int				redirect_type;
@@ -59,17 +30,17 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-typedef struct s_simple_command
-{
-	t_token						cur;
-	struct	s_simple_command	*next;
-}	t_simple_command;
-
 typedef struct s_redirect
 {
 	t_token		*redirect_input[2]; // [0] -> REDIRECT_TOKEN [1] -> FILENAME_TOKEN
 	t_token		*redirect_output[2];
 }	t_redirect;
+
+typedef struct s_simple_command
+{
+	t_token						cur;
+	struct	s_simple_command	*next;
+}	t_simple_command;
 
 typedef struct s_cmd
 {
@@ -93,20 +64,5 @@ typedef struct s_global
 	t_cmd		*lst_cmd;
 }	t_global;
 
-// main.c
-
-//main_loop.c
-void	loop_get_commandline(void);
-
-// init.c
-void	init(int argc, char *envp[]);
-void	init_env_lst(char *envp[]);
-void	update_shlvl(void);
-
-// signal_action.c
-void	set_signal_action(void);
-
-// pwd.c
-void	pwd(void);
 
 #endif
