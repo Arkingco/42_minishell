@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/21 16:00:58 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 16:54:38 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,8 @@ void	print_token_list(t_token *token_head)
 	{
 		if (this_token->next == NULL)
 			break ;
-		printf("token_str: %s   token_str_length:%zu  token_tpye: %d\n ", this_token->str, ft_strlen(this_token->str), this_token->type);
+		printf("token_str: %s   token_str_length:%zu  token_tpye: %d\n", this_token->str, ft_strlen(this_token->str), this_token->type);
 		this_token = this_token->next;
-		
 	}
 }
 
@@ -50,7 +49,7 @@ t_token *new_token_node(t_token_type token_type, char *token_str)
 	return (new_token);
 }
 
-void	token_add_list(t_token *token_head, t_token_type token_type, \
+void	token_add(t_token *token_head, t_token_type token_type, \
 															char *token_str)
 {
 	t_token	*curr;
