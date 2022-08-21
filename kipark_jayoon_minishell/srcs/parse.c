@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/21 17:59:40 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:08:38 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,8 @@
 #include "libft.h"
 #include <stdio.h>
 
-int	is_metachar_not_include_quote(char c)
-{
-	if (c == M_INPUT_REDIR || c == M_OUTPUT_REDIR || c == M_PIPE)
-		return (1);
-	return (0);
-}
-
-int	ft_isifs(int c)
-{
-	if (c == ' ' || c == '\n' || c == '\t')
-		return (1);
-	return (0);
-}
-
-
-static int	pass_ifs(char *rl, int i)
-{
-	while (ft_isifs(rl[i]) && rl[i] != '\0')
-		++i;
-	return (i);
-}
-
 static int	get_quote_type_return_index(char *rl, int i, \
-	t_token_type this_token_type)
+												t_token_type this_token_type)
 {
 	if (this_token_type == T_SINGLE_QUOTE)
 		while (rl[i] != M_SINGLE_QUOTE && rl[i + 1] != '\0')

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/21 16:54:41 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 18:07:54 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,8 @@ void	init_token_dummy_node(t_token *token_head);
 void	token_add(t_token *token_head, t_token_type token_type, \
 															char *token_str);
 void	print_token_list(t_token *token_head);
+int		pass_ifs(char *rl, int i);
+int		ft_isifs(int c);
+int		is_metachar_not_include_quote(char c);
 
 #endif
