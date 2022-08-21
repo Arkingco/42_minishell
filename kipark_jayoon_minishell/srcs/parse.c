@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/21 16:54:43 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/21 17:59:40 by kipark           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ static int	get_quote_type_return_index(char *rl, int i, \
 	t_token_type this_token_type)
 {
 	if (this_token_type == T_SINGLE_QUOTE)
-		while (rl[i] != M_SINGLE_QUOTE)
+		while (rl[i] != M_SINGLE_QUOTE && rl[i + 1] != '\0')
 			++i;
-	else if (this_token_type == T_DOUBLE_QUOTE)
+	else if (this_token_type == T_DOUBLE_QUOTE && rl[i + 1] != '\0')
 		while (rl[i] != M_DOUBLE_QUOTE)
 			++i;
 	return (i);
 }
 
 static int	set_token_type_return_index(char *rl, int i, \
-	t_token_type this_token_type, t_token_type *t_type)
+							t_token_type this_token_type, t_token_type *t_type)
 {
 	*t_type = this_token_type;
 	if (this_token_type == T_WORD)
