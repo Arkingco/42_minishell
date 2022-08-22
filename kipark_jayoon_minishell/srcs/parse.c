@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/22 16:34:01 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/22 16:43:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,8 +100,6 @@ static void	read_readline(char *rl, t_token *token_head)
 	if (rl[end] == '\0')
 		token_add(token_head, t_type, (char *)T_NULL);
 }
-
-
 
 t_token	*tokenize(char *readline)
 {
