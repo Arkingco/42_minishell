@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 22:25:23 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:49:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int	ft_delenv(char *key)
 void	ft_addenv_str(char *str_envp)
 {
 	const char	*p_del = ft_strchr(str_envp, '=');
-	const char	*p_null = ft_memchr(str_envp, '\0', INT_MAX);
 	char		*key;
 	char		*value;
 

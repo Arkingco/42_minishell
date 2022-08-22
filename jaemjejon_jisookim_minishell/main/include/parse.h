@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 11:44:45 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 15:51:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:03:50 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,15 @@
 void	parsing(char *line);
 
 // parse_make_cmd.c
-void	make_token_list(char *line);
+void	make_cmd_list(void);
 void	make_redirect_tokens(t_token *cur_token);
 void	make_word_token(t_token *cur_token);
-void	make_cmd_node(t_token *cur_token);
-void	make_cmd_list(void);
+t_cmd	*ft_getlstcmd_last(void);
 void	parse_add_redirect_token(t_token *token_addr, int io);
 void	parse_add_word_token(t_token *token_addr);
-t_cmd	*ft_getlstcmd_last(void);
+void	make_cmd_node(t_token *cur_token);
 
-// parse_token.c
-void	parse_add_redirect_token(t_token *token_addr, int io);
+// parse_make_token.c
+void	make_token_list(char *line);
 
 #endif

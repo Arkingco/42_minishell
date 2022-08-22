@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 12:40:57 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/22 20:54:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,7 @@ int	main(int argc, char *argv[], char *envp[])
 	init(argc, envp);
 	loop_get_commandline();
 	return (0);
+	// unused parameter error
+	argv++;
+	argv = NULL;
 }

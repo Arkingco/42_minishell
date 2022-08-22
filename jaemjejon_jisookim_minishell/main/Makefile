@@ -1,138 +1,73 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/08/19 15:49:31 by jisookim          #+#    #+#              #
-#    Updated: 2022/08/22 18:40:56 by jaemjeon         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+CC = cc
+NAME = minishell
+CFLAGS = -Wall -Wextra -Werror
+NAME_LIBFT = libft.a
+DIR_LIBFT = ./libft
+INCLUDE_READLINE = -I readline/include
+INCLUDE = -I include -I include/var_header -I $(DIR_LIBFT)
+LIB_READLINE = -L readline/lib
+RM = rm -f
 
-# HEADER
-INCLUDE	:=	-I include -I include/var_header -I libft -I readline/include
+SRCS_DIR := ./src
 
-# SRCS
-SRCS_DIR	:=	./src
-
-# DIRECTORIES
 DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 DIR_ENV			:=	$(SRCS_DIR)/env
-DIR_EXECUTEOR	:=	$(SRCS_DIR)/executor
-DIR_EXPAND		:=	$(SRCS_DIR)/expand
-DIR_HEREDOC		:=	$(SRCS_DIR)/heredoc
-DIR_LEXER		:=	$(SRCS_DIR)/lexer
 DIR_PARSER		:=	$(SRCS_DIR)/parser
-DIR_REDIRECTION	:=	$(SRCS_DIR)/redirection
 DIR_TERMINAL	:=	$(SRCS_DIR)/terminal
 DIR_TOKENIZER	:=	$(SRCS_DIR)/tokenizer
 DIR_UTILS		:=	$(SRCS_DIR)/utils
-DIR_MAIN		:=	$(SRCS_DIR)
+DIR_MAIN		:=	$(SRCS_DIR)/main
 
-# built_in
-SRC_BUILT_IN	:= env.c pwd.c
+SRC_BUILT_IN	:=	env.c pwd.c
 SRC_BUILT_IN	:= $(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
-# env
 SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
-# executor
-SRC_EXECUTOR	:= 
-SRC_EXECUTOR	:= $(addprefix $(DIR_EXECUTOR)/, $(SRC_EXECUTOR))
+SRC_PARSER		:= parsing.c parse_make_cmd.c parse_make_token.c
+SRC_PARSER		:= $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
 
-# expand
-SRC_EXPAND	:= 
-SRC_EXPAND	:= $(addprefix $(DIR_EXPAND)/, $(SRC_EXPAND))
-
-# heredoc
-SRC_HEREDOC	:= 
-SRC_HEREDOC	:= $(addprefix $(DIR_HEREDOC)/, $(SRC_HEREDOC))
-
-# lexer
-SRC_LEXER	:= 
-SRC_LEXER	:= $(addprefix $(DIR_LEXER)/, $(SRC_LEXER))
-
-# parse
-SRC_PARSER	:= parse_make_cmd.c parse_make_token.c parsing.c
-SRC_PARSER	:= $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
-
-# redirection
-SRC_REDIRECTION	:= 
-SRC_REDIRECTION	:= $(addprefix $(DIR_REDIRECTION)/, $(SRC_REDIRECTION))
-
-# terminal
 SRC_TERMINAL	:= signal_action.c
 SRC_TERMINAL	:= $(addprefix $(DIR_TERMINAL)/, $(SRC_TERMINAL))
 
-# tokenizer
-SRC_TOKENIZER	:= token_list_adt_1.c tokenizing.c
+SRC_TOKENIZER	:= token_list_adt_1.c
 SRC_TOKENIZER	:= $(addprefix $(DIR_TOKENIZER)/, $(SRC_TOKENIZER))
 
-# utils
 SRC_UTILS		:= util_1.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
-# main
-SRCS_MAIN		:=	main.c main_loop.c init.c
-SRCS_MAIN		:=	$(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
+SRC_MAIN		:= main.c init.c main_loop.c
+SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
+
+SRCS			=	$(SRC_BUILT_IN) $(SRC_ENV) $(SRC_PARSER) $(SRC_TERMINAL) \
+					$(SRC_TOKENIZER) $(SRC_UTILS) $(SRC_MAIN)
+
+OBJS 			=	${SRCS:.c=.o}
 
 
-# MINISHELL
-CC			:=	cc
-CFLAGS		:=  #-L readline/lib \
-				#-I readline/include \
-				#-g -L /opt/homebrew/Cellar/readline/8.1.2/lib \
-				#-I /opt/homebrew/Cellar/readline/8.1.2/include \
-				# -L ~/.brew/Cellar/readline/8.1.2/lib \
-				# -I ~/.brew/Cellar/readline/8.1.2/include
-READLINE_FLAGS = -L readline/lib \
-				 -I readline/include
-RM			:=	rm -f
-SANITIZE	:=	-fsanitize=address -g3
 
-NAME		:=	minishell
 
-SRCS	:=	$(SRC_BUILT_IN) $(SRC_ENV) $(SRC_EXECUTOR) \
-			$(SRC_EXPANDER) $(SRC_HEREDOC) $(SRC_LEXER) \
-			$(SRC_REDIRECTION) $(SRC_PARSER) $(SRC_TERMINAL) \
-			$(SRC_TOKENIZER) $(SRC_UTILS) $(SRC_MAIN)
+all : ${NAME}
 
-# libft
-DIR_LIBFT	:=	./libft
-LIBFT		:=	libft.a
-LIBFT		:=	$(addprefix $(DIR_LIBFT)/, $(LIBFT))
+$(NAME) : $(NAME_LIBFT) ${OBJS}
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
 
-# objs
-DIR_OBJS	:=	./
-OBJS		:=	$(SRCS:.c=.o)
-OBJS		+=	$(LIBFT:.c=.o)
+$(NAME_LIBFT)	:
+	make -C $(DIR_LIBFT) all
 
-NAME_LIBFT	:
-	$(MAKE) -C $(DIR_LIBFT) all
+# .c.o	:	$(SRCS)
+# 	${CC} ${CFLAGS} -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
-$(NAME)		:	$(NAME_LIBFT) $(OBJS)
-	$(CC) -L$(DIR_LIBFT) -lft -lreadline $(CFLAGS) $(OBJS) -o $@
+%.o		:	%.c
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
-%.o			: %.c
-	$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE}
+clean :
+	make -C $(DIR_LIBFT) clean
+	rm -f ${OBJS}
 
-# MAKE COMMANDS
-.PHONY		:	all
-all			:	$(NAME)
+fclean : clean
+	rm -f ${NAME}
 
-.PHONY		:	clean
-clean		:
-	$(MAKE) -C $(DIR_LIBFT) clean
-	$(RM) $(OBJS)
+.PHONY : all clean fclean bonus re
 
-.PHONY		:	fclean
-fclean		:	clean
-	$(MAKE) -C $(DIR_LIBFT) fclean
-	$(RM) $(NAME)
-
-.PHONY		:	re
-re			:
-	$(MAKE) fclean
-	$(MAKE) all
+re : fclean all
