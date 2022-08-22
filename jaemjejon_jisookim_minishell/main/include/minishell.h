@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 16:46:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 01:20:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <signal.h>
 
 # include "libft.h"
-# include "var_enum_def.h"
 # include "parse.h"
 # include "tokenize.h"
 # include "env.h"

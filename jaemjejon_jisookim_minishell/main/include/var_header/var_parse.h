@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   var_parse.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:13:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 18:42:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 01:10:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VAR_PARSE_H
 # define VAR_PARSE_H
 
-#include "var_tokenize.h"
+# include "var_enum_def.h"
+# include "var_tokenize.h"
 
 typedef struct s_simple_command
 {

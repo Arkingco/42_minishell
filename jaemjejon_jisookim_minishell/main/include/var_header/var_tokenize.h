@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   var_tokenize.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:13:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 21:51:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 01:20:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef VAR_TOKENIZE_H
 # define VAR_TOKENIZE_H
 
-# define DQUOTE 0b00000001
-# define SQUOTE 0b00000010
-# define QUOTE 0b00000011
+# include "var_enum_def.h"
 
 typedef struct s_token
 {
