@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/16 16:44:59 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/08/22 15:27:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,25 @@
 #include <readline/history.h>
 #include "prompt.h"
 #include "minishell.h"
+#include "parse.h"
 
 int main(void)
 {
-	int		ret;
 	char	*line;
+	t_token *token;
 	
-	ret = 1;
 	init_terminal();
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (line)
 		{
-			if (ret)
-				printf("output> %s\n", line);
+			
+			token = tokenize(line);
+			// set_parse_list();
+			// syntax_analysis();
+			// execute();
+			
 			add_history(line);
 			free(line);
 			line = NULL;

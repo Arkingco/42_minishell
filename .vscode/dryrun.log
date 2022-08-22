@@ -1,6 +1,6 @@
 make --dry-run --always-make --keep-going --print-directory
-make: Entering directory `/Users/jaemjeon/42seoul/minishell_team'
-make: Leaving directory `/Users/jaemjeon/42seoul/minishell_team'
+make: Entering directory `/Users/kipark/42_project/42_minishell'
+make: Leaving directory `/Users/kipark/42_project/42_minishell'
  
 make: *** No targets specified and no makefile found.  Stop.
 
