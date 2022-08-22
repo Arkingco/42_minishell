@@ -3,17 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+         #
+#    By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/08/19 15:49:31 by jisookim          #+#    #+#              #
-#    Updated: 2022/08/21 18:06:48 by jisookim         ###   ########.fr        #
+#    Updated: 2022/08/22 18:40:56 by jaemjeon         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # HEADER
-INCLUDE_DIR	:=	./include
-INCLUDE		:=	minishell.h env.h parse.h tokenize.h util.h
-INCLUDE		:=	$(addprefix $(INCLUDE_DIR)/, $(INCLUDE))
+INCLUDE	:=	-I include -I include/var_header -I libft -I readline/include
 
 # SRCS
 SRCS_DIR	:=	./src
@@ -56,8 +54,8 @@ SRC_HEREDOC	:= $(addprefix $(DIR_HEREDOC)/, $(SRC_HEREDOC))
 SRC_LEXER	:= 
 SRC_LEXER	:= $(addprefix $(DIR_LEXER)/, $(SRC_LEXER))
 
-# parser
-SRC_PARSER	:= parse_make_cmd.c parse_token.c parsing.c
+# parse
+SRC_PARSER	:= parse_make_cmd.c parse_make_token.c parsing.c
 SRC_PARSER	:= $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
 
 # redirection
@@ -73,21 +71,24 @@ SRC_TOKENIZER	:= token_list_adt_1.c tokenizing.c
 SRC_TOKENIZER	:= $(addprefix $(DIR_TOKENIZER)/, $(SRC_TOKENIZER))
 
 # utils
-SRC_UTILS		:= init.c leaks.c main_loop.c util_1.c
+SRC_UTILS		:= util_1.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 # main
-SRCS_MAIN		:=	main.c
+SRCS_MAIN		:=	main.c main_loop.c init.c
 SRCS_MAIN		:=	$(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
 
 # MINISHELL
 CC			:=	cc
-CFLAGS		:=	-Wall -Wextra -Werror \
-				-g -L /opt/homebrew/Cellar/readline/8.1.2/lib \
-				-I /opt/homebrew/Cellar/readline/8.1.2/include
-				# -L ~/.brew/Cellar/readline/8.1.2/lib
+CFLAGS		:=  #-L readline/lib \
+				#-I readline/include \
+				#-g -L /opt/homebrew/Cellar/readline/8.1.2/lib \
+				#-I /opt/homebrew/Cellar/readline/8.1.2/include \
+				# -L ~/.brew/Cellar/readline/8.1.2/lib \
 				# -I ~/.brew/Cellar/readline/8.1.2/include
+READLINE_FLAGS = -L readline/lib \
+				 -I readline/include
 RM			:=	rm -f
 SANITIZE	:=	-fsanitize=address -g3
 
@@ -108,13 +109,14 @@ DIR_OBJS	:=	./
 OBJS		:=	$(SRCS:.c=.o)
 OBJS		+=	$(LIBFT:.c=.o)
 
+NAME_LIBFT	:
+	$(MAKE) -C $(DIR_LIBFT) all
 
-$(NAME)		:	$(OBJS)
-	$(MAKE) -C $(DIR_LIBFT)
+$(NAME)		:	$(NAME_LIBFT) $(OBJS)
 	$(CC) -L$(DIR_LIBFT) -lft -lreadline $(CFLAGS) $(OBJS) -o $@
 
-%.o			: %.c $(INCLUDE)
-	$(CC) $(CFLAGS) -c $< -o $@
+%.o			: %.c
+	$(CC) $(CFLAGS) -c $< -o $@ ${INCLUDE}
 
 # MAKE COMMANDS
 .PHONY		:	all

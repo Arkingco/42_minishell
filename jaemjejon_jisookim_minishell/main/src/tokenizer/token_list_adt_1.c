@@ -6,11 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 15:23:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/08/21 19:24:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/19 16:42:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/variables/var_base_struct.h"
+#include "minishell.h"
 
 extern t_global	g_global;
 

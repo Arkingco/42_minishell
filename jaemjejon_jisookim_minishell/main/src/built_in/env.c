@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 00:35:59 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 03:55:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/22 15:46:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 extern t_global	g_global;
 
-void	env()
+void	env(void)
 {
 	t_envlst	*envlst;
 

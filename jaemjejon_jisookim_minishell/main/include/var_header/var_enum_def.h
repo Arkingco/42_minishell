@@ -1,20 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   var_enum_def.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:48:25 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 15:17:05 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/22 15:20:51 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/22 15:21:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILE_H
-# define UTILE_H
+#ifndef VAR_ENUM_DEF_H
+# define VAR_ENUM_DEF_H
 
-// util_1.c
-void	ft_error(int exit_status, char *message);
-void	ft_free_envp(char **envp);
+# define TRUE 1
+# define FALSE 0
+# define INT_MAX 2147483647
+# define GET 0
+# define SET 1
+
+# define INPUT 0
+# define OUTPUT 1
+
+enum	e_token
+{
+	E_WORD = 0,
+	E_REDIRECT,
+	E_PIPE,
+	E_NULL
+};
+
+enum	e_redirect
+{
+	E_REDI_R = 0,
+	E_REDI_L,
+	E_REDI_RR,
+	E_REDI_LL
+};
 
 #endif

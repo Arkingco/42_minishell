@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/21 19:23:49 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/17 12:39:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/variables/var_base_struct.h"
-#include "../../include/variables/var_define.h"
+#include "minishell.h"
 
 extern t_global	g_global;
 

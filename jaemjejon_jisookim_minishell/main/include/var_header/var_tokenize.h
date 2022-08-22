@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   var_tokenize.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:48:25 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 15:17:05 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/22 15:13:56 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/22 15:21:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILE_H
-# define UTILE_H
+#ifndef VAR_TOKENIZE_H
+# define VAR_TOKENIZE_H
 
-// util_1.c
-void	ft_error(int exit_status, char *message);
-void	ft_free_envp(char **envp);
+typedef struct s_token
+{
+	int				type;
+	int				redirect_type;
+	char			*word_value;
+	struct s_token	*next;
+}	t_token;
 
 #endif

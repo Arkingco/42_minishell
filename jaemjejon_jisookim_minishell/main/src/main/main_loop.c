@@ -1,20 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   main_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:48:25 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 15:17:05 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/17 03:43:03 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/19 14:45:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILE_H
-# define UTILE_H
+#include "minishell.h"
 
-// util_1.c
-void	ft_error(int exit_status, char *message);
-void	ft_free_envp(char **envp);
+void	loop_get_commandline(void)
+{
+	char	*line;
 
-#endif
+	while (1)
+	{
+		line = readline("MINISHELL : ");
+		if (line == NULL)
+			ft_error(0, "exit");
+		parsing(line);
+		add_history(line);
+		free(line);
+	}
+}

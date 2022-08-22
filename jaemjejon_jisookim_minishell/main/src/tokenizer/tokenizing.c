@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tokenizing.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 11:39:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/21 19:24:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/20 11:39:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/variables/var_base_struct.h"
+#include "minishell.h"
 
 extern t_global	g_global;
 

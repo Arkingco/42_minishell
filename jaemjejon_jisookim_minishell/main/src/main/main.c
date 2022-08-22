@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util.h                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:48:25 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 15:17:05 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/16 16:42:41 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/17 12:40:57 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILE_H
-# define UTILE_H
+#include "minishell.h"
 
-// util_1.c
-void	ft_error(int exit_status, char *message);
-void	ft_free_envp(char **envp);
+t_global	g_global;
 
-#endif
+int	main(int argc, char *argv[], char *envp[])
+{
+	init(argc, envp);
+	loop_get_commandline();
+	return (0);
+}

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   util_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:59:43 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/21 19:36:26 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/17 14:39:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/variables/var_base_struct.h"
+#include "minishell.h"
 
 void	ft_error(int exit_status, char *message)
 {
