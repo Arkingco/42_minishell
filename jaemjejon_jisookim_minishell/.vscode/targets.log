@@ -10,7 +10,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 make: *** No rule to make target `all'.  Stop.
 
 
-# Make data base, printed on Mon Aug 22 20:57:58 2022
+# Make data base, printed on Mon Aug 22 21:36:57 2022
 
 # Variables
 
@@ -134,7 +134,6 @@ MAKEFILES :=
 PAGER = less
 # environment
 LC_ALL = C
- 
 # environment
 SECURITYSESSIONID = 186a6
 # automatic
@@ -158,9 +157,9 @@ VSCODE_PID = 1764
 
 # Directories
 
-# . (device 16777225, inode 3977348): 6 files, no impossibilities.
+# . (device 16777225, inode 3977348): 5 files, no impossibilities.
 
-# 6 files, no impossibilities in 1 directories.
+# 5 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -232,6 +231,6 @@ GNUmakefile:
 # strcache size: total = 0 / max = 0 / min = 4096 / avg = 0
 # strcache free: total = 0 / max = 0 / min = 4096 / avg = 0
 
-# Finished Make data base on Mon Aug 22 20:57:58 2022
+# Finished Make data base on Mon Aug 22 21:36:57 2022
 
  

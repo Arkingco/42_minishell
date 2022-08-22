@@ -24,13 +24,13 @@ SRC_BUILT_IN	:= $(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
-SRC_PARSER		:= parsing.c parse_make_cmd.c parse_make_token.c
+SRC_PARSER		:= parsing.c parse_make_cmd.c
 SRC_PARSER		:= $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
 
 SRC_TERMINAL	:= signal_action.c
 SRC_TERMINAL	:= $(addprefix $(DIR_TERMINAL)/, $(SRC_TERMINAL))
 
-SRC_TOKENIZER	:= token_list_adt_1.c
+SRC_TOKENIZER	:= tokenizing.c token_list_adt_1.c tokenizer_util_1.c
 SRC_TOKENIZER	:= $(addprefix $(DIR_TOKENIZER)/, $(SRC_TOKENIZER))
 
 SRC_UTILS		:= util_1.c
@@ -54,9 +54,6 @@ $(NAME) : $(NAME_LIBFT) ${OBJS}
 
 $(NAME_LIBFT)	:
 	make -C $(DIR_LIBFT) all
-
-# .c.o	:	$(SRCS)
-# 	${CC} ${CFLAGS} -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 %.o		:	%.c
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)

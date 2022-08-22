@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 11:39:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/20 11:39:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/22 21:54:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,11 @@
 
 extern t_global	g_global;
 
-void	make_token_list(char *line)
+void	tokenizing(char *line)
 {
-	//
-	// thanks to kipark_jajoon!!
-	//
+	t_readstatus	readstatus;
+	int				index;
+
+	reset_readstatus(&readstatus);
+	index = 0;
 }
