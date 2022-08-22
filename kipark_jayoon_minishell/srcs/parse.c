@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/21 18:10:41 by kipark           ###   ########.fr       */
+/*   Updated: 2022/08/22 16:34:01 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ static int	get_quote_type_return_index(char *rl, int i, \
 {
 	if (this_token_type == T_SINGLE_QUOTE)
 		while (rl[i] != M_SINGLE_QUOTE && rl[i + 1] != '\0')
+		{
 			++i;
+		}
 	else if (this_token_type == T_DOUBLE_QUOTE && rl[i + 1] != '\0')
-		while (rl[i] != M_DOUBLE_QUOTE)
+		while (rl[i] != M_DOUBLE_QUOTE && rl[i + 1] != '\0')
 			++i;
 	return (i);
 }
@@ -99,14 +101,21 @@ static void	read_readline(char *rl, t_token *token_head)
 		token_add(token_head, t_type, (char *)T_NULL);
 }
 
+
+
 t_token	*tokenize(char *readline)
 {
 	t_token *token_head;
 
 	token_head = malloc(sizeof(t_token));
 	if (token_head == NULL)
-		printf("malloc Errror \n");
+		return (NULL);
 	init_token_dummy_node(token_head);
+	if (check_readline_able_parse(readline))
+	{
+		printf("syntex error\n");
+		return (NULL);
+	}
 	read_readline(readline, token_head);
 	// token_extention(token_head);
 	print_token_list(token_head);
