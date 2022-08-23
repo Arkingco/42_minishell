@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kipark <kipark@student.42.fr>              +#+  +:+       +#+         #
+#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:13:32 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/21 18:07:37 by kipark           ###   ########.fr        #
+#    Updated: 2022/08/23 11:42:37 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,7 @@ SRCS_NAME	=	main.c 				\
 				parse.c				\
 				parse_util.c 		\
 				token.c				\
+				token_expand.c
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o)
 
