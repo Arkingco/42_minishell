@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:13:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 01:20:13 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:42:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_token
 	int				redirect_type;
 	char			*word_value;
 	struct s_token	*next;
+	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_readstatus

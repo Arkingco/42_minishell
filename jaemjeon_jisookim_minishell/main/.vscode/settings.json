@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"stdio.h": "c"
+		"stdio.h": "c",
+		"var_tokenize.h": "c",
+		"var_enum_def.h": "c"
 	}
 }

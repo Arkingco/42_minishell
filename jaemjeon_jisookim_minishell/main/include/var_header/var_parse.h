@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/22 15:13:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 01:10:12 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 22:13:24 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,9 @@ typedef struct s_simple_command
 
 typedef struct s_redirect
 {
-	t_token		*redirect_input[2]; // [0] -> REDIRECT_TOKEN [1] -> FILENAME_TOKEN
-	t_token		*redirect_output[2];
+	t_token		*redirect_input; // 리다이렉트 종류와 파일 이름이 함께 저장되어있습니다
+	t_token		*redirect_output;
+	t_token		*unused_token; // 리다이렉트 종류만 저장되어 있기때문에 쓰이지 않습니다.
 }	t_redirect;
 
 typedef struct s_cmd

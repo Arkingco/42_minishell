@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 20:36:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:45:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ typedef struct s_global
 // main.c
 
 //main_loop.c
-void	loop_get_commandline(void);
+void	loop_get_commandline(t_envlst *env);
 
 // init.c
-void	init(int argc, char *envp[]);
-void	init_env_lst(char *envp[]);
-void	update_shlvl(void);
+void	init(int argc, char *envp[], t_envlst *env);
+void	init_env_lst(char *envp[], t_envlst *env);
+void	update_shlvl(t_envlst *env);
 
 // signal_action.c
 void	set_signal_action(void);

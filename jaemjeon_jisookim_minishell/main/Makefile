@@ -17,6 +17,7 @@ DIR_TERMINAL	:=	$(SRCS_DIR)/terminal
 DIR_TOKENIZER	:=	$(SRCS_DIR)/tokenizer
 DIR_UTILS		:=	$(SRCS_DIR)/utils
 DIR_MAIN		:=	$(SRCS_DIR)/main
+DIR_DEBUG		:=	$(SRCS_DIR)/debug
 
 SRC_BUILT_IN	:=	env.c pwd.c
 SRC_BUILT_IN	:= $(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
@@ -24,7 +25,7 @@ SRC_BUILT_IN	:= $(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
-SRC_PARSER		:= parsing.c parse_make_cmd.c
+SRC_PARSER		:= parsing.c parse_make_cmd.c cmd_list_adt_1.c
 SRC_PARSER		:= $(addprefix $(DIR_PARSER)/, $(SRC_PARSER))
 
 SRC_TERMINAL	:= signal_action.c
@@ -39,12 +40,14 @@ SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 SRC_MAIN		:= main.c init.c main_loop.c
 SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
+SRC_DEBUG		:= debug_init_env_lst.c
+SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
+
+
 SRCS			=	$(SRC_BUILT_IN) $(SRC_ENV) $(SRC_PARSER) $(SRC_TERMINAL) \
 					$(SRC_TOKENIZER) $(SRC_UTILS) $(SRC_MAIN)
 
 OBJS 			=	${SRCS:.c=.o}
-
-
 
 
 all : ${NAME}
@@ -52,11 +55,14 @@ all : ${NAME}
 $(NAME) : $(NAME_LIBFT) ${OBJS}
 	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
 
+debug : $(NAME_LIBFT) ${OBJS}
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
+
 $(NAME_LIBFT)	:
 	make -C $(DIR_LIBFT) all
 
 %.o		:	%.c
-	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE) -D DEBUG
 
 clean :
 	make -C $(DIR_LIBFT) clean
