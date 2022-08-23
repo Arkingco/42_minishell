@@ -1,0 +1,16 @@
+make --dry-run --always-make --keep-going --print-directory
+make: Entering directory `/Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell'
+make -C ./libft all
+cc -g -Wall -Wextra -Werror -o src/env/env.o -c src/env/env.c -I include -I include/var_header -I ./libft -I readline/include
+cc -g -Wall -Wextra -Werror -o src/env/env_list_adt_1.o -c src/env/env_list_adt_1.c -I include -I include/var_header -I ./libft -I readline/include
+cc -g -Wall -Wextra -Werror -o src/env/env_list_adt_2.o -c src/env/env_list_adt_2.c -I include -I include/var_header -I ./libft -I readline/include
+ 
+cc -g -Wall -Wextra -Werror -o src/env/env_list_adt_3.o -c src/env/env_list_adt_3.c -I include -I include/var_header -I ./libft -I readline/include
+cc -g -Wall -Wextra -Werror -o src/utils/ifs.o -c src/utils/ifs.c -I include -I include/var_header -I ./libft -I readline/include
+cc -g -Wall -Wextra -Werror -o src/utils/error_exit.o -c src/utils/error_exit.c -I include -I include/var_header -I ./libft -I readline/include
+ 
+cc -g -Wall -Wextra -Werror -o src/main/main.o -c src/main/main.c -I include -I include/var_header -I ./libft -I readline/include
+cc -g -Wall -Wextra -Werror -o src/main/init.o -c src/main/init.c -I include -I include/var_header -I ./libft -I readline/include
+cc -o minishell -g -Wall -Wextra -Werror ./src/env/env.o ./src/env/env_list_adt_1.o ./src/env/env_list_adt_2.o ./src/env/env_list_adt_3.o ./src/utils/ifs.o ./src/utils/error_exit.o ./src/main/main.o ./src/main/init.o -lreadline -lft -L readline/lib -L ./libft
+make: Leaving directory `/Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell'
+ 

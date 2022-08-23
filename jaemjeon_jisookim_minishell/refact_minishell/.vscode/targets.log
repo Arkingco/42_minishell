@@ -1,0 +1,412 @@
+make all --print-data-base --no-builtin-variables --no-builtin-rules --question
+# GNU Make 3.81
+# Copyright (C) 2006  Free Software Foundation, Inc.
+# This is free software; see the source for copying conditions.
+# There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A
+# PARTICULAR PURPOSE.
+
+# This program built for i386-apple-darwin11.3.0
+ 
+
+# Make data base, printed on Wed Aug 24 06:16:36 2022
+
+# Variables
+
+# automatic
+<D = $(patsubst %/,%,$(dir $<))
+# automatic
+?F = $(notdir $?)
+ 
+# makefile (from `Makefile', line 16)
+DIR_MAIN := ./src/main
+# environment
+ELECTRON_NO_ATTACH_CONSOLE = 1
+# makefile (from `Makefile', line 6)
+INCLUDE_READLINE = -I readline/include
+# environment
+VSCODE_LOG_NATIVE = false
+# automatic
+?D = $(patsubst %/,%,$(dir $?))
+# automatic
+@D = $(patsubst %/,%,$(dir $@))
+# automatic
+@F = $(notdir $@)
+# makefile
+CURDIR := /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+# makefile
+SHELL = /bin/sh
+# makefile (from `Makefile', line 9)
+RM = rm -f
+# environment
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# environment
+_ = /usr/bin/make
+# makefile (from `Makefile', line 3)
+CFLAGS = -g -Wall -Wextra -Werror
+# makefile (from `Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
+# makefile (from `Makefile', line 4)
+NAME_LIBFT = libft.a
+# environment
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 35)
+OBJS = ${SRCS:.c=.o}
+# makefile (from `Makefile', line 13)
+DIR_ENV := ./src/env
+# environment
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/vscode-ipc-01545976-1c6c-4bf3-9552-aec2a09b26ed.sock
+# environment
+VSCODE_CWD = /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+# environment
+PATH = /Users/jaemjeon/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+# makefile (from `Makefile', line 15)
+DIR_UTILS := ./src/utils
+# environment
+LSCOLORS = Gxfxcxdxbxegedabagacad
+# makefile (from `Makefile', line 11)
+SRCS_DIR := ./src
+# environment
+VSCODE_LOG_STACK = false
+# environment
+ELECTRON_RUN_AS_NODE = 1
+# default
+.FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
+# environment
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.37rJCfPjcu/Listeners
+# automatic
+%F = $(notdir $%)
+# environment
+VSCODE_PIPE_LOGGING = true
+# environment
+PWD = /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+# environment
+ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
+# environment
+HOME = /Users/jaemjeon
+# default
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+# environment
+VSCODE_CLI = 1
+# environment
+VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+# environment
+LOGNAME = jaemjeon
+# environment
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+# environment
+ZSH = /Users/jaemjeon/.oh-my-zsh
+# environment
+VSCODE_HANDLES_UNCAUGHT_ERRORS = true
+# automatic
+^D = $(patsubst %/,%,$(dir $^))
+# environment
+XPC_FLAGS = 0x0
+# environment
+COLORTERM = truecolor
+# default
+MAKE = $(MAKE_COMMAND)
+# environment
+LC_TERMINAL = iTerm2
+# makefile (from `Makefile', line 33)
+SRCS = $(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN)
+# environment
+SHLVL = 3
+# makefile (from `Makefile', line 1)
+CC = cc
+# default
+MAKE_VERSION := 3.81
+# environment
+USER = jaemjeon
+# makefile
+.DEFAULT_GOAL := all
+# makefile (from `Makefile', line 7)
+INCLUDE = -I include -I include/var_header -I $(DIR_LIBFT)
+# default
+MAKECMDGOALS := all
+# environment
+TERM_SESSION_ID = w0t0p0:A8DF735F-42FA-4145-AEE2-372DCBDFB351
+# makefile (from `Makefile', line 2)
+NAME = minishell
+# environment
+LESS = -R
+# automatic
+%D = $(patsubst %/,%,$(dir $%))
+# default
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 24)
+SRC_TOKENIZE := 
+# environment
+TERM_PROGRAM = iTerm.app
+# default
+.VARIABLES := 
+# environment
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/
+# makefile (from `Makefile', line 30)
+SRC_MAIN := ./src/main/main.c ./src/main/init.c
+# automatic
+*F = $(notdir $*)
+# environment
+VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.67.2-main.sock
+# makefile
+MAKEFLAGS = Rrqp
+# environment
+MFLAGS = -Rrqp
+# automatic
+*D = $(patsubst %/,%,$(dir $*))
+# environment
+TERM_PROGRAM_VERSION = 3.3.7
+# environment
+XPC_SERVICE_NAME = 0
+# environment
+LC_TERMINAL_VERSION = 3.3.7
+# automatic
++D = $(patsubst %/,%,$(dir $+))
+# automatic
++F = $(notdir $+)
+# environment
+ITERM_SESSION_ID = w0t0p0:A8DF735F-42FA-4145-AEE2-372DCBDFB351
+# environment
+COLORFGBG = 7;0
+# environment
+__CF_USER_TEXT_ENCODING = 0x197BF:0x0:0x0
+# default
+MAKEFILES := 
+# automatic
+<F = $(notdir $<)
+# environment
+ITERM_PROFILE = Default
+# environment
+PAGER = less
+# environment
+LC_ALL = C
+# makefile (from `Makefile', line 5)
+DIR_LIBFT = ./libft
+# makefile (from `Makefile', line 8)
+LIB_READLINE = -L readline/lib
+# automatic
+^F = $(notdir $^)
+# makefile (from `Makefile', line 20)
+SRC_ENV := ./src/env/env.c ./src/env/env_list_adt_1.c ./src/env/env_list_adt_2.c ./src/env/env_list_adt_3.c
+# default
+SUFFIXES := 
+# makefile (from `Makefile', line 17)
+DIR_DEBUG := ./src/debug
+# default
+.INCLUDE_DIRS = /usr/local/include
+# makefile (from `Makefile', line 27)
+SRC_UTILS := ./src/utils/ifs.c ./src/utils/error_exit.c
+# environment
+MAKELEVEL := 0
+# environment
+LANG = C
+# environment
+TERM = xterm-256color
+# environment
+VSCODE_PID = 64843
+# makefile (from `Makefile', line 14)
+DIR_TOKENIZE := ./src/tokenize
+# variable set hash-table stats:
+# Load=97/1024=9%, Rehash=0, Collisions=8/158=5%
+
+# Pattern-specific Variable Values
+
+# No pattern-specific variable values.
+
+# Directories
+
+# . (device 16777225, inode 4020466): 8 files, no impossibilities.
+
+# 8 files, no impossibilities in 1 directories.
+
+# Implicit Rules
+
+%.o: %.c
+#  commands to execute (from `Makefile', line 50):
+ 
+	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
+	
+
+# 1 implicit rules, 0 (0.0%) terminal.
+
+# Files
+
+all: minishell
+#  Phony target (prerequisite of .PHONY).
+#  Command-line target.
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+
+.PHONY: all clean fclean bonus re
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/env/env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/utils/error_exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/env/env_list_adt_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-08-24 06:11:39
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+src/main/init.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+debug: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 44):
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
+	
+
+libft.a:
+#  Implicit rule search has not been done.
+#  Implicit/static pattern stem: `'
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := libft.a
+# automatic
+# % := 
+# automatic
+# * := 
+# automatic
+# + := 
+# automatic
+# | := 
+# automatic
+# < := 
+# automatic
+# ^ := 
+# automatic
+# ? := 
+# variable set hash-table stats:
+# Load=8/32=25%, Rehash=0, Collisions=2/11=18%
+#  commands to execute (from `Makefile', line 47):
+	make -C $(DIR_LIBFT) all
+	
+
+# Not a target:
+src/env/env_list_adt_2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/3=0%
+#  commands to execute (from `Makefile', line 41):
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
+	
+
+# Not a target:
+src/utils/ifs.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+bonus:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 57):
+	rm -f ${NAME}
+	
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean all
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 53):
+	make -C $(DIR_LIBFT) fclean
+	rm -f ${OBJS}
+	
+
+# Not a target:
+src/env/env_list_adt_3.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/main/main.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# files hash-table stats:
+# Load=20/1024=2%, Rehash=0, Collisions=1/61=2%
+# VPATH Search Paths
+
+# No `vpath' search paths.
+
+# No general (`VPATH' variable) search path.
+
+# # of strings in strcache: 1
+# # of strcache buffers: 1
+# strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
+# strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
+
+# Finished Make data base on Wed Aug 24 06:16:36 2022
+
+ 

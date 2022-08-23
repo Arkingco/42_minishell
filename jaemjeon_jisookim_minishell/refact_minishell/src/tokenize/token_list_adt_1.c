@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 03:25:34 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/24 06:24:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int			ft_token_lstsize(t_token *lst)
 	return (size);
 }
 
-t_token		*ft_addtoken(t_token *lst, unsigned int type, char *string_value)
+t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 {
 	t_token	*token;
 
@@ -49,7 +49,7 @@ t_token		*ft_addtoken(t_token *lst, unsigned int type, char *string_value)
 	token->type = type;
 	if (token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_addtoken");
-	ft_token_lstadd_back(&lst, token);
+	ft_token_lstadd_back(lst, token);
 	return (token);
 }
 

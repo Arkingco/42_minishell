@@ -19,7 +19,8 @@ DIR_DEBUG		:=	$(SRCS_DIR)/debug
 SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
-SRC_TOKENIZE	:= token_list_adt_1.c token_list_adt_2.c
+SRC_TOKENIZE	:= tokenize.c split_all_component.c token_list_adt_1.c \
+					token_list_adt_2.c readstate_util.c
 SRC_TOKENIZE	:= $(addprefix $(DIR_TOKENIZER)/, $(SRC_TOKENIZER))
 
 SRC_UTILS		:= ifs.c error_exit.c
