@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 01:20:13 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:36:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	update_shlvl(void);
 void	set_signal_action(void);
 
 // pwd.c
-void	pwd(void);
+void	pwd(t_envlst *env);
 
 #endif
