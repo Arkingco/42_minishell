@@ -49,7 +49,7 @@ $(NAME_LIBFT)	:
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	make -C $(DIR_LIBFT) clean
+	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 
 fclean : clean

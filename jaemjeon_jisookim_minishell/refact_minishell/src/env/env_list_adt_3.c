@@ -26,7 +26,7 @@ void	ft_setenv(t_envlst *env, char *key, char *value)
 
 	envlst_toset = ft_getenv_lst(env, key);
 	if (envlst_toset == NULL)
-		ft_addenv(env, key, value);
+		ft_addenv(&env, key, value);
 	else
 	{
 		free(envlst_toset->value);
