@@ -3,36 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 20:49:45 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/23 20:25:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-extern t_global g_global;
-
-// t_envlst	*ft_env_lstdup(t_envlst *lst)
-// {
-// 	t_envlst	*new_lst;
-
-// 	if (lst == NULL)
-// 		return (NULL);
-// 	while (lst != NULL)
-// 	{
-// 		ft_env_lstadd_back(&new_lst, ft_env_lstnew(lst->key, lst->value));
-// 		lst = lst->next;
-// 	}
-// 	return (new_lst);
-// }
-
-t_envlst	*ft_getenv_lst(char *key)
+t_envlst	*ft_getenv_lst(t_envlst *env, char *key)
 {
 	t_envlst	*lst;
 
-	lst = g_global.lst_env;
+	lst = env;
 	while (lst != NULL)
 	{
 		if (ft_strncmp(lst->key, key, INT_MAX) == 0)
@@ -42,11 +26,11 @@ t_envlst	*ft_getenv_lst(char *key)
 	return (NULL);
 }
 
-char	*ft_getenv(char *key)
+char	*ft_getenv(t_envlst *env, char *key)
 {
 	t_envlst	*envlst;
 
-	envlst = g_global.lst_env;
+	envlst = env;
 	while (envlst != NULL)
 	{
 		if (ft_strncmp(envlst->key, key, INT_MAX) == 0)
@@ -56,36 +40,35 @@ char	*ft_getenv(char *key)
 	return (NULL);
 }
 
-int	ft_delenv(char *key)
+int	ft_delenv(t_envlst **env, char *key)
 {
 	t_envlst	*lst_cur;
 	t_envlst	*lst_prev;
-	t_envlst	*lst_tmp;
+	t_envlst	*lst_new_first;
 
-	if (ft_strncmp(g_global.lst_env->key, key, INT_MAX) == 0)
+	lst_cur = *env;
+	if (ft_strncmp(lst_cur->key, key, INT_MAX) == 0)
 	{
-		lst_tmp = g_global.lst_env->next;
-		ft_free_envlst(g_global.lst_env);
-		g_global.lst_env = lst_tmp;
+		lst_new_first = lst_cur->next;
+		ft_free_envlst(lst_cur);
+		*env = lst_new_first;
 		return (TRUE);
 	}
-	lst_prev = g_global.lst_env;
-	lst_cur = lst_prev->next;
-	while (lst_cur != NULL)
+	while (lst_cur->next != NULL)
 	{
+		lst_prev = lst_cur;
+		lst_cur = lst_cur->next;
 		if (ft_strncmp(lst_cur->key, key, INT_MAX) == 0)
 		{
 			lst_prev->next = lst_cur->next;
 			ft_free_envlst(lst_cur);
+			return (TRUE);
 		}
-		lst_prev = lst_cur;
-		lst_cur = lst_cur->next;
-		return (TRUE);
 	}
 	return (FALSE);
 }
 
-void	ft_addenv_str(char *str_envp)
+void	ft_addenv_str(t_envlst *env, char *str_envp)
 {
 	const char	*p_del = ft_strchr(str_envp, '=');
 	char		*key;
@@ -96,7 +79,7 @@ void	ft_addenv_str(char *str_envp)
 						ft_strlen(str_envp) - ft_strlen(key) - 1);
 	if (key == NULL || value == NULL)
 		ft_error(1, "malloc failed in ft_substr in ft_addenv_str");
-	ft_addenv(key, value);
+	ft_addenv(env, key, value);
 	free(key);
 	free(value);
 }
