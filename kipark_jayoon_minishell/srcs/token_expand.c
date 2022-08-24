@@ -15,9 +15,9 @@
 #include "libft.h"
 #include <stdio.h> 
 
-char *find_env_value(char *env_key)
+char *get_env_value() // char *env_key 지워둠
 {
-	return (ft_strdup("hi we are minis sheel"));
+	return (ft_strdup("[start]"));
 }
 
 int	is_env_key_word(char c)
@@ -26,6 +26,12 @@ int	is_env_key_word(char c)
 		return (1);
 	return (0);
 }
+
+// void	new_token_append(t_token *new_token, t_token next_token)
+// {
+	
+// }
+
 
 static int	get_env_key_size(char *env_key)
 {
@@ -36,41 +42,60 @@ static int	get_env_key_size(char *env_key)
 		++i;
 	return (i);
 }
-void	meet_dollar_and_work(char *str)
+char	*expand_and_join_words(char *str, int *i)
 {
 	int env_key_size;
 	char *env_key;
 	char *env_value;
+	char *expand_str;
+	char *after_str;
 
 	env_key_size = get_env_key_size(str);
 	env_key = ft_substr(str, 0, env_key_size);
-	env_value = find_env_value(env_key);
+	env_value = get_env_value();
+	after_str = ft_substr(str, env_key_size, ft_strlen(str));
+	*i = *i + ft_strlen(env_value) - 1;
+	expand_str = ft_strjoin(env_value, after_str);
+	free(env_value);
+	free(env_key);
+	free(after_str);
+	return (expand_str);
 }
 
 void	expand_this_token(t_token *this_token)
 {
 	int	i;
+	char *temp_str;
+	char *before_str;
+	char *after_str;
 
 	i = 0;
 	while (this_token->str[i] != '\0')
 	{
-		printf("%c\n", this_token->str[i]);
-		// 이미 WORD 단위로 나눠져 있기 때문에 확장할 때 ifs 와 metaCarater를 체크할 필요 없다.
-		// 체크 할 부분은 str[i] == 싱글 쿼터로 되어있나
 		if (this_token->str[i] == M_SINGLE_QUOTE)
 		{
 			while (this_token->str[i + 1] != M_SINGLE_QUOTE)
 				++i;
 			++i;
 		}
-		// 아니면 WORD or DOUBLE_QOUTE 로 되어있나
 		else
 		{
 			if (this_token->str[i] == M_DOLLAR_EXPAND)
-				meet_dollar_and_work(this_token->str + i + 1);
+			{
+				temp_str = this_token->str;
+				before_str = ft_substr(this_token->str, 0, i);
+				after_str = expand_and_join_words(this_token->str + i + 1, &i);
+				this_token->str = ft_strjoin(before_str, after_str);
+				free(temp_str);
+				free(before_str);
+				free(after_str);
+			}
 		}
 		++i;
 	}
+	this_token->str = this_token->str;
+	// new_token_append(this_token->str, this_token->next);
+
 }
 
 void	token_traverse(t_token *token_head)
@@ -84,8 +109,8 @@ void	token_traverse(t_token *token_head)
 			break ;
 		if (this_token->type == T_WORD)
 		{
-			printf("%s %d \n", this_token->str, this_token->type);
 			expand_this_token(this_token);
+			printf("%s\n", this_token->str);
 		}
 		this_token = this_token->next;
 	}
@@ -99,6 +124,5 @@ void	expand_token_main(t_token *token_head)
 	// 3. 확장 문구인 $가 있다면 $ 옆에 있는 문자를 확인하여 확장해야하는 값의 키를 가져온다.
 	// 	3.1 확장 키로 올 수 있는 값은 영어 소문자, 대문자, 숫자, 언더바 말고 없다고 한다 이 외에 다른 조건이 오면 무조건 틀림
 	// 4. 키 값을 가져오고 타입에 따라서 확장해준다.
-	//  4.1 제일 문제부분 이부분을 처리 할려면 문제가 많다..
 	token_traverse(token_head);
 }
