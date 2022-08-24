@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kipark <kipark@student.42.fr>              +#+  +:+       +#+         #
+#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:13:32 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/21 18:07:37 by kipark           ###   ########.fr        #
+#    Updated: 2022/08/24 15:32:20 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,10 @@ RL_INCLUDE	=	-I${HOME}/.brew/opt/readline/include
 
 LIBFT_AR	=	libft.a
 
+# PARSER_DIR	=	parser/
+# PARSER_SRCS	=	$(addprefix $(PARSER_DIR), $(PARSER_NAME))
+# PARSER_NAME	=	parser.c			\
+
 SRCS_DIR	=	./srcs/
 OBJS_DIR	=	./objs/
 INCS_DIR 	=	./includes/
@@ -34,6 +38,7 @@ SRCS_NAME	=	main.c 				\
 				parse.c				\
 				parse_util.c 		\
 				token.c				\
+				parser.c
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o)
 
@@ -47,6 +52,9 @@ endif
 
 all: $(NAME)
 
+$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
+	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
+
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
 
@@ -55,9 +63,6 @@ $(LIBFT):
 
 $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
-
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
