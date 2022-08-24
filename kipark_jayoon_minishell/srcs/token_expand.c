@@ -27,12 +27,6 @@ int	is_env_key_word(char c)
 	return (0);
 }
 
-// void	new_token_append(t_token *new_token, t_token next_token)
-// {
-	
-// }
-
-
 static int	get_env_key_size(char *env_key)
 {
 	int	i;
@@ -44,11 +38,11 @@ static int	get_env_key_size(char *env_key)
 }
 char	*expand_and_join_words(char *str, int *i)
 {
-	int env_key_size;
-	char *env_key;
-	char *env_value;
-	char *expand_str;
-	char *after_str;
+	int		env_key_size;
+	char	*env_key;
+	char	*env_value;
+	char	*expand_str;
+	char	*after_str;
 
 	env_key_size = get_env_key_size(str);
 	env_key = ft_substr(str, 0, env_key_size);
@@ -62,40 +56,42 @@ char	*expand_and_join_words(char *str, int *i)
 	return (expand_str);
 }
 
-void	expand_this_token(t_token *this_token)
+void	pass_sigle_quote(t_token *this_token, int *i)
+{
+	while (this_token->str[*i + 1] != M_SINGLE_QUOTE)
+		++(*i);
+	++(*i);
+}
+
+void	expand_and_join_before_after_words(t_token *this_token, int *i)
+{
+	char	*temp_str;
+	char	*before_str;
+	char	*after_str;
+
+	temp_str = this_token->str;
+	before_str = ft_substr(this_token->str, 0, *i);
+	after_str = expand_and_join_words(this_token->str + *i + 1, i);
+	this_token->str = ft_strjoin(before_str, after_str);
+	free(temp_str);
+	free(before_str);
+	free(after_str);
+}
+
+void	expand_this_word_token(t_token *this_token)
 {
 	int	i;
-	char *temp_str;
-	char *before_str;
-	char *after_str;
 
 	i = 0;
 	while (this_token->str[i] != '\0')
 	{
 		if (this_token->str[i] == M_SINGLE_QUOTE)
-		{
-			while (this_token->str[i + 1] != M_SINGLE_QUOTE)
-				++i;
-			++i;
-		}
+			pass_sigle_quote(this_token, &i);
 		else
-		{
 			if (this_token->str[i] == M_DOLLAR_EXPAND)
-			{
-				temp_str = this_token->str;
-				before_str = ft_substr(this_token->str, 0, i);
-				after_str = expand_and_join_words(this_token->str + i + 1, &i);
-				this_token->str = ft_strjoin(before_str, after_str);
-				free(temp_str);
-				free(before_str);
-				free(after_str);
-			}
-		}
+				expand_and_join_before_after_words(this_token, &i);
 		++i;
 	}
-	this_token->str = this_token->str;
-	// new_token_append(this_token->str, this_token->next);
-
 }
 
 void	token_traverse(t_token *token_head)
@@ -103,15 +99,10 @@ void	token_traverse(t_token *token_head)
 	t_token *this_token;
 
 	this_token = token_head->next;
-	while (1)
+	while (this_token)
 	{
-		if (this_token->next == NULL)
-			break ;
 		if (this_token->type == T_WORD)
-		{
-			expand_this_token(this_token);
-			printf("%s\n", this_token->str);
-		}
+			expand_this_word_token(this_token);
 		this_token = this_token->next;
 	}
 }

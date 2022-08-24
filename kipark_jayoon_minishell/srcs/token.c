@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/22 15:33:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/24 16:12:42 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	print_token_list(t_token *token_head)
 	t_token *this_token;
 
 	this_token = token_head->next;
-	while (1)
+	while (this_token)
 	{
-		if (this_token->next == NULL)
-			break ;
 		printf("token_str: %s   token_str_length:%zu  token_tpye: %d\n", this_token->str, ft_strlen(this_token->str), this_token->type);
 		this_token = this_token->next;
 	}
