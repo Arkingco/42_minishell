@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 03:55:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 05:20:25 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:23:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	ft_env_lstadd_back(t_envlst **lst, t_envlst *new)
 {

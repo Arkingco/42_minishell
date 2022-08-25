@@ -8,7 +8,7 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Wed Aug 24 06:16:36 2022
+# Make data base, printed on Thu Aug 25 15:07:58 2022
 
 # Variables
 
@@ -16,15 +16,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
- 
 # makefile (from `Makefile', line 16)
 DIR_MAIN := ./src/main
 # environment
 ELECTRON_NO_ATTACH_CONSOLE = 1
 # makefile (from `Makefile', line 6)
 INCLUDE_READLINE = -I readline/include
-# environment
-VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -32,69 +29,79 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+CURDIR := /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/refact_minishell
 # makefile
 SHELL = /bin/sh
 # makefile (from `Makefile', line 9)
 RM = rm -f
 # environment
-VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"d4733d4bd5138ffb2c9d12a76b2e9102.ko","_translationsConfigFile":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/tcf.json","_cacheRoot":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko","_resolvedLanguagePackCoreLocation":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/corrupted.info","_languagePackSupport":true}
 # environment
 _ = /usr/bin/make
 # makefile (from `Makefile', line 3)
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -g 
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 4)
 NAME_LIBFT = libft.a
 # environment
-VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 35)
-OBJS = ${SRCS:.c=.o}
+__CFBundleIdentifier = com.microsoft.VSCode
+# environment
+INFOPATH = /opt/homebrew/share/info:
+# environment
+P9K_SSH = 0
 # makefile (from `Makefile', line 13)
 DIR_ENV := ./src/env
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/vscode-ipc-01545976-1c6c-4bf3-9552-aec2a09b26ed.sock
+MAIL = jaemjeon@student.42.fr
 # environment
-VSCODE_CWD = /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+VSCODE_CWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/refact_minishell
 # environment
-PATH = /Users/jaemjeon/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS
 # makefile (from `Makefile', line 15)
 DIR_UTILS := ./src/utils
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
+# environment
+LaunchInstanceID = 8D456611-B937-44B9-8501-CE59F1B7FC6D
 # makefile (from `Makefile', line 11)
 SRCS_DIR := ./src
-# environment
-VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.37rJCfPjcu/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.vCpYBuziyT/Listeners
 # automatic
 %F = $(notdir $%)
+# makefile (from `Makefile', line 38)
+OBJS = ${SRCS:.c=.o}
 # environment
-VSCODE_PIPE_LOGGING = true
+PWD = /Users/jaemjeon/42seoul/minishell_team/jaemjeon_jisookim_minishell/refact_minishell
 # environment
-PWD = /Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/refact_minishell
+HOMEBREW_CELLAR = /opt/homebrew/Cellar
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
+# environment
+MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/jaemjeon
 # default
-MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
+MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
+VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
 # environment
 LOGNAME = jaemjeon
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+# environment
+a456 = ls -l
+# environment
+NVM_CD_FLAGS = -q
 # environment
 ZSH = /Users/jaemjeon/.oh-my-zsh
 # environment
@@ -109,12 +116,14 @@ COLORTERM = truecolor
 MAKE = $(MAKE_COMMAND)
 # environment
 LC_TERMINAL = iTerm2
-# makefile (from `Makefile', line 33)
-SRCS = $(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN)
+# makefile (from `Makefile', line 36)
+SRCS = $(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) $(SRC_DEBUG)
 # environment
 SHLVL = 3
 # makefile (from `Makefile', line 1)
 CC = cc
+# makefile (from `Makefile', line 33)
+SRC_DEBUG := ./src/debug/print_lst_token.c
 # default
 MAKE_VERSION := 3.81
 # environment
@@ -122,11 +131,11 @@ USER = jaemjeon
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 7)
-INCLUDE = -I include -I include/var_header -I $(DIR_LIBFT)
+INCLUDE = -I include -I $(DIR_LIBFT)
 # default
 MAKECMDGOALS := all
 # environment
-TERM_SESSION_ID = w0t0p0:A8DF735F-42FA-4145-AEE2-372DCBDFB351
+TERM_SESSION_ID = w0t0p1:A3AB2227-38B6-4E40-9B08-D85A41E3FFF6
 # makefile (from `Makefile', line 2)
 NAME = minishell
 # environment
@@ -134,43 +143,54 @@ LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
 # makefile (from `Makefile', line 24)
-SRC_TOKENIZE := 
+SRC_TOKENIZE := ./src/tokenize/tokenize.c ./src/tokenize/split_all_component.c ./src/tokenize/token_list_adt_1.c ./src/tokenize/token_list_adt_2.c ./src/tokenize/read_token_func.c ./src/tokenize/read_token_util_1.c
 # environment
 TERM_PROGRAM = iTerm.app
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/
+TMPDIR = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/
 # makefile (from `Makefile', line 30)
 SRC_MAIN := ./src/main/main.c ./src/main/init.c
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.67.2-main.sock
+VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.70.2-main.sock
+# environment
+MallocNanoZone = 0
 # makefile
 MAKEFLAGS = Rrqp
 # environment
 MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
+ 
 # environment
-TERM_PROGRAM_VERSION = 3.3.7
+TERM_PROGRAM_VERSION = 3.4.16
 # environment
-XPC_SERVICE_NAME = 0
+NVM_DIR = /Users/jaemjeon/.nvm
 # environment
-LC_TERMINAL_VERSION = 3.3.7
+XPC_SERVICE_NAME = application.com.microsoft.VSCode.8332660.8332666.EBAEF8B5-7A73-41E9-805F-DC142F457CF6
+# environment
+LC_TERMINAL_VERSION = 3.4.16
+# environment
+HOMEBREW_PREFIX = /opt/homebrew
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
 # environment
-ITERM_SESSION_ID = w0t0p0:A8DF735F-42FA-4145-AEE2-372DCBDFB351
+ITERM_SESSION_ID = w0t0p1:A3AB2227-38B6-4E40-9B08-D85A41E3FFF6
 # environment
-COLORFGBG = 7;0
+HOMEBREW_REPOSITORY = /opt/homebrew
 # environment
-__CF_USER_TEXT_ENCODING = 0x197BF:0x0:0x0
+COLORFGBG = 15;0
+# environment
+__CF_USER_TEXT_ENCODING = 0x1F5:0x3:0x33
+# environment
+COMMAND_MODE = unix2003
 # default
 MAKEFILES := 
 # automatic
@@ -185,6 +205,10 @@ LC_ALL = C
 DIR_LIBFT = ./libft
 # makefile (from `Makefile', line 8)
 LIB_READLINE = -L readline/lib
+# environment
+SECURITYSESSIONID = 186a5
+# environment
+P9K_TTY = old
 # automatic
 ^F = $(notdir $^)
 # makefile (from `Makefile', line 20)
@@ -204,11 +228,15 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 64843
+_P9K_TTY = /dev/ttys009
+# environment
+VSCODE_PID = 35549
 # makefile (from `Makefile', line 14)
 DIR_TOKENIZE := ./src/tokenize
+# environment
+NVM_RC_VERSION = 
 # variable set hash-table stats:
-# Load=97/1024=9%, Rehash=0, Collisions=8/158=5%
+# Load=111/1024=11%, Rehash=0, Collisions=10/169=6%
 
 # Pattern-specific Variable Values
 
@@ -216,21 +244,26 @@ DIR_TOKENIZE := ./src/tokenize
 
 # Directories
 
-# . (device 16777225, inode 4020466): 8 files, no impossibilities.
+# . (device 16777234, inode 8850651): 9 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 %.o: %.c
 #  commands to execute (from `Makefile', line 50):
- 
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 	
 
 # 1 implicit rules, 0 (0.0%) terminal.
 
 # Files
+
+# Not a target:
+src/debug/print_lst_token.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: minishell
 #  Phony target (prerequisite of .PHONY).
@@ -266,6 +299,12 @@ src/env/env_list_adt_1.o:
 #  File has not been updated.
 
 # Not a target:
+src/tokenize/tokenize.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .SUFFIXES:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -274,7 +313,8 @@ src/env/env_list_adt_1.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-24 06:11:39
+ 
+#  Last modified 2022-08-25 15:05:30
 #  File has been updated.
 #  Successfully updated.
 # variable set hash-table stats:
@@ -285,14 +325,6 @@ src/main/init.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-debug: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 44):
-	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
-	
 
 libft.a:
 #  Implicit rule search has not been done.
@@ -328,14 +360,14 @@ src/env/env_list_adt_2.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o
+minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/tokenize/tokenize.o src/tokenize/split_all_component.o src/tokenize/token_list_adt_1.o src/tokenize/token_list_adt_2.o src/tokenize/read_token_func.o src/tokenize/read_token_util_1.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o src/debug/print_lst_token.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-08-25 15:05:34
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-#  commands to execute (from `Makefile', line 41):
+#  commands to execute (from `Makefile', line 44):
 	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
 	
 
@@ -361,7 +393,32 @@ fclean: clean
 	
 
 # Not a target:
+src/tokenize/token_list_adt_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 .DEFAULT:
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/tokenize/read_token_util_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/tokenize/read_token_func.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+src/tokenize/split_all_component.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -370,6 +427,12 @@ re: fclean all
 #  Phony target (prerequisite of .PHONY).
 #  Implicit rule search has not been done.
 #  File does not exist.
+#  File has not been updated.
+
+# Not a target:
+src/tokenize/token_list_adt_2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
 #  File has not been updated.
 
 clean:
@@ -395,7 +458,7 @@ src/main/main.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=20/1024=2%, Rehash=0, Collisions=1/61=2%
+# Load=26/1024=3%, Rehash=0, Collisions=1/65=2%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -407,6 +470,6 @@ src/main/main.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Aug 24 06:16:36 2022
+# Finished Make data base on Thu Aug 25 15:07:58 2022
 
  

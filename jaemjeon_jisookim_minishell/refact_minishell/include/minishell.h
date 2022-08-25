@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 06:29:09 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:54:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-# include "libft.h"
+# include "../libft/libft.h"
 # include "env.h"
 # include "cmd.h"
 # include "token.h"
@@ -30,7 +30,7 @@
 # define INT_MAX	 	2147483647
 
 // token_type
-# define NONE			0b10000000000000000000000000000000
+# define EXPANDER		0b10000000000000000000000000000000
 # define PIPE			0b01000000000000000000000000000000
 # define REDIRECT		0b00100000000000000000000000000000
 # define WORD			0b00010000000000000000000000000000
@@ -55,11 +55,16 @@
 # define RIGHT_JOIN		0b00000000000000000000000000010000
 # define WORD_JOIN		0b00000000000000000000000000110000
 
-
 // main.c
 
 // init.c
 void	argument_error_check(int argc);
 void	init_envp(char *envp[], t_envlst **env);
+
+
+// DEBUG
+
+// print_lst_token.c
+void	debug_print_lst_token(t_token *lst);
 
 #endif

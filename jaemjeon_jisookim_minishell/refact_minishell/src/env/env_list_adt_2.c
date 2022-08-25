@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 05:21:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:23:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 t_envlst	*ft_getenv_lst(t_envlst *env, char *key)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_adt_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 06:24:08 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:23:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void		ft_token_lstadd_back(t_token **lst, t_token *new)
 {

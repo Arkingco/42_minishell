@@ -1,3 +1,9 @@
 {
-	"makefile.extensionOutputFolder": "./.vscode"
+	"makefile.extensionOutputFolder": "./.vscode",
+	"files.associations": {
+		"minishell.h": "c",
+		"stdio.h": "c",
+		"history.h": "c",
+		"dirent.h": "c"
+	}
 }

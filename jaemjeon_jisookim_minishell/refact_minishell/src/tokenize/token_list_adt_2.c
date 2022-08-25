@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_adt_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 03:33:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 12:23:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 void	ft_deltoken(t_token **lst)
 {

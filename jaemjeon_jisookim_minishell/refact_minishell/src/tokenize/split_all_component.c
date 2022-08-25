@@ -3,41 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   split_all_component.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 06:10:38 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 06:33:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/25 14:39:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-unsigned int	ft_get_token_type(t_readstate *readstate)
-{
-	unsigned int	result_flag;
-
-	result_flag = 0;
-	if (readstate->state & PIPE)
-		return (PIPE);
-	else if (readstate->state & REDIRECT)
-}
+#include "../../include/minishell.h"
 
 t_token	*split_all_component(char *line)
 {
 	t_token		*lst_token;
-	t_readstate	readstate;
+	t_token		*new_token;
 	int			index;
 
 	lst_token = NULL;
-	ft_reset_readstate(&readstate);
 	index = 0;
 	while (line[index] != '\0')
 	{
-		if (readstate.state & QUOTE)
-			read_in_quote(line[index])
+		ft_skip_ifs2(line, &index);
+		if (line[index] == '\"' || line[index] == '\'')
+			new_token = read_in_quote(line, &index);
 		else if (line[index] == '<' || line[index] == '>')
-		{
-
-		}
+			new_token = read_in_redirect(line, &index);
+		else if (line[index] == '|')
+			new_token = read_in_pipe(line, &index);
+		else if (line[index] == '$')
+			new_token = read_in_expander(line, &index);
+		else
+			new_token = read_in_pureword(line, &index);
+		ft_token_lstadd_back(&lst_token, new_token);
 	}
+	return (lst_token);
 }
