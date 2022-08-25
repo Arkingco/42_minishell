@@ -6,9 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:48:13 by jisookim          #+#    #+#             */
-/*   Updated: 2022/08/25 13:12:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/25 13:21:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+void	execute()
+{
+	return ;
+}
