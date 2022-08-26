@@ -1,50 +1,52 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/06/30 21:13:32 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/24 15:32:20 by jayoon           ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
+NAME						=	minishell
 
-NAME		=	minishell
+CC							=	cc
+CFLAGS						=	-Wall -Wextra -Werror
+DEBUG						=	-g3 -fsanitize=address
 
-CC			=	cc
-CFLAGS		=	-Wall -Wextra -Werror
-DEBUG		=	-g3 -fsanitize=address
+LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
+INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
+RL_LIB						=	-lreadline -L${HOME}/.brew/opt/readline/lib
+RL_INCLUDE					=	-I${HOME}/.brew/opt/readline/include
 
-LIBFT_FLAGS =	-L$(LIBFT_DIR) -lft
-INCS_FLAGS	=	-I$(LIBFT_DIR) -I $(INCS_DIR)
-RL_LIB		=	-lreadline -L${HOME}/.brew/opt/readline/lib
-RL_INCLUDE	=	-I${HOME}/.brew/opt/readline/include
+LIBFT_AR					:=	libft.a
 
-LIBFT_AR	=	libft.a
+DIR_SRCS					:=	./srcs
+DIR_OBJS					:=	./objs
+DIR_INCS 					:=	./includes/
+DIR_LIBFT					:=	./libft
 
-# PARSER_DIR	=	parser/
-# PARSER_SRCS	=	$(addprefix $(PARSER_DIR), $(PARSER_NAME))
-# PARSER_NAME	=	parser.c			\
+DIR_TERMINAL				:=	$(DIR_SRCS)/terminal
+DIR_LEXICAL_ANALYSIS		:=	$(DIR_SRCS)/lexical_analysis
+DIR_SYNTAX_ANALYSIS			:=	$(DIR_SRCS)/syntax_analysis
+DIR_EXECUTION				:=	$(DIR_SRCS)/execution
+DIR_BUILT_IN				:=	$(DIR_SRCS)/built_in
 
-SRCS_DIR	=	./srcs/
-OBJS_DIR	=	./objs/
-INCS_DIR 	=	./includes/
-LIBFT_DIR	=	./libft/
+SRCS_TERMINAL				:=	exit_terminal.c		\
+								init_terminal.c
+SRCS_TERMINAL				:=	$(addprefix $(DIR_TERMINAL)/, $(SRC_TERMINAL))
 
-SRCS_NAME	=	main.c 				\
-				init_terminal.c		\
-				exit_terminal.c		\
-				parse.c				\
-				parse_util.c 		\
-				token.c				\
-				parser.c
+SRCS_LEXICAL_ANALYSIS		:=	parse_util.c		\
+								parse.c				\
+								token.c				
+SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
-OBJS_NAME	=	$(SRCS_NAME:.c=.o)
+SRCS_SYNTAX_ANALYSIS		:=	parser.c
+SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS		=	$(addprefix $(SRCS_DIR), $(SRCS_NAME))
-OBJS		=	$(addprefix $(OBJS_DIR), $(OBJS_NAME))
-LIBFT		=	$(LIBFT_DIR)$(LIBFT_AR)
+SRCS_EXECUTION				:=	
+SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
+
+SRCS_BUILT_IN				:=	
+SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
+
+SRCS						:=	$(SRCS_TERMINAL)			\
+								$(SRCS_LEXICAL_ANALYSIS)	\
+								$(SRCS_SYNTAX_ANALYSIS)		\
+								$(SRCS_EXECUTION)			\
+								$(SRCS_BUILT_IN)
+
+OBJS						:=	$(SRCS:.c=.o)
 
 ifdef DEBUG_FLAG
 	CFLAGS += $(DEBUG)
@@ -52,30 +54,31 @@ endif
 
 all: $(NAME)
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
+%.o: %.c
 	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
 
 $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 $(LIBFT):
-	@make -C $(LIBFT_DIR)
+	make -C $(DIR_LIBFT)
 
-$(OBJS_DIR):
-	mkdir $(OBJS_DIR)
+# $(DIR_OBJS):
+# 	mkdir $(DIR_OBJS)
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
 
 clean:
-	@make clean -C $(LIBFT_DIR)
-	rm -rf $(OBJS_DIR)
+	make clean -C $(DIR_LIBFT)
+	rm -rf $(DIR_OBJS)
 
 fclean: clean
-	@make fclean -C $(LIBFT_DIR)
+	make fclean -C $(DIR_LIBFT)
 	rm -f $(NAME) $(BONUS_NAME)
 
-re: fclean
+re: 
+	make fclean
 	make all
 
 .PHONY: all clean fclean re debug
