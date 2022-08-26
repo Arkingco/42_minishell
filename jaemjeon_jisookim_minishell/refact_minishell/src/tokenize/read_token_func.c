@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_token_func.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:59:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 15:40:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/26 22:55:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ t_token		*read_in_quote(char *line, int *index)
 	if (new_token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr in read_token");
 	set_flag_joined(new_token, line, start_idx, *index - 1);
+	if (ft_strchr(new_token->string_value, '$') && new_token->type & DQUOTE)
+		new_token->type |= EXPANDER;
 	return (new_token);
 }
 
@@ -107,5 +109,7 @@ t_token		*read_in_pureword(char *line, int *index)
 	if (new_token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr in read_token");
 	set_flag_joined(new_token, line, start_idx, *index - 1);
+	if (ft_strchr(new_token->string_value, '$'))
+		new_token->type |= EXPANDER;
 	return (new_token);
 }

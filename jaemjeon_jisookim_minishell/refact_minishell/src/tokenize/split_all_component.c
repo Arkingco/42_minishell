@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_all_component.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 06:10:38 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 14:39:40 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/26 22:46:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ t_token	*split_all_component(char *line)
 			new_token = read_in_redirect(line, &index);
 		else if (line[index] == '|')
 			new_token = read_in_pipe(line, &index);
-		else if (line[index] == '$')
-			new_token = read_in_expander(line, &index);
 		else
 			new_token = read_in_pureword(line, &index);
 		ft_token_lstadd_back(&lst_token, new_token);
