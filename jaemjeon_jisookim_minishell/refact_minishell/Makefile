@@ -5,7 +5,7 @@ NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
 INCLUDE_READLINE = -I readline/include
 INCLUDE = -I include -I include/var_header -I $(DIR_LIBFT)
-LIB_READLINE = -lreadline -L${HOME}/.brew/opt/readline/lib
+LIB_READLINE = -lreadline -L ${HOME}/.brew/Cellar/readline/8.1.2/lib
 RM = rm -f
 
 SRCS_DIR := ./src
@@ -16,6 +16,7 @@ DIR_UTILS		:=	$(SRCS_DIR)/utils
 DIR_MAIN		:=	$(SRCS_DIR)/main
 DIR_DEBUG		:=	$(SRCS_DIR)/debug
 DIR_EXECUTE		:=	$(SRCS_DIR)/execute
+DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 
 SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
@@ -33,9 +34,12 @@ SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 SRC_EXECUTE		:= execute.c
 SRC_EXECUTE		:= $(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
+SRC_BUILT_IN	:= echo.c cd.c pwd.c export.c unset.c env.c exit.c
+SRC_BUILT_IN	:= $(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
+
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
-					$(SRC_EXECUTE)
+					$(SRC_EXECUTE) $(SRC_BUILT_IN)
 
 OBJS 			=	${SRCS:.c=.o}
 
