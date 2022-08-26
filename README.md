@@ -24,4 +24,4 @@
 
 ## 💪 공부 자료
 - [github issue, Pull Request 템플릿 설정 방법 ](https://velog.io/@mayinjanuary/github-PR-%ED%85%9C%ED%94%8C%EB%A6%BF-Issue-%ED%85%9C%ED%94%8C%EB%A6%BF-%EB%A7%8C%EB%93%A4%EA%B8%B0-Pull-Request-Issue-Template)
-
+- [github 브랜치 보호규칙](https://hbase.tistory.com/215)
