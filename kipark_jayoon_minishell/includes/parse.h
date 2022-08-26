@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/24 16:10:06 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 17:21:55 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,21 +56,26 @@ typedef struct s_token
 }	t_token;
 
 // parse.c
-t_token	*tokenize(char *readline);
-
+t_token	*tokenize(char *str);
+void	word_token_add(t_token *token_head, t_token_type t_type, \
+															char *expand_str);
+int	get_quote_type_return_index(char *rl, int i, \
+												t_token_type this_token_type);
 // token*.c
 void	init_token_dummy_node(t_token *token_head);
 void	token_add(t_token *token_head, t_token_type token_type, \
 															char *token_str);
 void	print_token_list(t_token *token_head);
+void	token_free(t_token *token);
 
 // token_expand*.c
-void	expand_token_main(t_token *token_head);
+char	*expand_this_word_token(char *expand_str);
 
 // parse_util*.c
 int		pass_ifs(char *rl, int i);
 int		ft_isifs(int c);
 int		is_metachar_not_include_quote(char c);
 int		check_readline_able_parse(char *rl);
+void	pass_sigle_quote(char *str, int *i);
 
 #endif

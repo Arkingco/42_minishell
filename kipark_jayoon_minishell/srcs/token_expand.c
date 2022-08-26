@@ -13,29 +13,9 @@
 #include "parse.h"
 #include "stdlib.h"
 #include "libft.h"
+#include "env.h"
 #include <stdio.h> 
 
-char *get_env_value() // char *env_key 지워둠
-{
-	return (ft_strdup("[start]"));
-}
-
-int	is_env_key_word(char c)
-{
-	if (ft_isalpha(c) || ft_isdigit(c) || c == '_')
-		return (1);
-	return (0);
-}
-
-static int	get_env_key_size(char *env_key)
-{
-	int	i;
-
-	i = 0;
-	while (is_env_key_word(env_key[i]))
-		++i;
-	return (i);
-}
 char	*expand_and_join_words(char *str, int *i)
 {
 	int		env_key_size;
@@ -56,64 +36,74 @@ char	*expand_and_join_words(char *str, int *i)
 	return (expand_str);
 }
 
-void	pass_sigle_quote(t_token *this_token, int *i)
-{
-	while (this_token->str[*i + 1] != M_SINGLE_QUOTE)
-		++(*i);
-	++(*i);
-}
-
-void	expand_and_join_before_after_words(t_token *this_token, int *i)
+void	expand_and_join_before_after_words(char **str, int *i)
 {
 	char	*temp_str;
 	char	*before_str;
 	char	*after_str;
 
-	temp_str = this_token->str;
-	before_str = ft_substr(this_token->str, 0, *i);
-	after_str = expand_and_join_words(this_token->str + *i + 1, i);
-	this_token->str = ft_strjoin(before_str, after_str);
+	temp_str = *str;
+	before_str = ft_substr(*str, 0, *i);
+	after_str = expand_and_join_words(*str + *i + 1, i);
+	*str = ft_strjoin(before_str, after_str);
 	free(temp_str);
 	free(before_str);
 	free(after_str);
 }
 
-void	expand_this_word_token(t_token *this_token)
+char	*expand_this_word_token(char *expand_str)
 {
 	int	i;
 
 	i = 0;
-	while (this_token->str[i] != '\0')
+	while (expand_str[i] != '\0')
 	{
-		if (this_token->str[i] == M_SINGLE_QUOTE)
-			pass_sigle_quote(this_token, &i);
+		if (expand_str[i] == M_SINGLE_QUOTE)
+			pass_sigle_quote(expand_str, &i);
 		else
-			if (this_token->str[i] == M_DOLLAR_EXPAND)
-				expand_and_join_before_after_words(this_token, &i);
+			if (expand_str[i] == M_DOLLAR_EXPAND)
+				expand_and_join_before_after_words(&expand_str, &i);
 		++i;
 	}
+	return (expand_str);
 }
 
-void	token_traverse(t_token *token_head)
-{
-	t_token *this_token;
 
-	this_token = token_head->next;
-	while (this_token)
+static int	set_word_token_return_index(char *rl, int i, \
+							t_token_type this_token_type, t_token_type *t_type)
+{
+	*t_type = this_token_type;
+	if (this_token_type == T_WORD)
+		while (rl[i + 1] != '\0')
+		{
+			if (rl[i] == M_SINGLE_QUOTE)
+				i = get_quote_type_return_index(rl, i + 1, T_SINGLE_QUOTE);
+			else if (rl[i] == M_DOUBLE_QUOTE)
+				i = get_quote_type_return_index(rl, i + 1, T_DOUBLE_QUOTE);
+			if (ft_isifs(rl[i + 1]) || rl[i + 1] == '\0')
+				return (i);
+			++i;
+		}
+	return (i);
+}
+
+void	word_token_add(t_token *token_head, t_token_type t_type, \
+															char *expand_str)
+{
+	int				start;
+	int				end;
+
+	start = 0;
+	end = 0;
+	while (expand_str[end] != '\0')
 	{
-		if (this_token->type == T_WORD)
-			expand_this_word_token(this_token);
-		this_token = this_token->next;
+		end = pass_ifs(expand_str, end);
+		if (expand_str[end] == '\0')
+			break ;
+		start = end;
+		end = set_word_token_return_index(expand_str, end, T_WORD, &t_type);
+		token_add(token_head, t_type, ft_substr(expand_str, \
+													start, end - start + 1));
+		end++;
 	}
-}
-
-void	expand_token_main(t_token *token_head)
-{
-	// 1. 토큰을 순회해서 해당하는 토믄 타입이 word인지 확인하다
-	// 2. 토큰 타입이 word라면 해당하는 토큰에 확장 $가 있는지 확인한다
-	//	2.1 토큰 타입은 총 WORD, SINGLE_QOUTE, DOUBLE_QOUTE가 있다 체크는 더블 쿼트 .워드 만하는걸로하자!
-	// 3. 확장 문구인 $가 있다면 $ 옆에 있는 문자를 확인하여 확장해야하는 값의 키를 가져온다.
-	// 	3.1 확장 키로 올 수 있는 값은 영어 소문자, 대문자, 숫자, 언더바 말고 없다고 한다 이 외에 다른 조건이 오면 무조건 틀림
-	// 4. 키 값을 가져오고 타입에 따라서 확장해준다.
-	token_traverse(token_head);
 }

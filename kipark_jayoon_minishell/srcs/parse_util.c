@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:05:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/22 16:33:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/26 17:20:35 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@ int	ft_isifs(int c)
 	return (0);
 }
 
+void	pass_sigle_quote(char *str, int *i)
+{
+	while (str[*i + 1] != M_SINGLE_QUOTE)
+		++(*i);
+	++(*i);
+}
 
 int	pass_ifs(char *rl, int i)
 {
