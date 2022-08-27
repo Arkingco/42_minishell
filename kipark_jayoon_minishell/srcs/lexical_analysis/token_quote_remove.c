@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 11:09:42 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/27 13:44:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:46:04 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 #include <stdio.h>
 
 static void	quote_remove_in_quote(int *i, int *j, char *str, char quote)

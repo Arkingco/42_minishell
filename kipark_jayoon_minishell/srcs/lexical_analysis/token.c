@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/26 17:22:51 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:45:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 #include "libft.h"
 #include <stdlib.h>
 #include <stdio.h>
@@ -22,7 +22,7 @@ void	print_token_list(t_token *token_head)
 	this_token = token_head->next;
 	while (this_token)
 	{
-		printf("token_str: %s   token_str_length:%zu  token_tpye: %d\n", \
+		printf("\n%s   length:%zu  token_tpye: %d\n", \
 				this_token->str, ft_strlen(this_token->str), this_token->type);
 		this_token = this_token->next;
 	}

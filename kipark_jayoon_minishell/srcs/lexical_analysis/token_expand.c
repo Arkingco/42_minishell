@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 #include "stdlib.h"
 #include "libft.h"
 #include "env.h"

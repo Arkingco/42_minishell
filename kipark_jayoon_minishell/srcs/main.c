@@ -3,14 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/08/24 16:17:47 by kipark           ###   ########seoul.kr  */
-=======
-/*   Updated: 2022/08/27 14:00:39 by jayoon           ###   ########.fr       */
->>>>>>> e2c55cfd9d54d452a560d3991c0b8270565fca56
+/*   Updated: 2022/08/27 15:46:43 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +14,9 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "parse.h"
+#include "lexer.h"
 #include "parser.h"
-#include "prompt.h"
+#include "terminal.h"
 #include "minishell.h"
 
 int main(void)

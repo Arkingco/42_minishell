@@ -6,11 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/23 11:17:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:46:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "terminal.h"
 #include <signal.h>
 #include <stdio.h>
 #include <readline/readline.h>

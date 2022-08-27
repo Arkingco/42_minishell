@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 11:42:34 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:46:06 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 #include "libft.h"
 #include <stdio.h>
 
@@ -118,10 +118,13 @@ t_token	*tokenize(char *readline)
 		return (NULL);
 	}
 	read_readline(readline, token_head);
-	print_token_list(token_head);
 	quote_rmove(token_head);
-	printf("\n\n");
+	printf("Before:");
 	print_token_list(token_head);
+	printf("\n\n");
+	printf("AFTER:");
+	print_token_list(token_head);
+	printf("\n\n");
 	
 	return (token_head);
 }
