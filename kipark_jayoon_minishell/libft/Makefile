@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: kipark <kipark@student.42.fr>              +#+  +:+       +#+         #
+#    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/16 14:02:26 by kipark           ###   ########.fr        #
+#    Updated: 2022/08/24 15:26:59 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,13 +80,13 @@ endif
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILES) $(HEADER)
-	@ar rcs $(NAME) $(OBJ_FILES)
+	ar rcs $(NAME) $(OBJ_FILES)
 
 bonus : 
 	@make WITH_BONUS=1
 
 %.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean : 
 	rm -f $(OBJECTS) $(OBJECTS_B)
