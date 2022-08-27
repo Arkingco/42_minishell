@@ -118,7 +118,7 @@ t_token	*tokenize(char *readline)
 		return (NULL);
 	}
 	read_readline(readline, token_head);
-	quote_rmove(token_head);
+	remove_quote(token_head);
 	printf("Before:");
 	print_token_list(token_head);
 	printf("\n\n");

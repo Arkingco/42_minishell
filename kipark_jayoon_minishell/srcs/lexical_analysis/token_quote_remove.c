@@ -37,9 +37,9 @@ static void	quote_remove_word_token(t_token *this_token)
 	str = this_token->str;
 	while(str[i] != '\0')
 	{
-		if (str[i] == '\'')
+		if (str[i] == M_SINGLE_QUOTE)
 			quote_remove_in_quote(&i, &j, str, M_SINGLE_QUOTE);
-		else if (str[i] == '\"')
+		else if (str[i] == M_DOUBLE_QUOTE)
 			quote_remove_in_quote(&i, &j, str, M_DOUBLE_QUOTE);
 		else
 		{
@@ -51,7 +51,7 @@ static void	quote_remove_word_token(t_token *this_token)
 	str[j] = '\0';
 }
 
-void	quote_rmove(t_token *token_head)
+void	remove_quote(t_token *token_head)
 {
 	t_token *this_token;
 
