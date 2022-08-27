@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:46:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 15:03:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:09:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,7 @@ t_token		*ft_token_lstlast(t_token *lst);
 // token_list_adt_2.c
 void		ft_deltoken(t_token **lst);
 t_token		*ft_token_lst_first(t_token *lst);
+t_token		*ft_make_newtoken(unsigned int type, char *string_value);
+void		ft_insert_token(t_token *prev_to_insert, t_token *to_insert);
 
 #endif

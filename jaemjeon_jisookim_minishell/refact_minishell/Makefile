@@ -17,6 +17,7 @@ DIR_ENV			:=	$(SRCS_DIR)/env
 DIR_TOKENIZE	:=	$(SRCS_DIR)/tokenize
 DIR_UTILS		:=	$(SRCS_DIR)/utils
 DIR_MAIN		:=	$(SRCS_DIR)/main
+DIR_EXPAND		:=	$(SRCS_DIR)/expand
 DIR_DEBUG		:=	$(SRCS_DIR)/debug
 
 SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
@@ -32,11 +33,16 @@ SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 SRC_MAIN		:= main.c init.c
 SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
+SRC_EXPAND		:= expand.c
+SRC_EXPAND		:= $(addprefix $(DIR_EXPAND)/, $(SRC_EXPAND))
+
 SRC_DEBUG		:= print_lst_token.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 
-SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) $(SRC_DEBUG)
+
+SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
+					$(SRC_DEBUG) $(SRC_EXPAND)
 
 OBJS 			=	${SRCS:.c=.o}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 15:43:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 14:21:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ void	main_loop(t_envlst *env)
 			// // execute(t_cmd);
 			// free_lst_token(lst_token);
 			// free_lst_cmd(lst_cmd);
+			lst_token = expander(lst_token, env);
 			debug_print_lst_token(lst_token);
+
 		}
 		else
 			ft_error_exit(0, "exit");
