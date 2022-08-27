@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/26 17:21:55 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 11:42:09 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,9 @@ int		ft_isifs(int c);
 int		is_metachar_not_include_quote(char c);
 int		check_readline_able_parse(char *rl);
 void	pass_sigle_quote(char *str, int *i);
+
+// token_quote_*.c
+void	quote_rmove(t_token *token_head);
+
 
 #endif

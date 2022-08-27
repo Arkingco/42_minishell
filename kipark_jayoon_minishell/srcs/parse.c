@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/26 17:27:14 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 11:42:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,5 +119,9 @@ t_token	*tokenize(char *readline)
 	}
 	read_readline(readline, token_head);
 	print_token_list(token_head);
+	quote_rmove(token_head);
+	printf("\n\n");
+	print_token_list(token_head);
+	
 	return (token_head);
 }

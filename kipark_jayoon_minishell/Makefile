@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/30 21:13:32 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/26 14:13:26 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/08/27 12:06:40 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,13 +28,14 @@ OBJS_DIR	=	./objs/
 INCS_DIR 	=	./includes/
 LIBFT_DIR	=	./libft/
 
-SRCS_NAME	=	main.c 				\
-				init_terminal.c		\
-				exit_terminal.c		\
-				parse.c				\
-				parse_util.c 		\
-				token.c				\
-				token_expand.c		\
+SRCS_NAME	=	main.c 					\
+				init_terminal.c			\
+				exit_terminal.c			\
+				parse.c					\
+				parse_util.c 			\
+				token.c					\
+				token_expand.c			\
+				token_quote_remove.c	\
 				env.c
 
 OBJS_NAME	=	$(SRCS_NAME:.c=.o)
@@ -59,7 +60,7 @@ $(OBJS_DIR):
 	mkdir $(OBJS_DIR)
 
 $(OBJS_DIR)%.o: $(SRCS_DIR)%.c | $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c -g $< -o $@
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
