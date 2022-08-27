@@ -6,24 +6,12 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 15:41:30 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 17:11:16 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
-
-
-// #define	M_DOUBLE_QUOTE 			"\""
-// #define	M_SINGLE_QUOTE 			"\'"
-// #define	M_INPUT_REDIR 	"<"
-// #define	M_OUTPUT_REDIR 	">"
-// #define	M_PIPE 					"|"
-// #define	T_HEAR_DOC_REDIR	"<<"
-// #define	T_APPEND_REDIR	">>"
-// #define	M_NOT_WORD				"NW"
-
-#define NULL_CHAR '\0'
 
 typedef enum e_metacharacter
 {
@@ -55,7 +43,7 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-// parse.c
+// lexer.c
 t_token	*tokenize(char *str);
 void	word_token_add(t_token *token_head, t_token_type t_type, \
 															char *expand_str);
@@ -71,7 +59,7 @@ void	token_free(t_token *token);
 // token_expand*.c
 char	*expand_this_word_token(char *expand_str);
 
-// parse_util*.c
+// lexer_util*.c
 int		pass_ifs(char *rl, int i);
 int		ft_isifs(int c);
 int		is_metachar_not_include_quote(char c);
@@ -79,7 +67,7 @@ int		check_readline_able_parse(char *rl);
 void	pass_sigle_quote(char *str, int *i);
 
 // token_quote_*.c
-void	quote_rmove(t_token *token_head);
+void	remove_quote(t_token *token_head);
 
 
 #endif
