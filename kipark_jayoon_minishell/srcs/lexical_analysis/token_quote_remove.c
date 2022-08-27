@@ -13,7 +13,7 @@
 #include "lexer.h"
 #include <stdio.h>
 
-static void	quote_remove_in_quote(int *i, int *j, char *str, char quote)
+static void	remove_quote_in_quotes_str(int *i, int *j, char *str, char quote)
 {
 	
 	++(*i);
@@ -26,7 +26,7 @@ static void	quote_remove_in_quote(int *i, int *j, char *str, char quote)
 	++(*i);
 }
 
-static void	quote_remove_word_token(t_token *this_token)
+static void	remove_quote_word_token(t_token *this_token)
 {
 	char *str;
 	int	i;
@@ -38,9 +38,9 @@ static void	quote_remove_word_token(t_token *this_token)
 	while(str[i] != '\0')
 	{
 		if (str[i] == M_SINGLE_QUOTE)
-			quote_remove_in_quote(&i, &j, str, M_SINGLE_QUOTE);
+			remove_quote_in_quotes_str(&i, &j, str, M_SINGLE_QUOTE);
 		else if (str[i] == M_DOUBLE_QUOTE)
-			quote_remove_in_quote(&i, &j, str, M_DOUBLE_QUOTE);
+			remove_quote_in_quotes_str(&i, &j, str, M_DOUBLE_QUOTE);
 		else
 		{
 			str[j] = str[i];
@@ -59,7 +59,7 @@ void	remove_quote(t_token *token_head)
 	while (this_token)
 	{
 		if (this_token->type == T_WORD)
-			quote_remove_word_token(this_token);
+			remove_quote_word_token(this_token);
 		this_token = this_token->next;
 	}
 }
