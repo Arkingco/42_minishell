@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 16:36:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 16:57:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_token	*make_quote_removed_token(unsigned int type, char *string_value)
 	if (type & EXPANDER)
 		new_type |= EXPANDED;
 	new_token = ft_make_newtoken(new_type, string_value_quote_removed);
-	// free(string_value_quote_removed);
+	free(string_value_quote_removed);
 	return (new_token);
 }
 
@@ -163,7 +163,10 @@ void	expand(t_token **token_lst, t_envlst *env)
 	if (!((*token_lst)->type & QUOTE))
 		(*token_lst)->string_value[0] = '\0';
 	else
-		ft_deltoken(token_lst);
+	{
+		*token_lst = (*token_lst)->next;
+		ft_deltoken(&(*token_lst)->prev);
+	}
 }
 
 t_token	*expander(t_token *token_lst, t_envlst *env)
