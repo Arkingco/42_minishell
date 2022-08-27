@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/22 16:43:34 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:46:06 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 #include "libft.h"
 #include <stdio.h>
 
-static int	get_quote_type_return_index(char *rl, int i, \
+int	get_quote_type_return_index(char *rl, int i, \
 												t_token_type this_token_type)
 {
 	if (this_token_type == T_SINGLE_QUOTE)
@@ -94,11 +94,14 @@ static void	read_readline(char *rl, t_token *token_head)
 			end = set_meta_token_type_return_end_index(rl, end, &t_type);
 		else
 			end = set_token_type_return_index(rl, end, T_WORD, &t_type);
-		token_add(token_head, t_type, ft_substr(rl, start, end - start + 1));		
+		if (t_type == T_WORD)
+			word_token_add(token_head, t_type, \
+				expand_this_word_token(ft_substr(rl, start, end - start + 1)));
+		else
+			token_add(token_head, t_type, \
+										ft_substr(rl, start, end - start + 1));
 		end++;
 	}
-	if (rl[end] == '\0')
-		token_add(token_head, t_type, (char *)T_NULL);
 }
 
 t_token	*tokenize(char *readline)
@@ -115,7 +118,13 @@ t_token	*tokenize(char *readline)
 		return (NULL);
 	}
 	read_readline(readline, token_head);
-	// token_extention(token_head);
+	remove_quote(token_head);
+	printf("Before:");
 	print_token_list(token_head);
+	printf("\n\n");
+	printf("AFTER:");
+	print_token_list(token_head);
+	printf("\n\n");
+	
 	return (token_head);
 }

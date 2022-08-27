@@ -27,9 +27,12 @@ SRCS_TERMINAL				:=	exit_terminal.c		\
 								init_terminal.c
 SRCS_TERMINAL				:=	$(addprefix $(DIR_TERMINAL)/, $(SRCS_TERMINAL))
 
-SRCS_LEXICAL_ANALYSIS		:=	parse_util.c		\
-								parse.c				\
-								token.c				
+SRCS_LEXICAL_ANALYSIS		:=	parse_util.c			\
+								parse.c					\
+								token.c					\
+								token_expand.c			\
+								token_quote_remove.c	\
+								env.c
 SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
 SRCS_SYNTAX_ANALYSIS		:=	parser.c

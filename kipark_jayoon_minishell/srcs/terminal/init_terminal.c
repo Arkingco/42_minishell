@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   init_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/16 14:46:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/08/27 15:46:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "prompt.h"
+#include "terminal.h"
 #include <signal.h>
 #include <stdio.h>
 #include <readline/readline.h>
@@ -43,7 +43,7 @@ static void	set_terminal_sig_handler()
 	signal(SIGINT, sig_handler);
 }
 
-void    init_terminal(void)
+void	init_terminal(void)
 {
 	set_terminal_sig_handler();
 	set_terminal_prompt_sigint();
