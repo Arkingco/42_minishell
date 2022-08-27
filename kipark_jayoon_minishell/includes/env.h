@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prompt.h                                           :+:      :+:    :+:   */
+/*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 13:59:38 by jayoon           ###   ########.fr       */
+/*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
+/*   Updated: 2022/08/26 13:25:42 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROMPT_H
-# define PROMPT_H
+#ifndef ENV_H
+# define ENV_H
 
-void    init_terminal(void);
-void	exit_readline_return_null(void);
+char		*get_env_value();
+int			get_env_key_size(char *env_key);
 
 #endif

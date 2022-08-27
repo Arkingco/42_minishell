@@ -1,6 +1,8 @@
 .DS_Store
 .vscode
 */.vscode
+*/minishell
+*/libft.a
 
 # Prerequisites
 *.d

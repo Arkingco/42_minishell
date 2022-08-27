@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_util.c                                       :+:      :+:    :+:   */
+/*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:05:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/22 16:33:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 15:46:01 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "lexer.h"
 
 int	is_metachar_not_include_quote(char c)
 {
@@ -26,6 +26,12 @@ int	ft_isifs(int c)
 	return (0);
 }
 
+void	pass_sigle_quote(char *str, int *i)
+{
+	while (str[*i + 1] != M_SINGLE_QUOTE)
+		++(*i);
+	++(*i);
+}
 
 int	pass_ifs(char *rl, int i)
 {
