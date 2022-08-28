@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 14:21:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:05:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	main_loop(t_envlst *env)
 			// // execute(t_cmd);
 			// free_lst_token(lst_token);
 			// free_lst_cmd(lst_cmd);
-			lst_token = expander(lst_token, env);
+			expander(&lst_token, env);
 			debug_print_lst_token(lst_token);
 
 		}

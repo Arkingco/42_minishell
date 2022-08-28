@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 19:43:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/28 18:17:15 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+/*
 t_token	*make_quote_removed_token(unsigned int type, char *string_value)
 {
 	char			*string_value_quote_removed;
@@ -125,37 +126,37 @@ void	expand_env_to_value(t_token *to_expand, t_envlst *env)
 	char	*expanded_value;
 
 	change_env_to_value(to_expand, env);
-	if ()
+	set_wordjoin_flags(to_expand);
 }
 
-t_token	*expand_env_to_value(t_token *to_expand, t_envlst *env)
-{
-	t_token	*expanded_lst;
-	char	*expanded_value;
+// t_token	*expand_env_to_value(t_token *to_expand, t_envlst *env)
+// {
+// 	t_token	*expanded_lst;
+// 	char	*expanded_value;
 
-	expanded_value = change_env_to_value(to_expand, env);
-	if (to_expand->type & DQUOTE)
-	{
-		expanded_lst =
-			make_quote_removed_token(to_expand->type, expanded_value);
-	}
-	else
-	{
-		expanded_lst =
-			make_ifs_splited_tokenlst(to_expand->type, expanded_value);
-		if (ft_strlen(expanded_value) == 0)
-			expanded_lst->type |= (LEFT_JOIN | RIGHT_JOIN);
-		else
-		{
-			if (ft_is_ifs(&expanded_value[0]) == FALSE)
-				expanded_lst->type |= LEFT_JOIN;
-			if (ft_is_ifs(&expanded_value[ft_strlen(expanded_value) - 1]) == FALSE)
-				(ft_token_lstlast(expanded_lst))->type |= RIGHT_JOIN;
-		}
-	}
-	free(expanded_value);
-	return (expanded_lst);
-}
+// 	expanded_value = change_env_to_value(to_expand, env);
+// 	if (to_expand->type & DQUOTE)
+// 	{
+// 		expanded_lst =
+// 			make_quote_removed_token(to_expand->type, expanded_value);
+// 	}
+// 	else
+// 	{
+// 		expanded_lst =
+// 			make_ifs_splited_tokenlst(to_expand->type, expanded_value);
+// 		if (ft_strlen(expanded_value) == 0)
+// 			expanded_lst->type |= (LEFT_JOIN | RIGHT_JOIN);
+// 		else
+// 		{
+// 			if (ft_is_ifs(&expanded_value[0]) == FALSE)
+// 				expanded_lst->type |= LEFT_JOIN;
+// 			if (ft_is_ifs(&expanded_value[ft_strlen(expanded_value) - 1]) == FALSE)
+// 				(ft_token_lstlast(expanded_lst))->type |= RIGHT_JOIN;
+// 		}
+// 	}
+// 	free(expanded_value);
+// 	return (expanded_lst);
+// }
 
 void	expand_pidenv(t_token *token_lst)
 {
@@ -183,7 +184,7 @@ void	expand(t_token **token_lst, t_envlst *env)
 
 	cur_token = *token_lst;
 	expand_pidenv(*token_lst);
-	expanded_lst = expand_env_to_value(cur_token, env);
+	// expanded_lst = expand_env_to_value(cur_token, env);
 	ft_insert_token(*token_lst, expanded_lst);
 	// ft_deltoken(token_lst);
 	if (!((*token_lst)->type & QUOTE))
@@ -194,46 +195,152 @@ void	expand(t_token **token_lst, t_envlst *env)
 		ft_deltoken(&(*token_lst)->prev);
 	}
 }
+*/
 
-t_token	*expander(t_token *token_lst, t_envlst *env)
+
+
+
+
+
+
+
+
+
+
+
+void	expand_pidenv(t_token *token)
 {
-	t_token	*cur_token;
-	t_token	*prev_token;
-
-	cur_token = token_lst;
-	while (cur_token != NULL)
+	char	*pid_suspect;
+	char	*tmp_string;
+	
+	pid_suspect = token->string_value;
+	while (1)
 	{
-		if (token_lst->type & EXPANDER)
-			expand(&cur_token, env);
-		prev_token = cur_token;
-		cur_token = cur_token->next;
-	}
-	cur_token = ft_token_lst_first(prev_token);
-	token_lst = cur_token;
-	// 아래는 pure_word중 빈 문자열을 싹 지우고 첫 노드를 반환하는 코드
-	while (cur_token != NULL)
-	{
-		if (!(cur_token->type & QUOTE) && (cur_token->string_value[0] == '\0'))
+		pid_suspect = ft_strchr(pid_suspect, '$');
+		if (pid_suspect == NULL)
+			break ;
+		if (ft_strncmp(pid_suspect, "$$", 2) != 0)
 		{
-			if (cur_token->prev != NULL)
-			{
-				cur_token = cur_token->prev;
-				ft_deltoken(&cur_token->next);
-			}
-			else if (cur_token->next != NULL)
-			{
-				cur_token = cur_token->next;
-				token_lst = cur_token;
-				ft_deltoken(&cur_token->prev);
-				continue ;
-			}
+			pid_suspect++;
+			continue ;
+		}
+		else
+			ft_memmove(pid_suspect, pid_suspect + 2, ft_strlen(pid_suspect) + 1);
+	}
+	tmp_string = ft_strdup(token->string_value);
+	free(token->string_value);
+	token->string_value = tmp_string;
+}
+
+char	*raise_buffer(char *prev, int raise_size)
+{
+	char	*raised_buffer;
+
+	raised_buffer = (char *)ft_calloc(1, ft_strlen(prev) + raise_size + 1);
+	ft_strlcpy(raised_buffer, prev, ft_strlen(prev) + 1);
+	free(prev);
+	return (raised_buffer);
+}
+
+void	expand_env(t_token *token, t_envlst *env)
+{
+	char	*cpy_start;
+	char	*cpy_end;
+	char	*expanded_string;
+	char	*env_key;
+	char	*env_value;
+
+	cpy_start = token->string_value;
+	expanded_string = ft_strdup("");
+	while (*cpy_start != '\0')
+	{
+		if (*cpy_start == '$')
+		{
+			cpy_end = cpy_start + 1;
+			if (*cpy_end == '\0' && token->next != NULL && token->next->type & QUOTE)
+				*cpy_start = '\0';
 			else
 			{
-				ft_deltoken(&cur_token);
-				return (NULL);
+				while (*cpy_end != '$' && *cpy_end != '\0' && *cpy_end != '\'' && *cpy_end != '\"')
+					cpy_end++;
+				cpy_end--;
+				if (cpy_start == cpy_end)
+				{
+					expanded_string = raise_buffer(expanded_string, 1);
+					ft_strlcat(expanded_string, cpy_start, ft_strlen(expanded_string) + 2);
+					cpy_start++;
+				}
+				else
+				{
+					env_key = ft_substr(cpy_start, 1, cpy_end - cpy_start);
+					env_value = ft_getenv(env, env_key);
+					if (env_value != NULL)
+					{
+						expanded_string = raise_buffer(expanded_string, ft_strlen(env_value));
+						ft_strlcat(expanded_string, env_value, ft_strlen(expanded_string) + ft_strlen(env_value) + 1);
+					}
+					cpy_start = cpy_end + 1;
+					free(env_key);
+				}
 			}
 		}
-		cur_token = cur_token->next;
+		else
+		{
+			cpy_end = cpy_start;
+			while (*cpy_end != '\0' && *cpy_end != '$')
+				cpy_end++;
+			cpy_end--;
+			expanded_string = raise_buffer(expanded_string, cpy_end - cpy_start + 1);
+			ft_strlcat(expanded_string, cpy_start, \
+						ft_strlen(expanded_string) + (cpy_end - cpy_start + 2));
+			cpy_start = cpy_end + 1;
+		}
 	}
-	return (token_lst);
+	free(token->string_value);
+	token->string_value = expanded_string;
+}
+
+void	expander(t_token **token_lst, t_envlst *env)
+{
+	t_token	*cur_token;
+
+	cur_token = *token_lst;
+	while (cur_token != NULL)
+	{
+		if ((cur_token->type & WORD) && !(cur_token->type & SQUOTE))
+		{
+			expand_pidenv(cur_token);
+			expand_env(cur_token, env);
+		}
+		if (cur_token->next == NULL)
+			break ;
+		else
+			cur_token = cur_token->next;
+	}
+	// 아래는 pure_word중 빈 문자열을 싹 지우고 첫 노드를 반환하는 코드
+	// while (cur_token != NULL)
+	// {
+	// 	if (!(cur_token->type & QUOTE) && (cur_token->string_value[0] == '\0'))
+	// 	{
+	// 		if (cur_token->prev != NULL)
+	// 		{
+	// 			cur_token = cur_token->prev;
+	// 			ft_deltoken(&cur_token->next);
+	// 		}
+	// 		else if (cur_token->next != NULL)
+	// 		{
+	// 			cur_token = cur_token->next;
+	// 			token_lst = cur_token;
+	// 			ft_deltoken(&cur_token->prev);
+	// 			continue ;
+	// 		}
+	// 		else
+	// 		{
+	// 			ft_deltoken(&cur_token);
+	// 			return (NULL);
+	// 		}
+	// 	}
+	// 	cur_token = cur_token->next;
+	// }
+	// return (token_lst);
 }
