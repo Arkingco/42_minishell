@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/28 19:04:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 02:03:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,7 @@ void	expand_env(t_token *token, t_envlst *env)
 				*cpy_start = '\0';
 			else
 			{
-				while (*cpy_end != '$' && *cpy_end != '\0' && *cpy_end != '\'' && *cpy_end != '\"')
+				while (*cpy_end != '$' && *cpy_end != '\0' && *cpy_end != '\'' && *cpy_end != '\"' && !ft_is_ifs(cpy_end))
 					cpy_end++;
 				cpy_end--;
 				if (cpy_start == cpy_end)
@@ -287,10 +287,21 @@ void	expand_env(t_token *token, t_envlst *env)
 				}
 			}
 		}
+		else if (*cpy_start == ' ')
+		{
+			cpy_end = cpy_start;
+			while (ft_is_ifs(cpy_end))
+				cpy_end++;
+			cpy_end--;
+			expanded_string = raise_buffer(expanded_string, cpy_end - cpy_start + 1);
+			ft_strlcat(expanded_string, cpy_start, \
+						ft_strlen(expanded_string) + (cpy_end - cpy_start + 2));
+			cpy_start = cpy_end + 1;
+		}
 		else
 		{
 			cpy_end = cpy_start;
-			while (*cpy_end != '\0' && *cpy_end != '$')
+			while (*cpy_end != '\0' && *cpy_end != '$' && !ft_is_ifs(cpy_end))
 				cpy_end++;
 			cpy_end--;
 			expanded_string = raise_buffer(expanded_string, cpy_end - cpy_start + 1);
@@ -301,6 +312,35 @@ void	expand_env(t_token *token, t_envlst *env)
 	}
 	free(token->string_value);
 	token->string_value = expanded_string;
+}
+
+void remove_trash_token(t_token **token_lst)
+{
+	t_token	*cur_token;
+
+	cur_token = *token_lst;
+	while (cur_token != NULL)
+	{
+		if ((cur_token->type & EXPANDER) && !(cur_token->type & EXPANDED) && \
+			ft_strlen(cur_token->string_value) == 0)
+		{
+			if (cur_token->prev == NULL && cur_token->next == NULL)
+				ft_deltoken(token_lst);
+			if (cur_token->prev == NULL)
+			{
+				cur_token = (*token_lst)->next;
+				ft_deltoken(token_lst);
+				*token_lst = cur_token;
+			}
+			else
+			{
+				cur_token = cur_token->next;
+				ft_deltoken(&cur_token->prev);
+			}
+		}
+		else
+			cur_token = cur_token->next;
+	}
 }
 
 void	expander(t_token **token_lst, t_envlst *env)
@@ -315,21 +355,10 @@ void	expander(t_token **token_lst, t_envlst *env)
 			expand_pidenv(cur_token);
 			expand_env(cur_token, env);
 		}
-		if (cur_token->next == NULL)
+		if (cur_token->next == NULL) // 지울수도  있음
 			break ;
 		else
 			cur_token = cur_token->next;
 	}
-
-
-	// 의미없는 토큰 지우는 과정
-	cur_token = ft_token_lst_first(cur_token);
-	while (cur_token != NULL)
-	{
-		if ((cur_token->type & EXPANDER) && !(cur_token->type & EXPANDED) && \
-									ft_strlen(cur_token->string_value) == 0)
-		{
-			ft_deltoken(&cur_token->prev);
-		}
-	}
+	remove_trash_token(token_lst);
 }
