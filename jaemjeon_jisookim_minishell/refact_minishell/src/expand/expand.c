@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 16:57:37 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 19:43:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-# include <sys/wait.h>
-
 
 t_token	*make_quote_removed_token(unsigned int type, char *string_value)
 {
@@ -59,7 +57,7 @@ t_token	*make_ifs_splited_tokenlst(unsigned int type, char *string_value)
 	return (splited_lst);
 }
 
-char	*change_env_to_value(t_token *to_expand, t_envlst *env)
+void	change_env_to_value(t_token *to_expand, t_envlst *env)
 {
 	char	*expanded_value;
 	char	*to_expand_value;
@@ -99,7 +97,35 @@ char	*change_env_to_value(t_token *to_expand, t_envlst *env)
 		expanded_value = tmp_value;
 		to_expand_value += read_len;
 	}
-	return (expanded_value);
+	free(to_expand->string_value);
+	to_expand->string_value = expanded_value;
+}
+
+void	set_wordjoin_flags(t_token *to_expand)
+{
+	int	len_string_value;
+
+	len_string_value = ft_strlen(to_expand->string_value);
+	if (len_string_value == 0)
+	{
+		to_expand->type |= (LEFT_JOIN | RIGHT_JOIN);
+		return ;
+	}
+	else
+	{
+		if (ft_is_ifs(&to_expand->string_value[0]) == TRUE)
+			to_expand->type |= LEFT_JOIN;
+		else if (ft_is_ifs(&to_expand->string_value[len_string_value - 1]) == TRUE)
+			to_expand->type |= RIGHT_JOIN;
+	}
+}
+
+void	expand_env_to_value(t_token *to_expand, t_envlst *env)
+{
+	char	*expanded_value;
+
+	change_env_to_value(to_expand, env);
+	if ()
 }
 
 t_token	*expand_env_to_value(t_token *to_expand, t_envlst *env)
