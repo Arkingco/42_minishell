@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/28 18:17:15 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/28 19:04:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,10 @@ void	expand_pidenv(t_token *token)
 			continue ;
 		}
 		else
+		{
 			ft_memmove(pid_suspect, pid_suspect + 2, ft_strlen(pid_suspect) + 1);
+			token->type |= EXPANDED;
+		}
 	}
 	tmp_string = ft_strdup(token->string_value);
 	free(token->string_value);
@@ -257,7 +260,7 @@ void	expand_env(t_token *token, t_envlst *env)
 		if (*cpy_start == '$')
 		{
 			cpy_end = cpy_start + 1;
-			if (*cpy_end == '\0' && token->next != NULL && token->next->type & QUOTE)
+			if (*cpy_end == '\0' && token->next != NULL && token->type & RIGHT_JOIN && token->next->type & QUOTE)
 				*cpy_start = '\0';
 			else
 			{
@@ -317,30 +320,16 @@ void	expander(t_token **token_lst, t_envlst *env)
 		else
 			cur_token = cur_token->next;
 	}
-	// 아래는 pure_word중 빈 문자열을 싹 지우고 첫 노드를 반환하는 코드
-	// while (cur_token != NULL)
-	// {
-	// 	if (!(cur_token->type & QUOTE) && (cur_token->string_value[0] == '\0'))
-	// 	{
-	// 		if (cur_token->prev != NULL)
-	// 		{
-	// 			cur_token = cur_token->prev;
-	// 			ft_deltoken(&cur_token->next);
-	// 		}
-	// 		else if (cur_token->next != NULL)
-	// 		{
-	// 			cur_token = cur_token->next;
-	// 			token_lst = cur_token;
-	// 			ft_deltoken(&cur_token->prev);
-	// 			continue ;
-	// 		}
-	// 		else
-	// 		{
-	// 			ft_deltoken(&cur_token);
-	// 			return (NULL);
-	// 		}
-	// 	}
-	// 	cur_token = cur_token->next;
-	// }
-	// return (token_lst);
+
+
+	// 의미없는 토큰 지우는 과정
+	cur_token = ft_token_lst_first(cur_token);
+	while (cur_token != NULL)
+	{
+		if ((cur_token->type & EXPANDER) && !(cur_token->type & EXPANDED) && \
+									ft_strlen(cur_token->string_value) == 0)
+		{
+			ft_deltoken(&cur_token->prev);
+		}
+	}
 }
