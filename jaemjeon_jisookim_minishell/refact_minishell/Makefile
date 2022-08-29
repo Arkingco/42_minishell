@@ -18,6 +18,7 @@ DIR_TOKENIZE	:=	$(SRCS_DIR)/tokenize
 DIR_UTILS		:=	$(SRCS_DIR)/utils
 DIR_MAIN		:=	$(SRCS_DIR)/main
 DIR_EXPAND		:=	$(SRCS_DIR)/expand
+DIR_PARSE		:=	$(SRCS_DIR)/parse
 DIR_DEBUG		:=	$(SRCS_DIR)/debug
 
 SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
@@ -36,13 +37,16 @@ SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 SRC_EXPAND		:= expand.c
 SRC_EXPAND		:= $(addprefix $(DIR_EXPAND)/, $(SRC_EXPAND))
 
+SRC_PARSE		:= parse.c cmd_adt_1.c parse_util_1.c
+SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
+
 SRC_DEBUG		:= print_lst_token.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
-					$(SRC_DEBUG) $(SRC_EXPAND)
+					$(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE)
 
 OBJS 			=	${SRCS:.c=.o}
 

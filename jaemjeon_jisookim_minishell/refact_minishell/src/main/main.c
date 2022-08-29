@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/28 18:05:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 21:58:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	main_loop(t_envlst *env)
 {
 	char	*line;
 	t_token	*lst_token;
-	// t_token	*lst_token;
 	// t_cmd	*lst_cmd;
 	while (1)
 	{
@@ -25,20 +24,13 @@ void	main_loop(t_envlst *env)
 		{
 			// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.
 			lst_token = tokenize(line);
-			// t_cmd = token_to_cmdlst(t_token);
-			// // execute(t_cmd);
-			// free_lst_token(lst_token);
-			// free_lst_cmd(lst_cmd);
 			expander(&lst_token, env);
+			combine_redirect_filename(lst_token);
 			debug_print_lst_token(lst_token);
-
 		}
 		else
 			ft_error_exit(0, "exit");
 	}
-	// unused para
-	env++;
-	env = NULL;
 }
 
 int	main(int argc, char *argv[], char *envp[])
@@ -51,9 +43,4 @@ int	main(int argc, char *argv[], char *envp[])
 	built_in_env(env);
 	main_loop(env);
 	return (0);
-
-
-	// unused para
-	argv++;
-	argv = NULL;
 }
