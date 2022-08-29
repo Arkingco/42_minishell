@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 15:41:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 16:06:14 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -424,6 +424,27 @@ void	quote_remove(t_token **token_lst)
 	}
 }
 
+void	word_join(t_token **token_lst)
+{
+	t_token	*cur_token;
+	char	*joined_string;
+
+	cur_token = *token_lst;
+	while (cur_token != NULL && cur_token->next != NULL)
+	{
+		if (cur_token->type & RIGHT_JOIN && cur_token->next->type & LEFT_JOIN)
+		{
+			joined_string = ft_strjoin(cur_token->string_value, cur_token->next->string_value);
+			free(cur_token->string_value);
+			cur_token->string_value = joined_string;
+			if ((cur_token->next->type & RIGHT_JOIN) == FALSE)
+				cur_token->type &= ~RIGHT_JOIN;
+			ft_deltoken(&(cur_token->next));
+		}
+		cur_token = cur_token->next;
+	}
+}
+
 void	expander(t_token **token_lst, t_envlst *env)
 {
 	t_token	*cur_token;
@@ -444,4 +465,5 @@ void	expander(t_token **token_lst, t_envlst *env)
 	remove_trash_token(token_lst);
 	quote_remove(token_lst);
 	word_split(token_lst);
+	word_join(token_lst);
 }
