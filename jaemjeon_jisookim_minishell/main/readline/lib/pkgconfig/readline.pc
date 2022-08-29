@@ -1,4 +1,4 @@
-prefix=/Users/jaemjeon/.brew/Cellar/readline/8.1.2
+prefix=/opt/homebrew/Cellar/readline/8.1.2
 exec_prefix=${prefix}
 libdir=${exec_prefix}/lib
 includedir=${prefix}/include
