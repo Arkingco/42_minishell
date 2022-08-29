@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 12:23:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 09:55:50 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ void	ft_addenv_str(t_envlst **env, char *str_envp)
 	if (p_del == NULL)
 		return ;
 	key = ft_substr(str_envp, 0, p_del - str_envp);
-	if (*(p_del + 1) == '\0' || ft_is_ifs(p_del + 1))
+	// if (*(p_del + 1) == '\0' || ft_is_ifs(p_del + 1))
+	// 	value = ft_strdup("");
+	if (*(p_del + 1) == '\0')
 		value = ft_strdup("");
 	else
 		value = ft_substr(str_envp, p_del - str_envp + 1,

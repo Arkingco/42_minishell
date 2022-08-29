@@ -8,12 +8,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Mon Aug 29 03:22:22 2022
+# Make data base, printed on Mon Aug 29 10:31:59 2022
 
 # Variables
 
- 
 # automatic
+ 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
@@ -54,7 +54,7 @@ OBJS = ${SRCS:.c=.o}
 # makefile (from `Makefile', line 16)
 DIR_ENV := ./src/env
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/vscode-ipc-4f002951-cb03-4e1a-82d7-232bd1800676.sock
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/vscode-ipc-7a107cfe-484b-430c-b3b7-532801eb83e7.sock
 # environment
 VSCODE_CWD = /
 # environment
@@ -72,7 +72,7 @@ ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.zDwEBuq6fe/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.wRz7oyIH6Y/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
@@ -123,7 +123,6 @@ USER = jaemjeon
 INCLUDE = -I include -I $(DIR_LIBFT)
 # makefile (from `Makefile', line 2)
 NAME = minishell
- 
 # environment
 LESS = -R
 # automatic
@@ -151,7 +150,7 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-XPC_SERVICE_NAME = com.microsoft.VSCode.2124
+XPC_SERVICE_NAME = com.microsoft.VSCode.4532
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
@@ -170,6 +169,7 @@ LC_ALL = C
 DIR_LIBFT = ./libft
 # makefile (from `Makefile', line 11)
 LIB_READLINE = -L /Users/jaemjeon/.brew/Cellar/readline/8.1.2/lib
+ 
 # automatic
 ^F = $(notdir $^)
 # makefile (from `Makefile', line 24)
@@ -187,7 +187,7 @@ MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 3282
+VSCODE_PID = 8839
 # makefile (from `Makefile', line 17)
 DIR_TOKENIZE := ./src/tokenize
 # variable set hash-table stats:
@@ -199,9 +199,9 @@ DIR_TOKENIZE := ./src/tokenize
 
 # Directories
 
-# . (device 16777225, inode 4034190): 8 files, no impossibilities.
+# . (device 16777225, inode 4034190): 9 files, no impossibilities.
 
-# 8 files, no impossibilities in 1 directories.
+# 9 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -316,7 +316,7 @@ src/env/env_list_adt_2.o:
 
 minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/tokenize/tokenize.o src/tokenize/split_all_component.o src/tokenize/token_list_adt_1.o src/tokenize/token_list_adt_2.o src/tokenize/read_token_func.o src/tokenize/read_token_util_1.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o src/debug/print_lst_token.o src/expand/expand.o
 #  Implicit rule search has not been done.
-#  File does not exist.
+#  Last modified 2022-08-29 10:16:05
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
@@ -429,6 +429,6 @@ src/expand/expand.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Mon Aug 29 03:22:22 2022
+# Finished Make data base on Mon Aug 29 10:31:59 2022
 
  

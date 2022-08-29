@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ifs.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:00:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 14:54:37 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 09:33:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	ft_has_ifs(char *string)
+{
+	while (*string != '\0')
+	{
+		if (ft_is_ifs(string) == TRUE)
+			return (TRUE);
+		string++;
+	}
+	return (FALSE);
+}
 
 int	ft_is_ifs(const char *letter)
 {

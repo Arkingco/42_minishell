@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:46:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 14:09:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 09:24:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,6 @@ void		ft_deltoken(t_token **lst);
 t_token		*ft_token_lst_first(t_token *lst);
 t_token		*ft_make_newtoken(unsigned int type, char *string_value);
 void		ft_insert_token(t_token *prev_to_insert, t_token *to_insert);
+t_token		*ft_strtok_token(unsigned int type, char **string);
 
 #endif

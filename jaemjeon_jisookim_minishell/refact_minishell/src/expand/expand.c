@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 03:40:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 10:16:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -348,6 +348,54 @@ void remove_trash_token(t_token **token_lst)
 	}
 }
 
+void	word_split(t_token **token_lst)
+{
+	t_token	*cur_token;
+	t_token	*splited_lst;
+	t_token	*new_token;
+	char	*string_value;
+
+	cur_token = *token_lst;
+	splited_lst = NULL;
+	while (cur_token != NULL)
+	{
+		if ((cur_token->type & WORD) && !(cur_token->type & QUOTE) && ft_has_ifs(cur_token->string_value))
+		{
+			string_value = cur_token->string_value;
+			while (*string_value != '\0')
+			{
+				new_token = ft_strtok_token(cur_token->type, &string_value);
+				if (new_token == NULL)
+					break ;
+				ft_token_lstadd_back(&splited_lst, new_token);
+			}
+			ft_insert_token(cur_token, splited_lst);
+			cur_token = cur_token->next;
+			if (cur_token->prev->prev == NULL)
+				*token_lst = cur_token;
+			ft_deltoken(&cur_token->prev);
+			continue ;
+		}
+		cur_token = cur_token->next;
+	}
+}
+
+void	quote_remove(t_token **token_lst)
+{
+	t_token	*cur_token;
+
+	cur_token = *token_lst;
+	while (cur_token != NULL)
+	{
+		if (cur_token->type & QUOTE)
+		{
+			ft_memmove(cur_token->string_value, cur_token->string_value + 1, ft_strlen(cur_token->string_value));
+			cur_token->string_value[ft_strlen(cur_token->string_value) - 1] = '\0';
+		}
+		cur_token = cur_token->next;
+	}
+}
+
 void	expander(t_token **token_lst, t_envlst *env)
 {
 	t_token	*cur_token;
@@ -366,4 +414,6 @@ void	expander(t_token **token_lst, t_envlst *env)
 			cur_token = cur_token->next;
 	}
 	remove_trash_token(token_lst);
+	quote_remove(token_lst);
+	word_split(token_lst);
 }
