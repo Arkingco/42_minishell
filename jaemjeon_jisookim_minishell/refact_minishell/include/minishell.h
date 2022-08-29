@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 21:48:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:54:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,7 @@ void	init_envp(char *envp[], t_envlst **env);
 
 // print_lst_token.c
 void	debug_print_lst_token(t_token *lst);
+// print_lst_cmd.c
+void	debug_print_lst_cmd(t_cmd *lst);
 
 #endif

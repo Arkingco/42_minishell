@@ -40,7 +40,7 @@ SRC_EXPAND		:= $(addprefix $(DIR_EXPAND)/, $(SRC_EXPAND))
 SRC_PARSE		:= parse.c cmd_adt_1.c parse_util_1.c
 SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 
-SRC_DEBUG		:= print_lst_token.c
+SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 

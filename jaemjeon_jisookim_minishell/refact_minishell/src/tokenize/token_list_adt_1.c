@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 12:23:08 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:11:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,11 @@ void		ft_token_lstadd_back(t_token **lst, t_token *new)
 	if (lst == NULL)
 		ft_error_exit(1, "input para error in ft_token_lstadd_back");
 	if (*lst == NULL)
+	{
 		*lst = new;
+		new->prev = NULL;
+		new->next = NULL;
+	}
 	else
 	{
 		new->prev = ft_token_lstlast(*lst);

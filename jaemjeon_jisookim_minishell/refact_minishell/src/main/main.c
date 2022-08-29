@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 21:58:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:23:53 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	main_loop(t_envlst *env)
 {
 	char	*line;
 	t_token	*lst_token;
-	// t_cmd	*lst_cmd;
+	t_cmd	*lst_cmd;
 	while (1)
 	{
 		line = readline("MINISHELL : ");
@@ -27,6 +27,8 @@ void	main_loop(t_envlst *env)
 			expander(&lst_token, env);
 			combine_redirect_filename(lst_token);
 			debug_print_lst_token(lst_token);
+			lst_cmd = token_to_cmd(lst_token);
+			debug_print_lst_cmd(lst_cmd);
 		}
 		else
 			ft_error_exit(0, "exit");

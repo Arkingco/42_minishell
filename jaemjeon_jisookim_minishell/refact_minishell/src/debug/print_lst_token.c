@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 14:44:22 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 15:23:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 23:20:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	debug_print_lst_token(t_token *lst)
 	printf("#debug_print_lst_token#\n");
 	printf("#######################\n");
 	if (lst == NULL)
-		printf("PARA_OF_TOKEN_IS_NULL!!");
+		printf("PARA_OF_TOKEN_IS_NULL!!\n\n");
 	while (lst != NULL)
 	{
 		print_token_type(lst);
