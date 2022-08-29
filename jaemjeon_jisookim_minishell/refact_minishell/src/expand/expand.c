@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 10:16:02 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:41:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void	expand_pidenv(t_token *token)
 {
 	char	*pid_suspect;
 	char	*tmp_string;
-	
+
 	pid_suspect = token->string_value;
 	while (1)
 	{
@@ -325,7 +325,10 @@ void remove_trash_token(t_token **token_lst)
 			ft_strlen(cur_token->string_value) == 0)
 		{
 			if (cur_token->prev == NULL && cur_token->next == NULL)
+			{
 				ft_deltoken(token_lst);
+				return ;
+			}
 			else if (cur_token->prev == NULL)
 			{
 				cur_token = (*token_lst)->next;
@@ -335,7 +338,7 @@ void remove_trash_token(t_token **token_lst)
 			else if (cur_token->next == NULL)
 			{
 				ft_deltoken(&cur_token);
-				cur_token = NULL;
+				return ;
 			}
 			else
 			{
@@ -346,6 +349,16 @@ void remove_trash_token(t_token **token_lst)
 		else
 			cur_token = cur_token->next;
 	}
+}
+
+int	is_ifs_word(char *string_value)
+{
+	while (ft_is_ifs(string_value) == TRUE && *string_value != '\0')
+		string_value++;
+	if (*string_value == '\0')
+		return (TRUE);
+	else
+		return (FALSE);
 }
 
 void	word_split(t_token **token_lst)
@@ -362,18 +375,33 @@ void	word_split(t_token **token_lst)
 		if ((cur_token->type & WORD) && !(cur_token->type & QUOTE) && ft_has_ifs(cur_token->string_value))
 		{
 			string_value = cur_token->string_value;
-			while (*string_value != '\0')
+			if (is_ifs_word(string_value))
+				splited_lst = ft_make_newtoken(cur_token->type & ~(LEFT_JOIN | RIGHT_JOIN), "");
+			else
 			{
-				new_token = ft_strtok_token(cur_token->type, &string_value);
-				if (new_token == NULL)
-					break ;
-				ft_token_lstadd_back(&splited_lst, new_token);
+				while (*string_value != '\0')
+				{
+					new_token = ft_strtok_token(cur_token->type, &string_value);
+					if (new_token == NULL)
+						break;
+					ft_token_lstadd_back(&splited_lst, new_token);
+				}
 			}
 			ft_insert_token(cur_token, splited_lst);
-			cur_token = cur_token->next;
-			if (cur_token->prev->prev == NULL)
-				*token_lst = cur_token;
-			ft_deltoken(&cur_token->prev);
+			if (cur_token->next == NULL && cur_token->prev == NULL)
+				ft_deltoken(token_lst);
+			else if (cur_token->next == NULL)
+				ft_deltoken(&cur_token);
+			else if (cur_token->prev == NULL)
+			{
+				cur_token = cur_token->next;
+				ft_deltoken(token_lst);
+			}
+			else
+			{
+				cur_token = cur_token->next;
+				ft_deltoken(&cur_token->prev);
+			}
 			continue ;
 		}
 		cur_token = cur_token->next;

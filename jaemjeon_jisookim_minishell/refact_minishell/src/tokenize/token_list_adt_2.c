@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_adt_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 09:32:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/29 15:42:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_deltoken(t_token **lst)
 	prev_token = to_free_token->prev;
 	next_token = to_free_token->next;
 	ft_free_tokenlst(to_free_token);
-	if (prev_token == NULL && prev_token == NULL)
+	if (prev_token == NULL && next_token == NULL)
 		*lst = NULL;
 	else if (prev_token == NULL)
 	{
@@ -89,6 +89,7 @@ t_token	*ft_strtok_token(unsigned int type, char **string)
 
 	string_start = *string;
 	join_flag = 0;
+	type &= ~(LEFT_JOIN | RIGHT_JOIN);
 	if (ft_is_ifs(string_start) == FALSE)
 		join_flag |= LEFT_JOIN;
 	while (ft_is_ifs(string_start) == TRUE && *string_start != '\0')
