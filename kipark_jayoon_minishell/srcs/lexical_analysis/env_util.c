@@ -1,27 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.h                                              :+:      :+:    :+:   */
+/*   env_util.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/27 16:17:40 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
+/*   Updated: 2022/08/27 16:00:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ENV_H
-# define ENV_H
+#include"libft.h"
+#include"env.h"
 
-typedef struct s_env
+char *get_env_value() // char *env_key 지워둠
 {
-	char			*str;
-	struct s_env	*next;
-}	t_env;
+	return (ft_strdup("ls > a"));
+}
 
+static int	is_env_key_word(char c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c) || c == '_')
+		return (1);
+	return (0);
+}
 
-char		*get_env_value();
-int			get_env_key_size(char *env_key);
-t_env		*set_shell_env_list(char **envp);
+int	get_env_key_size(char *env_key)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (is_env_key_word(env_key[i]))
+		++i;
+	return (i);
+}

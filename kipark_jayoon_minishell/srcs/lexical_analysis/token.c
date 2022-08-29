@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/27 15:45:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/27 16:18:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void	print_token_list(t_token *token_head)
 	}
 }
 
-void	init_token_dummy_node(t_token *token_head)
+void	init_token_dummy_node(t_token *new_token)
 {
-	token_head->next = NULL;
-	token_head->str = NULL;
-	token_head->type = T_NULL;
+	new_token->next = NULL;
+	new_token->str = NULL;
+	new_token->type = T_NULL;
 }
 
 void	token_free(t_token *token)
