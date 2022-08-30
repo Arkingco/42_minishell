@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 17:07:39 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:48:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,14 @@
 #include "minishell.h"
 #include "env.h"
 
-int	check_argument(int argc, char **argv)
+static void	free_main_line_and_token(char *line, t_token *token)
+{
+	free(line);
+	line = NULL;
+	token_free(token);
+}
+
+static int	check_argument(int argc, char **argv)
 {
 	if (argc > 2)
 		return (1);
@@ -44,15 +51,12 @@ int main(int argc, char **argv, char **envp)
 		line = readline("minishell$ ");
 		if (line)
 		{
-			
-			token = tokenize(line);
+			token = tokenize(env, line);
 			parser(token);
 			// syntax_analysis();
 			// execute();
-			
 			add_history(line);
-			free(line);
-			line = NULL;
+			free_main_line_and_token(line, token);
 		}
 		else
 			exit_readline_return_null();

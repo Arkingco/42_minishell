@@ -32,7 +32,9 @@ SRCS_LEXICAL_ANALYSIS		:=	lexer_util.c			\
 								token.c					\
 								token_expand.c			\
 								token_quote_remove.c	\
-								env.c
+								env.c					\
+								env_util.c				\
+								env_list.c
 SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
 SRCS_SYNTAX_ANALYSIS		:=	parser.c

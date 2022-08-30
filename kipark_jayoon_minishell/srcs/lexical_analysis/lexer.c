@@ -6,12 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 15:46:06 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 15:45:12 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "libft.h"
+#include "env.h"
 #include <stdio.h>
 
 int	get_quote_type_return_index(char *rl, int i, \
@@ -75,7 +76,7 @@ static int	set_meta_token_type_return_end_index(char *rl, int i, \
 	return (i);
 }
 
-static void	read_readline(char *rl, t_token *token_head)
+static void	read_readline(t_env *env_head, char *rl, t_token *token_head)
 {
 	int				start;
 	int				end;
@@ -96,7 +97,8 @@ static void	read_readline(char *rl, t_token *token_head)
 			end = set_token_type_return_index(rl, end, T_WORD, &t_type);
 		if (t_type == T_WORD)
 			word_token_add(token_head, t_type, \
-				expand_this_word_token(ft_substr(rl, start, end - start + 1)));
+				expand_this_word_token(env_head, \
+										ft_substr(rl, start, end - start + 1)));
 		else
 			token_add(token_head, t_type, \
 										ft_substr(rl, start, end - start + 1));
@@ -104,7 +106,7 @@ static void	read_readline(char *rl, t_token *token_head)
 	}
 }
 
-t_token	*tokenize(char *readline)
+t_token	*tokenize(t_env *env_head, char *readline)
 {
 	t_token *token_head;
 
@@ -117,14 +119,8 @@ t_token	*tokenize(char *readline)
 		printf("syntex error\n");
 		return (NULL);
 	}
-	read_readline(readline, token_head);
+	read_readline(env_head, readline, token_head);
 	remove_quote(token_head);
-	printf("Before:");
 	print_token_list(token_head);
-	printf("\n\n");
-	printf("AFTER:");
-	print_token_list(token_head);
-	printf("\n\n");
-	
 	return (token_head);
 }
