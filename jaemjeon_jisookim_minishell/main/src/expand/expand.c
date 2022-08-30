@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 22:05:36 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:20:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -366,41 +366,27 @@ void	expand_env(t_token *token, t_envlst *env)
 	token->string_value = result;
 }
 
-void remove_trash_token(t_token **token_lst)
+void	remove_trash_token(t_token **token_lst)
 {
 	t_token	*cur_token;
+	t_token	*head_token;
+	t_token	*to_del_token;
 
 	cur_token = *token_lst;
+	head_token = *token_lst;
 	while (cur_token != NULL)
 	{
 		if ((cur_token->type & EXPANDER) && !(cur_token->type & EXPANDED) && \
 			ft_strlen(cur_token->string_value) == 0)
 		{
-			if (cur_token->prev == NULL && cur_token->next == NULL)
-			{
-				ft_deltoken(token_lst);
-				return ;
-			}
-			else if (cur_token->prev == NULL)
-			{
-				cur_token = (*token_lst)->next;
-				ft_deltoken(token_lst);
-				*token_lst = cur_token;
-			}
-			else if (cur_token->next == NULL)
-			{
-				ft_deltoken(&cur_token);
-				return ;
-			}
-			else
-			{
-				cur_token = cur_token->next;
-				ft_deltoken(&cur_token->prev);
-			}
+			if (cur_token->prev == NULL)
+				head_token = cur_token->next;
+			to_del_token = cur_token;
+			ft_deltoken(&to_del_token);
 		}
-		else
-			cur_token = cur_token->next;
+		cur_token = cur_token->next;
 	}
+	*token_lst = head_token;
 }
 
 int	is_ifs_word(char *string_value)
