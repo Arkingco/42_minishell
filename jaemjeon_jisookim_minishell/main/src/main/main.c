@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 17:05:52 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 20:38:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	main_loop(t_envlst *env)
 			lst_cmd = token_to_cmd(lst_token);
 			debug_print_lst_cmd(lst_cmd);
 			ft_free_cmdlst(lst_cmd);
-			system("leaks minishell");
 			free(line);
 		}
 		else

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 16:06:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:05:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -245,73 +245,125 @@ char	*raise_buffer(char *prev, int raise_size)
 	return (raised_buffer);
 }
 
-void	expand_env(t_token *token, t_envlst *env)
+void	__skip_envkey(char **pointer)
+{
+	while (**pointer != '$' && **pointer != '\0' && **pointer != '\"' && \
+		**pointer != '\'' && !ft_is_ifs(*pointer) )
+		(*pointer)++;
+}
+
+int	__is_to_remove_dollar(t_token *cur_token, char *context)
+{
+	if ((*context == '\0') && (cur_token->next != NULL) && \
+			(cur_token->type & RIGHT_JOIN) && (cur_token->next->type & QUOTE))
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
+char	*__get_envvalue(char *doller_p, char **envkey_end, t_envlst *env)
+{
+	char	*expanded_string;
+	char	*env_key;
+	char	*env_value;
+
+	__skip_envkey(envkey_end);
+	if (doller_p + 1 == *envkey_end)
+	{
+		expanded_string = ft_strdup("$");
+		return (expanded_string);
+	}
+	else
+	{
+		env_key = ft_substr(doller_p, 1, *envkey_end - doller_p - 1);
+		env_value = ft_getenv(env, env_key);
+		if (env_value != NULL)
+			expanded_string = ft_strdup(env_value);
+		else
+			expanded_string = ft_strdup("");
+		free(env_key);
+		return (expanded_string);
+	}
+}
+
+char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 {
 	char	*cpy_start;
 	char	*cpy_end;
 	char	*expanded_string;
 	char	*env_key;
+
+	cpy_start = *context;
+	cpy_end = cpy_start + 1;
+	if (__is_to_remove_dollar(token, cpy_end))
+		expanded_string = ft_strdup("");
+	else
+		expanded_string = __get_envvalue(cpy_start, &cpy_end, env);
+	*context = cpy_end;
+	return (expanded_string);
+}
+
+char	*cpy_ifs_string(char **context)
+{
+	char	*cpy_start;
+	char	*cpy_end;
+	char	*copied_string;
+
+	cpy_start = *context;
+	cpy_end = cpy_start;
+	while (ft_is_ifs(cpy_end))
+		cpy_end++;
+	copied_string = ft_substr(cpy_start, 0, cpy_end - cpy_start);
+	*context = cpy_end;
+	return (copied_string);
+}
+
+void	__skip_only_quote_and_letter(char **pointer)
+{
+	while (**pointer != '\0' && **pointer != '$' && \
+		ft_is_ifs(*pointer) == FALSE)
+		(*pointer)++;
+}
+
+void	*cpy_none_expander(char **context)
+{
+	char	*cpy_start;
+	char	*cpy_end;
+	char	*copied_string;
+
+	cpy_start = *context;
+	cpy_end = cpy_start;
+	__skip_only_quote_and_letter(&cpy_end);
+	copied_string = ft_substr(cpy_start, 0, cpy_end - cpy_start);
+	*context = cpy_end;
+	return (copied_string);
+}
+
+void	expand_env(t_token *token, t_envlst *env)
+{
+	char	*cpy_start;
+	char	*result;
+	char	*copied_string;
+	char	*env_key;
 	char	*env_value;
 
 	cpy_start = token->string_value;
-	expanded_string = ft_strdup("");
+	result = ft_strdup("");
 	while (*cpy_start != '\0')
 	{
 		if (*cpy_start == '$')
-		{
-			cpy_end = cpy_start + 1;
-			if (*cpy_end == '\0' && token->next != NULL && token->type & RIGHT_JOIN && token->next->type & QUOTE)
-				*cpy_start = '\0';
-			else
-			{
-				while (*cpy_end != '$' && *cpy_end != '\0' && *cpy_end != '\'' && *cpy_end != '\"' && !ft_is_ifs(cpy_end))
-					cpy_end++;
-				cpy_end--;
-				if (cpy_start == cpy_end)
-				{
-					expanded_string = raise_buffer(expanded_string, 1);
-					ft_strlcat(expanded_string, cpy_start, ft_strlen(expanded_string) + 2);
-					cpy_start++;
-				}
-				else
-				{
-					env_key = ft_substr(cpy_start, 1, cpy_end - cpy_start);
-					env_value = ft_getenv(env, env_key);
-					if (env_value != NULL)
-					{
-						expanded_string = raise_buffer(expanded_string, ft_strlen(env_value));
-						ft_strlcat(expanded_string, env_value, ft_strlen(expanded_string) + ft_strlen(env_value) + 1);
-					}
-					cpy_start = cpy_end + 1;
-					free(env_key);
-				}
-			}
-		}
+			copied_string = expand_env_withdollar(token, env, &cpy_start);
 		else if (*cpy_start == ' ')
-		{
-			cpy_end = cpy_start;
-			while (ft_is_ifs(cpy_end))
-				cpy_end++;
-			cpy_end--;
-			expanded_string = raise_buffer(expanded_string, cpy_end - cpy_start + 1);
-			ft_strlcat(expanded_string, cpy_start, \
-						ft_strlen(expanded_string) + (cpy_end - cpy_start + 2));
-			cpy_start = cpy_end + 1;
-		}
+			copied_string = cpy_ifs_string(&cpy_start);
 		else
-		{
-			cpy_end = cpy_start;
-			while (*cpy_end != '\0' && *cpy_end != '$' && !ft_is_ifs(cpy_end))
-				cpy_end++;
-			cpy_end--;
-			expanded_string = raise_buffer(expanded_string, cpy_end - cpy_start + 1);
-			ft_strlcat(expanded_string, cpy_start, \
-						ft_strlen(expanded_string) + (cpy_end - cpy_start + 2));
-			cpy_start = cpy_end + 1;
-		}
+			copied_string = cpy_none_expander(&cpy_start);
+		result = raise_buffer(result, ft_strlen(copied_string));
+		ft_strlcat(result, copied_string, \
+							ft_strlen(result) + ft_strlen(copied_string) + 1);
+		free(copied_string);
 	}
 	free(token->string_value);
-	token->string_value = expanded_string;
+	token->string_value = result;
 }
 
 void remove_trash_token(t_token **token_lst)
