@@ -1,24 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokenizing.c                                       :+:      :+:    :+:   */
+/*   parse_util_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:39:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 21:54:45 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/29 21:36:42 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/30 16:52:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-extern t_global	g_global;
-
-void	tokenizing(char *line)
-{
-	t_readstatus	readstatus;
-	int				index;
-
-	reset_readstatus(&readstatus);
-	index = 0;
-}
+#include "../../include/minishell.h"

@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/17 22:28:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 22:29:36 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/24 04:39:33 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/25 12:23:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-void	pwd(void)
+void	built_in_env(t_envlst *env)
 {
-	char	*pwd_value;
-
-	pwd_value = ft_getenv("PWD");
-	if (pwd_value == NULL)
-		return ;
-	printf("%s\n", pwd_value);
+	while (env != NULL)
+	{
+		printf("%s=%s\n", env->key, env->value);
+		env = env->next;
+	}
 }

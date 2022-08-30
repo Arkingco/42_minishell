@@ -1,38 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   var_parse.h                                        :+:      :+:    :+:   */
+/*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/22 15:13:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 01:10:12 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/24 04:25:57 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/30 17:02:26 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VAR_PARSE_H
-# define VAR_PARSE_H
+#ifndef CMD_H
+# define CMD_H
 
-# include "var_enum_def.h"
-# include "var_tokenize.h"
-
-typedef struct s_simple_command
-{
-	t_token						*cur;
-	struct	s_simple_command	*next;
-}	t_simple_command;
-
-typedef struct s_redirect
-{
-	t_token		*redirect_input[2]; // [0] -> REDIRECT_TOKEN [1] -> FILENAME_TOKEN
-	t_token		*redirect_output[2];
-}	t_redirect;
+# include "token.h"
 
 typedef struct s_cmd
 {
-	t_simple_command	simple_command;
-	t_redirect			redirect;
-	struct s_cmd		*next;
+	t_token			*simple_cmd;
+	t_token			*redirect_input;
+	t_token			*redirect_output;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
 }	t_cmd;
+
+// cmd_adt_1.c
+t_cmd	*ft_cmd_lst_first(t_cmd *cmd_lst);
+t_cmd	*make_cmd_linkedlst(t_token *token_lst);
+void	ft_free_cmd(t_cmd *cmd);
+void	ft_free_cmdlst(t_cmd *cmd);
 
 #endif

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 16:42:56 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/23 01:20:13 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/29 22:54:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,35 +19,56 @@
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
-
-# include "libft.h"
-# include "parse.h"
-# include "tokenize.h"
+# include "../libft/libft.h"
 # include "env.h"
-# include "util.h"
+# include "cmd.h"
+# include "token.h"
+# include "utils.h"
+# include "expand.h"
+# include "parse.h"
 
-typedef struct s_global
-{
-	char		**envp;
-	t_envlst	*lst_env;
-	t_token		*lst_token;
-	t_cmd		*lst_cmd;
-}	t_global;
+# define TRUE			1
+# define FALSE			0
+# define INT_MAX	 	2147483647
+
+// token_type
+# define EXPANDER		0b10000000000000000000000000000000
+# define PIPE			0b01000000000000000000000000000000
+# define REDIRECT		0b00100000000000000000000000000000
+# define WORD			0b00010000000000000000000000000000
+
+// redirectio_type
+# define READ			0b00000000100000000000000000000000
+# define HEREDOC		0b00000000010000000000000000000000
+# define WRITE			0b00000000001000000000000000000000
+# define WRITE_APPEND	0b00000000000100000000000000000000
+
+// word_type
+# define PURE_WORD		0b00000000000000001000000000000000
+# define EXPANDED		0b00000000000000000100000000000000
+# define DQUOTE			0b00000000000000000010000000000000
+# define SQUOTE			0b00000000000000000001000000000000
+# define QUOTE			0b00000000000000000011000000000000
+
+// linked_word_status
+# define LEFT_IFS		0b00000000000000000000000010000000
+# define RIGHT_IFS		0b00000000000000000000000001000000
+# define LEFT_JOIN		0b00000000000000000000000000100000
+# define RIGHT_JOIN		0b00000000000000000000000000010000
+# define WORD_JOIN		0b00000000000000000000000000110000
 
 // main.c
 
-//main_loop.c
-void	loop_get_commandline(void);
-
 // init.c
-void	init(int argc, char *envp[]);
-void	init_env_lst(char *envp[]);
-void	update_shlvl(void);
+void	argument_error_check(int argc);
+void	init_envp(char *envp[], t_envlst **env);
 
-// signal_action.c
-void	set_signal_action(void);
 
-// pwd.c
-void	pwd(void);
+// DEBUG
+
+// print_lst_token.c
+void	debug_print_lst_token(t_token *lst);
+// print_lst_cmd.c
+void	debug_print_lst_cmd(t_cmd *lst);
 
 #endif

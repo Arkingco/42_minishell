@@ -3,30 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:44:45 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 21:03:50 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/29 21:46:02 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/29 22:51:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "var_parse.h"
-// paring.c
-void	parsing(char *line);
+# include "token.h"
 
-// parse_make_cmd.c
-void	make_cmd_list(void);
-void	make_redirect_tokens(t_token *cur_token);
-void	make_word_token(t_token *cur_token);
-t_cmd	*ft_getlstcmd_last(void);
-void	parse_add_redirect_token(t_token *token_addr, int io);
-void	parse_add_word_token(t_token *token_addr);
-void	make_cmd_node(t_token *cur_token);
+// parse.c
+void	combine_redirect_filename(t_token *token_lst);
+t_cmd	*token_to_cmd(t_token *token_lst);
 
-// parse_make_token.c
-void	make_token_list(char *line);
-
+// cmd_adt_1.c
+t_cmd	*make_cmd_linkedlst(t_token *token_lst);
+t_cmd	*ft_cmd_lst_first(t_cmd *cmd_lst);
 #endif
