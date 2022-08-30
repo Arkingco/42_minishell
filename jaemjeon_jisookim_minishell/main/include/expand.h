@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   expand.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/20 11:37:54 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/22 21:31:17 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/26 22:59:43 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/28 17:55:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef EXPAND_H
+# define EXPAND_H
 
-extern t_global	g_global;
+# include "token.h"
+# include "env.h"
 
-void	parsing(char *line)
-{
-	tokenizing(line); // 토큰을 여기서 만듭니다.
-	make_cmd_list(); // 토큰을 cmd struct에 넣어줍니다.
-}
+void	expander(t_token **token_lst, t_envlst *env);
+
+#endif
