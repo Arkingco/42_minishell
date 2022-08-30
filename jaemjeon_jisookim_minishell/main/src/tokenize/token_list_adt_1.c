@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 23:11:45 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:51:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void		ft_token_lstadd_back(t_token **lst, t_token *new)
 	{
 		new->prev = ft_token_lstlast(*lst);
 		new->prev->next = new;
+		new->next = NULL;
 	}
 }
 
@@ -57,10 +58,25 @@ t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 	return (token);
 }
 
-void		ft_free_tokenlst(t_token *lst)
+void		ft_free_token(t_token *lst)
 {
 	free(lst->string_value);
+	lst->string_value = NULL;
 	free(lst);
+}
+
+void		ft_free_tokenlst(t_token *lst)
+{
+	t_token	*next_token;
+
+	while (1)
+	{
+		next_token = lst->next;
+		ft_free_token(lst);
+		lst = next_token;
+		if (lst == NULL)
+			return ;
+	}
 }
 
 t_token		*ft_token_lstlast(t_token *lst)

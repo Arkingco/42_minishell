@@ -6,9 +6,8 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:36:42 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 21:36:52 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:52:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-

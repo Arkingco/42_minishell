@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:36:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 22:45:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:04:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,31 @@ t_cmd	*make_cmd_linkedlst(t_token *token_lst)
 		token_lst = token_lst->next;
 	}
 	return (first_cmd);
+}
+
+void	ft_free_cmd(t_cmd *cmd)
+{
+	if (cmd->simple_cmd != NULL)
+		ft_free_tokenlst(cmd->simple_cmd);
+	if (cmd->redirect_input != NULL)
+		ft_free_tokenlst(cmd->redirect_input);
+	if (cmd->redirect_output != NULL)
+		ft_free_tokenlst(cmd->redirect_output);
+	free(cmd);
+}
+
+void	ft_free_cmdlst(t_cmd *cmd)
+{
+	t_cmd	*cur_cmd;
+	t_cmd	*next_cmd;
+
+	cur_cmd = cmd;
+	while (1)
+	{
+		next_cmd = cur_cmd->next;
+		ft_free_cmd(cur_cmd);
+		cur_cmd = next_cmd;
+		if (cur_cmd == NULL)
+			return ;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 15:42:40 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:44:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_deltoken(t_token **lst)
 	to_free_token = *lst;
 	prev_token = to_free_token->prev;
 	next_token = to_free_token->next;
-	ft_free_tokenlst(to_free_token);
+	ft_free_token(to_free_token);
 	if (prev_token == NULL && next_token == NULL)
 		*lst = NULL;
 	else if (prev_token == NULL)

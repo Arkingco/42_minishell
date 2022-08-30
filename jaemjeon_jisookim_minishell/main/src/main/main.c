@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 23:23:53 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 17:05:52 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ void	main_loop(t_envlst *env)
 			debug_print_lst_token(lst_token);
 			lst_cmd = token_to_cmd(lst_token);
 			debug_print_lst_cmd(lst_cmd);
+			ft_free_cmdlst(lst_cmd);
+			system("leaks minishell");
+			free(line);
 		}
 		else
 			ft_error_exit(0, "exit");

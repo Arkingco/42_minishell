@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 23:12:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:44:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_cmd	*token_to_cmd(t_token *token_lst)
 		if (cur_token->type & PIPE)
 		{
 			cur_cmd = cur_cmd->next;
-			ft_free_tokenlst(cur_token);
+			ft_free_token(cur_token);
 		}
 		else if (cur_token->type & REDIRECT)
 		{

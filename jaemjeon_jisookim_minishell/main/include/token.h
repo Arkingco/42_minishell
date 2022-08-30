@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:46:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 09:24:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 16:52:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,9 @@ void		set_flag_joined(t_token *token, char *line, int start_idx, int end_idx);
 void		ft_token_lstadd_back(t_token **lst, t_token *new);
 int			ft_token_lstsize(t_token *lst);
 t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value);
-void		ft_free_tokenlst(t_token *lst);
+void		ft_free_token(t_token *lst);
 t_token		*ft_token_lstlast(t_token *lst);
+void		ft_free_tokenlst(t_token *lst);
 
 // token_list_adt_2.c
 void		ft_deltoken(t_token **lst);
