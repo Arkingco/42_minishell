@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 22:20:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/30 22:40:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -399,51 +399,62 @@ int	is_ifs_word(char *string_value)
 		return (FALSE);
 }
 
+int	is_to_word_split(t_token *token)
+{
+	return ((token->type & WORD) && !(token->type & QUOTE) && \
+		ft_has_ifs(token->string_value));
+}
+
+t_token	*__word_split(t_token *token)
+{
+	char	*string_value;
+	t_token	*splited_lst;
+	t_token	*new_token;
+
+	splited_lst = NULL;
+	string_value = token->string_value;
+	if (is_ifs_word(string_value))
+		splited_lst = \
+				ft_make_newtoken(token->type & ~(LEFT_JOIN | RIGHT_JOIN), "");
+	else
+	{
+		while (*string_value != '\0')
+		{
+			new_token = ft_strtok_token(token->type, &string_value);
+			if (new_token == NULL)
+				break;
+			ft_token_lstadd_back(&splited_lst, new_token);
+		}
+	}
+	return (splited_lst);
+}
+
 void	word_split(t_token **token_lst)
 {
 	t_token	*cur_token;
+	t_token	*to_del_token;
 	t_token	*splited_lst;
-	t_token	*new_token;
-	char	*string_value;
+	t_token	*head_token;
 
 	cur_token = *token_lst;
-	splited_lst = NULL;
+	head_token = *token_lst;
 	while (cur_token != NULL)
 	{
-		if ((cur_token->type & WORD) && !(cur_token->type & QUOTE) && ft_has_ifs(cur_token->string_value))
+		if (is_to_word_split(cur_token))
 		{
-			string_value = cur_token->string_value;
-			if (is_ifs_word(string_value))
-				splited_lst = ft_make_newtoken(cur_token->type & ~(LEFT_JOIN | RIGHT_JOIN), "");
-			else
-			{
-				while (*string_value != '\0')
-				{
-					new_token = ft_strtok_token(cur_token->type, &string_value);
-					if (new_token == NULL)
-						break;
-					ft_token_lstadd_back(&splited_lst, new_token);
-				}
-			}
+			splited_lst = NULL;
+			splited_lst = __word_split(cur_token);
 			ft_insert_token(cur_token, splited_lst);
-			if (cur_token->next == NULL && cur_token->prev == NULL)
-				ft_deltoken(token_lst);
-			else if (cur_token->next == NULL)
-				ft_deltoken(&cur_token);
-			else if (cur_token->prev == NULL)
-			{
-				cur_token = cur_token->next;
-				ft_deltoken(token_lst);
-			}
-			else
-			{
-				cur_token = cur_token->next;
-				ft_deltoken(&cur_token->prev);
-			}
-			continue ;
+			if (cur_token->prev == NULL)
+				head_token = cur_token->next;
+			to_del_token = cur_token;
+			cur_token = cur_token->next;
+			ft_deltoken(&to_del_token);
 		}
-		cur_token = cur_token->next;
+		else
+			cur_token = cur_token->next;
 	}
+	*token_lst = head_token;
 }
 
 void	quote_remove(t_token **token_lst)
