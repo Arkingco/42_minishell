@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 05:21:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 09:33:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_envlst
 
 
 // env.c
-void		built_in_env(t_envlst *env);
+t_envlst	*built_in_env(t_envlst *env);
 
 // env_list_adt_1.c
 void		ft_env_lstadd_back(t_envlst **lst, t_envlst *new);

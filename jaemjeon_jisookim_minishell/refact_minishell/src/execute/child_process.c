@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   child_process.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 04:39:33 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/27 09:33:39 by jisookim         ###   ########.fr       */
+/*   Created: 2022/08/30 14:59:56 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/30 16:35:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-t_envlst	*built_in_env(t_envlst *env)
+
+void	put_info_to_pipe(t_cmd *cmd, t_exec *exec)
 {
-	while (env != NULL)
-	{
-		//printf("%s=%s\n", env->key, env->value);
-		env = env->next;
-	}
-	return (env);
+	// child process 가 들어올 것!
+	//if first
+	ft_close(exec->pipe_fd[0]); 
+	ft_dup2(exec->pre_read_fd, 0);
+	ft_close(exec->pre_read_fd);
+	ft_dup2(exec->pipe_fd[1], 1);
+	ft_close(exec->pipe_fd[1]);
+	//execute
+}
+
+
+
+void	child_process(t_exec *exec, int idx)
+{
+	
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 05:18:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/27 09:38:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void	main_loop(t_envlst *env)
 			ft_error_exit(0, "exit");
 	}
 
-
 	// unused para
 	env++;
 	env = NULL;
@@ -46,7 +45,7 @@ int	main(int argc, char *argv[], char *envp[])
 	env = NULL;
 	argument_error_check(argc);
 	init_envp(envp, &env);
-	built_in_env(env);
+	env = built_in_env(env); // made to pass env
 	main_loop(env);
 	return (0);
 
