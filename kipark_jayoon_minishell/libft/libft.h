@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:25:50 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/01 12:33:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/08/31 18:16:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,15 @@ typedef struct s_utils_substr
 	char	*src;
 }	t_str;
 
-// gnl
+/* ft_check_error	*/
+typedef enum e_error
+{
+	E_LIBFT,
+	E_SYSTEM_CALL,
+	E_MALLOC
+}	t_error;
+
+/*	gnl	*/
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 42
 # endif
@@ -132,5 +140,9 @@ void		ft_lstclear(t_list **lst, void (*del)(void *));
 void		ft_lstiter(t_list *lst, void (*f)(void *));
 t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), \
 		void (*del)(void *));
+
+// additional func
+void		*ft_safe_malloc(size_t size);
+void		ft_check_error(t_error e, ssize_t data);
 
 #endif

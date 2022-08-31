@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 15:46:43 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/31 18:28:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@
 
 int main(void)
 {
-	char	*line;
-	t_token *token;
+	char			*line;
+	t_token 		*token;
+	t_parsing_list	l_parsing;
 	
 	init_terminal();
 	while (1)
@@ -30,9 +31,8 @@ int main(void)
 		line = readline("minishell$ ");
 		if (line)
 		{
-			
 			token = tokenize(line);
-			parser(token);
+			parser(token, &l_parsing);
 			// syntax_analysis();
 			// execute();
 			

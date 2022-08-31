@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/08/24 15:26:59 by jayoon           ###   ########.fr        #
+#    Updated: 2022/08/31 18:23:36 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,57 +14,59 @@ NAME = libft.a
 CFLAGS = -Wall -Wextra -Werror -I.
 CC = cc
 HEADER = ./libft.h
-SRCS =		ft_isalnum.c \
-			ft_isalpha.c \
-			ft_isascii.c \
-			ft_isdigit.c \
-			ft_isprint.c \
-			ft_isspace.c \
-			ft_issign.c \
-			ft_isint.c \
-			ft_tolower.c \
-			ft_toupper.c \
-			ft_strchr.c \
-			ft_strrchr.c \
-			ft_strncmp.c \
-			ft_strlen.c \
-			ft_strlcpy.c \
-			ft_strlcat.c \
-			ft_strnstr.c \
-			ft_atoi.c \
-			ft_atol.c \
-			ft_calloc.c \
-			ft_strdup.c \
-			ft_memset.c \
-			ft_bzero.c \
-			ft_memcmp.c \
-			ft_memcpy.c \
-			ft_memmove.c \
-			ft_memchr.c \
-			ft_substr.c \
-			ft_strjoin.c \
-			ft_strtrim.c \
-			ft_split.c \
-			ft_itoa.c \
-			ft_strmapi.c \
-			ft_striteri.c \
-			ft_putchar_fd.c \
-			ft_putstr_fd.c \
-			ft_putendl_fd.c \
-			ft_putnbr_fd.c \
-			get_next_line.c\
-			get_next_line_utils.c\
-			ft_safe_free.c
+SRCS =		ft_isalnum.c			\
+			ft_isalpha.c			\
+			ft_isascii.c			\
+			ft_isdigit.c			\
+			ft_isprint.c			\
+			ft_isspace.c			\
+			ft_issign.c				\
+			ft_isint.c				\
+			ft_tolower.c			\
+			ft_toupper.c			\
+			ft_strchr.c				\
+			ft_strrchr.c			\
+			ft_strncmp.c			\
+			ft_strlen.c				\
+			ft_strlcpy.c			\
+			ft_strlcat.c			\
+			ft_strnstr.c			\
+			ft_atoi.c				\
+			ft_atol.c				\
+			ft_calloc.c				\
+			ft_strdup.c				\
+			ft_memset.c				\
+			ft_bzero.c				\
+			ft_memcmp.c				\
+			ft_memcpy.c				\
+			ft_memmove.c			\
+			ft_memchr.c				\
+			ft_substr.c				\
+			ft_strjoin.c			\
+			ft_strtrim.c			\
+			ft_split.c				\
+			ft_itoa.c				\
+			ft_strmapi.c			\
+			ft_striteri.c			\
+			ft_putchar_fd.c			\
+			ft_putstr_fd.c			\
+			ft_putendl_fd.c			\
+			ft_putnbr_fd.c			\
+			get_next_line.c			\
+			get_next_line_utils.c	\
+			ft_safe_free.c			\
+			ft_safe_malloc.c		\
+			ft_check_error.c
 			
 		
-SRCS_B = 		ft_lstnew.c \
-				ft_lstadd_front.c \
-				ft_lstsize.c \
-				ft_lstlast.c \
-				ft_lstadd_back.c \
-				ft_lstdelone.c \
-				ft_lstclear.c \
-				ft_lstiter.c \
+SRCS_B = 		ft_lstnew.c			\
+				ft_lstadd_front.c	\
+				ft_lstsize.c		\
+				ft_lstlast.c		\
+				ft_lstadd_back.c	\
+				ft_lstdelone.c		\
+				ft_lstclear.c		\
+				ft_lstiter.c		\
 				ft_lstmap.c	
 
 OBJECTS = $(SRCS:%.c=%.o)
