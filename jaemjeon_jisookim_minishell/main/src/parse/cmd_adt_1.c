@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_adt_1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:36:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 17:04:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/31 20:41:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ void	ft_free_cmdlst(t_cmd *cmd)
 		if (cur_cmd == NULL)
 			return ;
 	}
+}
+
+int	ft_cmdlst_size(t_cmd *cmd_lst)
+{
+	int	count;
+
+	count = 0;
+	while (cmd_lst != NULL)
+	{
+		count++;
+		cmd_lst = cmd_lst->next;
+	}
+	return (cmd_lst);
 }

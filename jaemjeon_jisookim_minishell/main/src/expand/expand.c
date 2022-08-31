@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 23:03:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/31 14:55:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/31 21:40:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -503,9 +503,8 @@ void	word_split(t_token **token_lst)
 	{
 		if (is_to_word_split(cur_token)) // word_split할 토큰을 찾음
 		{
-			splited_lst = NULL;
 			splited_lst = __word_split(cur_token); // split된 연결리스트 반환
-			ft_insert_token(cur_token, splited_lst); // 현재다음으로 연결해주고,
+			ft_insert_token(cur_token, __word_split(cur_token)); // 현재다음으로 연결해주고,
 			if (cur_token->prev == NULL) // 만약에 현재가 맨처음것이라면
 				head_token = cur_token->next; // head_token을 다음것으로 바꿔줌.
 			to_del_token = cur_token; // 이미 split해서 반영했으므로 현재것은 지워줌
@@ -570,10 +569,6 @@ void	word_join(t_token **token_lst)
 /*
 1. pid($$)확장
 2. $확장
-3. 필요없는 토큰 지움
-4. quote에서 따옴표 지움
-5. split해야하는 word의 경우 split해줌
-5. word간의 문맥을 보고 필요시 합쳐줌
 */
 void	expander(t_token **token_lst, t_envlst *env)
 {
@@ -587,13 +582,6 @@ void	expander(t_token **token_lst, t_envlst *env)
 			expand_pidenv(cur_token);
 			expand_env(cur_token, env);
 		}
-		if (cur_token->next == NULL)
-			break ;
-		else
-			cur_token = cur_token->next;
+		cur_token = cur_token->next;
 	}
-	remove_trash_token(token_lst);
-	quote_remove(token_lst);
-	word_split(token_lst);
-	word_join(token_lst);
 }
