@@ -8,7 +8,7 @@ INCLUDE = -I include -I $(DIR_LIBFT)
 # 잼전 노트북
 LIB_READLINE = -L readline/lib
 # 잼전 맥
-#LIB_READLINE = -L /Users/jaemjeon/.brew/Cellar/readline/8.1.2/lib
+# LIB_READLINE = -L /Users/jaemjeon/.brew/Cellar/readline/8.1.2/lib
 RM = rm -f
 
 SRCS_DIR := ./src

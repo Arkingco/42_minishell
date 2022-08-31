@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 16:44:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/08/31 14:59:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,12 @@ t_token	*ft_strtok_token(unsigned int type, char **string)
 	char			*string_start;
 	char			*string_end;
 	char			*new_string;
-	unsigned int	join_flag;
 	t_token			*output_token;
 
 	string_start = *string;
-	join_flag = 0;
 	type &= ~(LEFT_JOIN | RIGHT_JOIN);
 	if (ft_is_ifs(string_start) == FALSE)
-		join_flag |= LEFT_JOIN;
+		type |= LEFT_JOIN;
 	while (ft_is_ifs(string_start) == TRUE && *string_start != '\0')
 		string_start++;
 	if (*string_start == '\0')
@@ -100,11 +98,11 @@ t_token	*ft_strtok_token(unsigned int type, char **string)
 	while (ft_is_ifs(string_end) == FALSE && *string_end != '\0')
 		string_end++;
 	if (*string_end == '\0')
-		join_flag |= RIGHT_JOIN;
+		type |= RIGHT_JOIN;
 	new_string = ft_substr(string_start, 0, string_end - string_start);
 	if (new_string == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr in ft_strtok_token");
-	output_token = ft_make_newtoken(type | join_flag, new_string);
+	output_token = ft_make_newtoken(type, new_string);
 	*string = string_end;
 	return (output_token);
 }
