@@ -6,18 +6,19 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/31 18:28:20 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/01 11:45:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#include "execution.h"
+#include "lexer.h"
+#include "minishell.h"
+#include "parser.h"
 #include <readline/readline.h>
 #include <readline/history.h>
-#include "lexer.h"
-#include "parser.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "terminal.h"
-#include "minishell.h"
 
 int main(void)
 {
@@ -33,9 +34,7 @@ int main(void)
 		{
 			token = tokenize(line);
 			parser(token, &l_parsing);
-			// syntax_analysis();
-			// execute();
-			
+			execute_cmd(&l_parsing);
 			add_history(line);
 			free(line);
 			line = NULL;
