@@ -6,12 +6,14 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/31 19:01:50 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:09:09 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+#include "lexer.h"
 
 typedef struct s_simple_cmd
 {
@@ -39,7 +41,7 @@ typedef struct s_parsing_data_structure
 	struct s_parsing_data_structure	*next;
 }	t_parsing_list;
 
-void	parser(t_token *l_token, t_parsing_list *l_parsing);
-void	init_parsing_list(t_parsing_list *l_parsing);
+t_parsing_list	*parser(t_token *l_token);
+t_parsing_list	*init_parsing_list(void);
 
 #endif

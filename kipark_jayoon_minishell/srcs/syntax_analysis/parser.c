@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/31 19:00:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/01 17:00:34 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,47 @@ parsing linked list 는 이후에 command program 을 실행하기 위해 사용
 #include "parser.h"
 #include <stdlib.h>
 
-void	parser(t_token	*l_token, t_parsing_list *l_parsing)
+void	*print_syntax_error(void)
 {
-	init_parsing_list(l_parsing);
+	printf("Syntax error\n");
+	return (NULL);
+}
+
+void	*print_syntax_error_pipe(void)
+{
+	printf("minishell: syntax error near unexpected token `|'\n");
+	return (NULL);
+}
+
+t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token, \
+				t_parsing_list *l_parsing)
+{
+	l_token = l_token->next;
+	if (l_token && l_token->type == T_PIPE)
+		return ((t_parsing_list *)print_syntax_error_pipe());
+	while (l_token)
+	{
+		if (is_word(l_token->type))
+		{
+
+		}
+		else if (is_redirection(l_token->type))
+		{
+
+		}
+		else // pipe
+		{
+
+		}
+	}
+	return (l_parsing);
+}
+
+t_parsing_list	*parser(t_token	*l_token)
+{
+	t_parsing_list	*l_parsing;
+
+	l_parsing = init_parsing_list();
+	l_parsing = check_syntax_and_set_parsing_list(l_token, l_parsing);
+	return (l_parsing);
 }

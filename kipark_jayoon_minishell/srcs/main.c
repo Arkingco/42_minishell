@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/31 18:28:20 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/01 16:04:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void)
 {
 	char			*line;
 	t_token 		*token;
-	t_parsing_list	l_parsing;
+	t_parsing_list	*l_parsing;
 	
 	init_terminal();
 	while (1)
@@ -32,7 +32,7 @@ int main(void)
 		if (line)
 		{
 			token = tokenize(line);
-			parser(token, &l_parsing);
+			l_parsing = parser(token);
 			// syntax_analysis();
 			// execute();
 			
