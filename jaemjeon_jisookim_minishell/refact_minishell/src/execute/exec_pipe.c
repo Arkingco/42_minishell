@@ -1,33 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   child_process.c                                    :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 14:59:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/08/30 16:35:06 by jisookim         ###   ########.fr       */
+/*   Created: 2022/08/30 11:47:25 by jisookim          #+#    #+#             */
+/*   Updated: 2022/08/31 14:42:24 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
-void	put_info_to_pipe(t_cmd *cmd, t_exec *exec)
+void	pipe_and_fork(t_exec *exec, t_cmd *cmd)
 {
-	// child process 가 들어올 것!
-	//if first
-	ft_close(exec->pipe_fd[0]); 
-	ft_dup2(exec->pre_read_fd, 0);
-	ft_close(exec->pre_read_fd);
-	ft_dup2(exec->pipe_fd[1], 1);
-	ft_close(exec->pipe_fd[1]);
-	//execute
-}
+	pid_t	pid[exec->process_cnt];
 
-
-
-void	child_process(t_exec *exec, int idx)
-{
-	
+	pid = {0,};
+	ft_pipe(exec->pipe_fd); // pid 배열의 0, 1인덱스에 값이 채워짐
+	exec->pid_lst = &pid;
+	exec_fork(exec, cmd, pid);
+	if (exec->pipe_fd[0])
+		exec->pre_read_fd = exec->pipe_fd[0]; // 파이프의 출력값 저장
 }

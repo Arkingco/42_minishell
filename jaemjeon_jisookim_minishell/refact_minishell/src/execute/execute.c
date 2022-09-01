@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 12:48:13 by jisookim          #+#    #+#             */
-/*   Updated: 2022/08/30 14:54:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:08:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,14 @@ void	ft_error(void)
 void	execute(t_cmd *cmd)
 {
 	t_exec	*exec;
-	pid_t	*pid_lst;
 	
 	exec = ft_calloc(1, sizeof(t_exec));
 	init_exec(exec, cmd);
-	pid_lst = making_pipe(exec);
+	pipe_and_fork(exec, cmd); // child process pid list
+	execute();
 
 
+	// .
 	// if (exec->cmds == 1)
 	// else if (exec->cmds == 2)
 	// else //
@@ -79,4 +80,19 @@ void	execute(t_cmd *cmd)
 	// }
 
 	return ;
+}
+
+
+void	do_execute(t_envlst *env, t_cmd *cmd,t_exec *exec, char *argv_cmd)
+{
+	int	flag;
+
+	flag = 0;
+	exec->cmds = cmd->simple_cmd;
+	exec->final_path = get_path_lst(env, exec); // path 파싱해서 가져온 값
+	if (exec->final_path == NULL)
+		exec->final_path = exec->cmds[0];
+	flag = execve(exec->final_path, exec->cmds, exec->envp);
+	if (flag < 0)
+		ft_error("Exit with error due to execve() or command not found! ", 127);
 }

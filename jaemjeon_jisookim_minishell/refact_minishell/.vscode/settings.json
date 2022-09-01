@@ -2,6 +2,23 @@
 	"makefile.extensionOutputFolder": "./.vscode",
 	"files.associations": {
 		"minishell.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"__bit_reference": "c",
+		"__node_handle": "c",
+		"bitset": "c",
+		"chrono": "c",
+		"__memory": "c",
+		"limits": "c",
+		"optional": "c",
+		"ratio": "c",
+		"system_error": "c",
+		"tuple": "c",
+		"type_traits": "c",
+		"vector": "c",
+		"__functional_base": "c",
+		"algorithm": "c",
+		"functional": "c",
+		"iterator": "c",
+		"memory": "c"
 	}
 }
