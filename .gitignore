@@ -1,6 +1,5 @@
 *.DS_Store
 *.vscode
-*minishell
 *libft.a
 
 # Prerequisites
