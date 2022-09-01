@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_1.c                                           :+:      :+:    :+:   */
+/*   tokenize.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 16:59:43 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/17 14:39:37 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/08/24 05:47:51 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/08/25 14:41:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-void	ft_error(int exit_status, char *message)
+t_token	*tokenize(char *line)
 {
-	ft_putendl_fd(message, 2);
-	exit(exit_status);
-}
+	t_token	*lst_token;
 
-void	ft_free_envp(char **envp)
-{
-	if (envp == NULL)
-		ft_error(1, "null guard");
-	// 2차원배열 할당해제하는 코드
+	lst_token = split_all_component(line);
+	return (lst_token);
 }
