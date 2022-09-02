@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/30 15:48:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 11:38:46 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,20 +20,13 @@
 #include "minishell.h"
 #include "env.h"
 
-static void	free_main_line_and_token(char *line, t_token *token)
-{
-	free(line);
-	line = NULL;
-	token_free(token);
-}
-
-static int	check_argument(int argc, char **argv)
+static void	check_argument(int argc, char **argv)
 {
 	if (argc > 2)
-		return (1);
+		exit(1);
 	if (argv[1] != NULL)
-		return (1);
-	return (0);
+		exit(1);
+	return ;
 }
 
 int main(int argc, char **argv, char **envp)
@@ -43,8 +36,7 @@ int main(int argc, char **argv, char **envp)
 	t_env	*env;
 
 	init_terminal();
-	if (check_argument(argc, argv))
-		return (1);
+	check_argument(argc, argv);
 	env = set_shell_env_list(envp);
 	while (1)
 	{

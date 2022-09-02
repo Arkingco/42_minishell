@@ -24,7 +24,8 @@ SRCS_MAIN					:=	main.c
 SRCS_MAIN					:=	$(addprefix $(DIR_SRCS)/, $(SRCS_MAIN))
 
 SRCS_TERMINAL				:=	exit_terminal.c		\
-								init_terminal.c
+								init_terminal.c		\
+								free_terminal.c
 SRCS_TERMINAL				:=	$(addprefix $(DIR_TERMINAL)/, $(SRCS_TERMINAL))
 
 SRCS_LEXICAL_ANALYSIS		:=	lexer_util.c			\
