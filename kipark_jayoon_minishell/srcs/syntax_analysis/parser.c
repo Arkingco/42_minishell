@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/01 17:00:34 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/02 18:40:23 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,25 +51,60 @@ parser 가 해야 할 일은
 parsing linked list 는 이후에 command program 을 실행하기 위해 사용하게 된다.
 */
 
+#include "error.h"
 #include "lexer.h"
 #include "parser.h"
 #include <stdlib.h>
 
-void	*print_syntax_error(void)
+/*
+*	print parsing list
+*/
+#include <stdio.h>
+static void 	print_parsing_list(t_parsing_list *l_parsing)
 {
-	printf("Syntax error\n");
-	return (NULL);
-}
+	t_simple_cmd	*head_cmd;
+	t_redir_chunk	*head_redir;
 
-void	*print_syntax_error_pipe(void)
-{
-	printf("minishell: syntax error near unexpected token `|'\n");
-	return (NULL);
+	if (!l_parsing)
+		printf("List is empty\n");
+
+	printf("\n\n****parsing list****\n\n");
+	while (l_parsing)
+	{
+		// simple cmd
+		printf("****simple cmd****");
+		head_cmd = l_parsing->l_simple_cmd;
+		while (head_cmd)
+		{
+			printf("simple cmd:		%s\n\n", head_cmd->str);
+			head_cmd = head_cmd->next;
+		}
+		// redirection input
+		printf("****Output_redirection****");
+		head_redir = l_parsing->redir_iter.l_input;
+		while (head_redir)
+		{
+			printf("redirection:	%s\n\n", head_redir->redir);
+			printf("file_path:		%s\n\n", head_redir->file_name);
+			head_redir = head_redir->next;
+		}
+		// redirection input
+		printf("****Input_redirection****");
+		head_redir = l_parsing->redir_iter.l_output;
+		while (head_redir)
+		{
+			printf("redirection:	%s\n\n", head_redir->redir);
+			printf("file_path:		%s\n\n", head_redir->file_name);
+			head_redir = head_redir->next;
+		}
+	}
 }
 
 t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token, \
 				t_parsing_list *l_parsing)
 {
+	void	*node;
+
 	l_token = l_token->next;
 	if (l_token && l_token->type == T_PIPE)
 		return ((t_parsing_list *)print_syntax_error_pipe());
@@ -77,17 +112,26 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token, \
 	{
 		if (is_word(l_token->type))
 		{
-
+			node = init_simple_cmd_node(l_token->str);
+			add_simple_cmd_node(&l_parsing->l_simple_cmd, node);
 		}
 		else if (is_redirection(l_token->type))
 		{
-
+			if (!l_token->next || l_token->next->type != T_WORD)
+				return (print_syntax_error());
+			node = init_redirection_node(l_token->str, l_token->next->str);
+			if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
+				add_linked_list();
+			else
+				add_linked_list();
 		}
-		else // pipe
-		{
-
-		}
+		// else // pipe
+		// {
+		// 	l_parsing node 만들고, next 에 연결
+		// }
+		l_token = l_token->next;
 	}
+	print_parsing_list(l_parsing);
 	return (l_parsing);
 }
 

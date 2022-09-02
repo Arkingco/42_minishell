@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_simple_cmd_node.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/02 16:37:08 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/02 18:24:38 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
+#include <stdlib.h>
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	add_simple_cmd_node(t_simple_cmd **head, t_simple_cmd *node)
 {
-	SUCCESS,
-	FAIL
-};
+	t_simple_cmd	*last;
 
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	if (*head == NULL)
+		*head = node;
+	else
+	{
+		last = *head;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+}

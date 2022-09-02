@@ -6,14 +6,25 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:46:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/01 16:10:18 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/02 12:18:19 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
 
-static t_parsing_list	*init_parsing_list(void)
+t_parsing_list	*init_parsing_list(void)
+{
+	t_parsing_list	*l_parsing;
+
+	l_parsing = ft_safe_malloc(sizeof(t_parsing_list));
+	l_parsing->l_simple_cmd = NULL;
+	l_parsing->next = NULL;
+	return (l_parsing);
+}
+
+/*
+static t_parsing_list	*init_list(void)
 {
 	t_parsing_list	*l_parsing;
 
@@ -44,14 +55,4 @@ static void	init_redir_chunk(t_redir_chunk *chunk)
 	chunk->file_name = NULL;
 	chunk->next = NULL;
 }
-
-t_parsing_list	*init_parsing_list(void)
-{
-	t_parsing_list	*l_parsing;
-
-	l_parsing = init_parsing_list();
-	init_simple_cmd(l_parsing->l_simple_cmd);
-	init_redir_iter(l_parsing->redir_iter);
-	l_parsing->next = NULL;
-	return (l_parsing);
-}
+*/
