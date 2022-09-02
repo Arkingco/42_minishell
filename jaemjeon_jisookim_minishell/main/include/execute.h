@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:09:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:11:01 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #define STDIN_FD	0
 #define STDOUT_FD	1
 
+// divide single & multi cmd
 #define SINGLE_CMD	0
 #define MULTI_CMD	1
 
