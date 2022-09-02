@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/01 14:11:53 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/01 23:59:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	main_loop(t_envlst *env)
 			lst_cmd = token_to_cmd(lst_token); // 토큰을 cmd구조체에 넣음
 
 			// execute
-			
+			execute(lst_cmd);
 
 			//debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
 			//ft_free_cmdlst(lst_cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
