@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:11:01 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:47:59 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,16 @@
 // divide single & multi cmd
 #define SINGLE_CMD	0
 #define MULTI_CMD	1
+
+// pipe control - pipe type
+#define SINGLE_PIPE		0
+#define ADDITIONAL_PIPE	1
+
+// pipe type
+// PIPE_OUT matches with STDIN_FD
+// PIPE_IN matches with STDOUT_FD
+#define PIPE_OUT	0
+#define PIPE_IN		1
 
 // typedef struct s_cmd
 // {
@@ -64,6 +74,12 @@ typedef struct s_exec
 
 
 //fork
+int	exec_single_fork(t_exec *exec);
+int	exec_multi_fork(t_exec *exec);
+
+//dup2
+int	single_pipe_dup2(t_exec *exec);
+int	multi_pipe_dup2(t_exec *exec);
 
 //init
 t_exec	*init_exec(t_exec *exec, t_cmd *cmd);
@@ -71,20 +87,20 @@ int		count_process(t_exec *exec);
 
 
 //main
-int	execute(t_cmd *cmd);
-int	exec_multi_cmd(t_exec *exec);
-int	exec_single_cmd(t_exec *exec);
+int		execute(t_cmd *cmd);
+int		exec_multi_cmd(t_exec *exec);
+int		exec_single_cmd(t_exec *exec);
 
 //multi_cmd
-int	exec_multi_check_built_in(t_exec *exec);
-int	exec_multi_first(t_exec *exec, t_cmd *cmd);
-int	exec_multi_last(t_exec *exec, t_cmd *cmd);
-int	exec_multi_middle(t_exec *exec, t_cmd *cmd);
+int		exec_multi_check_built_in(t_exec *exec);
+int		exec_multi_first(t_exec *exec);
+int		exec_multi_last(t_exec *exec);
+int		exec_multi_middle(t_exec *exec);
 
 //pipe
 
 //single_cmd
-int	exec_single_check_built_in(t_exec *exec);
+void	exec_single_check_built_in(t_exec *exec);
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
@@ -93,7 +109,7 @@ int		ft_close(int fd);
 //exec_tools
 int		*ft_pipe(int *pipe_fd);
 int		ft_dup2(int fd1, int fd2);
-int		ft_fork(void);
+pid_t	ft_fork(void);
 int		ft_exceve(const char *filename, char *const argv[], char *const envp[]);
 pid_t	ft_wait(int *statloc);
 

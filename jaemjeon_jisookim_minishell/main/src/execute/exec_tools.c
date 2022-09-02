@@ -6,15 +6,16 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 15:23:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 18:43:04 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_fork(void)
+pid_t	ft_fork(void)
 {
-	int	fork_return;
+	pid_t	fork_return;
+	
 	fork_return = fork();
 	if (fork_return == -1)
 	{
@@ -29,6 +30,7 @@ int	ft_fork(void)
 int	ft_dup2(int fd1, int fd2)
 {
 	int	dup2_return;
+	
 	dup2_return = dup2(fd1, fd2);
 	if (dup2_return == -1)
 	{
@@ -51,17 +53,12 @@ pid_t	ft_wait(int *statloc)
 		ft_putstr_fd("ERROR : wait() function error! \n", 2);
 		exit(BAD_EXIT);
 	}
-	if (WIFSIGNALED(wait_return))
+	if (WIFSIGNALED(wait_return) || !WIFEXITED(wait_return))
 	{
 		wait_error = WTERMSIG(statloc);
 		ft_putstr_fd("ERROR : child process error! WTERMSIG : ", 2);
 		ft_putstr_fd(&wait_error, 2);
 		write(2, "\n", 1);
-		exit(BAD_EXIT);
-	}
-	if (!WIFEXITED(wait_return))
-	{
-		ft_putstr_fd("ERROR : wait function not successfuly done! \n", 2);
 		exit(BAD_EXIT);
 	}
 	return (wait_return); 
@@ -74,14 +71,14 @@ int	*ft_pipe(int *pipe_fd)
 	int	pipe_return;
 
 	pipe_return = pipe(pipe_fd);
-	if (!pipe_return)
-	{
-		ft_putstr_fd("ERROR : pipe error! Please put correct int array. \n", 2);
-		exit(BAD_EXIT);
-	}
 	if (pipe_return == -1)
 	{
 		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
+		exit(BAD_EXIT);
+	}
+	if (pipe_return != 0)
+	{
+		ft_putstr_fd("ERROR : pipe error! Please put correct int array. \n", 2);
 		exit(BAD_EXIT);
 	}
 	return (0);

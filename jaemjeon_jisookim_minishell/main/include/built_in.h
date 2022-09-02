@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin.h                                          :+:      :+:    :+:   */
+/*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:53:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:07:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 17:44:24 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 int	ft_cd(int exec_type);
 
 //echo
-int	ft_echo(int exec_type);
+int	ft_echo(t_exec *exec, int exec_type);
 
 //env
 int	ft_env(int exec_type);
