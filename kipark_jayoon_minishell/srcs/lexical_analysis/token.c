@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/27 15:45:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 16:30:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,25 +22,33 @@ void	print_token_list(t_token *token_head)
 	this_token = token_head->next;
 	while (this_token)
 	{
-		printf("\n%s   length:%zu  token_tpye: %d\n", \
+		printf("%s   length:%zu  token_tpye: %d\n", \
 				this_token->str, ft_strlen(this_token->str), this_token->type);
 		this_token = this_token->next;
 	}
 }
 
-void	init_token_dummy_node(t_token *token_head)
+void	init_token_dummy_node(t_token *new_token)
 {
-	token_head->next = NULL;
-	token_head->str = NULL;
-	token_head->type = T_NULL;
+	new_token->next = NULL;
+	new_token->str = NULL;
+	new_token->type = T_NULL;
 }
 
 void	token_free(t_token *token)
 {
-	if (token->str != NULL)
-		free(token->str);
-	if (token)
-		free(token);
+	t_token *this_token;
+	t_token *next;
+
+	this_token = token;
+	while (this_token)
+	{
+		next = this_token->next;
+		if (this_token->str != NULL)
+			free(this_token->str);
+		free(this_token);
+		this_token = next;
+	}
 	return ;
 }
 
