@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 11:32:19 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/02 11:49:35 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_token	*tokenize(t_env *env_head, char *readline)
 	init_token_dummy_node(token_head);
 	if (check_readline_able_parse(readline))
 	{
-		printf("syntex error\n");
+		printf("syntax error\n");
 		return (NULL);
 	}
 	read_readline(env_head, readline, token_head);
