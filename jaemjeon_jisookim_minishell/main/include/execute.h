@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 15:38:36 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 15:58:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 #define STDIN_FD	0
 #define STDOUT_FD	1
 
+// test git
 
 // typedef struct s_cmd
 // {
