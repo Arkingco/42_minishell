@@ -7,6 +7,7 @@
 		"types.h": "c",
 		"resource.h": "c",
 		"time.h": "c",
-		"locale": "c"
+		"locale": "c",
+		"signal.h": "c"
 	}
 }

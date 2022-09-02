@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 15:29:23 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/02 16:25:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,18 @@
 
 int	exec_single_cmd(t_exec *exec)
 {
+	int	is_built_in;
+	
+	is_built_in = check_built_in(exec);
+	if (is_built_in)
+	{
+		
+	}
+	else
+	{
+		
+	}
+	
 	return (0);
 }
 
@@ -36,9 +48,9 @@ int	exec_multi_cmd(t_exec *exec)
 		{
 			exec_multi_middle(exec);
 		}
-		ezec->cmds = exec->cmds->next;
-		if (!cmd->next)
-			break;
+		exec->cmds = exec->cmds->next;
+		if (!exec->cmds)
+			break ;
 	}
 	return (0);
 }
@@ -47,7 +59,7 @@ int	execute(t_cmd *cmd)
 {
 	t_exec	*exec;
 
-	init_exec(exec, cmd);
+	exec = init_exec(exec, cmd);
 	if (cmd && !cmd->next)
 	{	
 		exec_single_cmd(exec);
