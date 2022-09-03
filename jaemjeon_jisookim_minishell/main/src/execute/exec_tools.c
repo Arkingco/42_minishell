@@ -6,11 +6,37 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 18:43:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/03 16:52:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	ft_double_free(char **list)
+{
+	int	i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
+}
+
+int	ft_stat(const char *path, struct stat *buf)
+{
+	int	stat_return;
+	
+	stat_return = stat(path, buf);
+	if (stat_return != 0)
+	{
+		ft_putstr_fd("ERROR : stat() function error. \n", 2);
+		exit(BAD_EXIT);
+	}
+	return (stat_return);
+}
 
 pid_t	ft_fork(void)
 {
@@ -19,7 +45,7 @@ pid_t	ft_fork(void)
 	fork_return = fork();
 	if (fork_return == -1)
 	{
-		ft_putstr_fd("ERROR : pipe error during making pipe! \n", 2);
+		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
 		exit(BAD_EXIT);
 	}
 	return (fork_return);

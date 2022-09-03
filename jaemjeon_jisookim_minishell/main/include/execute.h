@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 14:32:58 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:34:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,8 @@ typedef struct s_exec
 
 	// for exec
 	char		**execve_cmds;
-	char		**final_paths;
-	char		**envp_lst;
+	char		*final_path;
+	char		**env_lst;
 	t_envlst	*env;
 
 	//pipe
@@ -83,6 +83,34 @@ typedef struct s_exec_parse
 	
 }	t_eparse;
 
+/*
+	INITIALIZING
+*/
+
+//init_double_env
+int		count_key_value(t_envlst *env);
+void	make_env_double_ptr(t_exec *exec, t_envlst *env);
+
+//init_final_path
+char	*get_paths_from_env(t_exec *exec, char *path_list);
+char	*ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists);
+char	*get_final_path(t_exec *exec, char **temp_path_lists);
+void	main_get_final_paths(t_exec *exec);
+
+//exec_init_get_cmd
+void	make_double_ptr_execve_cmds(t_exec *exec, int cmd_count);
+int		get_cmd_count(t_exec *exec);
+char	**get_execve_cmds(t_exec *exec);
+
+//init
+int		count_process(t_exec *exec);
+t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env);
+
+
+/*
+	MAIN PART
+*/
+
 //fork
 int	exec_single_fork(t_exec *exec);
 int	exec_multi_fork(t_exec *exec);
@@ -90,14 +118,6 @@ int	exec_multi_fork(t_exec *exec);
 //dup2
 int	single_pipe_dup2(t_exec *exec);
 int	multi_pipe_dup2(t_exec *exec);
-
-//init_path
-char	**get_final_paths(t_exec *exec);
-
-//init
-t_exec	*init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env);
-int		count_process(t_exec *exec);
-
 
 //main
 int		execute(t_cmd *cmd);
@@ -120,6 +140,8 @@ int		ft_open(const char *filename, int flags);
 int		ft_close(int fd);
 
 //exec_tools
+void	ft_double_free(char **list);
+int		ft_stat(const char *path, struct stat *buf);
 int		*ft_pipe(int *pipe_fd);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_fork(void);

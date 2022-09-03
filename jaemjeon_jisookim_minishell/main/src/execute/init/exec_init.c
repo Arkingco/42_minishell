@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 15:01:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/03 17:33:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	count_process(t_exec *exec)
 // all of the cmd string
 // main cmd
 // execve(const char *path, char *const argv[], char *const envp[]);
-t_exec	*init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
+t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 {
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
@@ -50,9 +50,9 @@ t_exec	*init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	exec->cmd_head = cmd;
 	exec->process_cnt = count_process(exec);
 	
-	exec->execve_cmds = get_execve_cmd(exec); //middle
-	exec->final_paths = get_final_paths(exec); //first
-	exec->envp_lst =  make_env_double_ptr(env); //linked list to ptr
+	make_env_double_ptr(exec, env);
+	exec->execve_cmds = get_execve_cmds(exec);
+	main_get_final_paths(exec);
 	
 	return (exec);
 }
