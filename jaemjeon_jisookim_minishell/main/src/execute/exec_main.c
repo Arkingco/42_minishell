@@ -6,28 +6,31 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 18:03:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/03 13:46:02 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	exec_single_cmd(t_exec *exec)
+int	exec_single_cmd(t_exec *exec, t_envlst *env)
 {
-	int	is_built_in;
+	int		is_built_in;
+	pid_t	pid;
 	
 	exec_single_check_built_in(exec);
-	//execute with fork
-		//make pipe
-		//fork
-		//execute in child process
-		//wait_pid in parent process
-		//wait_pid control
+	pid = ft_fork();
+	if (pid == 0)
+	{
+		ft_exceve(exec->final_path, exec->exceve_cmd, env);
+	}
+	//execute in child process
+	//wait_pid in parent process
+	//wait_pid control
 	
 	return (0);
 }
 
-int	exec_multi_cmd(t_exec *exec)
+int	exec_multi_cmd(t_exec *exec, t_envlst *env)
 {
 	int	i;
 	
@@ -53,11 +56,11 @@ int	exec_multi_cmd(t_exec *exec)
 	return (0);
 }
 
-int	execute(t_cmd *cmd)
+int	execute(t_cmd *cmd, t_envlst *env)
 {
 	t_exec	*exec;
 
-	exec = init_exec(exec, cmd);
+	exec = init_exec(exec, cmd, env);
 	if (cmd && !cmd->next)
 	{	
 		exec_single_cmd(exec);

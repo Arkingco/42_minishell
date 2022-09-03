@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 18:47:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/03 14:32:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,28 @@
 
 typedef struct s_exec
 {
+	//util
 	t_cmd	*cmds;
 	t_cmd	*cmd_head;
 	int		process_cnt;
-	
 
-	int		pipe_fd[3];
+	// for exec
+	char		**execve_cmds;
+	char		**final_paths;
+	char		**envp_lst;
+	t_envlst	*env;
+
+	//pipe
+	int			pipe_fd[3];
 	//int		pre_read_fd;
-	//pid_t	*pid_lst;
-	//char	*final_path;
+	//pid_t		*pid_lst;
+	
 }	t_exec;
 
-
+typedef struct s_exec_parse
+{
+	
+}	t_eparse;
 
 //fork
 int	exec_single_fork(t_exec *exec);
@@ -81,8 +91,11 @@ int	exec_multi_fork(t_exec *exec);
 int	single_pipe_dup2(t_exec *exec);
 int	multi_pipe_dup2(t_exec *exec);
 
+//init_path
+char	**get_final_paths(t_exec *exec);
+
 //init
-t_exec	*init_exec(t_exec *exec, t_cmd *cmd);
+t_exec	*init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env);
 int		count_process(t_exec *exec);
 
 
