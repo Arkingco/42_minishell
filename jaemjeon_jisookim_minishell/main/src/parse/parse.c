@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/05 00:14:43 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/05 01:51:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	word_split(t_token **token_lst)
 	{
 		if (is_to_word_split(cur_token)) // word_split할 토큰을 찾음
 		{
-			splited_lst = NULL;
 			splited_lst = __word_split(cur_token); // split된 연결리스트 반환
 			ft_insert_token(cur_token, splited_lst); // 현재다음으로 연결해주고,
 			if (cur_token->prev == NULL) // 만약에 현재가 맨처음것이라면
