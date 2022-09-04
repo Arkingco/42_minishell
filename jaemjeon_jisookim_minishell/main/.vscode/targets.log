@@ -8,21 +8,23 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-# Make data base, printed on Wed Aug 31 14:29:11 2022
+# Make data base, printed on Mon Sep  5 01:12:56 2022
 
 # Variables
 
 # automatic
+ 
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
 ?F = $(notdir $?)
-# makefile (from `Makefile', line 19)
+# makefile (from `Makefile', line 21)
 DIR_MAIN := ./src/main
 # makefile (from `Makefile', line 6)
-INCLUDE_READLINE = -I readline/include
-# makefile (from `Makefile', line 20)
- 
+INCLUDE_READLINE = -I readline
+# makefile (from `Makefile', line 22)
 DIR_EXPAND := ./src/expand
+# environment
+VSCODE_LOG_NATIVE = false
 # automatic
 ?D = $(patsubst %/,%,$(dir $?))
 # automatic
@@ -30,14 +32,14 @@ DIR_EXPAND := ./src/expand
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /Users/jaemjeon/42seoul/minishell/jaemjeon_jisookim_minishell/main
+CURDIR := /Users/jaemjeon/projects/minishell_new/jaemjeon_jisookim_minishell/main
 # makefile
 SHELL = /bin/sh
-# makefile (from `Makefile', line 12)
+# makefile (from `Makefile', line 10)
 RM = rm -f
 # environment
-VSCODE_NLS_CONFIG = {"locale":"ko","availableLanguages":{"*":"ko"},"_languagePackId":"d4733d4bd5138ffb2c9d12a76b2e9102.ko","_translationsConfigFile":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/tcf.json","_cacheRoot":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko","_resolvedLanguagePackCoreLocation":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/e4503b30fc78200f846c62cf8091b76ff5547662","_corruptedFile":"/Users/jaemjeon/Library/Application Support/Code/clp/d4733d4bd5138ffb2c9d12a76b2e9102.ko/corrupted.info","_languagePackSupport":true}
-# makefile (from `Makefile', line 21)
+VSCODE_NLS_CONFIG = {"locale":"en-us","availableLanguages":{},"_languagePackSupport":true}
+# makefile (from `Makefile', line 23)
 DIR_PARSE := ./src/parse
 # environment
 _ = /usr/bin/make
@@ -48,59 +50,55 @@ MAKEFILE_LIST :=  Makefile
 # makefile (from `Makefile', line 4)
 NAME_LIBFT = libft.a
 # environment
-__CFBundleIdentifier = com.microsoft.VSCode
-# environment
-INFOPATH = /opt/homebrew/share/info:
-# environment
-P9K_SSH = 0
-# makefile (from `Makefile', line 16)
+VSCODE_VERBOSE_LOGGING = true
+# makefile (from `Makefile', line 53)
+OBJS = ${SRCS:.c=.o}
+# makefile (from `Makefile', line 18)
 DIR_ENV := ./src/env
 # environment
-MAIL = jaemjeon@student.42.fr
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/vscode-ipc-04429cc4-9102-44bd-8c93-08e3c0620c0e.sock
+# makefile (from `Makefile', line 13)
+READLINE = $(DIR_READLINE)/libreadline.a $(DIR_READLINE)/libhistory.a
 # environment
 VSCODE_CWD = /
 # environment
-PATH = /opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Applications/Wireshark.app/Contents/MacOS
-# makefile (from `Makefile', line 18)
+PATH = /Users/jaemjeon/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+# makefile (from `Makefile', line 20)
 DIR_UTILS := ./src/utils
 # environment
 LSCOLORS = Gxfxcxdxbxegedabagacad
 # environment
-LaunchInstanceID = C342F49A-D217-421A-8DFE-95D52A0787BF
-# makefile (from `Makefile', line 14)
+LaunchInstanceID = 0845E38E-32B6-4946-99CF-162C8B5C3C3B
+# makefile (from `Makefile', line 16)
 SRCS_DIR := ./src
+# environment
+VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.L5T3EuYqyA/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.sImOqYkprK/Listeners
 # automatic
 %F = $(notdir $%)
-# makefile (from `Makefile', line 51)
-OBJS = ${SRCS:.c=.o}
 # environment
-PWD = /Users/jaemjeon/42seoul/minishell/jaemjeon_jisookim_minishell/main
+VSCODE_PIPE_LOGGING = true
 # environment
-HOMEBREW_CELLAR = /opt/homebrew/Cellar
+PWD = /Users/jaemjeon/projects/minishell_new/jaemjeon_jisookim_minishell/main
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
-# environment
-MANPATH = /opt/homebrew/share/man::
 # environment
 VSCODE_AMD_ENTRYPOINT = vs/workbench/api/node/extensionHostProcess
 # environment
 HOME = /Users/jaemjeon
 # default
-MAKEFILEPATH = $(shell /usr/bin/xcode-select -print-path 2>/dev/null || echo /Developer)/Makefiles
+MAKEFILEPATH := /Applications/Xcode.app/Contents/Developer/Makefiles
 # environment
-VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/e4503b30fc78200f846c62cf8091b76ff5547662
+VSCODE_CODE_CACHE_PATH = /Users/jaemjeon/Library/Application Support/Code/CachedData/c3511e6c69bb39013c4a4b7b9566ec1ca73fc4d5
 # environment
 LOGNAME = jaemjeon
 # environment
 APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
-# environment
-NVM_CD_FLAGS = -q
 # environment
 ZSH = /Users/jaemjeon/.oh-my-zsh
 # environment
@@ -113,13 +111,13 @@ XPC_FLAGS = 0x0
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 48)
+# makefile (from `Makefile', line 50)
 SRCS = $(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) $(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE)
 # environment
 SHLVL = 1
 # makefile (from `Makefile', line 1)
 CC = cc
-# makefile (from `Makefile', line 44)
+# makefile (from `Makefile', line 46)
 SRC_DEBUG := ./src/debug/print_lst_token.c ./src/debug/print_lst_cmd.c
 # default
 MAKE_VERSION := 3.81
@@ -128,7 +126,7 @@ USER = jaemjeon
 # makefile
 .DEFAULT_GOAL := all
 # makefile (from `Makefile', line 7)
-INCLUDE = -I include -I $(DIR_LIBFT)
+INCLUDE = -I include -I$(DIR_LIBFT)
 # makefile (from `Makefile', line 2)
 NAME = minishell
 # environment
@@ -136,22 +134,20 @@ LESS = -R
 # automatic
 %D = $(patsubst %/,%,$(dir $%))
 # default
-MAKE_COMMAND := /Library/Developer/CommandLineTools/usr/bin/make
-# makefile (from `Makefile', line 29)
+MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
+# makefile (from `Makefile', line 31)
 SRC_TOKENIZE := ./src/tokenize/tokenize.c ./src/tokenize/split_all_component.c ./src/tokenize/token_list_adt_1.c ./src/tokenize/token_list_adt_2.c ./src/tokenize/read_token_func.c ./src/tokenize/read_token_util_1.c
 # default
 .VARIABLES := 
 # environment
-TMPDIR = /var/folders/6y/r_plnjts3lz1zwf61_134ssw0000gn/T/
-# makefile (from `Makefile', line 35)
+TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cqqw0035xz/T/
+# makefile (from `Makefile', line 37)
 SRC_MAIN := ./src/main/main.c ./src/main/init.c
 # automatic
 *F = $(notdir $*)
 # environment
-VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.70.2-main.sock
-# environment
-MallocNanoZone = 0
-# makefile (from `Makefile', line 38)
+VSCODE_IPC_HOOK = /Users/jaemjeon/Library/Application Support/Code/1.67.2-main.sock
+# makefile (from `Makefile', line 40)
 SRC_EXPAND := ./src/expand/expand.c
 # makefile
 MAKEFLAGS = Rrqp
@@ -160,21 +156,17 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-NVM_DIR = /Users/jaemjeon/.nvm
-# environment
-XPC_SERVICE_NAME = application.com.microsoft.VSCode.8332660.8332666
-# environment
-HOMEBREW_PREFIX = /opt/homebrew
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000001.Electron
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
 # automatic
 +F = $(notdir $+)
-# makefile (from `Makefile', line 41)
+# makefile (from `Makefile', line 43)
 SRC_PARSE := ./src/parse/parse.c ./src/parse/cmd_adt_1.c ./src/parse/parse_util_1.c
+# makefile (from `Makefile', line 9)
+LIB_LIBFT = -L$(DIR_LIBFT)
 # environment
-HOMEBREW_REPOSITORY = /opt/homebrew
-# environment
-__CF_USER_TEXT_ENCODING = 0x1F5:0x3:0x33
+__CF_USER_TEXT_ENCODING = 0x197BF:0x0:0x0
 # environment
 COMMAND_MODE = unix2003
 # default
@@ -187,34 +179,34 @@ PAGER = less
 LC_ALL = C
 # makefile (from `Makefile', line 5)
 DIR_LIBFT = ./libft
-# makefile (from `Makefile', line 9)
-LIB_READLINE = -L readline/lib
+# makefile (from `Makefile', line 8)
+LIB_READLINE = -L readline
 # environment
 SECURITYSESSIONID = 186a5
 # automatic
 ^F = $(notdir $^)
-# makefile (from `Makefile', line 25)
+# makefile (from `Makefile', line 27)
 SRC_ENV := ./src/env/env.c ./src/env/env_list_adt_1.c ./src/env/env_list_adt_2.c ./src/env/env_list_adt_3.c
 # default
 SUFFIXES := 
-# makefile (from `Makefile', line 22)
+# makefile (from `Makefile', line 11)
+DIR_READLINE = readline
+# makefile (from `Makefile', line 24)
 DIR_DEBUG := ./src/debug
 # default
 .INCLUDE_DIRS = /usr/local/include
-# makefile (from `Makefile', line 32)
+# makefile (from `Makefile', line 34)
 SRC_UTILS := ./src/utils/ifs.c ./src/utils/error_exit.c
 # environment
 MAKELEVEL := 0
 # environment
 LANG = C
 # environment
-VSCODE_PID = 491
-# makefile (from `Makefile', line 17)
+VSCODE_PID = 1724
+# makefile (from `Makefile', line 19)
 DIR_TOKENIZE := ./src/tokenize
-# environment
-NVM_RC_VERSION = 
 # variable set hash-table stats:
-# Load=100/1024=10%, Rehash=0, Collisions=7/168=4%
+# Load=96/1024=9%, Rehash=0, Collisions=10/170=6%
 
 # Pattern-specific Variable Values
 
@@ -222,14 +214,14 @@ NVM_RC_VERSION =
 
 # Directories
 
-# . (device 16777232, inode 9006134): 9 files, no impossibilities.
+# . (device 16777225, inode 4151343): 8 files, no impossibilities.
 
-# 9 files, no impossibilities in 1 directories.
+# 8 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
 %.o: %.c
-#  commands to execute (from `Makefile', line 63):
+#  commands to execute (from `Makefile', line 69):
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 	
 
@@ -297,9 +289,8 @@ src/tokenize/tokenize.o:
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  Last modified 2022-08-31 14:28:50
+#  Last modified 2022-09-04 16:32:12
 #  File has been updated.
- 
 #  Successfully updated.
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/0=0%
@@ -315,6 +306,7 @@ libft.a:
 #  Implicit/static pattern stem: `'
 #  File does not exist.
 #  File has been updated.
+ 
 #  Needs to be updated (-q is set).
 # automatic
 # @ := libft.a
@@ -334,7 +326,7 @@ libft.a:
 # ? := 
 # variable set hash-table stats:
 # Load=8/32=25%, Rehash=0, Collisions=2/11=18%
-#  commands to execute (from `Makefile', line 60):
+#  commands to execute (from `Makefile', line 62):
 	make -C $(DIR_LIBFT) all
 	
 
@@ -344,15 +336,24 @@ src/env/env_list_adt_2.o:
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/tokenize/tokenize.o src/tokenize/split_all_component.o src/tokenize/token_list_adt_1.o src/tokenize/token_list_adt_2.o src/tokenize/read_token_func.o src/tokenize/read_token_util_1.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o src/debug/print_lst_token.o src/debug/print_lst_cmd.o src/expand/expand.o src/parse/parse.o src/parse/cmd_adt_1.o src/parse/parse_util_1.o
+readline/libreadline.a:
 #  Implicit rule search has not been done.
-#  Last modified 2022-08-31 14:28:57
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 65):
+	cd $(DIR_READLINE); ./configure
+	make -C $(DIR_READLINE) all
+	
+
+minishell: libft.a src/env/env.o src/env/env_list_adt_1.o src/env/env_list_adt_2.o src/env/env_list_adt_3.o src/tokenize/tokenize.o src/tokenize/split_all_component.o src/tokenize/token_list_adt_1.o src/tokenize/token_list_adt_2.o src/tokenize/read_token_func.o src/tokenize/read_token_util_1.o src/utils/ifs.o src/utils/error_exit.o src/main/main.o src/main/init.o src/debug/print_lst_token.o src/debug/print_lst_cmd.o src/expand/expand.o src/parse/parse.o src/parse/cmd_adt_1.o src/parse/parse_util_1.o readline/libreadline.a readline/libhistory.a
+#  Implicit rule search has not been done.
+#  File does not exist.
 #  File has been updated.
 #  Needs to be updated (-q is set).
 # variable set hash-table stats:
 # Load=0/32=0%, Rehash=0, Collisions=0/3=0%
-#  commands to execute (from `Makefile', line 57):
-	${CC} -o ${NAME} ${CFLAGS} ${OBJS} -lreadline -lft $(LIB_READLINE) -L $(DIR_LIBFT)
+#  commands to execute (from `Makefile', line 59):
+	${CC} -o ${NAME} ${CFLAGS} ${OBJS} $(LIB_READLINE) $(LIB_LIBFT) -lreadline -lft -lncurses
 	
 
 # Not a target:
@@ -372,7 +373,7 @@ fclean: clean
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 70):
+#  commands to execute (from `Makefile', line 77):
 	rm -f ${NAME}
 	
 
@@ -429,7 +430,8 @@ clean:
 #  Implicit rule search has not been done.
 #  File does not exist.
 #  File has not been updated.
-#  commands to execute (from `Makefile', line 66):
+#  commands to execute (from `Makefile', line 72):
+	make -C $(DIR_READLINE) clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 	
@@ -452,6 +454,15 @@ src/env/env_list_adt_3.o:
 #  Modification time never checked.
 #  File has not been updated.
 
+readline/libhistory.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 65):
+	cd $(DIR_READLINE); ./configure
+	make -C $(DIR_READLINE) all
+	
+
 # Not a target:
 src/main/main.o:
 #  Implicit rule search has not been done.
@@ -465,7 +476,7 @@ src/expand/expand.o:
 #  File has not been updated.
 
 # files hash-table stats:
-# Load=31/1024=3%, Rehash=0, Collisions=1/75=1%
+# Load=33/1024=3%, Rehash=0, Collisions=1/79=1%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -477,6 +488,6 @@ src/expand/expand.o:
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-# Finished Make data base on Wed Aug 31 14:29:11 2022
+# Finished Make data base on Mon Sep  5 01:12:56 2022
 
  
