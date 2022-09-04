@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 16:57:24 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/26 22:47:06 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/04 22:17:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	move_index_next_to_end_of_word(char *line, int *index)
 {
 	(*index)++;
 	while (!(line[*index] == '\'' || line[*index] == '\"' \
-	|| ft_is_ifs(&line[*index]) || line[*index] == '\0' || line[*index] == '|'))
+	|| ft_is_ifs(&line[*index]) || line[*index] == '\0' \
+	|| line[*index] == '|' || line[*index] == '<' || line[*index] == '>'))
 		(*index)++;
 }
 
