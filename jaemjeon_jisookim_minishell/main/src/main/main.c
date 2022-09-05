@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
 /*   Updated: 2022/09/05 09:48:25 by jisookim         ###   ########.fr       */
+=======
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/04 22:50:31 by jaemjeon         ###   ########.fr       */
+>>>>>>> ff994a7ce624631981ca9515e36ec7e125b70329
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +33,10 @@ void	main_loop(t_envlst *env)
 			// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.
 			lst_token = tokenize(line); // word, quote, redirect, pipe로 토큰을 나눔.
 			expander(&lst_token, env); // 확장하고 필요없는 토큰을 지우고 word_split을 하고 양쪽 문맥을 보고 token을 join시킴
+			remove_trash_token(&lst_token);
+			quote_remove(&lst_token);
+			word_split(&lst_token);
+			word_join(&lst_token);
 			// debug_print_lst_token(lst_token);
 			combine_redirect_filename(lst_token); // 리다이렉션바로 뒤의 word토큰을 합침
 			lst_cmd = token_to_cmd(lst_token); // 토큰을 cmd구조체에 넣음
