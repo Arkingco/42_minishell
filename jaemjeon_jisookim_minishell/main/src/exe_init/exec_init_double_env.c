@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:58:33 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 10:42:18 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/06 01:07:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	make_env_double_ptr(t_exec *exec)
 	char	*ret;
 	int		i;
 
-	printf("aaaaa\n");
 	i = 0;
 	env_head = exec->env; 
 	exec->env_lst = ft_calloc(1, sizeof(char *) * count_key_value(exec));

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:59:42 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:44:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/06 01:00:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ char	*get_paths_from_env(t_exec *exec, char *path_list)
 	printf("env_head: %p\n", &env_head);
 	printf("exec->env: %p\n", &exec->env);
 	i = 0;
-	printf("envlst[%d] : %s \n", i, exec->env->key[0]);
-	while (exec->env->key[i]) // todo : seg)
+	printf("envlst[%d] : %s \n", i, exec->env->key);
+	while (exec->env->key)
 	{
-		printf("envlst[%d] : %s \n", i, exec->env->key[0]);
+		printf("envlst[%d] : %s \n", i, exec->env->key);
 		if (ft_strnstr(exec->env->key, "PATH=", 5))
 		{
 			printf("get path!\n");

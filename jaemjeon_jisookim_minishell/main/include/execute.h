@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:56:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/06 01:05:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char	*get_final_path(t_exec *exec, char **temp_path_lists);
 void	main_get_final_paths(t_exec *exec);
 
 //exec_init_get_cmd
-void	make_ptr_execve_cmds(t_exec *exec, int cmd_count);
+void	make_ptr_execve_cmds(t_exec *exec);
 void	get_cmd_count(t_exec *exec);
 char	***get_execve_cmds(t_exec *exec);
 

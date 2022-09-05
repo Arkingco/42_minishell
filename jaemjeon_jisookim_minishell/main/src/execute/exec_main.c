@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:03:26 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/06 01:09:20 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,16 @@ int	execute(t_cmd *cmd, t_envlst *env)
 	t_exec	*exec;
 	int		wait_ret;
 
-	printf("hihi\n");
 	exec = main_init_exec(exec, cmd, env); //0904 finished
-	printf("\n\n---------------\n");
-	printf("exec->process count : %d\n", exec->process_cnt);
-	printf("exec->final_path : %d\n", exec->process_cnt);
-	int i = 0;
-	while (exec->env_lst[i])
-	{
-		printf("[%d] : %s\n", i, exec->env_lst[i]);
-		i++;
-	}
+	// printf("\n\n---------------\n");
+	// printf("exec->process count : %d\n", exec->process_cnt);
+	// printf("exec->final_path : %d\n", exec->process_cnt);
+	// int i = 0;
+	// while (exec->env_lst[i])
+	// {
+	// 	printf("[%d] : %s\n", i, exec->env_lst[i]);
+	// 	i++;
+	// }
 
 	
 	// if (cmd && !cmd->next)

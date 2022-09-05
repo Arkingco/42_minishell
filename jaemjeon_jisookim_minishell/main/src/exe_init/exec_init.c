@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:05:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/06 01:11:03 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,10 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	// 	exec->env = exec->env->next;
 	// }
 	make_env_double_ptr(exec);
-	exec->execve_cmds = get_execve_cmds(exec);
+	exec->execve_cmds = *get_execve_cmds(exec);
 	//main_get_final_paths(exec); // seg fault
 	//printf("g\n");
 	
-	exit(0);
 
 	return (exec);
 }
