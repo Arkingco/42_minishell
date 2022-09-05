@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 19:05:30 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/02 16:38:24 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/02 17:24:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+// do when (exec_type == SINGLE) or
+// do when (exec_type == MULTI) && last cmd
+int	ft_export(int exec_type)
 {
-	unsigned char	u_s1;
-	unsigned char	u_s2;
-
-	while (n-- > 0)
-	{
-		u_s1 = (unsigned char)*s1;
-		u_s2 = (unsigned char)*s2;
-		if (u_s1 > u_s2)
-			return (1);
-		else if (u_s1 < u_s2)
-			return (-1);
-		else if (u_s1 == '\0' && u_s2 == '\0')
-			return (0);
-		s1++;
-		s2++;
-	}
 	return (0);
 }
