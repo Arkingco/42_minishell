@@ -3,15 +3,12 @@ NAME = minishell
 CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
-INCLUDE_READLINE = -I readline/include
-INCLUDE = -I include -I $(DIR_LIBFT)
-LIB_READLINE = -L readline
-INCLUDE_READLINE = -I readline
-INCLUDE = -I include -I$(DIR_LIBFT)
-LIB_READLINE = -L readline
 LIB_LIBFT = -L$(DIR_LIBFT)
-RM = rm -f
 DIR_READLINE = readline
+LIB_READLINE = -L$(DIR_READLINE) 
+INCLUDE_READLINE = -I$(DIR_READLINE)
+INCLUDE = -I include -I$(DIR_LIBFT)
+RM = rm -f
 
 READLINE = $(DIR_READLINE)/libreadline.a \
 		   $(DIR_READLINE)/libhistory.a
