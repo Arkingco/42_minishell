@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 02:44:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/04 22:50:31 by jaemjeon         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../../include/minishell.h"
 
 void	main_loop(t_envlst *env)
@@ -33,7 +21,11 @@ void	main_loop(t_envlst *env)
 			// debug_print_lst_token(lst_token);
 			combine_redirect_filename(lst_token); // 리다이렉션바로 뒤의 word토큰을 합침
 			lst_cmd = token_to_cmd(lst_token); // 토큰을 cmd구조체에 넣음
-			debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
+
+			// execute
+			execute(lst_cmd, env);
+
+			//debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
 			ft_free_cmdlst(lst_cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
 			free(line);
 		}
