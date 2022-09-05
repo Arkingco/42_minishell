@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/02 17:09:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:54:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@
 # include "utils.h"
 # include "expand.h"
 # include "parse.h"
-# include "execute.h"
-# include "built_in.h"
 
 # define TRUE			1
 # define FALSE			0

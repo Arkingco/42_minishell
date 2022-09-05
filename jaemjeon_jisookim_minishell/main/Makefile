@@ -3,21 +3,10 @@ NAME = minishell
 CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
-<<<<<<< HEAD
-INCLUDE_READLINE = -I readline/include
-INCLUDE = -I include -I $(DIR_LIBFT)
-# 지수킴 노트북
-LIB_READLINE = -lreadline -L ${HOME}/.brew/Cellar/readline/8.1.2/lib
-# 잼전 노트북
-#LIB_READLINE = -L readline/lib
-# 잼전 맥
-# LIB_READLINE = -L /Users/jaemjeon/.brew/Cellar/readline/8.1.2/lib
-=======
 INCLUDE_READLINE = -I readline
 INCLUDE = -I include -I$(DIR_LIBFT)
 LIB_READLINE = -L readline
 LIB_LIBFT = -L$(DIR_LIBFT)
->>>>>>> ff994a7ce624631981ca9515e36ec7e125b70329
 RM = rm -f
 DIR_READLINE = readline
 
@@ -33,9 +22,6 @@ DIR_MAIN		:=	$(SRCS_DIR)/main
 DIR_EXPAND		:=	$(SRCS_DIR)/expand
 DIR_PARSE		:=	$(SRCS_DIR)/parse
 DIR_DEBUG		:=	$(SRCS_DIR)/debug
-DIR_EXECUTE		:=	$(SRCS_DIR)/execute
-DIR_EXE_INIT	:=	$(SRCS_DIR)/exe_init
-DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 
 SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
@@ -59,22 +45,10 @@ SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
-SRC_EXECUTE		:=	exec_dup2.c exec_fork.c exec_main.c exec_multi_cmd.c \
-					exec_pipe.c exec_single_cmd.c exec_tools_file.c \
-					exec_tools.c
-SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
-SRC_EXE_INIT	:=	exec_init_double_env.c exec_init_final_path.c \
-					exec_init_get_cmd.c exec_init.c
-SRC_EXE_INIT	:=	$(addprefix $(DIR_EXE_INIT)/, $(SRC_EXE_INIT))
-
-SRC_BUILT_IN	:=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c \
-					ft_unset.c
-SRC_BUILT_IN	:=	$(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
-					$(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE) $(SRC_EXECUTE) \
-					$(SRC_BUILT_IN) $(SRC_EXE_INIT)
+					$(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE)
 
 OBJS 			=	${SRCS:.c=.o}
 
