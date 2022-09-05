@@ -6,27 +6,39 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:59:42 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 17:40:53 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:44:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 char	*get_paths_from_env(t_exec *exec, char *path_list)
 {
-	t_exec	*env_head;
+	void	*env_head;
 
 	env_head = exec->env;
-	while (exec->env->key != "PATH")
+	printf("env_head: %p\n", &env_head);
+	printf("exec->env: %p\n", &exec->env);
+	while (exec->env // todo : seg)
 	{
+		printf("Asdf\n");
+		if (ft_strnstr(exec->env->key, "PATH=", 5))
+		{
+			printf("get path!\n");
+			break;
+		}
 		exec->env = exec->env->next;
+		printf("next!\n");
 	}
+	printf("22\n");
 	path_list = exec->env->value;
+	printf("33\n");
 	exec->env = env_head;
+	printf("path list : %s\n", path_list);
 	return (path_list);
 }
 
-char	*ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists)
+char	**ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists)
 {
 	temp_path_lists = ft_split(path_list, ':');
 	if (!temp_path_lists)
@@ -43,9 +55,8 @@ char	*get_final_path(t_exec *exec, char **temp_path_lists)
 	int	i;
 	char		*temp;
 	char		*slash_cmd;
-	struct stat	*buf;
 	
-	slash_cmd = ft_strjoin("/", exec->cmds->simple_cmd->string_value);
+	slash_cmd = ft_strjoin("/", exec->execve_cmds[0]);
 	if (!(slash_cmd))
 		exit(1);
 	i = 0;
@@ -54,8 +65,11 @@ char	*get_final_path(t_exec *exec, char **temp_path_lists)
 		temp = ft_calloc(1, sizeof(temp_path_lists[i]) + sizeof(slash_cmd) + 1);
 		temp = ft_strjoin(temp_path_lists[i], slash_cmd);
 		if (!temp)
+		{
+			free(temp);
 			exit(BAD_EXIT);
-		if (!ft_stat(temp, buf))
+		}
+		if (ft_stat(temp) == 0)
 			return (temp);
 		free(temp);
 		i++;
@@ -66,10 +80,14 @@ char	*get_final_path(t_exec *exec, char **temp_path_lists)
 
 void	main_get_final_paths(t_exec *exec)
 {
-	char	*path_list;
+	char	*path_value;
 	char	**temp_path_lists;
 	
-	path_list = get_paths_from_env(exec, path_list);
-	temp_path_lists = ft_split_paths(exec, path_list, temp_path_lists);
-	exec->final_path = get_final_path(exec, temp_path_lists);
+	printf("aa\n");
+	path_value = get_paths_from_env(exec, path_value); // todo : seg
+	printf("bb\n");
+	temp_path_lists = ft_split_paths(exec, path_value, temp_path_lists); // todo : seg
+	printf("cc\n");
+	exec->final_path = get_final_path(exec, temp_path_lists); // todo : seg
+	printf("dd\n");
 }

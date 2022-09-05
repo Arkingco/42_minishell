@@ -6,11 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:58:33 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 17:45:23 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:42:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 int	count_key_value(t_envlst *env)
 {
@@ -24,13 +24,15 @@ int	count_key_value(t_envlst *env)
 
 void	make_env_double_ptr(t_exec *exec, t_envlst *env)
 {	
+	void	*env_head;
 	char	*temp;
 	char	*ret;
 	int		i;
 
 	i = 0;
+	env_head = env; 
 	exec->env_lst = ft_calloc(1, sizeof(char *) * count_key_value(env));
-	while (exec->env->key[i])
+	while (exec->env)
 	{
 		temp = ft_strjoin(env->key, "=");
 		if (!(temp))
@@ -40,7 +42,8 @@ void	make_env_double_ptr(t_exec *exec, t_envlst *env)
 			exit(1);
 		free(temp);
 		exec->env_lst[i] = ft_strdup(ret);
-		free(ret);
+		env = env->next;
 		i++;
 	}
+	env = env_head;
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:58:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:20:31 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	exec_multi_check_built_in(t_exec *exec)
 	char	*cmd;
 	int		do_flag;
 
-	cmd = exec->cmds->simple_cmd;
+	cmd = exec->cmds->simple_cmd->string_value;
 	if (!ft_strncmp(cmd, "export", ft_strlen("export")))
 		ft_export(MULTI_CMD);
 	else if(!ft_strncmp(cmd, "unset", ft_strlen("unset")))
@@ -40,6 +40,13 @@ int	exec_multi_check_built_in(t_exec *exec)
 int	exec_multi_first(t_exec *exec)
 {
 	
+	//pipe
+	//fork -> get pid
+	//dup2
+	//if pid == 0 <- child process
+	
+	
+	
 	return (0);
 }
 
@@ -50,5 +57,6 @@ int	exec_multi_last(t_exec *exec)
 
 int	exec_multi_middle(t_exec *exec)
 {
+	exec_multi_check_built_in(exec);
 	return (0);
 }

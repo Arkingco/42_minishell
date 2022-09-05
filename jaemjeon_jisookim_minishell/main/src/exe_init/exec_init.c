@@ -6,11 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 17:33:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:05:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
 // pipe_cnt = process_cnt -1
 int	count_process(t_exec *exec)
@@ -52,7 +52,8 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	
 	make_env_double_ptr(exec, env);
 	exec->execve_cmds = get_execve_cmds(exec);
-	main_get_final_paths(exec);
+	main_get_final_paths(exec); // seg fault
+	printf("g\n");
 	
 	return (exec);
 }

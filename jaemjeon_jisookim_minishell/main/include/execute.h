@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 17:34:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 14:56:38 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include <fcntl.h> // open, close
 #include <sys/wait.h> // wait
 #include <sys/types.h> // pid_t
+#include <sys/stat.h> // stat
+
+#include <string.h> //for debug
 
 #define BAD_EXIT	1
 
@@ -58,11 +61,17 @@
 // 	struct s_token	*prev;
 // }	t_token;
 
+
+// todo: single, multi 나눈거
+// 실행하면서 환경변수를 바꿔야 하는데
+// 실행할때 envlist 넘겨주는 쪽이?
+
+
 typedef struct s_exec
 {
 	//util
 	t_cmd	*cmds;
-	t_cmd	*cmd_head;
+	void	*cmd_head;
 	int		process_cnt;
 
 	// for exec
@@ -78,10 +87,24 @@ typedef struct s_exec
 	
 }	t_exec;
 
-typedef struct s_exec_parse
-{
+// typedef struct s_stat
+// {
+// 	dev_t	st_dev;			/*ID of device containing file */
+// 	ino_t	st_ino;			/*inode number*/
+// 	mode_t	st_mode;		/*protection*/
+// 	nlink_t	st_nlink;		/*number of hard links*/
+// 	uid_t	st_uid;			/*user ID of owner*/
+// 	gid_t	st_gid;			/*group ID of owner*/
+// 	dev_t	st_rdev;		/*device ID (if special file)*/
+// 	off_t	st_size;		/*total size, in byte*/
+// 	blksize_t	st_blksize;	/*blocksize for file system I/O*/
+// 	blkcnt_t	st_blocks;	/*number of 512B blocks allocated*/
+// 	// time_t	st_atime;		/*time of last access*/
+// 	// time_t	st_mtime;		/*time of last modification*/
+// 	// time_t	st_xtime;		/*time of last status change*/
 	
-}	t_eparse;
+// }	t_stat;
+
 
 /*
 	INITIALIZING
@@ -93,7 +116,7 @@ void	make_env_double_ptr(t_exec *exec, t_envlst *env);
 
 //init_final_path
 char	*get_paths_from_env(t_exec *exec, char *path_list);
-char	*ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists);
+char	**ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists);
 char	*get_final_path(t_exec *exec, char **temp_path_lists);
 void	main_get_final_paths(t_exec *exec);
 
@@ -120,9 +143,9 @@ int	single_pipe_dup2(t_exec *exec);
 int	multi_pipe_dup2(t_exec *exec);
 
 //main
-int		execute(t_cmd *cmd);
-int		exec_multi_cmd(t_exec *exec);
-int		exec_single_cmd(t_exec *exec);
+int	exec_single_cmd(t_exec *exec, t_envlst *env);
+int	exec_multi_cmd(t_exec *exec, t_envlst *env, int *wait_ret);
+int	execute(t_cmd *cmd, t_envlst *env);
 
 //multi_cmd
 int		exec_multi_check_built_in(t_exec *exec);
@@ -131,6 +154,7 @@ int		exec_multi_last(t_exec *exec);
 int		exec_multi_middle(t_exec *exec);
 
 //pipe
+int	exec_pipe_control(t_exec *exec);
 
 //single_cmd
 void	exec_single_check_built_in(t_exec *exec);
@@ -141,7 +165,7 @@ int		ft_close(int fd);
 
 //exec_tools
 void	ft_double_free(char **list);
-int		ft_stat(const char *path, struct stat *buf);
+int		ft_stat(const char *path);
 int		*ft_pipe(int *pipe_fd);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_fork(void);

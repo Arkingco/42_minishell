@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 18:51:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 10:35:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ int	do_echo(t_exec *exec)
 	int		ret;
 	char	*echo_str;
 	
-	echo_str = exec->cmds->simple_cmd;
-	while (echo_str)
-	{
-		if (echo_str)
-	}
+	echo_str = exec->cmds->simple_cmd->string_value;
+	// while (echo_str)
+	// {
+	// 	if (echo_str)
+	// }
 	return (ret);
 }
 

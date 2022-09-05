@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 16:52:54 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/05 13:51:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ void	ft_double_free(char **list)
 	free(list);
 }
 
-int	ft_stat(const char *path, struct stat *buf)
+int	ft_stat(const char *path)
 {
 	int	stat_return;
 	
-	stat_return = stat(path, buf);
+	stat_return = stat(path, NULL);
 	if (stat_return != 0)
 	{
 		ft_putstr_fd("ERROR : stat() function error. \n", 2);
@@ -82,8 +82,7 @@ pid_t	ft_wait(int *statloc)
 	if (WIFSIGNALED(wait_return) || !WIFEXITED(wait_return))
 	{
 		wait_error = WTERMSIG(statloc);
-		ft_putstr_fd("ERROR : child process error! WTERMSIG : ", 2);
-		ft_putstr_fd(&wait_error, 2);
+		ft_putstr_fd("ERROR : child process error!", 2);
 		write(2, "\n", 1);
 		exit(BAD_EXIT);
 	}
@@ -113,7 +112,7 @@ int	*ft_pipe(int *pipe_fd)
 int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
 {
 	int	execve_return;
-	execve_return = exceve(filename, argv, envp);
+	execve_return = execve(filename, argv, envp);
 	if (execve_return == -1)
 	{
 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
