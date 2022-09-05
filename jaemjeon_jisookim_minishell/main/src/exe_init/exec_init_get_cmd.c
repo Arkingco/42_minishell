@@ -12,40 +12,80 @@
 
 #include "../../include/minishell.h"
 
-int	get_cmd_count(t_exec *exec)
+void	get_cmd_count(t_exec *exec)
 {
-	int	count;
+	int	i;
+	int	simple_cmd_count;
 	
-	count = 0;
-	while (exec->cmds->next)
+	i = 0;
+	simple_cmd_count = 0;
+	while (exec->cmds)
 	{
-		count++;
+		while (exec->cmds->simple_cmd)
+		{
+			simple_cmd_count++;
+			if (exec->cmds->simple_cmd->next)
+				exec->cmds->simple_cmd = exec->cmds->simple_cmd->next;
+			else
+				break ;
+		}
+		exec->cmd_cnt[i] = exec->cmds->simple_cmd;
+		if (exec->cmds->next)
+		{
+			exec->cmds = exec->cmds->next;
+			i++;
+		}
+		else
+			break ;
 	}
-	count++;
-	return (count);
+	return ;
 }
 
-void	make_double_ptr_execve_cmds(t_exec *exec, int cmd_count)
+void	make_ptr_execve_cmds(t_exec *exec)
 {
-	exec->execve_cmds = ft_calloc(1, sizeof(char *) * cmd_count + 1);
-	if (!exec->execve_cmds)
+	int	i;
+	int	j;
+
+	i = 0;
+	j = 0;
+	exec->execve_cmds[i] = ft_calloc(1, sizeof(char *) * exec->cmd_cnt[i] + 1); // divide with cmd
+	if (!exec->execve_cmds[i])
 	{
 		ft_putstr_fd("ERROR : calloc() error while making execve_cmds. \n", 2);
-		free(exec->execve_cmds);
-		exit(BAD_EXIT);
+		free(exec->execve_cmds[i]);
 	}
+	while (i < exec->cmd_cnt[i])
+	{
+		if (exec->cmds->simple_cmd && exec->cmds->simple_cmd->next)
+		{
+			exec->execve_cmds[i] = ft_strdup(exec->cmds->simple_cmd);
+			exec->cmds->simple_cmd = exec->cmds->simple_cmd->next;
+		}
+	}
+	i++;
+	free(exec->execve_cmds);
+	exit(BAD_EXIT);
+	
 }
 
 // 단위 : one cmd, in one process.
-char	**get_execve_cmds(t_exec *exec)
+char	***get_execve_cmds(t_exec *exec)
 {	
 	int		i;
-	int		cmd_count;
 	
 	i = 0;
-	cmd_count = get_cmd_count(exec);
-	make_double_ptr_execve_cmds(exec, cmd_count);
-	while(i < cmd_count && exec->cmds)
+	get_cmd_count(exec);
+	printf("\n\n========================\n");
+	while (exec->cmd_cnt[i])
+	{
+		printf("cmd_count : %d\n", exec->cmd_cnt[i]);
+		i++;
+	}
+	printf("\n========================\n\n");
+
+	i = 0;
+	make_ptr_execve_cmds(exec);
+	while(i < exec->cmd_count && exec->cmds)
 	{
 		exec->execve_cmds[i] = exec->cmds->simple_cmd->string_value;
 		exec->cmds = exec->cmds->next;

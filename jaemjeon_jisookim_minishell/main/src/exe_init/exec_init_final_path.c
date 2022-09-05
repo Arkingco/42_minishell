@@ -14,24 +14,27 @@
 
 char	*get_paths_from_env(t_exec *exec, char *path_list)
 {
-	void	*env_head;
+	t_envlst	*env_head;
+	int			i;
 
 	env_head = exec->env;
 	printf("env_head: %p\n", &env_head);
 	printf("exec->env: %p\n", &exec->env);
-	while (exec->env) // todo : seg)
+	i = 0;
+	printf("envlst[%d] : %s \n", i, exec->env->key[0]);
+	while (exec->env->key[i]) // todo : seg)
 	{
-		printf("Asdf\n");
+		printf("envlst[%d] : %s \n", i, exec->env->key[0]);
 		if (ft_strnstr(exec->env->key, "PATH=", 5))
 		{
 			printf("get path!\n");
 			break;
 		}
-		exec->env = exec->env->next;
+		i++;
 		printf("next!\n");
 	}
 	printf("22\n");
-	path_list = exec->env->value;
+	path_list = ft_strdup(exec->env->value);
 	printf("33\n");
 	exec->env = env_head;
 	printf("path list : %s\n", path_list);

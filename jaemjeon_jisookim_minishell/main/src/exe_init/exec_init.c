@@ -49,11 +49,20 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	exec->cmds = cmd;
 	exec->cmd_head = cmd;
 	exec->process_cnt = count_process(exec);
-	
-	make_env_double_ptr(exec, env);
+	exec->env = env;
+
+	// printf("/n/n/n == DEBUG ++ \n\n\n");
+	// while (exec->env->key && exec->env->next)
+	// {
+	// 	printf("%s : %s \n", exec->env->key, exec->env->value);
+	// 	exec->env = exec->env->next;
+	// }
+	make_env_double_ptr(exec);
 	exec->execve_cmds = get_execve_cmds(exec);
-	main_get_final_paths(exec); // seg fault
-	printf("g\n");
+	//main_get_final_paths(exec); // seg fault
+	//printf("g\n");
 	
+	exit(0);
+
 	return (exec);
 }
