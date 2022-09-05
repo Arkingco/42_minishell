@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/05 01:51:23 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/06 05:58:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ void	remove_trash_token(t_token **token_lst)
 	head_token = *token_lst;
 	while (cur_token != NULL)
 	{
-		if ((cur_token->type & EXPANDER) && !(cur_token->type & EXPANDED) && \
+		if ((cur_token->type & EXPANDER) && \
 			ft_strlen(cur_token->string_value) == 0)
 		{
 			if (cur_token->prev == NULL)
