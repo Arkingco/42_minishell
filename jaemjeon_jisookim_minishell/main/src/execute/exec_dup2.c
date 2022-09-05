@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   exec_dup2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/03/07 19:05:30 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/02 16:38:24 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/02 18:46:06 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/03 13:34:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/minishell.h"
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+int	single_pipe_dup2(t_exec *exec)
 {
-	unsigned char	u_s1;
-	unsigned char	u_s2;
+	// // default : child process pipe 연결
+	// 
+	// ft_dup2(STDOUT_FD, exec->pipe_fd[PIPE_IN]);
+	// close(STDOUT_FD);
+	// ft_dup2(STDIN_FD, exec->pipe_fd[PIPE_OUT]);
+	// close(STDIN_FD);
+	
+	// // redirection handling (input)
+	// // redirection handling (output)
+	return (0);
+}
 
-	while (n-- > 0)
-	{
-		u_s1 = (unsigned char)*s1;
-		u_s2 = (unsigned char)*s2;
-		if (u_s1 > u_s2)
-			return (1);
-		else if (u_s1 < u_s2)
-			return (-1);
-		else if (u_s1 == '\0' && u_s2 == '\0')
-			return (0);
-		s1++;
-		s2++;
-	}
+int	multi_pipe_dup2(t_exec *exec)
+{
+	// if ()
 	return (0);
 }

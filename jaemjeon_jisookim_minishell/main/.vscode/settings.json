@@ -6,6 +6,8 @@
 		"wait.h": "c",
 		"types.h": "c",
 		"resource.h": "c",
-		"time.h": "c"
+		"time.h": "c",
+		"locale": "c",
+		"signal.h": "c"
 	}
 }
