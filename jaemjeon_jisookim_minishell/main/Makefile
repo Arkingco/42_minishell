@@ -3,21 +3,13 @@ NAME = minishell
 CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
-<<<<<<< HEAD
 INCLUDE_READLINE = -I readline/include
 INCLUDE = -I include -I $(DIR_LIBFT)
-# 지수킴 노트북
-LIB_READLINE = -lreadline -L ${HOME}/.brew/Cellar/readline/8.1.2/lib
-# 잼전 노트북
-#LIB_READLINE = -L readline/lib
-# 잼전 맥
-# LIB_READLINE = -L /Users/jaemjeon/.brew/Cellar/readline/8.1.2/lib
-=======
+LIB_READLINE = -L readline
 INCLUDE_READLINE = -I readline
 INCLUDE = -I include -I$(DIR_LIBFT)
 LIB_READLINE = -L readline
 LIB_LIBFT = -L$(DIR_LIBFT)
->>>>>>> ff994a7ce624631981ca9515e36ec7e125b70329
 RM = rm -f
 DIR_READLINE = readline
 

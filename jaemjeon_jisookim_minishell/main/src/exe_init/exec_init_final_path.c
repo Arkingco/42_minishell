@@ -19,7 +19,7 @@ char	*get_paths_from_env(t_exec *exec, char *path_list)
 	env_head = exec->env;
 	printf("env_head: %p\n", &env_head);
 	printf("exec->env: %p\n", &exec->env);
-	while (exec->env // todo : seg)
+	while (exec->env) // todo : seg)
 	{
 		printf("Asdf\n");
 		if (ft_strnstr(exec->env->key, "PATH=", 5))
