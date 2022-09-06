@@ -58,7 +58,7 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	// 	exec->env = exec->env->next;
 	// }
 	make_env_double_ptr(exec);
-	exec->execve_cmds = *get_execve_cmds(exec);
+	init_execve_cmds(exec);
 	//main_get_final_paths(exec); // seg fault
 	//printf("g\n");
 	

@@ -72,12 +72,12 @@ typedef struct s_exec
 	//util
 	t_cmd	*cmds;
 	void	*cmd_head;
-	int		*cmd_cnt; //no malloc
+	int		*token_cnt; //no malloc
 	int		process_cnt; // len of cmd_cnt array
 
 	// for exec
-	char		**execve_cmds; // exceve 2째인수로 execve_cmds[i]
-	char		***store_execve_cmds;
+	char		**execve_cmds;
+	char		***store_execve_cmds; // exceve 2째인수로 execve_cmds[i]
 	char		*final_path;
 	char		**env_lst;
 	t_envlst	*env;
@@ -113,7 +113,7 @@ typedef struct s_exec
 */
 
 //init_double_env
-int	count_key_value(t_exec *exec);
+int		count_key_value(t_exec *exec);
 void	make_env_double_ptr(t_exec *exec);
 
 //init_final_path
@@ -123,9 +123,11 @@ char	*get_final_path(t_exec *exec, char **temp_path_lists);
 void	main_get_final_paths(t_exec *exec);
 
 //exec_init_get_cmd
-void	make_ptr_execve_cmds(t_exec *exec);
 void	get_cmd_count(t_exec *exec);
-char	***get_execve_cmds(t_exec *exec);
+int		get_simple_cmd_count(t_exec *exec, int i);
+void	make_ptr_execve_cmds(t_exec *exec);
+char	**init_execve_cmds(t_exec *exec);
+char	***init_execve_cmds_lst(t_exec *exec);
 
 //init
 int		count_process(t_exec *exec);
