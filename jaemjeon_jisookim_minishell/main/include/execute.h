@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:21:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:34:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,11 @@ int		init_exec_struct(t_exec *exec, int j);
 	MAIN PART
 */
 
+//check_built_in
+int		check_built_in(t_exec *exec);
+void	exec_single_check_built_in(t_exec *exec);
+int		exec_multi_check_built_in(t_exec *exec);
+
 //fork
 int	exec_single_fork(t_exec *exec);
 int	exec_multi_fork(t_exec *exec);
@@ -144,7 +149,7 @@ int	exec_multi_cmd(t_exec *exec);
 int	execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
-int		exec_multi_check_built_in(t_exec *exec);
+
 int		exec_multi_first(t_exec *exec);
 int		exec_multi_last(t_exec *exec);
 int		exec_multi_middle(t_exec *exec);
@@ -153,8 +158,6 @@ int		exec_multi_middle(t_exec *exec);
 int	exec_pipe_control(t_exec *exec);
 
 //single_cmd
-int		check_built_in(t_exec *exec);
-void	exec_single_check_built_in(t_exec *exec);
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
