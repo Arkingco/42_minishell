@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/06 01:09:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:27:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,19 @@ int	exec_single_cmd(t_exec *exec)
 	if (pid == 0)
 	{
 		init_exec_struct(exec);
-		ft_exceve(exec->final_path, exec->final_cmd_str, exec->env_lst);
+		if (exec->final_path == NULL)
+			exec->final_path = exec->cmds->simple_cmd->string_value;
+		stat = execve(exec->final_path, exec->final_cmd_str, exec->envp); //정상적으로 끝나면 여기서 종료.
+		if (stat == -1)
+		{
+			ft_putstr_fd("ERROR : execve() function error. \n", 2);
+			exit(1);
+		}
+		exit(127);
 	}
-
-	//execute in child process
-	//wait_pid in parent process
-	//wait_pid control
 	
-	return (ft_wait(&stat));
+	ft_wait(&stat);
+	return (0);
 }
 
 int	exec_multi_cmd(t_exec *exec)
@@ -72,12 +77,12 @@ int	exec_multi_cmd(t_exec *exec)
 
 
 
-int	execute(t_cmd *cmd, t_envlst *env)
+int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 {
 	t_exec	*exec;
 	
-
-	exec = main_init_exec(exec, cmd, env);
+	
+	exec = main_init_exec(exec, cmd, env, envp);
 
 	if (exec->process_cnt == 0)
 		return (0);

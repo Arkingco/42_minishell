@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/06 01:05:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 14:24:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@
 typedef struct s_exec
 {
 	//util
-	t_cmd	*cmds;
-	void	*cmd_head;
-	int		*token_cnt;				// fin, no malloc
-	int		process_cnt;	 		// fin, len of cmd_cnt array
+	t_cmd		*cmds;
+	void		*cmd_head;
+	int			*token_cnt;				// fin, no malloc
+	int			process_cnt;	 		// fin, len of cmd_cnt array
 
 	// for exec
 	t_envlst	*env;				//fin
-	char		**env_lst;			//fin
+	char		**envp;
 	
 	char		**path_lst;			// malloced, fin
 	char		*final_path;
@@ -117,7 +117,7 @@ char	**init_execve_cmds(t_exec *exec);
 //init
 int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
-t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env);
+t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
 
 char	*set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec);
@@ -137,7 +137,7 @@ int	multi_pipe_dup2(t_exec *exec);
 //main
 int	exec_single_cmd(t_exec *exec);
 int	exec_multi_cmd(t_exec *exec);
-int	execute(t_cmd *cmd, t_envlst *env);
+int	execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
 int		exec_multi_check_built_in(t_exec *exec);

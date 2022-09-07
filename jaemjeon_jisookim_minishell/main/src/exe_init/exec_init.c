@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/06 01:11:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:06:33 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	make_path_list(t_exec *exec)
 	int		i;
 
 	i = 0;
-	while (exec->env_lst[i])
+	while (exec->envp[i])
 	{
-		if (ft_strnstr(exec->env_lst[i], "PATH=", 5)) //find PATH in env
+		if (ft_strnstr(exec->envp[i], "PATH=", 5)) //find PATH in env
 		{
-			exec->path_lst = ft_split((exec->env_lst[i] + 5), ':'); //store path in exec->path_lst
+			exec->path_lst = ft_split((exec->envp[i] + 5), ':'); //store path in exec->path_lst
 			if (!exec->path_lst)
 			{
 				ft_putstr_fd("ERROR : error while making list.\n", 2);
@@ -59,7 +59,7 @@ void	make_path_list(t_exec *exec)
 // all of the cmd string
 // main cmd
 // execve(const char *path, char *const argv[], char *const envp[]);
-t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
+t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 {
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
@@ -70,13 +70,15 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
 	}
 	exec->cmds = cmd;
 	exec->cmd_head = cmd;
-	exec->process_cnt = count_process(exec);
+
+	exec->envp = envp;
 	exec->env = env;
+
+	exec->process_cnt = count_process(exec);
 	get_token_count(exec);
 
-	make_env_double_ptr(exec);
+	//make_env_double_ptr(exec);
 	make_path_list(exec);
-
 	return (exec);
 }
 
@@ -98,6 +100,7 @@ void	set_exec_struct_final_cmd_str(t_exec *exec)
 
 	i = 0;
 	exec->final_cmd_str = ft_calloc(1, sizeof(char *) * exec->process_cnt + 1);
+	exec->final_cmd_str[exec->process_cnt] = NULL;
 	if (!exec->final_cmd_str)
 		ft_exit(1);
 	exec->cmds = exec->cmd_head;
@@ -111,7 +114,7 @@ void	set_exec_struct_final_cmd_str(t_exec *exec)
 		i++;
 	}
 	set_exec_struct_final_cmd_loop(exec, cmd_str, i);
-	exec->final_cmd_str[++i] = 0;
+	exec->final_cmd_str[++i] = NULL;
 	exec->cmds = exec->cmd_head; // init
 	return ;
 }
@@ -150,7 +153,6 @@ char	*set_final_path_str(t_exec *exec)
 
 int	init_exec_struct(t_exec *exec)
 {
-	int i = 0;
 	char *temp;
 	//check redirection
 	
@@ -158,10 +160,10 @@ int	init_exec_struct(t_exec *exec)
 
 	// debug
 	printf("\n\n============= DEBUG ============\n");
-	while (exec->final_cmd_str[i]) 
+	int i = -1;
+	while (exec->final_cmd_str[++i]) 
 	{
 		printf("exec->final_cmd_str[%d] : %s\n", i, exec->final_cmd_str[i]);
-		i++;
 	}
 	printf("exec->final_cmd_str[%d] : %s\n", i, exec->final_cmd_str[i]); // needs to have (null);
 	exec->final_path = set_final_path_str(exec);
