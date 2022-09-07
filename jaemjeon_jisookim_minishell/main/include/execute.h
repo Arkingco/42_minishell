@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:34:28 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:45:31 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,16 +132,15 @@ int		init_exec_struct(t_exec *exec, int j);
 
 //check_built_in
 int		check_built_in(t_exec *exec);
-void	exec_single_check_built_in(t_exec *exec);
-int		exec_multi_check_built_in(t_exec *exec);
+void	exec_go_check_built_in(t_exec *exec);
 
 //fork
-int	exec_single_fork(t_exec *exec);
-int	exec_multi_fork(t_exec *exec);
+int		exec_single_fork(t_exec *exec);
+int		exec_multi_fork(t_exec *exec);
 
 //dup2
-int	single_pipe_dup2(t_exec *exec);
-int	multi_pipe_dup2(t_exec *exec);
+int		single_pipe_dup2(t_exec *exec);
+int		multi_pipe_dup2(t_exec *exec);
 
 //main
 int	exec_single_cmd(t_exec *exec);
@@ -155,7 +154,7 @@ int		exec_multi_last(t_exec *exec);
 int		exec_multi_middle(t_exec *exec);
 
 //pipe
-int	exec_pipe_control(t_exec *exec);
+int		exec_pipe_control(t_exec *exec);
 
 //single_cmd
 
