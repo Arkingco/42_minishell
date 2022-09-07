@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 14:24:29 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:50:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,8 +119,10 @@ int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
 t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
 
+void	set_exec_struct_final_cmd_loop(t_exec *exec, char *cmd_str, int i);
+void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
 char	*set_final_path_str(t_exec *exec);
-int		init_exec_struct(t_exec *exec);
+int		init_exec_struct(t_exec *exec, int j);
 
 /*
 	MAIN PART

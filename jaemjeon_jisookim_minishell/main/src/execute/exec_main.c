@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:27:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:52:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,24 @@
 // don't need pipe
 int	exec_single_cmd(t_exec *exec)
 {
+	int		process_number;
 	int		is_built_in;
 	int		stat;
 	pid_t	pid;
 	
+	process_number = 0;
 	exec_single_check_built_in(exec);
 	pid = ft_fork();
 
 	if (pid == 0)
 	{
-		init_exec_struct(exec);
+		init_exec_struct(exec, process_number);
+		int i = 0;
+		while (exec->final_cmd_str[i])
+		{
+			printf("debug : %s\n", exec->final_cmd_str[i]);
+			i++;
+		}
 		if (exec->final_path == NULL)
 			exec->final_path = exec->cmds->simple_cmd->string_value;
 		stat = execve(exec->final_path, exec->final_cmd_str, exec->envp); //정상적으로 끝나면 여기서 종료.
@@ -35,7 +43,6 @@ int	exec_single_cmd(t_exec *exec)
 		}
 		exit(127);
 	}
-	
 	ft_wait(&stat);
 	return (0);
 }

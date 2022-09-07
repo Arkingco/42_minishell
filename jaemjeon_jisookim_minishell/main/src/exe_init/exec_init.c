@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:06:33 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:50:40 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,14 +93,14 @@ void	set_exec_struct_final_cmd_loop(t_exec *exec, char *cmd_str, int i)
 	return ;
 }
 
-void	set_exec_struct_final_cmd_str(t_exec *exec)
+void	set_exec_struct_final_cmd_str(t_exec *exec, int j)
 {
 	int		i;
 	char	*cmd_str;
 
 	i = 0;
-	exec->final_cmd_str = ft_calloc(1, sizeof(char *) * exec->process_cnt + 1);
-	exec->final_cmd_str[exec->process_cnt] = NULL;
+	exec->final_cmd_str = ft_calloc(1, sizeof(char *) * (exec->token_cnt[j] + 1));
+	exec->final_cmd_str[exec->token_cnt[j]] = NULL;
 	if (!exec->final_cmd_str)
 		ft_exit(1);
 	exec->cmds = exec->cmd_head;
@@ -151,23 +151,23 @@ char	*set_final_path_str(t_exec *exec)
 }
 
 
-int	init_exec_struct(t_exec *exec)
+int	init_exec_struct(t_exec *exec, int j)
 {
 	char *temp;
 	//check redirection
 	
-	set_exec_struct_final_cmd_str(exec);
-
+	set_exec_struct_final_cmd_str(exec, j);
+	exec->final_path = set_final_path_str(exec);
 	// debug
 	printf("\n\n============= DEBUG ============\n");
 	int i = -1;
+	printf("exec->final_path : %s\n", exec->final_path);
 	while (exec->final_cmd_str[++i]) 
 	{
 		printf("exec->final_cmd_str[%d] : %s\n", i, exec->final_cmd_str[i]);
 	}
 	printf("exec->final_cmd_str[%d] : %s\n", i, exec->final_cmd_str[i]); // needs to have (null);
-	exec->final_path = set_final_path_str(exec);
-	printf("exec->final_path : %s\n", exec->final_path);
+	
 	printf("============= DEBUG ============\n\n");
 	// debug
 
