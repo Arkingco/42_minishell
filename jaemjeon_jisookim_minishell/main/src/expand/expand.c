@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:47:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/05 02:10:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:12:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ void	expand_pidenv(t_token *token)
 		}
 		else // $$가 나와서 pid로 확장을 해야하는 경우
 		{
-			ft_memmove(pid_suspect, pid_suspect + 2, \
-									ft_strlen(pid_suspect) + 1); // $$를 지워버림.
+			pid_suspect[0] = '4';
+			pid_suspect[1] = '2';
 			token->type |= EXPANDED; // 그냥 지워진게 아니라 pid로 확장이 되었다는 맥락이니까 expanded flag도 박아줌
 		}
 	}
