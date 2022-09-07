@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:47:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:55:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,21 +58,24 @@ int	exec_multi_cmd(t_exec *exec)
 		exec_go_built_in(exec);
 	else
 	{
-		pid = ft_fork();
-		if (pid == 0)
-		{
-			init_exec_struct(exec, process_number);
-			if (exec->final_path == NULL)
-				exec->final_path = exec->cmds->simple_cmd->string_value;
-			stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
-			if (stat == -1)
-			{
-				ft_putstr_fd("ERROR : execve() function error. \n", 2);
-				exit(1);
-			}
-			exit(127);
-		}
-		ft_wait(&stat); // todo : return exit stat
+		exec_main_forking_process(exec);
+		
+		// if (pid == 0)
+		// {
+		// 	init_exec_struct(exec, process_number);
+		// 	if (exec->final_path == NULL)
+		// 		exec->final_path = exec->cmds->simple_cmd->string_value;
+		// 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
+		// 	if (stat == -1)
+		// 	{
+		// 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
+		// 		exit(1);
+		// 	}
+		// 	exit(127);
+		// }
+		// ft_wait(&stat); // todo : return exit stat
+
+		
 	}
 
 	// int	i;
