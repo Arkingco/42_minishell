@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 18:33:15 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:45:28 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:47:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	check_built_in(t_exec *exec)
 	return (0);
 }
 
-void	exec_go_check_built_in(t_exec *exec)
+void	exec_go_built_in(t_exec *exec)
 {
 	char	*cmd;
 

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:44:34 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:47:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	exec_single_cmd(t_exec *exec)
 	
 	process_number = 0;
 	if (check_built_in(exec))
-		exec_go_check_built_in(exec);
+		exec_go_built_in(exec);
 	else
 	{
 		pid = ft_fork();
@@ -55,7 +55,7 @@ int	exec_multi_cmd(t_exec *exec)
 	
 	process_number = 0;
 	if (check_built_in(exec))
-		exec_go_check_built_in(exec);
+		exec_go_built_in(exec);
 	else
 	{
 		pid = ft_fork();
