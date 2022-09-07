@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 23:08:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 23:09:44 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 
 // to do : i라ㅇ j랑 잘  해해봐봐!!!! ㅠㅠㅠㅠㅠ
 // set_exec_struct_final_cmd_loop & set_exec_struct_final_cmd_str
+//
 void	set_exec_struct_final_cmd_loop(t_exec *exec, char *cmd_str, int i, int j)
 {
 	cmd_str = ft_strdup(exec->cmds->simple_cmd->string_value);
