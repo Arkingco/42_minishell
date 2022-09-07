@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:50:40 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:14:31 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,11 @@ void	make_path_list(t_exec *exec)
 	int		i;
 
 	i = 0;
-	while (exec->envp[i])
+	while (i < exec->count_key)
 	{
-		if (ft_strnstr(exec->envp[i], "PATH=", 5)) //find PATH in env
+		if (ft_strnstr(exec->env_lst[i], "PATH=", 5)) //find PATH in env
 		{
-			exec->path_lst = ft_split((exec->envp[i] + 5), ':'); //store path in exec->path_lst
+			exec->path_lst = ft_split((exec->env_lst[i] + 5), ':'); //store path in exec->path_lst
 			if (!exec->path_lst)
 			{
 				ft_putstr_fd("ERROR : error while making list.\n", 2);
@@ -70,14 +70,11 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 	}
 	exec->cmds = cmd;
 	exec->cmd_head = cmd;
-
-	exec->envp = envp;
 	exec->env = env;
-
+	exec->env_head = exec->env; 
 	exec->process_cnt = count_process(exec);
 	get_token_count(exec);
-
-	//make_env_double_ptr(exec);
+	make_env_double_ptr(exec);
 	make_path_list(exec);
 	return (exec);
 }
@@ -173,49 +170,3 @@ int	init_exec_struct(t_exec *exec, int j)
 
 	return (0);
 }
-
-
-// pipex
-// char	*add_path_with_cmd(t_info *info, char **raw_paths)
-// {
-// 	char	*slash_cmd;
-// 	char	*temp;
-// 	int		i;
-
-// 	slash_cmd = ft_strjoin("/", info->cmds[0]);
-// 	if (!(slash_cmd))
-// 		error_exit("Join error. ", 127);
-// 	i = 0;
-// 	while (raw_paths[i])
-// 	{
-// 		temp = (char *)ft_malloc(ft_strlen(raw_paths[i]) \
-// 									+ ft_strlen(slash_cmd) + 1);
-// 		temp = ft_strjoin(raw_paths[i], slash_cmd);
-// 		if (!temp)
-// 			error_exit("Join error. ", 127);
-// 		if (access(temp, X_OK) == 0)
-// 		{
-// 			info->final_path = temp;
-// 			return (info->final_path);
-// 		}
-// 		free(temp);
-// 		i++;
-// 	}
-// 	free(slash_cmd);
-// 	return (NULL);
-// }
-
-// char	*find_available_stat_path(t_exec *exec)
-// {
-// 	(void) exec;
-// 	// char	*path;
-// 	// int		i;
-
-// 	// i = 0;
-// 	// while (exec->env_lst[i])
-// 	// {
-// 	// 	if (!stat())		
-// 	// }
-// 	return (path);
-// }
-

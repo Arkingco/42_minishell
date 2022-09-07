@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:50:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:21:57 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,9 @@ typedef struct s_exec
 
 	// for exec
 	t_envlst	*env;				//fin
-	char		**envp;
+	char		**env_lst;
+	void		*env_head;
+	int			count_key;
 	
 	char		**path_lst;			// malloced, fin
 	char		*final_path;
@@ -151,10 +153,8 @@ int		exec_multi_middle(t_exec *exec);
 int	exec_pipe_control(t_exec *exec);
 
 //single_cmd
+int		check_built_in(t_exec *exec);
 void	exec_single_check_built_in(t_exec *exec);
-
-
-
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:52:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:22:53 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,26 @@ int	exec_single_cmd(t_exec *exec)
 	pid_t	pid;
 	
 	process_number = 0;
-	exec_single_check_built_in(exec);
-	pid = ft_fork();
-
-	if (pid == 0)
+	if (check_built_in(exec))
+		exec_single_check_built_in(exec);
+	else
 	{
-		init_exec_struct(exec, process_number);
-		int i = 0;
-		while (exec->final_cmd_str[i])
+		pid = ft_fork();
+		if (pid == 0)
 		{
-			printf("debug : %s\n", exec->final_cmd_str[i]);
-			i++;
+			init_exec_struct(exec, process_number);
+			if (exec->final_path == NULL)
+				exec->final_path = exec->cmds->simple_cmd->string_value;
+			stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
+			if (stat == -1)
+			{
+				ft_putstr_fd("ERROR : execve() function error. \n", 2);
+				exit(1);
+			}
+			exit(127);
 		}
-		if (exec->final_path == NULL)
-			exec->final_path = exec->cmds->simple_cmd->string_value;
-		stat = execve(exec->final_path, exec->final_cmd_str, exec->envp); //정상적으로 끝나면 여기서 종료.
-		if (stat == -1)
-		{
-			ft_putstr_fd("ERROR : execve() function error. \n", 2);
-			exit(1);
-		}
-		exit(127);
+		ft_wait(&stat);
 	}
-	ft_wait(&stat);
 	return (0);
 }
 
