@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:22:53 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:37:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,12 @@ int	exec_single_cmd(t_exec *exec)
 			}
 			exit(127);
 		}
-		ft_wait(&stat);
+		ft_wait(&stat); // todo : return exit stat
 	}
 	return (0);
 }
+
+// todo : make exit stat function
 
 int	exec_multi_cmd(t_exec *exec)
 {
