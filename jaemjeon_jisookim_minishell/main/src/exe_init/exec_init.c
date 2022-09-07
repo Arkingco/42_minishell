@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:14:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:29:49 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void	set_exec_struct_final_cmd_str(t_exec *exec, int j)
 	exec->final_cmd_str = ft_calloc(1, sizeof(char *) * (exec->token_cnt[j] + 1));
 	exec->final_cmd_str[exec->token_cnt[j]] = NULL;
 	if (!exec->final_cmd_str)
-		ft_exit(1);
+		ft_exit(exec);
 	exec->cmds = exec->cmd_head;
 	while (exec->cmds->simple_cmd->string_value)
 	{
@@ -126,7 +126,7 @@ char	*set_final_path_str(t_exec *exec)
 
 	slash_cmd = ft_strjoin("/", exec->final_cmd_str[0]);
 	if (!(slash_cmd))
-		ft_exit(1);
+		ft_exit(exec);
 	i = 0;
 	while (exec->path_lst[i])
 	{
@@ -134,7 +134,7 @@ char	*set_final_path_str(t_exec *exec)
 									+ ft_strlen(slash_cmd) + 1);
 		temp = ft_strjoin(exec->path_lst[i], slash_cmd);
 		if (!temp)
-			ft_exit(127);
+			ft_exit(exec);
 		if (!stat(temp, &buf))
 		{
 			exec->final_path = temp;

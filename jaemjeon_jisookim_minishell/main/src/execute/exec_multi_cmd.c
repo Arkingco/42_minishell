@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 10:20:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:27:47 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,19 @@ int	exec_multi_check_built_in(t_exec *exec)
 
 	cmd = exec->cmds->simple_cmd->string_value;
 	if (!ft_strncmp(cmd, "export", ft_strlen("export")))
-		ft_export(MULTI_CMD);
+		ft_export(exec);
 	else if(!ft_strncmp(cmd, "unset", ft_strlen("unset")))
-		ft_unset(MULTI_CMD);
+		ft_unset(exec);
 	else if (!ft_strncmp(cmd, "cd", ft_strlen("cd")))
-		ft_cd(MULTI_CMD);
+		ft_cd(exec);
 	else if (!ft_strncmp(cmd, "exit", ft_strlen("exit")))
-		ft_exit(MULTI_CMD);
+		ft_exit(exec);
 	else if (!ft_strncmp(cmd, "echo", ft_strlen("echo")))
-		ft_echo(exec, MULTI_CMD); 
+		ft_echo(exec); 
 	else if (!ft_strncmp(cmd, "pwd", ft_strlen("pwd")))
-		ft_pwd(MULTI_CMD);
+		ft_pwd(exec);
 	else if (!ft_strncmp(cmd, "env", ft_strlen("env")))
-		ft_env(MULTI_CMD);
+		ft_env(exec);
 	return (0);
 }
 
