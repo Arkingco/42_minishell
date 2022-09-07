@@ -62,10 +62,8 @@ void	make_env_double_ptr(t_exec *exec)
 	// printf("==========================");
 	// while (exec->env_lst[i])
 	// {
-	// 	printf("i : %d\n", i );
-	// 	printf("%s\n", exec->env_lst[i]);
+	// 	printf("[%d] %s\n", i, exec->env_lst[i]);
 	// 	i++;
 	// }
 	// printf("==========================");
-	exec->env = env_head;
 }

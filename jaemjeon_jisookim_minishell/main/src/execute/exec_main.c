@@ -13,7 +13,7 @@
 #include "../../include/minishell.h"
 
 // don't need pipe
-int	exec_single_cmd(t_exec *exec, t_envlst *env)
+int	exec_single_cmd(t_exec *exec)
 {
 	int		is_built_in;
 	int		stat;
@@ -21,10 +21,13 @@ int	exec_single_cmd(t_exec *exec, t_envlst *env)
 	
 	exec_single_check_built_in(exec);
 	pid = ft_fork();
+
 	if (pid == 0)
 	{
-		ft_exceve(exec->final_path, exec->execve_cmds, exec->env_lst);
+		init_exec_struct(exec);
+		ft_exceve(exec->final_path, exec->final_cmd_str, exec->env_lst);
 	}
+
 	//execute in child process
 	//wait_pid in parent process
 	//wait_pid control
@@ -32,11 +35,10 @@ int	exec_single_cmd(t_exec *exec, t_envlst *env)
 	return (ft_wait(&stat));
 }
 
-int	exec_multi_cmd(t_exec *exec, t_envlst *env, int *wait_ret)
+int	exec_multi_cmd(t_exec *exec)
 {
 	(void)exec;
-	(void)env;
-	(void)wait_ret;
+	
 	// int	i;
 	// int	pid;
 	
@@ -66,12 +68,24 @@ int	exec_multi_cmd(t_exec *exec, t_envlst *env, int *wait_ret)
 	return (0);
 }
 
+
+
+
+
 int	execute(t_cmd *cmd, t_envlst *env)
 {
 	t_exec	*exec;
-	int		wait_ret;
+	
 
-	exec = main_init_exec(exec, cmd, env); //0904 finished
+	exec = main_init_exec(exec, cmd, env);
+
+	if (exec->process_cnt == 0)
+		return (0);
+	else if (exec->process_cnt == 1)
+		exec_single_cmd(exec);
+	else 
+		exec_multi_cmd(exec);
+
 	// printf("\n\n---------------\n");
 	// printf("exec->process count : %d\n", exec->process_cnt);
 	// printf("exec->final_path : %d\n", exec->process_cnt);

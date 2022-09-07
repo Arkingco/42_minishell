@@ -72,15 +72,17 @@ typedef struct s_exec
 	//util
 	t_cmd	*cmds;
 	void	*cmd_head;
-	int		*token_cnt; //no malloc
-	int		process_cnt; // len of cmd_cnt array
+	int		*token_cnt;				// fin, no malloc
+	int		process_cnt;	 		// fin, len of cmd_cnt array
 
 	// for exec
-	char		**execve_cmds;
-	char		***store_execve_cmds; // exceve 2째인수로 execve_cmds[i]
+	t_envlst	*env;				//fin
+	char		**env_lst;			//fin
+	
+	char		**path_lst;			// malloced, fin
 	char		*final_path;
-	char		**env_lst;
-	t_envlst	*env;
+
+	char		**final_cmd_str;	//fin
 
 	//pipe
 	int			pipe_fd[3];
@@ -88,24 +90,6 @@ typedef struct s_exec
 	//pid_t		*pid_lst;
 	
 }	t_exec;
-
-// typedef struct s_stat
-// {
-// 	dev_t	st_dev;			/*ID of device containing file */
-// 	ino_t	st_ino;			/*inode number*/
-// 	mode_t	st_mode;		/*protection*/
-// 	nlink_t	st_nlink;		/*number of hard links*/
-// 	uid_t	st_uid;			/*user ID of owner*/
-// 	gid_t	st_gid;			/*group ID of owner*/
-// 	dev_t	st_rdev;		/*device ID (if special file)*/
-// 	off_t	st_size;		/*total size, in byte*/
-// 	blksize_t	st_blksize;	/*blocksize for file system I/O*/
-// 	blkcnt_t	st_blocks;	/*number of 512B blocks allocated*/
-// 	// time_t	st_atime;		/*time of last access*/
-// 	// time_t	st_mtime;		/*time of last modification*/
-// 	// time_t	st_xtime;		/*time of last status change*/
-	
-// }	t_stat;
 
 
 /*
@@ -116,23 +100,27 @@ typedef struct s_exec
 int		count_key_value(t_exec *exec);
 void	make_env_double_ptr(t_exec *exec);
 
+/*
 //init_final_path
 char	*get_paths_from_env(t_exec *exec, char *path_list);
 char	**ft_split_paths(t_exec *exec, char *path_list, char **temp_path_lists);
 char	*get_final_path(t_exec *exec, char **temp_path_lists);
 void	main_get_final_paths(t_exec *exec);
+*/
 
 //exec_init_get_cmd
-void	get_cmd_count(t_exec *exec);
+void	get_token_count(t_exec *exec);
 int		get_simple_cmd_count(t_exec *exec, int i);
 void	make_ptr_execve_cmds(t_exec *exec);
 char	**init_execve_cmds(t_exec *exec);
-char	***init_execve_cmds_lst(t_exec *exec);
 
 //init
 int		count_process(t_exec *exec);
+void	make_path_list(t_exec *exec);
 t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env);
 
+char	*set_final_path_str(t_exec *exec);
+int		init_exec_struct(t_exec *exec);
 
 /*
 	MAIN PART
@@ -147,8 +135,8 @@ int	single_pipe_dup2(t_exec *exec);
 int	multi_pipe_dup2(t_exec *exec);
 
 //main
-int	exec_single_cmd(t_exec *exec, t_envlst *env);
-int	exec_multi_cmd(t_exec *exec, t_envlst *env, int *wait_ret);
+int	exec_single_cmd(t_exec *exec);
+int	exec_multi_cmd(t_exec *exec);
 int	execute(t_cmd *cmd, t_envlst *env);
 
 //multi_cmd
@@ -163,13 +151,15 @@ int	exec_pipe_control(t_exec *exec);
 //single_cmd
 void	exec_single_check_built_in(t_exec *exec);
 
+
+
+
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
 int		ft_close(int fd);
 
 //exec_tools
 void	ft_double_free(char **list);
-int		ft_stat(const char *path);
 int		*ft_pipe(int *pipe_fd);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_fork(void);

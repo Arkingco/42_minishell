@@ -35,4 +35,3 @@ void	exec_single_check_built_in(t_exec *exec)
 		ft_env(SINGLE_CMD);
 	return ;
 }
-

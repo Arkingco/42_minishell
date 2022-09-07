@@ -25,19 +25,6 @@ void	ft_double_free(char **list)
 	free(list);
 }
 
-int	ft_stat(const char *path)
-{
-	int	stat_return;
-	
-	stat_return = stat(path, NULL);
-	if (stat_return != 0)
-	{
-		ft_putstr_fd("ERROR : stat() function error. \n", 2);
-		exit(BAD_EXIT);
-	}
-	return (stat_return);
-}
-
 pid_t	ft_fork(void)
 {
 	pid_t	fork_return;
