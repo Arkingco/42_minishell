@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 18:33:15 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:48:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 10:06:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,11 @@ int	check_built_in(t_exec *exec)
 		return (1);
 	else if (!ft_strncmp(cmd, "exit", ft_strlen("exit") + 1))
 		return (1);
-	else if (!ft_strncmp(cmd, "echo", ft_strlen("echo") + 1))
-		return (1);
 	else if (!ft_strncmp(cmd, "pwd", ft_strlen("pwd") + 1))
 		return (1);
 	else if (!ft_strncmp(cmd, "env", ft_strlen("env") + 1))
+		return (1);
+	else if (!ft_strncmp(cmd, "echo", ft_strlen("echo") + 1))
 		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 22:42:02 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 09:57:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ pid_t	exec_multi_first(t_exec *exec, pid_t *pid)
 
 	if (pid == 0) //child process
 	{
-		dprintf(2, " +++++++++ this is [%d](pid) multi first!  +++++++++ \n", (int)pid);
-		dprintf("exec->pipe_fd[0] : %d\n", (int)exec->pipe_fd[0]);
-		dprintf("exec->pipe_fd[1] : %d\n", (int)exec->pipe_fd[1]);
 		ft_close(exec->pipe_fd[0]);
 		// redirection check
 		ft_dup2(exec->pipe_fd[1], 1);
@@ -63,8 +60,6 @@ pid_t	exec_multi_last(t_exec *exec, pid_t *pid)
 
 	if (pid == 0 && exec->process_cnt == 2) //child process
 	{
-		dprintf(2, " +++++++++ this is [%d](pid) multi last!  +++++++++ \n", (int)pid);
-		dprintf(2, "+++ process cnt is 2! +++ \n");
 		ft_close(exec->pipe_fd[1]);
 		ft_dup2(exec->pipe_fd[0], 0);
 		ft_close(exec->pipe_fd[0]);	

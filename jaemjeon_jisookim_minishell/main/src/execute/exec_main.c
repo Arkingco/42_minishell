@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 22:54:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 10:07:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,28 +16,24 @@ void	exec_executing(t_exec *exec, int process_number, int stat, pid_t pid)
 {
 	init_exec_struct(exec, process_number);
 
-	// debug
-	dprintf(2, "\n\n=============[%d] DEBUG ============\n", process_number);
-	int idx = 0;
-	dprintf(2, "exec->final_path : %s\n", exec->final_path);
-	dprintf(2, "exec->process_cnt: %d\n", exec->process_cnt);
+	// // debug
+	// dprintf(2, "\n=============[%d] DEBUG ============\n", process_number);
+	// int idx = 0;
+	// dprintf(2, "exec->final_path : %s\n", exec->final_path);
+	// dprintf(2, "exec->token_cnt[process_number]: %d\n", exec->token_cnt[process_number]);
 	
-	while (idx <= exec->token_cnt[process_number]) 
-	{
-		dprintf(2, "exec->final_cmd_str[%d] : %s\n", idx, exec->final_cmd_str[idx]);
-		idx++;
-	}
-	dprintf(2, "exec->final_cmd_str[%d] : %s (last)\n", idx, exec->final_cmd_str[idx]); // needs to have (null);
-	dprintf(2, "============= DEBUG ============\n\n");
-	// debug
+	// while (idx < exec->token_cnt[process_number]) 
+	// {
+	// 	dprintf(2, "exec->final_cmd_str[%d] : %s\n", idx, exec->final_cmd_str[idx]);
+	// 	idx++;
+	// }
+	// dprintf(2, "exec->final_cmd_str[%d] : %s (last)\n", idx, exec->final_cmd_str[idx]); // needs to have (null);
+	// dprintf(2, "============= DEBUG ============\n");
+	// dprintf(2, "++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+	// // debug
 
 	if (exec->final_path == NULL)
 		exec->final_path = exec->cmds->simple_cmd->string_value;
-
-
-	
-
-	
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
 	if (stat == -1)
 	{
