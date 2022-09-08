@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:25:57 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 17:02:26 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:48:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@ t_cmd	*ft_cmd_lst_first(t_cmd *cmd_lst);
 t_cmd	*make_cmd_linkedlst(t_token *token_lst);
 void	ft_free_cmd(t_cmd *cmd);
 void	ft_free_cmdlst(t_cmd *cmd);
+int		ft_cmdlst_size(t_cmd *cmd);
 
 #endif

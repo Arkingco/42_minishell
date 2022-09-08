@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:36:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 17:04:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:47:57 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,4 +66,17 @@ void	ft_free_cmdlst(t_cmd *cmd)
 		if (cur_cmd == NULL)
 			return ;
 	}
+}
+
+int	ft_cmdlst_size(t_cmd *cmd)
+{
+	int	size;
+
+	size = 0;
+	while (cmd != NULL)
+	{
+		size++;
+		cmd = cmd->next;
+	}
+	return (size);
 }

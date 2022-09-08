@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   ft_str_chrset_cnt.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:21:25 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/08 15:08:28 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/08 15:15:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#include "libft.h"
 
-# include "cmd.h"
-# include "env.h"
-# include "../libft/libft.h"
-# include "utils.h"
-# include <fcntl.h>
-# include <sys/dir.h>
-# include <sys/stat.h>
+static int	in_chrset(char letter, char *chrset)
+{
+	if (ft_strchr(chrset, letter) != NULL)
+		return (1);
+	else
+		return (0);
+}
 
-// execute.c
-void	execute(t_cmd *cmd, t_envlst *env);
+int	ft_str_chrset_cnt(char *string, char *chrset)
+{
+	int	count;
 
-
-// execute_utils_1.c
-
-#endif
+	if (string == NULL)
+		return (0);
+	count = 0;
+	while (*string != '\0')
+	{
+		if (in_chrset(chrset, *string))
+			count++;
+		string++;
+	}
+	return (count);
+}

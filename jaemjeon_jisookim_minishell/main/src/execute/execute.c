@@ -1,30 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.h                                          :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:21:25 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/08 15:16:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTE_H
-# define EXECUTE_H
+#include "../../include/minishell.h"
 
-# include "cmd.h"
-# include "env.h"
-# include "../libft/libft.h"
-# include "utils.h"
-# include <fcntl.h>
-# include <sys/dir.h>
-# include <sys/stat.h>
+void	process_single_cmd(t_cmd *cmd, t_envlst *env)
+{
 
-// execute.c
-void	execute(t_cmd *cmd, t_envlst *env);
+}
 
+void	process_multi_cmd(t_cmd *cmd, t_envlst *env)
+{
 
-// execute_utils_1.c
+}
 
-#endif
+void	execute(t_cmd *cmd, t_envlst *env)
+{
+	int	cmd_count;
+
+	cmd_count = ft_cmdlst_size(cmd);
+	if (cmd_count == 0)
+		return ;
+	else if (cmd_count == 1)
+	{
+		process_single_cmd(cmd, env);
+	}
+	else
+	{
+		process_multi_cmd(cmd, env);
+	}
+}
