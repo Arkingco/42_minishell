@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 12:42:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:46:33 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,8 @@ pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid)
 
 		exec_executing(exec, i, stat);
 	}
-	dprintf(2, "=== this is parent ===\n");
-	// if (exec->process_cnt != 2)
-	// 	ft_close(exec->pipe_fd[1]); // todo : pipe handle
-	init_pipe_before_exec(exec);
-	return (ft_wait(&stat, i)); // todo : return exit stat
+	
+	return ((pid_t)stat); // todo : return exit stat
 }
 
 pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid)
@@ -50,10 +47,8 @@ pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid)
 		close(exec->pipe_fd[1]);
 		exec_executing(exec, i, stat);
 	}
-	dprintf(2, "=== this is parent ===\n");
-	
-	init_pipe_before_exec(exec);
-	return (ft_wait(&stat, i)); // todo : return exit stat
+
+	return ((pid_t)stat); // todo : return exit stat
 }
 
 pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid)
@@ -69,9 +64,8 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid)
 		// redirection check
 		exec_executing(exec, i, stat);
 	}
-	dprintf(2, "=== this is parent ===\n");
-	// init_pipe_before_exec(exec);
-	return (ft_wait(&stat, i)); // todo : return exit stat
+
+	return ((pid_t)stat); // todo : return exit stat
 }
 
 
@@ -79,19 +73,24 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid)
 // ================================================================
 
 //middle cmd (multi) tools
-void	init_pipe_before_exec(t_exec *exec)
+void	init_pipe_before_exec(t_exec *exec, int i)
 {
 	int	temp_fd;
 
 	temp_fd = 0;
-	if (exec->process_cnt != 2)
-	{
-		temp_fd = exec->pipe_fd[0];
-		exec->pipe_fd[0] = 0;
-		exec->pipe_fd[2] = temp_fd;
-	}
 
-	dprintf(2, "exec->pipe_fd : [%d][%d][%d]\n", exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+	if (i != (exec->process_cnt - 1))
+	{
+		ft_close(exec->pipe_fd[1]);	
+		exec->pipe_fd[1] = 0;
+	}
+	temp_fd = exec->pipe_fd[0];
+	exec->pipe_fd[0] = 0;
+	exec->pipe_fd[2] = temp_fd;
+	
+	dprintf(2, "exec->pipe_fd : [%d][%d][%d]\n", \
+					exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+
 	return ;
 }
 
@@ -105,19 +104,19 @@ int	multi_process_exceve(t_exec *exec)
 	i = 0;
 	while (i < exec->process_cnt)
 	{
-		if (i != (exec->process_cnt -1))
+		if (i != (exec->process_cnt - 1))
 			ft_pipe(exec->pipe_fd);
 		pid = ft_fork();
 		if (i == 0) //first
 		{
 			dprintf(2, "\n\n<<<FIRST[%d]>>>\n", i);
-			dprintf(2, "exec->pipe_fd : [%d][%d][%d]\n", exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+			dprintf(2, "** exec->pipe_fd : [%d][%d][%d]\n", exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 			ret_pid = exec_multi_first(exec, i, &pid);
 		}
 		else if (i == (exec->process_cnt - 1))
 		{ 
 			dprintf(2, "\n\n<<<LAST[%d]>>>\n", i);
-			dprintf(2, "exec->pipe_fd : [%d][%d][%d]\n", exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+			dprintf(2, "** exec->pipe_fd : [%d][%d][%d]\n", exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 			ret_pid = exec_multi_last(exec, i, &pid); // last
 			// todo : pipe handling, close pipe
 		}
@@ -126,6 +125,7 @@ int	multi_process_exceve(t_exec *exec)
 			dprintf(2, "\n\n<<<MIDDLE[%d]>>>\n", i);
 			ret_pid = exec_multi_middle(exec, i, &pid); // middle
 		}
+		init_pipe_before_exec(exec, i);
 		i++;
 	}
 	

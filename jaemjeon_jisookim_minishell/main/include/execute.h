@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 11:18:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:44:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,7 +154,8 @@ pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid);
 pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid);
 pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid);
 
-void	init_pipe_before_exec(t_exec *exec);
+
+void	init_pipe_before_exec(t_exec *exec, int i);
 int		multi_process_exceve(t_exec *exec);
 int		exec_multi_child_process(t_exec *exec);
 

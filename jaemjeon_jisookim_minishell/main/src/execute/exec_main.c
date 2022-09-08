@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 12:35:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:18:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ void	exec_executing(t_exec *exec, int process_number, int stat)
 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
 		exit(1);
 	}
-	exit(127);
 }
 
 // don't need pipe

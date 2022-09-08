@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 12:31:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:21:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ pid_t	ft_wait(int *statloc, int i)
 	int	wait_return;
 	int	wait_error;
 	
-	dprintf(2, ":: this is parent waiting! :: \n");
 	wait_return = wait(&wait_return);
 	
 	if (wait_return == -1)
