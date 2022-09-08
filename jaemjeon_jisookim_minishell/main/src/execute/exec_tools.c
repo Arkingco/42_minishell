@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 13:51:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 15:26:46 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,6 @@ void	ft_double_free(char **list)
 		i++;
 	}
 	free(list);
-}
-
-int	ft_stat(const char *path)
-{
-	int	stat_return;
-	
-	stat_return = stat(path, NULL);
-	if (stat_return != 0)
-	{
-		ft_putstr_fd("ERROR : stat() function error. \n", 2);
-		exit(BAD_EXIT);
-	}
-	return (stat_return);
 }
 
 pid_t	ft_fork(void)
@@ -67,25 +54,24 @@ int	ft_dup2(int fd1, int fd2)
 }
 
 // if success : process id, WIFEXITED(wait_return) == TRUE
-// if error : -1, WIFSIGNALED(wait_return) == TRUE
+// if error : -1
 pid_t	ft_wait(int *statloc)
 {
 	int	wait_return;
 	int	wait_error;
 	
 	wait_return = wait(&wait_return);
+	
 	if (wait_return == -1)
 	{
 		ft_putstr_fd("ERROR : wait() function error! \n", 2);
 		exit(BAD_EXIT);
 	}
-	if (WIFSIGNALED(wait_return) || !WIFEXITED(wait_return))
+	else if (WIFEXITED(wait_return))
 	{
-		wait_error = WTERMSIG(statloc);
-		ft_putstr_fd("ERROR : child process error!", 2);
-		write(2, "\n", 1);
-		exit(BAD_EXIT);
+		ft_putstr_fd("GOOD! : wait function. \n", 1);
 	}
+	
 	return (wait_return); 
 }
 
@@ -119,4 +105,19 @@ int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
 		exit(BAD_EXIT);
 	}
 	return (execve_return);
+}
+
+
+int waiting_child(int argc, int last_pid_status)
+{
+	int status;
+	int ret;
+
+	while (argc - 1)
+	{
+		argc--;
+		if (wait(&status) == last_pid_status)
+			ret = status;
+	}
+	return (ret);
 }

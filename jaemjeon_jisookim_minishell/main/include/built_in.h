@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:53:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:44:24 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:15:33 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,24 +48,24 @@
 
 
 //cd
-int	ft_cd(int exec_type);
+int	ft_cd(t_exec *exec);
 
 //echo
-int	ft_echo(t_exec *exec, int exec_type);
+int	ft_echo(t_exec *exec);
 
 //env
-int	ft_env(int exec_type);
+int	ft_env(t_exec *exec);
 
 //exit
-int	ft_exit(int exec_type);
+int	ft_exit(t_exec *exec);
 
 //export
-int	ft_export(int exec_type);
+int	ft_export(t_exec *exec);
 
 //pwd
-int	ft_pwd(int exec_type);
+int	ft_pwd(t_exec *exec);
 
 //unset
-int	ft_unset(int exec_type);
+int	ft_unset(t_exec *exec);
 
 #endif

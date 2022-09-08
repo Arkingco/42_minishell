@@ -3,15 +3,12 @@ NAME = minishell
 CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
-INCLUDE_READLINE = -I readline/include
-INCLUDE = -I include -I $(DIR_LIBFT)
-LIB_READLINE = -L readline
-INCLUDE_READLINE = -I readline
-INCLUDE = -I include -I$(DIR_LIBFT)
-LIB_READLINE = -L readline
 LIB_LIBFT = -L$(DIR_LIBFT)
-RM = rm -f
 DIR_READLINE = readline
+LIB_READLINE = -L$(DIR_READLINE) 
+INCLUDE_READLINE = -I$(DIR_READLINE)
+INCLUDE = -I include -I$(DIR_LIBFT)
+RM = rm -f
 
 READLINE = $(DIR_READLINE)/libreadline.a \
 		   $(DIR_READLINE)/libhistory.a
@@ -53,7 +50,7 @@ SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_dup2.c exec_fork.c exec_main.c exec_multi_cmd.c \
 					exec_pipe.c exec_single_cmd.c exec_tools_file.c \
-					exec_tools.c
+					exec_tools.c exec_check_built_in.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 SRC_EXE_INIT	:=	exec_init_double_env.c exec_init_final_path.c \
