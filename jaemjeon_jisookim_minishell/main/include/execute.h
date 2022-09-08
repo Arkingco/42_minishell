@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 09:53:05 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 11:18:30 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,18 +143,19 @@ int		single_pipe_dup2(t_exec *exec);
 int		multi_pipe_dup2(t_exec *exec);
 
 //main
-void	exec_executing(t_exec *exec, int process_number, int stat, pid_t pid);
+void	exec_executing(t_exec *exec, int process_number, int stat);
 int		exec_single_cmd(t_exec *exec);
 int		exec_multi_cmd(t_exec *exec);
 int		execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
 
-pid_t	exec_multi_first(t_exec *exec, pid_t *pid);
+pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid);
 pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid);
-pid_t	exec_multi_last(t_exec *exec, pid_t *pid);
+pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid);
 
-int		multi_process_exceve(t_exec *exec, int i, pid_t *pid);
+void	init_pipe_before_exec(t_exec *exec);
+int		multi_process_exceve(t_exec *exec);
 int		exec_multi_child_process(t_exec *exec);
 
 //pipe
@@ -172,7 +173,7 @@ int		*ft_pipe(int *pipe_fd);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_fork(void);
 int		ft_exceve(const char *filename, char *const argv[], char *const envp[]);
-pid_t	ft_wait(int *statloc);
+pid_t	ft_wait(int *statloc, int i);
 
 
 #endif

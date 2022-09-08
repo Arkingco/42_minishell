@@ -6,13 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 10:07:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:35:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exec_executing(t_exec *exec, int process_number, int stat, pid_t pid)
+void	exec_executing(t_exec *exec, int process_number, int stat)
 {
 	init_exec_struct(exec, process_number);
 
@@ -46,11 +46,9 @@ void	exec_executing(t_exec *exec, int process_number, int stat, pid_t pid)
 // don't need pipe
 int	exec_single_cmd(t_exec *exec)
 {
-	int		process_number;
 	int		stat;
 	pid_t	pid;
 	
-	process_number = 0;
 	if (check_built_in(exec))
 		exec_go_built_in(exec);
 	else
@@ -58,9 +56,9 @@ int	exec_single_cmd(t_exec *exec)
 		pid = ft_fork();
 		if (pid == 0)
 		{
-			exec_executing(exec, process_number, stat, pid);
+			exec_executing(exec, 0, stat);
 		}
-		ft_wait(&stat); // todo : return exit stat
+		ft_wait(&stat, 0); // todo : return exit stat
 	}
 	return (0);
 }
@@ -69,28 +67,14 @@ int	exec_single_cmd(t_exec *exec)
 
 int	exec_multi_cmd(t_exec *exec)
 {
-	int		process_number;
-	int		is_built_in;
-	int		stat;
-	int		i;
-	pid_t	pid;
-	
-	process_number = 0;
-	if (check_built_in(exec))
-		exec_go_built_in(exec);
-	else
-	{
-		exec_multi_child_process(exec);
-		while (i < process_number)
-		{
-			ft_wait(&stat); // todo : return exit stat
-			i++;
-		}
-	}
+	pid_t	ret_pid;
 
-	return (0);
+	ret_pid = multi_process_exceve(exec);
+	if (ret_pid == -1)
+		ft_putstr_fd("ERROR! : error during getting ret_pid.\n", 2);
+
+	return (ret_pid); // returning pid, pid fail(-1)
 }
-
 
 
 
@@ -109,24 +93,20 @@ int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 	else 
 		exec_multi_cmd(exec);
 
-	// printf("\n\n---------------\n");
-	// printf("exec->process count : %d\n", exec->process_cnt);
-	// printf("exec->final_path : %d\n", exec->process_cnt);
-	// int i = 0;
-	// while (exec->env_lst[i])
-	// {
-	// 	printf("[%d] : %s\n", i, exec->env_lst[i]);
-	// 	i++;
-	// }
-
-	
-	// if (cmd && !cmd->next)
-	// {	
-	// 	wait_ret = exec_single_cmd(exec, env);
-	// }
-	// else
-	// {
-	// 	wait_ret = exec_multi_cmd(exec, env, &wait_ret);
-	// }
 	return (0);
 }
+
+
+
+	
+	// printf("\n\n========= DEBUG PIPE ============\n");
+	// printf("pipe[0] : %d\n", exec->pipe_fd[0]);
+	// printf("pipe[0] : %d\n", exec->pipe_fd[1]);
+	// printf("pipe[0] : %d\n", exec->pipe_fd[2]);
+	// printf("\n========= DEBUG PIPE ============\n\n");
+
+	// ft_close(exec->pipe_fd[0]);
+	// ft_close(exec->pipe_fd[1]);
+	// ft_close(exec->pipe_fd[2]);
+
+

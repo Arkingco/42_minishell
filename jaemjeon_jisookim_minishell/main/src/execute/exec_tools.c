@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 15:26:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:31:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,15 +55,17 @@ int	ft_dup2(int fd1, int fd2)
 
 // if success : process id, WIFEXITED(wait_return) == TRUE
 // if error : -1
-pid_t	ft_wait(int *statloc)
+pid_t	ft_wait(int *statloc, int i)
 {
 	int	wait_return;
 	int	wait_error;
 	
+	dprintf(2, ":: this is parent waiting! :: \n");
 	wait_return = wait(&wait_return);
 	
 	if (wait_return == -1)
 	{
+		dprintf(2, "process number : %d\n", i);
 		ft_putstr_fd("ERROR : wait() function error! \n", 2);
 		exit(BAD_EXIT);
 	}
