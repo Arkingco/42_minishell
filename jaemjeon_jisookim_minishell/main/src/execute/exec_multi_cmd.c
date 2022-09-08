@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 14:46:33 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/08 14:47:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ void	init_pipe_before_exec(t_exec *exec, int i)
 	return ;
 }
 
-
+// todo : need to work on pipe
 int	multi_process_exceve(t_exec *exec)
 {
 	pid_t	ret_pid;
