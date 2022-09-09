@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 15:35:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:39:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ pid_t	ft_fork(void)
 	if (fork_return == -1)
 	{
 		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	return (fork_return);
 }
@@ -35,7 +35,7 @@ int	ft_dup2(int fd1, int fd2)
 	if (dup2_return == -1)
 	{
 		ft_putstr_fd("ERROR : dup2() function error! \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	return (dup2_return); 
 }
@@ -48,18 +48,12 @@ pid_t	ft_wait(int *statloc, int i)
 	int	wait_error;
 	
 	wait_return = wait(&wait_return);
-	
 	if (wait_return == -1)
 	{
 		dprintf(2, "process number : %d\n", i);
 		ft_putstr_fd("ERROR : wait() function error! \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
-	else if (WIFEXITED(wait_return))
-	{
-		ft_putstr_fd("GOOD! : wait function. \n", 1);
-	}
-	
 	return (wait_return); 
 }
 
@@ -73,12 +67,12 @@ int	*ft_pipe(int *pipe_fd)
 	if (pipe_return == -1)
 	{
 		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	if (pipe_return != 0)
 	{
 		ft_putstr_fd("ERROR : pipe error! Please put correct int array. \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	return (0);
 }

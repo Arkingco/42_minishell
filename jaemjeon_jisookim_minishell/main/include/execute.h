@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 15:10:23 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:38:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,25 +25,6 @@
 #include <sys/stat.h> // stat
 
 #include <string.h> //for debug
-
-#define BAD_EXIT	1
-
-#define STDIN_FD	0
-#define STDOUT_FD	1
-
-// divide single & multi cmd
-#define SINGLE_CMD	0
-#define MULTI_CMD	1
-
-// pipe control - pipe type
-#define SINGLE_PIPE		0
-#define ADDITIONAL_PIPE	1
-
-// pipe type
-// PIPE_OUT matches with STDIN_FD
-// PIPE_IN matches with STDOUT_FD
-#define PIPE_OUT	0
-#define PIPE_IN		1
 
 // typedef struct s_cmd
 // {

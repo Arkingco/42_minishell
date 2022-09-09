@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:53:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:15:33 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:38:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@
 // #include <fcntl.h> // open, close
 // #include <sys/wait.h> // wait
 // #include <sys/types.h> // pid_t
-
-#define BAD_EXIT	1
-
-#define STDIN_FD	0
-#define STDOUT_FD	1
 
 // typedef struct s_cmd
 // {

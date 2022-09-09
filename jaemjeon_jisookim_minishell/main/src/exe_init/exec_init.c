@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:58:11 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:37:53 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 	{
 		ft_putstr_fd("ERROR : calloc() function error. ", 2);
 		free(exec);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	exec->cmds = cmd;
 	exec->cmd_head = cmd;
