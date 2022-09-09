@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 08:39:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 08:45:44 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,18 +89,4 @@ void	exec_executing(t_exec *exec, int process_number, int stat)
 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
 		exit(1);
 	}
-}
-
-int waiting_child(int argc, int last_pid_status)
-{
-	int status;
-	int ret;
-
-	while (argc - 1)
-	{
-		argc--;
-		if (wait(&status) == last_pid_status)
-			ret = status;
-	}
-	return (ret);
 }
