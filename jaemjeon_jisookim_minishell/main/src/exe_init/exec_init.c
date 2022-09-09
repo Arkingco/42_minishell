@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 10:07:47 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 12:18:07 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,6 @@ int	count_process(t_exec *exec)
 		process++;
 		if (!exec->cmds->next)
 			break ;
-		if (process == sizeof(int))
-		{
-			ft_putstr_fd("ERROR : process size too big. ", 2);
-			exit(BAD_EXIT);
-		}
 		exec->cmds = exec->cmds->next;
 	}
 	exec->cmds = exec->cmd_head; // put back cmd

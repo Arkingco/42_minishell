@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/jisookim/Desktop/42_minishell/jaemjeon_jisookim_minishell/main/readline'
+ac_pwd='/Users/nimo/Desktop/42_minishell/jaemjeon_jisookim_minishell/main/readline'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 test -n "$AWK" || AWK=awk
@@ -619,7 +619,7 @@ S["ARFLAGS"]="cr"
 S["LOCAL_DEFS"]=""
 S["LOCAL_LDFLAGS"]=""
 S["LOCAL_CFLAGS"]=""
-S["BUILD_DIR"]="/Users/jisookim/Desktop/42_minishell/jaemjeon_jisookim_minishell/main/readline"
+S["BUILD_DIR"]="/Users/nimo/Desktop/42_minishell/jaemjeon_jisookim_minishell/main/readline"
 S["EXAMPLES_INSTALL_TARGET"]="install-examples"
 S["SHARED_INSTALL_TARGET"]="install-shared"
 S["STATIC_INSTALL_TARGET"]="install-static"
@@ -663,14 +663,14 @@ S["CC"]="gcc"
 S["SET_MAKE"]=""
 S["CROSS_COMPILE"]=""
 S["BRACKETED_PASTE"]="-DBRACKETED_PASTE_DEFAULT=1"
-S["host_os"]="darwin19.6.0"
+S["host_os"]="darwin21.6.0"
 S["host_vendor"]="apple"
 S["host_cpu"]="x86_64"
-S["host"]="x86_64-apple-darwin19.6.0"
-S["build_os"]="darwin19.6.0"
+S["host"]="x86_64-apple-darwin21.6.0"
+S["build_os"]="darwin21.6.0"
 S["build_vendor"]="apple"
 S["build_cpu"]="x86_64"
-S["build"]="x86_64-apple-darwin19.6.0"
+S["build"]="x86_64-apple-darwin21.6.0"
 S["target_alias"]=""
 S["host_alias"]=""
 S["build_alias"]=""
