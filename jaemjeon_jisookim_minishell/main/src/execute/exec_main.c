@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 15:07:58 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:35:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	exec_single_cmd(t_exec *exec)
 {
 	int		stat;
 	pid_t	pid;
+	pid_t	ret_pid;
 	
 	if (check_built_in(exec))
 		exec_go_built_in(exec);
@@ -28,9 +29,9 @@ int	exec_single_cmd(t_exec *exec)
 		{
 			exec_executing(exec, 0, stat);
 		}
-		ft_wait(&stat, 0); // todo : return exit stat
+		ret_pid = ft_wait(&stat, 0); // todo : return exit stat
 	}
-	return (0);
+	return (ret_pid);
 }
 
 // todo : make exit stat function
@@ -49,15 +50,17 @@ int	exec_multi_cmd(t_exec *exec)
 int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 {
 	t_exec	*exec;
+	pid_t	ret_pid;
 	
 	exec = main_init_exec(exec, cmd, env, envp);
 	if (exec->process_cnt == 0)
 		return (0);
 	else if (exec->process_cnt == 1)
-		exec_single_cmd(exec);
+		ret_pid = exec_single_cmd(exec);
 	else 
-		exec_multi_cmd(exec);
-	return (0);
+		ret_pid = exec_multi_cmd(exec);
+	//printf("\n\nreturn pid is : %d\n\n", ret_pid);
+	return (ret_pid);
 }
 
 

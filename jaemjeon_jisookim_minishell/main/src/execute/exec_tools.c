@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 15:08:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:35:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,17 +83,6 @@ int	*ft_pipe(int *pipe_fd)
 	return (0);
 }
 
-// int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
-// {
-// 	int	execve_return;
-// 	execve_return = execve(filename, argv, envp);
-// 	if (execve_return == -1)
-// 	{
-// 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
-// 		exit(BAD_EXIT);
-// 	}
-// 	return (execve_return);
-// }
 
 void	exec_executing(t_exec *exec, int process_number, int stat)
 {
