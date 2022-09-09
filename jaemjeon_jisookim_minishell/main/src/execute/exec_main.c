@@ -6,24 +6,12 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:45:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:07:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exec_executing(t_exec *exec, int process_number, int stat)
-{
-	init_exec_struct(exec, process_number);
-	if (exec->final_path == NULL)
-		exec->final_path = exec->cmds->simple_cmd->string_value;
-	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
-	if (stat == -1)
-	{
-		ft_putstr_fd("ERROR : execve() function error. \n", 2);
-		exit(1);
-	}
-}
 
 // don't need pipe
 int	exec_single_cmd(t_exec *exec)

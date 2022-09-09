@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:48:36 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:08:03 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,18 +83,30 @@ int	*ft_pipe(int *pipe_fd)
 	return (0);
 }
 
-int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
+// int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
+// {
+// 	int	execve_return;
+// 	execve_return = execve(filename, argv, envp);
+// 	if (execve_return == -1)
+// 	{
+// 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
+// 		exit(BAD_EXIT);
+// 	}
+// 	return (execve_return);
+// }
+
+void	exec_executing(t_exec *exec, int process_number, int stat)
 {
-	int	execve_return;
-	execve_return = execve(filename, argv, envp);
-	if (execve_return == -1)
+	init_exec_struct(exec, process_number);
+	if (exec->final_path == NULL)
+		exec->final_path = exec->cmds->simple_cmd->string_value;
+	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
+	if (stat == -1)
 	{
 		ft_putstr_fd("ERROR : execve() function error. \n", 2);
-		exit(BAD_EXIT);
+		exit(1);
 	}
-	return (execve_return);
 }
-
 
 int waiting_child(int argc, int last_pid_status)
 {

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:58:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 15:10:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,21 +75,21 @@ typedef struct s_exec
 	int			*token_cnt;				// fin, no malloc
 	int			process_cnt;	 		// fin, len of cmd_cnt array
 
-	// for exec
+	// for exec - env
 	t_envlst	*env;				//fin
 	char		**env_lst;
 	void		*env_head;
 	int			count_key;
 	
+	// for exec - path
 	char		**path_lst;			// malloced, fin
 	char		*final_path;
 
+	// for exec - cmd
 	char		**final_cmd_str;	//fin
 
-	//pipe
+	// for exec - pipe
 	int			pipe_fd[3];
-	//int		pre_read_fd;
-	//pid_t		*pid_lst;
 	
 }	t_exec;
 
@@ -128,7 +128,6 @@ int		check_built_in(t_exec *exec);
 void	exec_go_built_in(t_exec *exec);
 
 //main
-void	exec_executing(t_exec *exec, int process_number, int stat);
 int		exec_single_cmd(t_exec *exec);
 int		exec_multi_cmd(t_exec *exec);
 int		execute(t_cmd *cmd, t_envlst *env, char **envp);
@@ -150,6 +149,6 @@ pid_t	ft_fork(void);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_wait(int *statloc, int i);
 int		*ft_pipe(int *pipe_fd);
-int		ft_exceve(const char *filename, char *const argv[], char *const envp[]);
+void	exec_executing(t_exec *exec, int process_number, int stat);
 
 #endif
