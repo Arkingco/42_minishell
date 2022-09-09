@@ -30,8 +30,8 @@ Kernel configured for up to 4 processors.
 Processor type: x86_64h (Intel x86-64h Haswell)
 Processors active: 0 1 2 3
 Primary memory available: 8.00 gigabytes
-Default processor set: 570 tasks, 1873 threads, 4 processors
-Load average: 4.05, Mach factor: 1.69
+Default processor set: 579 tasks, 1911 threads, 4 processors
+Load average: 5.42, Mach factor: 0.70
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -2166,7 +2166,7 @@ configure:6129: checking for tgetent
 configure:6129: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_tgetent", referenced from:
-      _main in conftest-165d3b.o
+      _main in conftest-7d4f34.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6129: $? = 1
@@ -2552,7 +2552,7 @@ configure:6458: checking for mbscasecmp
 configure:6458: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscasecmp", referenced from:
-      _main in conftest-0569fc.o
+      _main in conftest-9b6e09.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6458: $? = 1
@@ -2683,7 +2683,7 @@ configure:6464: checking for mbscmp
 configure:6464: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscmp", referenced from:
-      _main in conftest-a33bbf.o
+      _main in conftest-c89bc2.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6464: $? = 1
@@ -2822,7 +2822,7 @@ configure:6483: checking for mbschr
 configure:6483: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbschr", referenced from:
-      _main in conftest-c6cfc6.o
+      _main in conftest-8419f0.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6483: $? = 1

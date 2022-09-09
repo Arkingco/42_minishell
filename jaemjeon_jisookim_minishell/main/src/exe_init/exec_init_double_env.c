@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:58:33 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:13:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/09 14:50:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,6 @@ void	make_env_double_ptr(t_exec *exec)
 	
 	while (i < exec->count_key)
 	{
-		// printf("key : %s\n", exec->env->key);
-		// printf("value : %s\n", exec->env->value);
-
 		temp = ft_strjoin(exec->env->key, "=");
 		if (!(temp))
 			exit(1);
@@ -57,13 +54,5 @@ void	make_env_double_ptr(t_exec *exec)
 		i++;
 	}
 	exec->env = exec->env_head;
-	// i = 0; // debug
-	// printf("\n\n=========== ENV_DEBUG ===============\n");
-	// while (i < exec->count_key)
-	// {
-	// 	printf("[%d] %s\n", i, exec->env_lst[i]);
-	// 	i++;
-	// }
-	// printf("\n=========== ENV_DEBUG ===============\n\n");
 	return ;
 }

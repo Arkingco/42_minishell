@@ -48,12 +48,12 @@ SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
-SRC_EXECUTE		:=	exec_dup2.c exec_fork.c exec_main.c exec_multi_cmd.c \
-					exec_pipe.c exec_single_cmd.c exec_tools_file.c \
+SRC_EXECUTE		:=	exec_main.c exec_multi_cmd.c \
+					exec_tools_file.c \
 					exec_tools.c exec_check_built_in.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
-SRC_EXE_INIT	:=	exec_init_double_env.c exec_init_final_path.c \
+SRC_EXE_INIT	:=	exec_init_double_env.c exec_init_struct.c\
 					exec_init_get_cmd.c exec_init.c
 SRC_EXE_INIT	:=	$(addprefix $(DIR_EXE_INIT)/, $(SRC_EXE_INIT))
 
