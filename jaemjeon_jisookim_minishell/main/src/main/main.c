@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 16:50:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:12:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	main_loop(t_envlst *env, char **envp)
 	while (1)
 	{
 		line = readline("MINISHELL : ");
-		printf("이걸 입입력력했했어요!! %s\n", line);
 		if (line != NULL)
 		{
 			// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.

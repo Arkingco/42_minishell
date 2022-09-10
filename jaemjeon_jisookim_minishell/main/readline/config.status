@@ -437,7 +437,7 @@ Copyright (C) 2012 Free Software Foundation, Inc.
 This config.status script is free software; the Free Software Foundation
 gives unlimited permission to copy, distribute and modify it."
 
-ac_pwd='/Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/main/readline'
+ac_pwd='/Users/jaemjeon/projects/minishell_prev/jaemjeon_jisookim_minishell/main/readline'
 srcdir='.'
 INSTALL='/usr/bin/install -c'
 test -n "$AWK" || AWK=awk
@@ -619,7 +619,7 @@ S["ARFLAGS"]="cr"
 S["LOCAL_DEFS"]=""
 S["LOCAL_LDFLAGS"]=""
 S["LOCAL_CFLAGS"]=""
-S["BUILD_DIR"]="/Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/main/readline"
+S["BUILD_DIR"]="/Users/jaemjeon/projects/minishell_prev/jaemjeon_jisookim_minishell/main/readline"
 S["EXAMPLES_INSTALL_TARGET"]="install-examples"
 S["SHARED_INSTALL_TARGET"]="install-shared"
 S["STATIC_INSTALL_TARGET"]="install-static"

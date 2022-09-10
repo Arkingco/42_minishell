@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 16:53:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:14:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	exec_single_cmd(t_exec *exec)
 			exec_handle_redirection(exec, 0);
 			exec_executing(exec, 0, stat);
 		}
-		ret_pid = ft_wait(&stat, 0); // todo : return exit stat
+		ret_pid = ft_wait(exec, &pid); // todo : return exit stat
 	}
 	return (ret_pid);
 }

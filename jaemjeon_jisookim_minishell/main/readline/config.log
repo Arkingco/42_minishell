@@ -30,13 +30,8 @@ Kernel configured for up to 6 processors.
 Processor type: x86_64h (Intel x86-64h Haswell)
 Processors active: 0 1 2 3 4 5
 Primary memory available: 32.00 gigabytes
-<<<<<<< HEAD
-Default processor set: 387 tasks, 1786 threads, 6 processors
-Load average: 2.84, Mach factor: 3.15
-=======
-Default processor set: 377 tasks, 1453 threads, 6 processors
-Load average: 2.15, Mach factor: 3.84
->>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
+Default processor set: 348 tasks, 1645 threads, 6 processors
+Load average: 2.51, Mach factor: 3.47
 /bin/machine           = unknown
 /usr/bin/oslevel       = unknown
 /bin/universe          = unknown
@@ -2177,11 +2172,7 @@ configure:6129: checking for tgetent
 configure:6129: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_tgetent", referenced from:
-<<<<<<< HEAD
-      _main in conftest-b36cc0.o
-=======
-      _main in conftest-cb0d96.o
->>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
+      _main in conftest-4b8a57.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6129: $? = 1
@@ -2567,11 +2558,7 @@ configure:6458: checking for mbscasecmp
 configure:6458: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscasecmp", referenced from:
-<<<<<<< HEAD
-      _main in conftest-2b4d57.o
-=======
-      _main in conftest-bc1fe0.o
->>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
+      _main in conftest-27a607.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6458: $? = 1
@@ -2702,11 +2689,7 @@ configure:6464: checking for mbscmp
 configure:6464: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbscmp", referenced from:
-<<<<<<< HEAD
-      _main in conftest-a33361.o
-=======
-      _main in conftest-b755ca.o
->>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
+      _main in conftest-700b5d.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6464: $? = 1
@@ -2845,11 +2828,7 @@ configure:6483: checking for mbschr
 configure:6483: gcc -o conftest -g -O2   conftest.c  >&5
 Undefined symbols for architecture x86_64:
   "_mbschr", referenced from:
-<<<<<<< HEAD
-      _main in conftest-aedc69.o
-=======
-      _main in conftest-7a5c72.o
->>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
+      _main in conftest-9ca42e.o
 ld: symbol(s) not found for architecture x86_64
 clang: error: linker command failed with exit code 1 (use -v to see invocation)
 configure:6483: $? = 1
@@ -3362,7 +3341,7 @@ bash_cv_wcwidth_broken=no
 AR='ar'
 ARFLAGS='cr'
 BRACKETED_PASTE='-DBRACKETED_PASTE_DEFAULT=1'
-BUILD_DIR='/Users/jaemjeon/projects/minishell/jaemjeon_jisookim_minishell/main/readline'
+BUILD_DIR='/Users/jaemjeon/projects/minishell_prev/jaemjeon_jisookim_minishell/main/readline'
 CC='gcc'
 CFLAGS='-g -O2 -Wno-parentheses -Wno-format-security'
 CPP='gcc -E'
