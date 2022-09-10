@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 21:56:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:48:51 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,8 @@ void	check_redirection(t_exec *exec);
 void	exec_handle_redirection(t_exec *exec, int process_number);
 
 //exec_redi_parse
-void	exec_redi_heredoc(t_exec *exec);
+void	do_heredoc(t_exec *exec, char *limiter, int fd);
+void	exec_redi_heredoc(t_exec *exec, char *limiter, int *fd);
 void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
 char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *more_redi_flag);
 char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i, int *type);

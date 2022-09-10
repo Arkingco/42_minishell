@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 22:31:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:55:47 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@ void	handle_redirect_input(t_exec *exec, int process_number)
 	type = 0;
 	redi = exec->cmds->redirect_input;
 	infile = get_redi_execute_file(exec, redi, process_number, &type);
-	if (type & READ)
-		infile_fd = ft_open(infile, O_RDONLY);
-	else if (type & HEREDOC)
-		exec_redi_heredoc(exec);
+	infile_fd = ft_open(infile, O_RDONLY);
+	//dprintf(2, "dilimeter(infile) : %s\n", infile);
+	if (type & HEREDOC)
+		exec_redi_heredoc(exec, infile, &infile_fd);
 	ft_dup2(infile_fd, 0);
 	ft_close(infile_fd);
 	

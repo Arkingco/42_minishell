@@ -6,14 +6,50 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 09:26:17 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 22:30:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 23:54:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exec_redi_heredoc(t_exec *exec)
+void	exec_redi_heredoc(t_exec *exec, char *limiter, int *fd)
 {
+	*fd = open("here_docs", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (*fd == -1)
+		exit (1);
+	do_heredoc(exec, limiter, *fd);
+	ft_close(*fd);
+	ft_open("here_docs", O_RDONLY);
+	
+	return (1);
+}
+
+void	do_heredoc(t_exec *exec, char *limiter, int fd)
+{
+	char	*line;
+
+	line = 0;
+	while (1)
+	{
+		ft_putstr_fd("> ", 1);
+		line = get_next_line(0);
+		if (line)
+		{
+			line[ft_strlen(line) - 1] = '\0';
+			if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
+			{
+				free(line);
+				line = 0;
+				break ;
+			}
+			write(fd, line, ft_strlen(line));
+			write(fd, "\n", 1);
+			free(line);
+			line = 0;
+		}
+		else
+			break ;
+	}
 	return ;
 }
 
