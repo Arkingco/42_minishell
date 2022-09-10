@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 21:14:18 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/11 05:04:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,81 @@ void	process_built_in(t_cmd *cmd, int cmd_type, t_envlst *env)
 	built_in_func_board[cmd_type];
 }
 
+int	is_already_exec_path(char *cmd_string)
+{
+	if (ft_strlen(cmd_string) < 2)
+		return (FALSE);
+	if (ft_strncmp("./", cmd_string, 2) == 0 || \
+		ft_strncmp("~/", cmd_string, 2) == 0)
+		return (TRUE);
+}
+
+void	expand_homepath(char **cmd_string, t_envlst *env)
+{
+	char	*new_cmd_string;
+	char	*homepath;
+
+	homepath = ft_getenv(env, "HOME");
+	if (homepath == NULL)
+		return ;
+	if (**cmd_string == '~')
+	{
+		new_cmd_string = ft_strjoin(homepath, *cmd_string + 1);
+		free(*cmd_string);
+		*cmd_string = new_cmd_string;
+	}
+}
+
+int	expand_homepath_and_check_is_there(t_cmd *cmd, t_envlst *env)
+{
+	struct stat	file_stat;
+
+	expand_homepath(&cmd->simple_cmd->string_value, env);
+	if (stat(cmd->simple_cmd->string_value, &file_stat) == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 int	set_absolute_path(t_cmd *cmd, t_envlst *env)
 {
-	char		**path_board;
+	const char	**path_board = get_path_board(env);
+	int		index;
+	char	*exec_path;
+	struct stat	file_stat;
+
+	if (path_board == NULL)
+		return (FALSE);
+	index = 0;
+	while (path_board[index] != NULL)
+	{
+		exec_path = ft_strjoin_triple(path_board[index], "/",
+									  cmd->simple_cmd->string_value);
+		if (stat(exec_path, &file_stat) == 0)
+		{
+			free(cmd->simple_cmd->string_value);
+			cmd->simple_cmd->string_value = exec_path;
+			return (TRUE);
+		}
+		free(exec_path);
+		index++;
+	}
+	return (FALSE);
+}
+
+int	set_exec_path(t_cmd *cmd, t_envlst *env)
+{
 	char		*execv_path;
 	char		*cmd_string;
-	struct stat	file_stat;
-	int			index;
 
 	cmd_string = cmd->simple_cmd->string_value;
-	if (stat(cmd_string, &file_stat) == 0)
-		return (TRUE);
-	path_board = get_path_board(env);
-	if (path_board != NULL)
+	if (is_already_exec_path(cmd_string) == TRUE)
 	{
-		index = 0;
-		while (path_board[index] != NULL)
-		{
-			execv_path = ft_strjoin_triple(path_board[index], "/", cmd_string);
-			index++;
-		}
+		expand_homepath(&cmd_string, env);
+		return (is_valid_cmd_path(cmd_string));
+	}
+	else
+	{
+		return (set_absolute_path(&cmd_string, env));
 	}
 }
 
@@ -56,11 +111,14 @@ void	process_not_built_in(t_cmd *cmd, t_envlst *env)
 {
 	pid_t	pid;
 
-	set_absolute_path(cmd, env);
+	if (set_exec_path(cmd, env) == FALSE)
+	{
+
+	}
 	pid = fork();
 	if (pid == 0)
 	{
-		
+
 	}
 }
 
