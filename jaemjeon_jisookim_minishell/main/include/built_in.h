@@ -3,69 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:53:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:15:33 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/10 16:04:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#ifndef BUILT_IN
+# define BUILT_IN
 
-# include "token.h"
-# include "env.h"
-# include "cmd.h"
-# include "execute.h"
+# define BUILT_IN_COUNT 7
+# define NOT_BUILT_IN BUILT_IN_COUNT
 
-// #include <stdio.h>
-// #include <unistd.h>
-// #include <fcntl.h> // open, close
-// #include <sys/wait.h> // wait
-// #include <sys/types.h> // pid_t
+enum e_type_built_in
+{
+	T_ECHO = 0,
+	T_CD,
+	T_PWD,
+	T_EXPORT,
+	T_UNSET,
+	T_ENV,
+	T_EXIT
+};
 
-#define BAD_EXIT	1
+// built_ins
+void	ft_echo(t_cmd *cmd, t_envlst *env);
+void	ft_cd(t_cmd *cmd, t_envlst *env);
+void	ft_pwd(t_cmd *cmd, t_envlst *env);
+void	ft_export(t_cmd *cmd, t_envlst *env);
+void	ft_unset(t_cmd *cmd, t_envlst *env);
+void	ft_env(t_cmd *cmd, t_envlst *env);
+void	ft_exit(t_cmd *cmd, t_envlst *env);
 
-#define STDIN_FD	0
-#define STDOUT_FD	1
-
-// typedef struct s_cmd
-// {
-// 	t_token			*simple_cmd;
-// 	t_token			*redirect_input;
-// 	t_token			*redirect_output;
-// 	struct s_cmd	*next;
-// }	t_cmd;
-
-// typedef struct s_token
-// {
-// 	unsigned int	type;
-// 	char			*string_value;
-// 	struct s_token	*next;
-// 	struct s_token	*prev;
-// }	t_token;
-
-
-
-//cd
-int	ft_cd(t_exec *exec);
-
-//echo
-int	ft_echo(t_exec *exec);
-
-//env
-int	ft_env(t_exec *exec);
-
-//exit
-int	ft_exit(t_exec *exec);
-
-//export
-int	ft_export(t_exec *exec);
-
-//pwd
-int	ft_pwd(t_exec *exec);
-
-//unset
-int	ft_unset(t_exec *exec);
 
 #endif

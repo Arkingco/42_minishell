@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:21:25 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 15:53:21 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,8 @@ void	execute(t_cmd *cmd, t_envlst *env);
 
 
 // execute_utils_1.c
+int	get_cmd_type(t_cmd *cmd)
+char	**get_path_board(t_envlst *env)
+char	*get_excv_path(char *cmd_string, t_envlst *env)
 
 #endif

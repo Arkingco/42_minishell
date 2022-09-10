@@ -3,14 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:21:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 16:04:24 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/execute.h"
+#include "../../include/built_in.h"
+
+int	get_cmd_type(t_cmd *cmd)
+{
+	char	*cmd_string;
+	int		index;
+	static const char * built_in_board[] = {
+		[T_ECHO] = "echo",
+		[T_CD] = "cd",
+		[T_PWD] = "pwd",
+		[T_EXPORT] = "export",
+		[T_UNSET] = "unset",
+		[T_ENV] = "env",
+		[T_EXIT] = "exit"
+	};
+
+	cmd_string = cmd->simple_cmd->string_value;
+	index = 0;
+	while (index < BUILT_IN_COUNT)
+	{
+		if (ft_strncmp(cmd_string, built_in_board[index], -1) == 0)
+			return (index);
+		index++;
+	}
+	return (index);
+}
 
 char	**get_path_board(t_envlst *env)
 {
@@ -29,5 +55,6 @@ char	*get_excv_path(char *cmd_string, t_envlst *env)
 {
 	char **path;
 
-	path =
+	path = get_path_board(env);
+
 }
