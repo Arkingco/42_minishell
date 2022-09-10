@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 20:05:57 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:56:30 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ typedef struct s_exec
 	int			pipe_fd[3];
 
 	// for redirection
-	int		redirect[2];
+	int			redirect[2];
 	
 }	t_exec;
 
@@ -134,12 +134,13 @@ void	check_redirection(t_exec *exec);
 void	exec_handle_redirection(t_exec *exec, int process_number);
 
 //exec_redi_parse
+void	exec_redi_heredoc(t_exec *exec);
 void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
 char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *more_redi_flag);
-char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i);
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i, int *type);
 
 //exec_tools_file
-int		ft_open(const char *filename, int flags, int num);
+int		ft_open(const char *filename, int flags);
 int		ft_close(int fd);
 
 //exec_tools

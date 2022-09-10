@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 17:22:15 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:34:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ pid_t	ft_wait(t_exec *exec, pid_t *child_pids)
 	while (i < exec->process_cnt)
 	{
 		waitpid(child_pids[i], &exit_status, 0);
-		printf("exit_status : %d\n", exit_status);
+		// printf("exit_status : %d\n", exit_status);
 		i++;
 	}
 	return (exit_status);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_multi_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 20:04:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 22:33:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid)
 		
 		exec_executing(exec, i, stat);
 	}
-	dprintf(2, "first:) || exec->pipe_fd : [%d][%d][%d]\n", \
-					exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+	// dprintf(2, "first:) || exec->pipe_fd : [%d][%d][%d]\n", \
+	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 
 	return (*pid);
 }
@@ -51,8 +51,8 @@ pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid)
 		exec_executing(exec, i, stat);
 	}
 	
-	dprintf(2, "middle:) || exec->pipe_fd : [%d][%d][%d]\n", \
-					exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+	// dprintf(2, "middle:) || exec->pipe_fd : [%d][%d][%d]\n", \
+	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 
 	return (*pid);
 }
@@ -76,8 +76,8 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid)
 	if (exec->pipe_fd[2]) //process_cnt == 2 일때랑 아닐때랑 구분
 		ft_close(exec->pipe_fd[2]);
 	
-	dprintf(2, "last:) || exec->pipe_fd : [%d][%d][%d]\n", \
-					exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+	// dprintf(2, "last:) || exec->pipe_fd : [%d][%d][%d]\n", \
+	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 
 	return (*pid); 
 }
