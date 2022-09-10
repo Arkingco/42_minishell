@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redi_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 09:26:17 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 23:54:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/11 00:00:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ void	exec_redi_heredoc(t_exec *exec, char *limiter, int *fd)
 	do_heredoc(exec, limiter, *fd);
 	ft_close(*fd);
 	ft_open("here_docs", O_RDONLY);
-	
-	return (1);
 }
 
 void	do_heredoc(t_exec *exec, char *limiter, int fd)
