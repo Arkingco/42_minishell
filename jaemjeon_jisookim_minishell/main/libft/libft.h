@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:46:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:15:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:03:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t size);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strjoin_triple(char *s1, char *s2, char *s3);
 char	**ft_split(const char *s, char c);
 
 void	ft_bzero(void *s, size_t n);

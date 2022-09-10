@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 18:00:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 21:14:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,48 @@ void	process_built_in(t_cmd *cmd, int cmd_type, t_envlst *env)
 	built_in_func_board[cmd_type];
 }
 
+int	set_absolute_path(t_cmd *cmd, t_envlst *env)
+{
+	char		**path_board;
+	char		*execv_path;
+	char		*cmd_string;
+	struct stat	file_stat;
+	int			index;
+
+	cmd_string = cmd->simple_cmd->string_value;
+	if (stat(cmd_string, &file_stat) == 0)
+		return (TRUE);
+	path_board = get_path_board(env);
+	if (path_board != NULL)
+	{
+		index = 0;
+		while (path_board[index] != NULL)
+		{
+			execv_path = ft_strjoin_triple(path_board[index], "/", cmd_string);
+			index++;
+		}
+	}
+}
+
+void	process_not_built_in(t_cmd *cmd, t_envlst *env)
+{
+	pid_t	pid;
+
+	set_absolute_path(cmd, env);
+	pid = fork();
+	if (pid == 0)
+	{
+		
+	}
+}
+
 void	process_single_cmd(t_cmd *cmd, t_envlst *env)
 {
 	int	cmd_type;
 
 	cmd_type = get_cmd_type(cmd);
 	if (cmd_type == NOT_BUILT_IN)
-		run_in_single_child(cmd, env);
+		process_not_built_in(cmd, env);
 	else
 		process_built_in(cmd, cmd_type, env);
 }

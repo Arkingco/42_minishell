@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 15:53:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:32:05 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include "../libft/libft.h"
 # include "utils.h"
 # include <fcntl.h>
+# include <unistd.h>
 # include <sys/dir.h>
 # include <sys/stat.h>
 
