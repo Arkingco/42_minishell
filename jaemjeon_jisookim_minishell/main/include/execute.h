@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 08:38:21 by jisookim         ###   ########.fr       */
+<<<<<<< HEAD
+/*   Updated: 2022/09/10 17:23:46 by jaemjeon         ###   ########.fr       */
+=======
+/*   Updated: 2022/09/10 16:16:49 by jisookim         ###   ########.fr       */
+>>>>>>> 120fb0b0ddeb1c2e1f9ee057da8c57642357d51f
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +47,7 @@
 // }	t_token;
 
 
+
 // todo: single, multi 나눈거
 // 실행하면서 환경변수를 바꿔야 하는데
 // 실행할때 envlist 넘겨주는 쪽이?
@@ -71,6 +76,9 @@ typedef struct s_exec
 
 	// for exec - pipe
 	int			pipe_fd[3];
+
+	// for redirection
+	int		redirect[2];
 	
 }	t_exec;
 
@@ -95,6 +103,7 @@ char	*set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec, int j);
 
 //init
+void	tools_move_cmd(t_exec *exec, int i);
 int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
 t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
@@ -121,14 +130,26 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid);
 void	init_pipe_before_exec(t_exec *exec, int i);
 int		multi_process_exceve(t_exec *exec);
 
+//exec_redirection
+void	handle_redirect_input(t_exec *exec, int process_number);
+void	handle_redirect_output(t_exec *exec, int process_number);
+void	handle_redirection(t_exec *exec, int process_number);
+void	check_redirection(t_exec *exec);
+void	exec_handle_redirection(t_exec *exec, int process_number);
+
+//exec_redi_parse
+void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
+char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *more_redi_flag);
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i);
+
 //exec_tools_file
-int		ft_open(const char *filename, int flags);
+int		ft_open(const char *filename, int flags, int num);
 int		ft_close(int fd);
 
 //exec_tools
 pid_t	ft_fork(void);
 int		ft_dup2(int fd1, int fd2);
-pid_t	ft_wait(int *statloc, int i);
+pid_t	ft_wait(t_exec *exec, pid_t *child_pids);
 int		*ft_pipe(int *pipe_fd);
 void	exec_executing(t_exec *exec, int process_number, int stat);
 

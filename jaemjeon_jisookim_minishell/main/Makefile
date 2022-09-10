@@ -49,8 +49,8 @@ SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_main.c exec_multi_cmd.c \
-					exec_tools_file.c \
-					exec_tools.c exec_check_built_in.c
+					exec_tools_file.c exec_redirection.c\
+					exec_redi_parse.c exec_tools.c exec_check_built_in.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 SRC_EXE_INIT	:=	exec_init_double_env.c exec_init_struct.c\

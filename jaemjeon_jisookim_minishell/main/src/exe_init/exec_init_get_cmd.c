@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:55:52 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:57:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:35:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,16 @@ void	get_token_count(t_exec *exec)
 	return ;
 }
 
+
 int	get_simple_cmd_count(t_exec *exec, int i)
 {
-	int		j;
 	int		cmd_count;
 	void	*backup_exec_cmd;
 	void	*backup_simple_cmd_head;
 	
-	j = 0;
 	cmd_count = 0;
 	backup_exec_cmd = exec->cmds;
-	while (j < i) //cmd이동
-	{
-		exec->cmds = exec->cmds->next;
-		j++;
-	}
+	tools_move_cmd(exec, i);
 	backup_simple_cmd_head = exec->cmds->simple_cmd;
 	while (exec->cmds->simple_cmd)  //simple cmd이동
 	{

@@ -6,11 +6,24 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 08:37:53 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/10 10:35:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	tools_move_cmd(t_exec *exec, int i)
+{
+	int	j;
+
+	j = 0;
+	while (j < i) //i 만큼 cmd이동
+	{
+		exec->cmds = exec->cmds->next;
+		j++;
+	}
+	return ;
+}
 
 // pipe_cnt = process_cnt -1
 int	count_process(t_exec *exec)
