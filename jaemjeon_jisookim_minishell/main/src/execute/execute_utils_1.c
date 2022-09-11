@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 16:04:24 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:56:17 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,24 @@ char	**get_path_board(t_envlst *env)
 	path_board = ft_split(path_line, ':');
 	if (path_board == NULL)
 		ft_error_exit(1, "malloc error in ft_split");
+	return (path_board);
 }
 
-char	*get_excv_path(char *cmd_string, t_envlst *env)
+char	**get_exec_argv(t_cmd *cmd)
 {
-	char **path;
+	t_token *cmd_lst;
+	char	**exec_argv;
+	int		index;
 
-	path = get_path_board(env);
-
+	index = 0;
+	cmd_lst = cmd->simple_cmd;
+	exec_argv = \
+			(char **)ft_calloc(ft_token_lstsize(cmd_lst) + 1, sizeof(char *));
+	while (cmd_lst != NULL)
+	{
+		exec_argv[index] = cmd_lst->string_value;
+		index++;
+		cmd_lst = cmd_lst->next;
+	}
+	return (exec_argv);
 }

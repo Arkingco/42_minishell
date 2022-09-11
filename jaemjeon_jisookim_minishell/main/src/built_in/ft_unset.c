@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:17:26 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:46:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_unset(t_exec *exec)
+void	ft_unset(t_cmd *cmd, t_envlst *env)
 {
-	return (0);
 }

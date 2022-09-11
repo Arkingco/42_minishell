@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_str_chrset_cnt.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 15:08:28 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 15:15:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/11 12:41:26 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_str_chrset_cnt(char *string, char *chrset)
 	count = 0;
 	while (*string != '\0')
 	{
-		if (in_chrset(chrset, *string))
+		if (in_chrset(*string, chrset))
 			count++;
 		string++;
 	}

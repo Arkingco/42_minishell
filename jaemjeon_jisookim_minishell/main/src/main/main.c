@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/08 14:44:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/11 19:24:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	main_loop(t_envlst *env, char **envp)
 	while (1)
 	{
 		line = readline("MINISHELL : ");
+		add_history(line);
 		if (line != NULL)
 		{
 			// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.
@@ -37,7 +38,7 @@ void	main_loop(t_envlst *env, char **envp)
 			// execute
 			execute(lst_cmd, env);
 
-			//debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
+			// debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
 			ft_free_cmdlst(lst_cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
 			free(line);
 		}

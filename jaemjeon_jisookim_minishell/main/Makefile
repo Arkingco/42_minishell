@@ -47,7 +47,7 @@ SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
-SRC_EXECUTE		:=
+SRC_EXECUTE		:= execute.c execute_utils_1.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 
@@ -78,7 +78,7 @@ $(READLINE)		:
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	make -C $(DIR_READLINE) clean
+	# make -C $(DIR_READLINE) clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 
