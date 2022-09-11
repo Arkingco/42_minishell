@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 02:58:49 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 04:40:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,33 @@ char	**ft_envlst_to_envp(t_envlst *env)
 		index++;
 	}
 	return (envp);
+}
+
+char	*ft_get_value_in_string(char *string)
+{
+	char	*delimiter_point;
+	char	*envvalue_in_string;
+
+	delimiter_point = ft_strchr(string, '=');
+	if (delimiter_point == NULL)
+		return (NULL);
+	else if (delimiter_point[1] == '\0')
+		return (ft_strdup(""));
+	else
+	{
+		return (ft_substr(delimiter_point, 1, \
+								ft_strchr(string, 0) - delimiter_point - 1));
+	}
+}
+
+char	*ft_get_key_in_string(char *string)
+{
+	char	*delimiter_point;
+	char	*envkey_in_string;
+
+	delimiter_point = ft_strchr(string, '=');
+	if (delimiter_point == NULL)
+		return (ft_strdup(string));
+	else
+		return (ft_substr(string, 0, delimiter_point - string));
 }

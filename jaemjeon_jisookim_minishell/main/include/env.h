@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 03:11:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 04:40:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,7 @@ int			ft_has_env(t_envlst *env, char *key);
 void		ft_setenv(t_envlst *env, char *key, char *value, int has_value);
 char		**ft_envlst_to_envp(t_envlst *env);
 char		*ft_envlst_to_string(t_envlst *lst);
+char		*ft_get_value_in_string(char *string);
+char		*ft_get_key_in_string(char *string);
 
 #endif
