@@ -25,7 +25,7 @@ DIR_DEBUG		:=	$(SRCS_DIR)/debug
 DIR_EXECUTE		:=	$(SRCS_DIR)/execute
 DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 
-SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
+SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
 SRC_TOKENIZE	:= tokenize.c split_all_component.c token_list_adt_1.c \

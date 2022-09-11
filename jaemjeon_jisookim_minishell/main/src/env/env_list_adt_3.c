@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 12:23:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 02:58:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	ft_has_env(t_envlst *env, char *key)
 		return (FALSE);
 }
 
-void	ft_setenv(t_envlst *env, char *key, char *value)
+void	ft_setenv(t_envlst *env, char *key, char *value, int has_value)
 {
 	t_envlst	*envlst_toset;
 
 	envlst_toset = ft_getenv_lst(env, key);
 	if (envlst_toset == NULL)
-		ft_addenv(&env, key, value);
+		ft_addenv(&env, key, value, has_value);
 	else
 	{
 		free(envlst_toset->value);

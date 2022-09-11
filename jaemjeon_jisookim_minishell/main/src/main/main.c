@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/11 19:24:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:12:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	main(int argc, char *argv[], char *envp[])
 	env = NULL;
 	argument_error_check(argc);
 	init_envp(envp, &env);
-	built_in_env(env);
+	// built_in_env(env);
 	main_loop(env, envp);
 	return (0);
 }
