@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 22:33:00 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:57:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,21 @@ pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid)
 	
 	if (*pid == 0) //child process
 	{	
-		exec_handle_redirection(exec, i);
+		if (exec->cmds->redirect_input || exec->cmds->redirect_output)
+			exec_handle_redirection(exec, i);
+		else if (!exec->cmds->redirect_output)
+			ft_dup2(exec->pipe_fd[1], 1);
+			
 		ft_close(exec->pipe_fd[0]);
-		ft_dup2(exec->pipe_fd[1], 1);
-		ft_close(exec->pipe_fd[1]);	
+		ft_close(exec->pipe_fd[1]);
 		
-		exec_executing(exec, i, stat);
+		if (exec->cmds->simple_cmd)
+			exec_executing(exec, i, stat);
+				
+		exit(0);
 	}
-	// dprintf(2, "first:) || exec->pipe_fd : [%d][%d][%d]\n", \
-	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
+	dprintf(2, "first:) || exec->pipe_fd : [%d][%d][%d]\n", \
+				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 
 	return (*pid);
 }
@@ -40,20 +46,24 @@ pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid)
 	
 	if (*pid == 0)
 	{
-		exec_handle_redirection(exec, i);
+		if (exec->cmds->redirect_input || exec->cmds->redirect_output)
+			exec_handle_redirection(exec, i);
+		else if (!exec->cmds->redirect_input)
+			ft_dup2(exec->pipe_fd[2], 0);
+		else if (!exec->cmds->redirect_output)
+			ft_dup2(exec->pipe_fd[1], 1);
+			
 		ft_close(exec->pipe_fd[0]);
-		ft_dup2(exec->pipe_fd[2], 0);
 		ft_close(exec->pipe_fd[2]);
-
-		ft_dup2(exec->pipe_fd[1], 1);
 		ft_close(exec->pipe_fd[1]);
 
-		exec_executing(exec, i, stat);
+		if (exec->cmds->simple_cmd)
+			exec_executing(exec, i, stat);
+			
+		exit(0);
 	}
-	
-	// dprintf(2, "middle:) || exec->pipe_fd : [%d][%d][%d]\n", \
-	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
-
+	dprintf(2, "middle:) || exec->pipe_fd : [%d][%d][%d]\n", \
+			exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 	return (*pid);
 }
 
@@ -62,30 +72,31 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid)
 	int	stat;
 
 	if (*pid == 0) //child process
-	{
-		exec_handle_redirection(exec, i);
+	{		
+		if (exec->cmds->redirect_input || exec->cmds->redirect_output)
+			exec_handle_redirection(exec, i);
+		else if (!exec->cmds->redirect_output)
+			ft_dup2(exec->pipe_fd[0], 0);
+
 		ft_close(exec->pipe_fd[1]);
-		ft_dup2(exec->pipe_fd[0], 0);
 		ft_close(exec->pipe_fd[0]);	
 		
-		exec_executing(exec, i, stat);
+		if (exec->cmds->simple_cmd)
+			exec_executing(exec, i, stat);
+			
+		exit(0);
 	}
+
+	dprintf(2, "last:) || exec->pipe_fd : [%d][%d][%d]\n", \
+			exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
 	
 	ft_close(exec->pipe_fd[0]);
 	ft_close(exec->pipe_fd[1]);
 	if (exec->pipe_fd[2]) //process_cnt == 2 일때랑 아닐때랑 구분
 		ft_close(exec->pipe_fd[2]);
 	
-	// dprintf(2, "last:) || exec->pipe_fd : [%d][%d][%d]\n", \
-	// 				exec->pipe_fd[0], exec->pipe_fd[1], exec->pipe_fd[2]);
-
 	return (*pid); 
 }
-
-
-// ================================================================
-// ================================================================
-
 
 void	init_pipe_before_exec(t_exec *exec, int i)
 {
@@ -119,6 +130,7 @@ int	multi_process_exceve(t_exec *exec)
 	i = 0;
 	while (i < exec->process_cnt)
 	{
+		exec->temp_input_fd = exec_check_heredoc(exec, i);
 		if (i != (exec->process_cnt - 1))
 			ft_pipe(exec->pipe_fd);
 		pid = ft_fork();

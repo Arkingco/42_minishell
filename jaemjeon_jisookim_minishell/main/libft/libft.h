@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:46:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 22:53:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:13:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define LIBFT_H
 
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE

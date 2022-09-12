@@ -1,6 +1,6 @@
 CC = cc
 NAME = minishell
-CFLAGS = -g #-Wall -Wextra -Werror
+CFLAGS = -fsanitize=address -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
 LIB_LIBFT = -L$(DIR_LIBFT)
@@ -48,7 +48,7 @@ SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
-SRC_EXECUTE		:=	exec_main.c exec_multi_cmd.c \
+SRC_EXECUTE		:=	exec_main.c exec_multi_cmd.c exec_heredoc.c\
 					exec_tools_file.c exec_redirection.c\
 					exec_redi_parse.c exec_tools.c exec_check_built_in.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))

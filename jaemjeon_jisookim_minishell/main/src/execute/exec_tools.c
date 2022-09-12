@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 20:34:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:31:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ pid_t	ft_fork(void)
 	fork_return = fork();
 	if (fork_return == -1)
 	{
-		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
 	return (fork_return);
@@ -34,7 +35,8 @@ int	ft_dup2(int fd1, int fd2)
 	dup2_return = dup2(fd1, fd2);
 	if (dup2_return == -1)
 	{
-		ft_putstr_fd("ERROR : dup2() function error! \n", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
 	return (dup2_return); 
@@ -64,14 +66,10 @@ int	*ft_pipe(int *pipe_fd)
 	int	pipe_return;
 
 	pipe_return = pipe(pipe_fd);
-	if (pipe_return == -1)
-	{
-		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
-		exit(1);
-	}
 	if (pipe_return != 0)
 	{
-		ft_putstr_fd("ERROR : pipe error! Please put correct int array. \n", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
 	return (0);
@@ -81,12 +79,19 @@ int	*ft_pipe(int *pipe_fd)
 void	exec_executing(t_exec *exec, int process_number, int stat)
 {
 	init_exec_struct(exec, process_number);
-	if (exec->final_path == NULL)
+	
+	if ((exec->final_path == NULL) && (exec->cmds->simple_cmd))
 		exec->final_path = exec->cmds->simple_cmd->string_value;
+	
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
 	if (stat == -1)
 	{
-		ft_putstr_fd("ERROR : execve() function error. \n", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
 }
+
+// if ((exec->final_path == NULL) && (exec->is_redirect))
+// 		;
+// 	else 

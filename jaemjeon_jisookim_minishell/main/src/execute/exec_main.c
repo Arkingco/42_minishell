@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 20:14:18 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:08:36 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 // don't need pipe
 int	exec_single_cmd(t_exec *exec)
@@ -20,16 +19,20 @@ int	exec_single_cmd(t_exec *exec)
 	pid_t	pid;
 	pid_t	ret_pid;
 	
-	
-	if (check_built_in(exec))
+	ret_pid = 0;
+	exec->temp_input_fd = exec_check_heredoc(exec, 0);
+	if (exec->cmds->simple_cmd && check_built_in(exec))
 		exec_go_built_in(exec);
 	else
 	{
 		pid = ft_fork();
 		if (pid == 0)
 		{
-			exec_handle_redirection(exec, 0);
-			exec_executing(exec, 0, stat);
+			if (exec->cmds->redirect_input || exec->cmds->redirect_output)
+				exec_handle_redirection(exec, 0);
+			if (exec->cmds->simple_cmd)
+				exec_executing(exec, 0, stat);
+			exit(0);
 		}
 		ret_pid = ft_wait(exec, &pid); // todo : return exit stat
 	}
@@ -64,6 +67,10 @@ int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 	//printf("\n\nreturn pid is : %d\n\n", ret_pid);
 	return (ret_pid);
 }
+
+
+
+
 
 
 	// printf("\n\n========= DEBUG PIPE ============\n");

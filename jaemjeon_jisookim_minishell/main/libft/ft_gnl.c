@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 15:05:44 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 22:48:53 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/12 17:24:09 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ static char	*get_line(char *static_str)
 	if (line == 0)
 		return (0);
 	i = 0;
+	dprintf(2, "00 line : %s\n", line);
 	while (static_str[i] && static_str[i] != '\n')
 	{
 		line[i] = static_str[i];
@@ -82,6 +83,7 @@ static char	*get_line(char *static_str)
 		i++;
 	}
 	line[i] = '\0';
+	dprintf(2, "01 line : %s\n", line);
 	return (line);
 }
 

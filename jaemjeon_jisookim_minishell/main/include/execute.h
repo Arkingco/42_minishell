@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 23:48:51 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:00:07 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 #include <sys/wait.h> // wait
 #include <sys/types.h> // pid_t
 #include <sys/stat.h> // stat
+#include <errno.h>
 
 #include <string.h> //for debug
 
@@ -74,8 +75,12 @@ typedef struct s_exec
 	int			pipe_fd[3];
 
 	// for redirection
-	int			redirect[2];
+	int			is_redirect;
+	int			here_doc_flag;
+	//int			redirect[2];
 	
+	int			temp_input_fd; //heredoc_fd
+
 }	t_exec;
 
 
@@ -92,8 +97,8 @@ void	get_token_count(t_exec *exec);
 int		get_simple_cmd_count(t_exec *exec, int i);
 
 //init_struct
-void	set_exec_struct_final_cmd_loop(t_exec *exec, char *cmd_str, int i);
-void	set_exec_process_number_init(t_exec *exec, char *cmd_str, int j);
+void	set_exec_struct_final_cmd_loop(t_exec *exec, int i);
+void	set_exec_process_number_init(t_exec *exec, int j);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
 char	*set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec, int j);
@@ -126,18 +131,21 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid);
 void	init_pipe_before_exec(t_exec *exec, int i);
 int		multi_process_exceve(t_exec *exec);
 
+//heredoc
+int		exec_check_heredoc(t_exec *exec, int i);
+void	do_heredoc(t_exec *exec, char *limiter, int fd);
+int		exec_redi_heredoc(t_exec *exec, char *limiter);
+
+
 //exec_redirection
-void	handle_redirect_input(t_exec *exec, int process_number);
-void	handle_redirect_output(t_exec *exec, int process_number);
-void	handle_redirection(t_exec *exec, int process_number);
+int		handle_redirect_input(t_exec *exec, int process_number);
+int		handle_redirect_output(t_exec *exec, int process_number);
 void	check_redirection(t_exec *exec);
-void	exec_handle_redirection(t_exec *exec, int process_number);
+void	exec_handle_redirection(t_exec *exec, int i);
 
 //exec_redi_parse
-void	do_heredoc(t_exec *exec, char *limiter, int fd);
-void	exec_redi_heredoc(t_exec *exec, char *limiter, int *fd);
 void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
-char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *more_redi_flag);
+char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *flag, int *type);
 char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i, int *type);
 
 //exec_tools_file
