@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/11 19:28:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/13 00:30:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -290,9 +290,32 @@ int	ft_wait_childs(pid_t *child_pids, int cmd_count)
 	return (exit_status);
 }
 
-int	first_cmd(t_cmd *cmd, t_envlst *env)
+void	run_program_in_multi_process(t_cmd *cmd, t_envlst *env)
 {
 
+}
+
+int	first_cmd(t_cmd *cmd, t_envlst *env)
+{
+	pid_t	pid;
+	int		pipe_fd[2];
+	int		io_fd[4];
+
+	pipe(pipe_fd);
+	pid = fork();
+	if (pid == 0)
+	{
+		close(pipe_fd[0]);
+		dup2(pipe_fd[1], STDOUT_FILENO);
+		process_redirect(cmd, io_fd);
+		run_program_in_multi_process(cmd, env);
+		restore_redirect_fd(cmd, io_fd);
+	}
+	else
+	{
+		close(pipe_fd[1]);
+		dup2(STDIN_FILENO, pipe_fd[0]);
+	}
 }
 
 int	middle_cmd(t_cmd *cmd, t_envlst *env)
@@ -302,7 +325,19 @@ int	middle_cmd(t_cmd *cmd, t_envlst *env)
 
 int	last_cmd(t_cmd *cmd, t_envlst *env)
 {
+	pid_t	pid;
+	int		io_fd[4];
 
+	pid = fork();
+	if (pid == 0)
+	{
+		process_redirect(cmd, io_fd);
+		run_program_in_multi_process(cmd, env);
+		restore_redirect_fd(cmd, io_fd);
+	}
+	else
+	{
+	}
 }
 
 int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
@@ -314,6 +349,7 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 	cmd_index = 0;
 	cmd_count = ft_cmdlst_size(cmd);
 	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
+
 	while (cmd_index < cmd_count)
 	{
 		if (cmd_index == 0)
@@ -322,6 +358,7 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 			child_pids[cmd_index] = last_cmd(cmd, env);
 		else
 			child_pids[cmd_index] = middle_cmd(cmd, env);
+		cmd = cmd->next;
 		cmd_index++;
 	}
 	return (ft_wait_childs(child_pids, cmd_count));
