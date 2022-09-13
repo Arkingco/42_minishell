@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:22:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:04:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ int		exec_redi_heredoc(t_exec *exec, char *limiter);
 
 
 //exec_redirection
-int		handle_redirect_input(t_exec *exec, t_cmd *cmd);
+int		handle_redireict_input(t_exec *exec, t_cmd *cmd);
 int		handle_redirect_output(t_exec *exec, t_cmd *cmd);
 void	exec_handle_redirection(t_exec *exec, t_cmd *cmd);
 

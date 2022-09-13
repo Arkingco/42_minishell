@@ -6,13 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:27:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:04:20 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-
 
 int	handle_redirect_input(t_exec *exec, t_cmd *cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:43:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:14:29 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:22:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	exec_redi_heredoc(t_exec *exec, char *limiter)
 	input_fd = open("here_docs", O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	if (input_fd == -1)
 		exit(1);
-	
 	do_heredoc(exec, limiter, input_fd);
 	ft_close(input_fd);
 	input_fd = ft_open("here_docs", O_RDONLY);
