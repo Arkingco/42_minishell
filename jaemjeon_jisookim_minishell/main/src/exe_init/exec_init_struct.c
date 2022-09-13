@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 20:00:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 09:15:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ int	init_exec_struct(t_exec *exec, int process_number)
 	set_exec_struct_final_cmd_str(exec, process_number);
 	exec->final_path = set_final_path_str(exec);
 
-	dprintf(2, "exec->final_path : %s\n", exec->final_path);
-	dprintf(2, "exec->fianl_cmd_str[0]: %s\n", exec->final_cmd_str[0]);
+	// dprintf(2, "exec->final_path : %s\n", exec->final_path);
+	// dprintf(2, "exec->fianl_cmd_str[0]: %s\n", exec->final_cmd_str[0]);
 
 	return (0);
 }

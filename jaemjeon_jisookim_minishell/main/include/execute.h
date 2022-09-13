@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 22:00:07 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:13:20 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,17 @@ typedef struct s_exec
 	char		**final_cmd_str;	//fin
 
 	// for exec - pipe
-	int			pipe_fd[3];
+	int			temp_pipe_input_fd;
+	int			temp_pipe_output_fd;
+	int			pipe_fd[2];
 
 	// for redirection
 	int			is_redirect;
 	int			here_doc_flag;
-	//int			redirect[2];
 	
-	int			temp_input_fd; //heredoc_fd
+	int			*input_fd;
+	int			*output_fd;
+	int			*before_input_fd;
 
 }	t_exec;
 

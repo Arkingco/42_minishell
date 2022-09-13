@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 21:55:35 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 11:26:51 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,16 +29,14 @@ int	handle_redirect_input(t_exec *exec, int process_number)
 	infile = get_redi_execute_file(exec, redi, process_number, &type);
 	if (type & HEREDOC)
 	{
-		dprintf(2, "limiter : %s\n", infile);
-		infile_fd = exec->temp_input_fd;
-		exec->temp_input_fd = 0;
+		infile_fd = exec_check_heredoc(exec, 0);
 	}
 	else if (type & READ)
 	{
 		infile_fd = open(infile, O_RDONLY, 0644);
 	}
 	if (infile_fd == -1)
-		exit(1);
+		return (0);
 	ft_dup2(infile_fd, 0);
 	ft_close(infile_fd);
 	redi = redi_head;
@@ -60,11 +58,15 @@ int	handle_redirect_output(t_exec *exec, int process_number)
 	redi_head = redi;
 	outfile = get_redi_execute_file(exec, redi, process_number, &type);
 	if (type & WRITE)
+	{
 		outfile_fd = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	}
 	else if (type & WRITE_APPEND)
+	{
 		outfile_fd = open(outfile, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	}
 	if (outfile_fd == -1)
-		exit(1);
+		return (0);
 	ft_dup2(outfile_fd, 1);
 	ft_close(outfile_fd);
 	redi = redi_head;

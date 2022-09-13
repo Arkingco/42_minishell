@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 22:08:36 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 12:15:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	exec_single_cmd(t_exec *exec)
 	pid_t	ret_pid;
 	
 	ret_pid = 0;
-	exec->temp_input_fd = exec_check_heredoc(exec, 0);
 	if (exec->cmds->simple_cmd && check_built_in(exec))
 		exec_go_built_in(exec);
 	else
@@ -30,8 +29,7 @@ int	exec_single_cmd(t_exec *exec)
 		{
 			if (exec->cmds->redirect_input || exec->cmds->redirect_output)
 				exec_handle_redirection(exec, 0);
-			if (exec->cmds->simple_cmd)
-				exec_executing(exec, 0, stat);
+			exec_executing(exec, 0, stat);
 			exit(0);
 		}
 		ret_pid = ft_wait(exec, &pid); // todo : return exit stat
@@ -44,6 +42,9 @@ int	exec_multi_cmd(t_exec *exec)
 {
 	pid_t	ret_pid;
 
+	*exec->input_fd = -1;
+	*exec->output_fd = -1;
+	*exec->before_input_fd = -1;
 	ret_pid = multi_process_exceve(exec);
 	if (ret_pid == -1)
 		ft_putstr_fd("ERROR! : error during getting ret_pid.\n", 2);
@@ -67,10 +68,6 @@ int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 	//printf("\n\nreturn pid is : %d\n\n", ret_pid);
 	return (ret_pid);
 }
-
-
-
-
 
 
 	// printf("\n\n========= DEBUG PIPE ============\n");

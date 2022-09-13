@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:43:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 21:57:40 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 09:13:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ void	do_heredoc(t_exec *exec, char *limiter, int fd)
 	{
 		ft_putstr_fd("> ", 1);
 		line = get_next_line(0);
-		dprintf(2, "line : %s\n", line);
 		if (line)
 		{
 			line[ft_strlen(line) - 1] = '\0';

@@ -8,6 +8,7 @@ DIR_READLINE = readline
 LIB_READLINE = -L$(DIR_READLINE) 
 INCLUDE_READLINE = -I$(DIR_READLINE)
 INCLUDE = -I include -I$(DIR_LIBFT)
+SANITIZE = -fsanitize=address -g3
 RM = rm -f
 
 READLINE = $(DIR_READLINE)/libreadline.a \
