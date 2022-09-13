@@ -6,16 +6,16 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 00:33:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/14 03:25:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	process_built_in(t_cmd *cmd, int cmd_type, t_envlst *env)
+void	process_built_in(t_cmd *cmd, int cmd_type, t_working_info *info)
 {
-	void	(*built_in_func)(t_cmd*, t_envlst*);
-	static void (*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_envlst*)\
+	void	(*built_in_func)(t_cmd*, t_working_info*);
+	static void (*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
 	= {
 		[T_ECHO] = ft_echo,
 		[T_CD] = ft_cd,
@@ -27,7 +27,7 @@ void	process_built_in(t_cmd *cmd, int cmd_type, t_envlst *env)
 	};
 
 	built_in_func = built_in_func_board[cmd_type];
-	built_in_func(cmd, env);
+	built_in_func(cmd, info);
 }
 
 int	is_already_exec_path(char *cmd_string)
@@ -42,12 +42,12 @@ int	is_already_exec_path(char *cmd_string)
 		return (FALSE);
 }
 
-void	expand_homepath(char **cmd_string, t_envlst *env)
+void	expand_homepath(char **cmd_string, t_working_info *info)
 {
 	char	*new_cmd_string;
 	char	*homepath;
 
-	homepath = ft_getenv(env, "HOME");
+	homepath = ft_getenv(info->env, "HOME");
 	if (homepath == NULL)
 		return ;
 	if (**cmd_string == '~')
@@ -67,11 +67,11 @@ int	is_valid_cmd_path(char *cmd_string)
 	return (FALSE);
 }
 
-int	expand_homepath_and_check_is_there(t_cmd *cmd, t_envlst *env)
+int	expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info)
 {
 	struct stat	file_stat;
 
-	expand_homepath(&cmd->simple_cmd->string_value, env);
+	expand_homepath(&cmd->simple_cmd->string_value, info->env);
 	if (stat(cmd->simple_cmd->string_value, &file_stat) == 0)
 		return (TRUE);
 	return (FALSE);
@@ -91,9 +91,9 @@ void	ft_free_double(char **board)
 	free(board);
 }
 
-int	set_absolute_path(t_cmd *cmd, t_envlst *env)
+int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 {
-	const char	**path_board = (const char **)get_path_board(env);
+	const char	**path_board = (const char **)get_path_board(info->env);
 	int		index;
 	char	*exec_path;
 	struct stat	file_stat;
@@ -119,7 +119,7 @@ int	set_absolute_path(t_cmd *cmd, t_envlst *env)
 	return (FALSE);
 }
 
-int	set_exec_path(t_cmd *cmd, t_envlst *env)
+int	set_exec_path(t_cmd *cmd, t_working_info *info)
 {
 	char		*execv_path;
 	char		*cmd_string;
@@ -127,23 +127,23 @@ int	set_exec_path(t_cmd *cmd, t_envlst *env)
 	cmd_string = cmd->simple_cmd->string_value;
 	if (is_already_exec_path(cmd_string) == TRUE)
 	{
-		expand_homepath(&cmd_string, env);
+		expand_homepath(&cmd_string, info);
 		return (is_valid_cmd_path(cmd_string));
 	}
 	else
 	{
-		return (set_absolute_path(cmd, env));
+		return (set_absolute_path(cmd, info));
 	}
 }
 
-int	process_not_built_in(t_cmd *cmd, t_envlst *env)
+int	process_not_built_in(t_cmd *cmd, t_working_info *info)
 {
 	pid_t	pid;
 	char	**exec_argv;
 	char	**exec_env;
 	int		exit_status;
 
-	if (set_exec_path(cmd, env) == FALSE)
+	if (set_exec_path(cmd, info) == FALSE)
 	{
 		perror("not cmd found");
 		return (1);
@@ -154,7 +154,7 @@ int	process_not_built_in(t_cmd *cmd, t_envlst *env)
 		if (pid == 0)
 		{
 			exec_argv = get_exec_argv(cmd);
-			exec_env = ft_envlst_to_envp(env);
+			exec_env = ft_envlst_to_envp(info->env);
 			execve(cmd->simple_cmd->string_value, exec_argv, exec_env);
 			free(exec_argv);
 			free(exec_env);
@@ -258,7 +258,7 @@ void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
 	}
 }
 
-void	process_single_cmd(t_cmd *cmd, t_envlst *env)
+void	process_single_cmd(t_cmd *cmd, t_working_info *info)
 {
 	int	cmd_type;
 	int	io_fd[4];
@@ -269,9 +269,9 @@ void	process_single_cmd(t_cmd *cmd, t_envlst *env)
 	{
 		cmd_type = get_cmd_type(cmd);
 		if (cmd_type == NOT_BUILT_IN)
-			process_not_built_in(cmd, env);
+			process_not_built_in(cmd, info);
 		else
-			process_built_in(cmd, cmd_type, env);
+			process_built_in(cmd, cmd_type, info);
 	}
 	restore_redirect_fd(cmd, io_fd);
 }
@@ -375,13 +375,13 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 	return (ft_wait_childs(child_pids, cmd_count));
 }
 
-void	execute(t_cmd *cmd, t_envlst *env)
+void	execute(t_cmd *cmd, t_working_info *info)
 {
 	int	cmd_count;
 
 	cmd_count = ft_cmdlst_size(cmd);
 	if (cmd_count == 1)
-		process_single_cmd(cmd, env);
+		process_single_cmd(cmd, info);
 	else
-		process_multi_cmd(cmd, env);
+		process_multi_cmd(cmd, info->env);
 }

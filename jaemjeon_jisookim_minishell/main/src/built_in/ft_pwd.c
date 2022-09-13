@@ -6,12 +6,25 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/11 12:46:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/14 05:03:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd(t_cmd *cmd, t_envlst *env)
+void	ft_pwd(t_cmd *cmd, t_working_info *info)
 {
+	char	*cur_pwd;
+
+	if (info->cur_path != NULL)
+		printf("%s\n", info->cur_path);
+	else
+	{
+		cur_pwd = ft_getcwd(NULL, 0);
+		if (cur_pwd != NULL)
+		{
+			printf("%s\n", cur_pwd);
+			free(cur_pwd);
+		}
+	}
 }
