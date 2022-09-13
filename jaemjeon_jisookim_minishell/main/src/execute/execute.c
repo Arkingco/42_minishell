@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/13 00:30:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:32:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,6 +295,16 @@ void	run_program_in_multi_process(t_cmd *cmd, t_envlst *env)
 
 }
 
+void	process_redirect_in_multi(t_cmd *cmd, int *io_fd)
+{
+
+}
+
+void	restore_redirect_fd_in_multi(t_cmd *cmd, int *io_fd)
+{
+
+}
+
 int	first_cmd(t_cmd *cmd, t_envlst *env)
 {
 	pid_t	pid;
@@ -307,9 +317,9 @@ int	first_cmd(t_cmd *cmd, t_envlst *env)
 	{
 		close(pipe_fd[0]);
 		dup2(pipe_fd[1], STDOUT_FILENO);
-		process_redirect(cmd, io_fd);
+		process_redirect_in_multi(cmd, io_fd);
 		run_program_in_multi_process(cmd, env);
-		restore_redirect_fd(cmd, io_fd);
+		restore_redirect_fd_in_multi(cmd, io_fd);
 	}
 	else
 	{
@@ -345,6 +355,7 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 	int		cmd_index;
 	int		cmd_count;
 	pid_t	*child_pids;
+
 
 	cmd_index = 0;
 	cmd_count = ft_cmdlst_size(cmd);
