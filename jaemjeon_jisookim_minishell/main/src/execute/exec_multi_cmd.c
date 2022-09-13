@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 15:40:21 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:26:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,29 @@
 
 void	exec_multi(t_exec *exec, int i, t_fd *fd)
 {
-	int	stat;
+	t_cmd	*cmd;
 	
-	if (exec->cmds && exec->cmds->redirect_input || \
-						exec->cmds && exec->cmds->redirect_output)
-		exec_handle_redirection(exec, i);
-	if (fd->before_input_fd != -1 && !exec->cmds->redirect_input)
+	cmd = get_cmd_for_index(exec, i);
+	if (cmd && (cmd->redirect_input || cmd->redirect_output))
+		exec_handle_redirection(exec, cmd);
+	if (fd->before_input_fd != -1 && !cmd->redirect_input)
+	{
 		ft_dup2(fd->before_input_fd, 0);
-	if (fd->output_fd != -1 && !exec->cmds->redirect_output)
-		ft_dup2(fd->output_fd, 1);
+		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN => %d\n", i, fd->before_input_fd);
+	}
+	// else
+	// {
+	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN =/=> cause (%d, %d)\n", i, fd->before_input_fd, !cmd->redirect_input);
+	// }
+	if (fd->output_fd != -1 && !cmd->redirect_output)
+	{
+		ft_dup2(fd->input_fd, 1);
+		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT => %d\n", i, fd->input_fd);
+	}
+	// else
+	// {
+	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT =/=> cause (%d, %d)\n", i, fd->input_fd, !cmd->redirect_output);
+	// }
 
 	if (fd->input_fd != -1)
 		ft_close(fd->input_fd);
@@ -31,7 +45,7 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 	if (fd->before_input_fd != -1)
 		ft_close(fd->before_input_fd);
 
-	exec_executing(exec, i, stat);
+	exec_executing(exec, i);
 
 	exit(0);
 }

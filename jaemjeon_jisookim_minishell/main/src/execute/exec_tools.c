@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 16:05:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:17:57 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,11 @@ int	ft_pipe(int *pipe_fd)
 }
 
 
-void	exec_executing(t_exec *exec, int process_number, int stat)
+void	exec_executing(t_exec *exec, int process_number)
 {
+	int	stat;
+
 	init_exec_struct(exec, process_number);
-	
-	if ((exec->final_path == NULL) && (exec->cmds->simple_cmd))
-		exec->final_path = exec->cmds->simple_cmd->string_value;
 	
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
 	if (stat == -1)

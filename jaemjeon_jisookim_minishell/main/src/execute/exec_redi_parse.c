@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 09:26:17 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 21:47:11 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:33:44 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *flag, int *type)
 }
 
 // change input, output file stream by using dup2
-char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i, int *type)
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int *type)
 {
 	char	*is_exec_file;
 	int		more_redi_flag;

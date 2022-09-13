@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 11:26:51 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:27:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 
 
-int	handle_redirect_input(t_exec *exec, int process_number)
+int	handle_redirect_input(t_exec *exec, t_cmd *cmd)
 {
 	char	*infile;
 	int		infile_fd;
@@ -24,9 +24,10 @@ int	handle_redirect_input(t_exec *exec, int process_number)
 
 	infile_fd = 0;
 	type = 0;
-	redi = exec->cmds->redirect_input;
+	redi = cmd->redirect_input;
 	redi_head = redi;
-	infile = get_redi_execute_file(exec, redi, process_number, &type);
+	infile = get_redi_execute_file(exec, redi, &type);
+	// dprintf(STDERR_FILENO, " STDIN => %s\n", infile);
 	if (type & HEREDOC)
 	{
 		infile_fd = exec_check_heredoc(exec, 0);
@@ -44,7 +45,7 @@ int	handle_redirect_input(t_exec *exec, int process_number)
 	return (0);
 }
 
-int	handle_redirect_output(t_exec *exec, int process_number)
+int	handle_redirect_output(t_exec *exec, t_cmd *cmd)
 {
 	char	*outfile;
 	int		outfile_fd;
@@ -54,9 +55,10 @@ int	handle_redirect_output(t_exec *exec, int process_number)
 
 	outfile_fd = 0;
 	type = 0;
-	redi = exec->cmds->redirect_output;
+	redi = cmd->redirect_output;
 	redi_head = redi;
-	outfile = get_redi_execute_file(exec, redi, process_number, &type);
+	outfile = get_redi_execute_file(exec, redi, &type);
+	// dprintf(STDERR_FILENO, " STDOUT => %s\n", outfile);
 	if (type & WRITE)
 	{
 		outfile_fd = open(outfile, O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -74,17 +76,13 @@ int	handle_redirect_output(t_exec *exec, int process_number)
 	return (0);
 }
 
-void	exec_handle_redirection(t_exec *exec, int i)
+void	exec_handle_redirection(t_exec *exec, t_cmd *cmd)
 {
-	tools_move_cmd(exec, i); // process number 만큼 돌리기
-	
-	if (exec->cmds && exec->cmds->redirect_input)
-		handle_redirect_input(exec, i);
+	if (cmd && cmd->redirect_input)
+		handle_redirect_input(exec, cmd);
 
-	if (exec->cmds && exec->cmds->redirect_output)
-		handle_redirect_output(exec, i);
-	
-	exec->cmds = exec->cmd_head; 
-	
+	if (cmd && cmd->redirect_output)
+		handle_redirect_output(exec, cmd);
+
 	return ;
 }

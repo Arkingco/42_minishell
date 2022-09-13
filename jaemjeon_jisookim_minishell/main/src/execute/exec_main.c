@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 14:07:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:22:55 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 // don't need pipe
 int	exec_single_cmd(t_exec *exec)
 {
-	int		stat;
 	pid_t	pid;
 	pid_t	ret_pid;
 	
@@ -28,8 +27,8 @@ int	exec_single_cmd(t_exec *exec)
 		if (pid == 0)
 		{
 			if (exec->cmds->redirect_input || exec->cmds->redirect_output)
-				exec_handle_redirection(exec, 0);
-			exec_executing(exec, 0, stat);
+				exec_handle_redirection(exec, exec->cmds);
+			exec_executing(exec, 0);
 			exit(0);
 		}
 		ret_pid = ft_wait(exec, &pid); // todo : return exit stat

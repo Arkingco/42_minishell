@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 15:40:54 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:22:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,18 +103,22 @@ void	get_token_count(t_exec *exec);
 int		get_simple_cmd_count(t_exec *exec, int i);
 
 //init_struct
-void	set_exec_struct_final_cmd_loop(t_exec *exec, int i);
-void	set_exec_process_number_init(t_exec *exec, int j);
+void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
-char	*set_final_path_str(t_exec *exec);
+void	set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec, int j);
 
-//init
+//Deprecated
 void	tools_move_cmd(t_exec *exec, int i);
+
+//init
+t_cmd	*get_cmd_for_index(t_exec *exec, int index);
 int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
 t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
 
+//exit
+void	ft_exit_if(t_exec *exec, int condition);
 
 /*
 	MAIN PART
@@ -144,15 +148,14 @@ int		exec_redi_heredoc(t_exec *exec, char *limiter);
 
 
 //exec_redirection
-int		handle_redirect_input(t_exec *exec, int process_number);
-int		handle_redirect_output(t_exec *exec, int process_number);
-void	check_redirection(t_exec *exec);
-void	exec_handle_redirection(t_exec *exec, int i);
+int		handle_redirect_input(t_exec *exec, t_cmd *cmd);
+int		handle_redirect_output(t_exec *exec, t_cmd *cmd);
+void	exec_handle_redirection(t_exec *exec, t_cmd *cmd);
 
 //exec_redi_parse
 void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
 char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *flag, int *type);
-char	*get_redi_execute_file(t_exec *exec, t_token *redi, int i, int *type);
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int *type);
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
@@ -163,6 +166,6 @@ pid_t	ft_fork(void);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_wait(t_exec *exec, pid_t *child_pids);
 int		ft_pipe(int *pipe_fd);
-void	exec_executing(t_exec *exec, int process_number, int stat);
+void	exec_executing(t_exec *exec, int process_number);
 
 #endif

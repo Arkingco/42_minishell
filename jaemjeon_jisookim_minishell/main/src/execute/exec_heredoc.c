@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:43:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 09:13:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:14:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,22 @@ int	exec_check_heredoc(t_exec *exec, int i)
 {
 	int		input_fd;
 	char	*limiter;
+	t_cmd	*cmd;
 
 	limiter = 0;
 	input_fd = -1;
-	tools_move_cmd(exec, i);
-	if (exec->cmds && exec->cmds->redirect_input)
+	cmd = get_cmd_for_index(exec, i);
+	if (cmd && cmd->redirect_input)
 	{
-		if (exec->cmds->redirect_input->type & HEREDOC)
+		if (cmd->redirect_input->type & HEREDOC)
 		{
-			limiter = exec->cmds->redirect_input->string_value;
+			limiter = cmd->redirect_input->string_value;
 			input_fd = exec_redi_heredoc(exec, limiter);
 			exec->here_doc_flag = 1;
 		}
 		else
 			exec->here_doc_flag = 0;
 	}
-	exec->cmds = exec->cmd_head;
 	return (input_fd);
 }
 

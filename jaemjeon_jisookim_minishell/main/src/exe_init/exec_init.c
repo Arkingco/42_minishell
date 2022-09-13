@@ -6,23 +6,25 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 20:16:24 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:44:40 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	tools_move_cmd(t_exec *exec, int i)
+t_cmd	*get_cmd_for_index(t_exec *exec, int index)
 {
-	int	j;
+	t_cmd	*result;
+	int		i;
 
-	j = 0;
-	while (j < i) //i 만큼 cmd이동
+	result = exec->cmd_head;
+	i = 0;
+	while (i < index) //i 만큼 cmd이동
 	{
-		exec->cmds = exec->cmds->next;
-		j++;
+		result = result->next;
+		i++;
 	}
-	return ;
+	return (result);
 }
 
 // pipe_cnt = process_cnt -1

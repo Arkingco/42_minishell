@@ -6,19 +6,19 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 16:04:51 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 17:23:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	set_exec_struct_final_cmd_loop(t_exec *exec, int i)
+void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i)
 {
 	char *cmd_str;
 
 	cmd_str = 0;
-	if (exec->cmds->simple_cmd && exec->cmds->simple_cmd->string_value)
-		cmd_str = ft_strdup(exec->cmds->simple_cmd->string_value);
+	if (cmd->simple_cmd && cmd->simple_cmd->string_value)
+		cmd_str = ft_strdup(cmd->simple_cmd->string_value);
 	if (!cmd_str)
 	{
 		free(cmd_str);
@@ -45,33 +45,28 @@ void	set_exec_process_number_init(t_exec *exec, int j)
 	return ;
 }
 
-void	set_exec_struct_final_cmd_str(t_exec *exec, int j) // j == process number
+void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 {
+	t_cmd	*cmd;
 	int		i;
 
-	exec->final_cmd_str = ft_calloc(1, sizeof(char *) * (exec->token_cnt[j] + 1));
-	exec->final_cmd_str[exec->token_cnt[j]] = NULL;
+	exec->final_cmd_str = ft_calloc(exec->token_cnt[index] + 1, sizeof(char *));
 	if (!exec->final_cmd_str)
 		ft_exit(exec);
 	
-	set_exec_process_number_init(exec, j);
+	cmd = get_cmd_for_index(exec, index);
 	i = 0;
-	while (exec->cmds->simple_cmd && exec->cmds->simple_cmd->string_value)
+	while (cmd->simple_cmd && cmd->simple_cmd->string_value)
 	{
-		set_exec_struct_final_cmd_loop(exec, i);
-		if (exec->cmds->simple_cmd && exec->cmds->simple_cmd->next)
-			exec->cmds->simple_cmd = exec->cmds->simple_cmd->next;
-		else
-			break;
+		set_exec_struct_final_cmd_loop(exec, cmd, i);
+		cmd->simple_cmd = cmd->simple_cmd->next;
 		i++;
 	}
-	set_exec_struct_final_cmd_loop(exec, i);
-	exec->cmds = exec->cmd_head; // init
 	return ;
 }
 
 
-char	*set_final_path_str(t_exec *exec)
+void	set_final_path_str(t_exec *exec)
 {
 	char			*slash_cmd;
 	char			*temp;
@@ -82,38 +77,34 @@ char	*set_final_path_str(t_exec *exec)
 	{
 		// Absolute path case
 		exec->final_path = exec->final_cmd_str[0];
-		if (!(exec->final_path))
-			ft_exit(exec);
-		return (exec->final_path);
+		ft_exit_if(exec, !(exec->final_path));
+		return ;
 	}
 	slash_cmd = ft_strjoin("/", exec->final_cmd_str[0]);
-	if (!(slash_cmd))
-		ft_exit(exec);
+	ft_exit_if(exec, !(slash_cmd));
 	i = 0;
+	exec->final_path = NULL;
 	while (exec->path_lst[i])
 	{
-		temp = (char *)ft_calloc(1, ft_strlen(exec->path_lst[i]) \
-									+ ft_strlen(slash_cmd) + 1);
 		temp = ft_strjoin(exec->path_lst[i], slash_cmd);
-		if (!temp)
-			ft_exit(exec);
+		ft_exit_if(exec, !(temp));
 		if (!stat(temp, &buf))
 		{
 			exec->final_path = temp;
-			return (exec->final_path);
+			break ;
 		}
 		free(temp);
 		i++;
 	}
 	free(slash_cmd);
-	return (NULL);
+	return ;
 }
 
 
 int	init_exec_struct(t_exec *exec, int process_number)
 {
 	set_exec_struct_final_cmd_str(exec, process_number);
-	exec->final_path = set_final_path_str(exec);
+	set_final_path_str(exec);
 
 	// dprintf(2, "exec->final_path : %s\n", exec->final_path);
 	// dprintf(2, "exec->fianl_cmd_str[0]: %s\n", exec->final_cmd_str[0]);
