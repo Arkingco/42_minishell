@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 04:40:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/14 00:32:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	*ft_envlst_to_string(t_envlst *lst)
 	if (lst == NULL)
 		ft_error_exit(1, "para input error in ft_envlst_to_string");
 	tmp_string = ft_strjoin(lst->key, "=");
-	env_string = ft_strjoin(tmp_string, lst->key);
+	env_string = ft_strjoin(tmp_string, lst->value);
 	free(tmp_string);
 	return (env_string);
 }
