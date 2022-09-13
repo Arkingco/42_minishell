@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 12:13:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:40:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,15 @@ typedef struct s_exec
 	int			is_redirect;
 	int			here_doc_flag;
 	
-	int			*input_fd;
-	int			*output_fd;
-	int			*before_input_fd;
-
 }	t_exec;
 
+typedef struct s_fd
+{
+	int			input_fd;
+	int			output_fd;
+	int			before_input_fd;
+
+}	t_fd;
 
 /*
 	INITIALIZING
@@ -127,12 +130,12 @@ int		exec_multi_cmd(t_exec *exec);
 int		execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
-pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid);
-pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid);
-pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid);
+pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid, t_fd *fd);
+pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid, t_fd *fd);
+pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid, t_fd *fd);
 
-void	init_pipe_before_exec(t_exec *exec, int i);
-int		multi_process_exceve(t_exec *exec);
+void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd);
+int	multi_process_exceve(t_exec *exec, t_fd *fd);
 
 //heredoc
 int		exec_check_heredoc(t_exec *exec, int i);
@@ -159,7 +162,7 @@ int		ft_close(int fd);
 pid_t	ft_fork(void);
 int		ft_dup2(int fd1, int fd2);
 pid_t	ft_wait(t_exec *exec, pid_t *child_pids);
-int		*ft_pipe(int *pipe_fd);
+int		ft_pipe(int *pipe_fd);
 void	exec_executing(t_exec *exec, int process_number, int stat);
 
 #endif

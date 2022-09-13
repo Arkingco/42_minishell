@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 09:15:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:04:51 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,14 @@ char	*set_final_path_str(t_exec *exec)
 	struct stat		buf;
 	int				i;
 
+	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL)
+	{
+		// Absolute path case
+		exec->final_path = exec->final_cmd_str[0];
+		if (!(exec->final_path))
+			ft_exit(exec);
+		return (exec->final_path);
+	}
 	slash_cmd = ft_strjoin("/", exec->final_cmd_str[0]);
 	if (!(slash_cmd))
 		ft_exit(exec);

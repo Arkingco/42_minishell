@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 12:15:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 14:07:38 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,18 @@ int	exec_single_cmd(t_exec *exec)
 int	exec_multi_cmd(t_exec *exec)
 {
 	pid_t	ret_pid;
+	t_fd	*fd;
 
-	*exec->input_fd = -1;
-	*exec->output_fd = -1;
-	*exec->before_input_fd = -1;
-	ret_pid = multi_process_exceve(exec);
+	fd = ft_calloc(1, sizeof(t_fd));
+	if (!fd)
+		exit(1);
+	fd->input_fd = -1;
+	fd->output_fd = -1;
+	fd->before_input_fd = -1;
+	ret_pid = multi_process_exceve(exec, fd);
 	if (ret_pid == -1)
 		ft_putstr_fd("ERROR! : error during getting ret_pid.\n", 2);
-
+	free(fd);
 	return (ret_pid); // returning pid, pid fail(-1)
 }
 

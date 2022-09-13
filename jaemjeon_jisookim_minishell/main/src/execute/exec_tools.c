@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 09:37:49 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:05:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ pid_t	ft_wait(t_exec *exec, pid_t *child_pids)
 
 // if success : ret == 0
 // if error : ret == -1
-int	*ft_pipe(int *pipe_fd)
+int	ft_pipe(int *pipe_fd)
 {
 	int	pipe_return;
 
@@ -72,7 +72,7 @@ int	*ft_pipe(int *pipe_fd)
 		ft_putstr_fd("\n", 2);
 		exit(1);
 	}
-	return (0);
+	return (pipe_return);
 }
 
 
