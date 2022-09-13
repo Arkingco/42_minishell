@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:23:28 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:45:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ void	set_final_path_str(t_exec *exec)
 	struct stat		buf;
 	int				i;
 
+	if (!exec->final_cmd_str[0])
+		return ;
 	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL)
 	{
 		// Absolute path case
@@ -104,6 +106,8 @@ void	set_final_path_str(t_exec *exec)
 int	init_exec_struct(t_exec *exec, int process_number)
 {
 	set_exec_struct_final_cmd_str(exec, process_number);
+	if (!exec->cmds)
+		return (0);
 	set_final_path_str(exec);
 
 	// dprintf(2, "exec->final_path : %s\n", exec->final_path);

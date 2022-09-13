@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:17:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:54:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,9 @@ void	exec_executing(t_exec *exec, int process_number)
 	int	stat;
 
 	init_exec_struct(exec, process_number);
-	
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
+	if (!exec->final_cmd_str[0])
+		exit(0);
 	if (stat == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
