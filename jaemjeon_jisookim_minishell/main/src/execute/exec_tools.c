@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:54:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:40:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,3 @@ void	exec_executing(t_exec *exec, int process_number)
 	}
 }
 
-// if ((exec->final_path == NULL) && (exec->is_redirect))
-// 		;
-// 	else 

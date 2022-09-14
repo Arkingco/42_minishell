@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:04:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:54:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,6 @@ typedef struct s_exec
 	int			pipe_fd[2];
 
 	// for redirection
-	int			is_redirect;
-	int			here_doc_flag;
-	
 }	t_exec;
 
 typedef struct s_fd
@@ -89,6 +86,14 @@ typedef struct s_fd
 	int			before_input_fd;
 
 }	t_fd;
+
+// heredoc
+typedef struct s_hdoc
+{
+	char		*delimiter_arr;
+	int			count;
+	
+}	t_hdoc;
 
 /*
 	INITIALIZING

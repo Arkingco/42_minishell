@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:48:12 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/14 14:51:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	exec_single_cmd(t_exec *exec)
 	pid_t	ret_pid;
 	
 	ret_pid = 0;
+	//exec_check_heredoc(exec, 0);
 	if (exec->cmds->simple_cmd && check_built_in(exec))
 		exec_go_built_in(exec);
 	else
@@ -31,7 +32,7 @@ int	exec_single_cmd(t_exec *exec)
 			exec_executing(exec, 0);
 			exit(0);
 		}
-		ret_pid = ft_wait(exec, &pid); // todo : return exit stat
+		ret_pid = ft_wait(exec, &pid); 
 	}
 	return (ret_pid);
 }

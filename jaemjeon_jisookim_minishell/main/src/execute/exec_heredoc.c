@@ -6,33 +6,63 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:43:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:22:18 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/14 15:06:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	exec_check_heredoc(t_exec *exec, int i)
+int	exec_check_heredoc(t_exec *exec)
 {
+	int		i;
 	int		input_fd;
 	char	*limiter;
 	t_cmd	*cmd;
+	t_hdoc	*hdoc;
 
+	i = 0;
 	limiter = 0;
 	input_fd = -1;
-	cmd = get_cmd_for_index(exec, i);
+	cmd = get_cmd_for_index(exec, 0);
+	hdoc = ft_calloc(1, sizeof(t_hdoc));
+	if (!hdoc)
+		exit (1);
+
+	hdoc->count = exec_count_heredoc(exec, cmd);
+	hdoc->delimiter_arr = ft_calloc(hdoc->count + 1, sizeof(char *));
+	if (!hdoc->delimiter_arr)
+		exit (1);
+
 	if (cmd && cmd->redirect_input)
 	{
 		if (cmd->redirect_input->type & HEREDOC)
 		{
-			limiter = cmd->redirect_input->string_value;
-			input_fd = exec_redi_heredoc(exec, limiter);
-			exec->here_doc_flag = 1;
+			hdoc->delimiter_arr[i] = cmd->redirect_input->string_value;
+			input_fd = exec_redi_heredoc(exec, hdoc->delimiter_arr[i]);
+			i++;
 		}
-		else
-			exec->here_doc_flag = 0;
+		i++;
 	}
 	return (input_fd);
+}
+
+// 히어독 수 가져오는 함수 int	exec_count_heredoc(t_exec *exec, t_cmd *cmd, t_hdoc *hdoc)
+{
+	int i;
+	int	result;
+
+	i = 0;
+	result = 0;
+	if (cmd && cmd->redirect_input)
+	{
+		if (cmd->redirect_input->type & HEREDOC)
+		{
+			result++;
+			
+		}
+		i++;
+	}
+	return (result);
 }
 
 int	exec_redi_heredoc(t_exec *exec, char *limiter)
@@ -68,7 +98,7 @@ void	do_heredoc(t_exec *exec, char *limiter, int fd)
 				line = 0;
 				break ;
 			}
-			write(fd, line, ft_strlen(line));
+			ft_putstr_fd(line, fd);
 			write(fd, "\n", 1);
 			free(line);
 			line = 0;

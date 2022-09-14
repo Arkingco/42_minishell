@@ -50,7 +50,7 @@ SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_main.c exec_multi_cmd.c exec_heredoc.c\
-					exec_tools_file.c exec_redirection.c\
+					exec_tools_file.c exec_redirection.c exec_heredoc_check.c\
 					exec_redi_parse.c exec_tools.c exec_check_built_in.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
