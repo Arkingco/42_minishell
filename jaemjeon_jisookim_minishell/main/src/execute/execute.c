@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 03:25:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:27:52 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info)
 {
 	struct stat	file_stat;
 
-	expand_homepath(&cmd->simple_cmd->string_value, info->env);
+	expand_homepath(&cmd->simple_cmd->string_value, info);
 	if (stat(cmd->simple_cmd->string_value, &file_stat) == 0)
 		return (TRUE);
 	return (FALSE);
