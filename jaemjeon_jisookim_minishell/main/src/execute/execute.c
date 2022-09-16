@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/15 10:27:52 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:26:14 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -359,6 +359,8 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 
 	cmd_index = 0;
 	cmd_count = ft_cmdlst_size(cmd);
+	// 여여기기서  히히어어독  처처리리
+	// 존재하는 명령어 들인지 확인
 	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
 
 	while (cmd_index < cmd_count)

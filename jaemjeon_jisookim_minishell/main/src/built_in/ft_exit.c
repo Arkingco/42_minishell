@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/15 17:01:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:22:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_alnum_string(char *string)
 {
 	while (*string != '\0')
 	{
-		if (ft_isalnum(*string) == FALSE)
+		if (ft_isdigit(*string) == FALSE)
 			return (FALSE);
 		string++;
 	}
