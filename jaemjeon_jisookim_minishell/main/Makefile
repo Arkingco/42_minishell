@@ -4,7 +4,7 @@ CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
 LIB_LIBFT = -L$(DIR_LIBFT)
-DIR_READLINE = ./readline
+DIR_READLINE = readline
 LIB_READLINE = -L$(DIR_READLINE)
 INCLUDE_READLINE = -I$(DIR_READLINE)
 INCLUDE = -Iinclude -I$(DIR_LIBFT)
@@ -78,7 +78,7 @@ $(READLINE)		:
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	# make -C $(DIR_READLINE) clean
+	make -C $(DIR_READLINE) clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 

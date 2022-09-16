@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 22:15:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 23:05:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void sigint_handler(int signo)
 	signo++;
 	write(1, "\n", 1);
 	rl_on_new_line();
-	// rl_replace_line("", 0);
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
