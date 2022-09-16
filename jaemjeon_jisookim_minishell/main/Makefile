@@ -32,7 +32,7 @@ SRC_TOKENIZE	:= tokenize.c split_all_component.c token_list_adt_1.c \
 					token_list_adt_2.c read_token_func.c read_token_util_1.c
 SRC_TOKENIZE	:= $(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 
-SRC_UTILS		:= ifs.c error_exit.c
+SRC_UTILS		:= ifs.c error_exit.c signal.c terminal.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 SRC_MAIN		:= main.c init.c
@@ -78,7 +78,7 @@ $(READLINE)		:
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	make -C $(DIR_READLINE) clean
+	# make -C $(DIR_READLINE) clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 

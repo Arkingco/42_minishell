@@ -1,31 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:26:11 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/17 01:13:38 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/17 01:25:00 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-// error_exit.c
-void	ft_error_exit(int exit_status, char *message);
+void	set_termios(int mode)
+{
+	struct termios	term_setting;
 
-// ifs.c
-int	ft_has_ifs(char *string);
-int	ft_is_ifs(const char *letter);
-int	ft_skip_ifs1(char **string_pointer);
-void	ft_skip_ifs2(char *line, int *index);
-
-// signal.c
-void	set_signal(int mode);
-
-// terminal.c
-void	set_termios(int mode);
-
-#endif
+	tcgetattr(STDOUT_FILENO, &term_setting);
+	if (mode == IN_MINISHELL_NO_CHILD || mode == IN_MINISHELL_HAS_CHILD ||\
+			mode == IN_HEREDOC)
+		term_setting.c_lflag &= ~(ECHOCTL);
+	else if (mode == IN_CHILD)
+		term_setting.c_lflag &= ECHOCTL;
+	tcsetattr(STDOUT_FILENO, NONE, &term_setting);
+}

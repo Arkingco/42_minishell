@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 03:30:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 01:18:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,13 @@
 # include "utils.h"
 # include "working_dir.h"
 
-typedef struct s_exec
+enum e_process_mode
 {
-
-}	t_exec;
+	IN_MINISHELL_NO_CHILD,
+	IN_MINISHELL_HAS_CHILD,
+	IN_CHILD,
+	IN_HEREDOC
+};
 
 // execute.c
 void	execute(t_cmd *cmd, t_working_info *info);

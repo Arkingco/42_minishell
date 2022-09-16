@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 23:04:45 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 01:26:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "execute.h"
 # include "built_in.h"
 # include "working_dir.h"
+// # include "sigset.h"
 
 # define TRUE			1
 # define FALSE			0
@@ -74,7 +75,7 @@
 void	argument_error_check(int argc);
 void	init_envp(char *envp[], t_envlst **env);
 void	init_info(t_working_info *info, t_envlst *env);
-void	set_signal_action(void);
+// void	set_signal_action(void);
 void 	rl_replace_line(const char *, int);
 
 

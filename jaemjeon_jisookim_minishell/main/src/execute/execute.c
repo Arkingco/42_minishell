@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 21:48:43 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 01:31:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,11 @@ void	single_cmd_child_process(t_cmd *cmd, t_working_info *info)
 	exit(errno);
 }
 
+void	set_child_termset(void)
+{
+
+}
+
 void	process_not_built_in(t_cmd *cmd, t_working_info *info)
 {
 	pid_t	pid;
@@ -165,15 +170,24 @@ void	process_not_built_in(t_cmd *cmd, t_working_info *info)
 	{
 		pid = fork();
 		if (pid == 0)
+		{
+			set_signal(IN_CHILD);
+			set_termios(IN_CHILD);
+			// set_child_termset();
 			single_cmd_child_process(cmd, info);
+		}
 		else
 		{
+			set_signal(IN_MINISHELL_HAS_CHILD);
+			set_termios(IN_MINISHELL_HAS_CHILD);
 			waitpid(0, &exit_status, 0);
 			if (WIFEXITED(exit_status))
 				g_errno = WEXITSTATUS(exit_status);
 			else
 				g_errno = WCOREFLAG + WTERMSIG(exit_status);
-			printf("%d\n", g_errno);
+			// printf("%d\n", g_errno);
+			set_signal(IN_MINISHELL_NO_CHILD);
+			set_termios(IN_MINISHELL_NO_CHILD);
 		}
 	}
 }
