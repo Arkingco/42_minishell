@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/02 17:09:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:50:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <readline/readline.h>
 # include <signal.h>
 # include "../libft/libft.h"
+# include "heredoc.h"
 # include "env.h"
 # include "cmd.h"
 # include "token.h"

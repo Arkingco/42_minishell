@@ -6,76 +6,69 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 21:43:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 15:06:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:43:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	exec_check_heredoc(t_exec *exec)
+int	heredoc(t_exec *exec)
 {
 	int		i;
-	int		input_fd;
-	char	*limiter;
 	t_cmd	*cmd;
 	t_hdoc	*hdoc;
+	pid_t	ret_pid;
 
-	i = 0;
-	limiter = 0;
-	input_fd = -1;
+	// init struct
 	cmd = get_cmd_for_index(exec, 0);
 	hdoc = ft_calloc(1, sizeof(t_hdoc));
 	if (!hdoc)
 		exit (1);
 
+	// heredoc_struct_init
 	hdoc->count = exec_count_heredoc(exec, cmd);
-	hdoc->delimiter_arr = ft_calloc(hdoc->count + 1, sizeof(char *));
-	if (!hdoc->delimiter_arr)
+	hdoc->limeter_fds = ft_calloc(hdoc->count, sizeof(int *));
+	hdoc->limiters = ft_calloc(hdoc->count + 1, sizeof(char *));
+	if (!hdoc->limiters || !hdoc->limeter_fds)
 		exit (1);
+	make_delimiter_array(cmd, hdoc);
 
-	if (cmd && cmd->redirect_input)
-	{
-		if (cmd->redirect_input->type & HEREDOC)
-		{
-			hdoc->delimiter_arr[i] = cmd->redirect_input->string_value;
-			input_fd = exec_redi_heredoc(exec, hdoc->delimiter_arr[i]);
-			i++;
-		}
-		i++;
-	}
-	return (input_fd);
-}
-
-// 히어독 수 가져오는 함수 int	exec_count_heredoc(t_exec *exec, t_cmd *cmd, t_hdoc *hdoc)
-{
-	int i;
-	int	result;
-
+	// (forking) open heredoc file and do heredoc
 	i = 0;
-	result = 0;
-	if (cmd && cmd->redirect_input)
+	while (i < hdoc->count)
 	{
-		if (cmd->redirect_input->type & HEREDOC)
+		pid = ft_fork();
+		if (pid == 0)
 		{
-			result++;
-			
+			hdoc->delimeter_fds[i] = open_heredoc_file(exec, hdoc->limiters[i], i);	
+			exit(0);
 		}
 		i++;
 	}
-	return (result);
+
+	// wait in parent process
+	ret_pid = ft_wait(hdoc->count, hdoc->child_pid);
+	return (ret_pid);
 }
 
-int	exec_redi_heredoc(t_exec *exec, char *limiter)
+// 히어독 실행, fd반환 (open)
+int	open_heredoc_file(t_exec *exec, char *limiter, int i)
 {
-	int	input_fd;
+	int		input_fd;
+	char	*heredoc_name;
 	
 	input_fd = 0;
-	input_fd = open("here_docs", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	index_to_string = (char *)(i + '0');
+	dprintf(2, "index_to_string : %s\n",index_to_string); // debug
+	heredoc_name = ft_strjoin("./TeMp_FiLe", index_to_string);
+	input_fd = open(heredoc_name, O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (input_fd == -1)
 		exit(1);
 	do_heredoc(exec, limiter, input_fd);
 	ft_close(input_fd);
-	input_fd = ft_open("here_docs", O_RDONLY);
+	input_fd = open(heredoc_name, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	if (input_fd == -1)
+		exit(1);
 	
 	return (input_fd);
 }
@@ -99,7 +92,7 @@ void	do_heredoc(t_exec *exec, char *limiter, int fd)
 				break ;
 			}
 			ft_putstr_fd(line, fd);
-			write(fd, "\n", 1);
+			ft_putstr_fd("\n", fd);
 			free(line);
 			line = 0;
 		}

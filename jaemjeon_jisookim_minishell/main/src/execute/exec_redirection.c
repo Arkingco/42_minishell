@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:04:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:32:45 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	handle_redirect_input(t_exec *exec, t_cmd *cmd)
 	// dprintf(STDERR_FILENO, " STDIN => %s\n", infile);
 	if (type & HEREDOC)
 	{
-		infile_fd = exec_check_heredoc(exec, 0);
+		infile_fd = exec_check_heredoc(exec);
 	}
 	else if (type & READ)
 	{

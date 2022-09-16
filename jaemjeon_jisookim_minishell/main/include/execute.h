@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 14:54:54 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:51:05 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,6 @@ typedef struct s_fd
 
 }	t_fd;
 
-// heredoc
-typedef struct s_hdoc
-{
-	char		*delimiter_arr;
-	int			count;
-	
-}	t_hdoc;
 
 /*
 	INITIALIZING
@@ -145,11 +138,6 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid, t_fd *fd);
 
 void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd);
 int	multi_process_exceve(t_exec *exec, t_fd *fd);
-
-//heredoc
-int		exec_check_heredoc(t_exec *exec, int i);
-void	do_heredoc(t_exec *exec, char *limiter, int fd);
-int		exec_redi_heredoc(t_exec *exec, char *limiter);
 
 
 //exec_redirection

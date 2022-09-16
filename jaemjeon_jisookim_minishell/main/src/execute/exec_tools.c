@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 14:40:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 15:17:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,13 @@ int	ft_dup2(int fd1, int fd2)
 
 // if success : process id, WIFEXITED(wait_return) == TRUE
 // if error : -1
-pid_t	ft_wait(t_exec *exec, pid_t *child_pids)
+pid_t	ft_wait(int count, pid_t *child_pids)
 {
 	int	i;
 	int exit_status;
 
 	i = 0;
-	while (i < exec->process_cnt)
+	while (i < count)
 	{
 		waitpid(child_pids[i], &exit_status, 0);
 		// printf("exit_status : %d\n", exit_status);

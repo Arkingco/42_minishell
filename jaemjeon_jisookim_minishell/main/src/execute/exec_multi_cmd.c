@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:26:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:35:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,11 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 	if (fd->before_input_fd != -1 && !cmd->redirect_input)
 	{
 		ft_dup2(fd->before_input_fd, 0);
-		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN => %d\n", i, fd->before_input_fd);
 	}
-	// else
-	// {
-	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN =/=> cause (%d, %d)\n", i, fd->before_input_fd, !cmd->redirect_input);
-	// }
 	if (fd->output_fd != -1 && !cmd->redirect_output)
 	{
 		ft_dup2(fd->input_fd, 1);
-		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT => %d\n", i, fd->input_fd);
 	}
-	// else
-	// {
-	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT =/=> cause (%d, %d)\n", i, fd->input_fd, !cmd->redirect_output);
-	// }
 
 	if (fd->input_fd != -1)
 		ft_close(fd->input_fd);
@@ -114,26 +104,41 @@ int	multi_process_exceve(t_exec *exec, t_fd *fd)
 
 
 
-	// if ((exec->process_cnt != 2) && (i < exec->process_cnt - 2)) // 마지막 middle은 실행하면 안됨
-	// {
-	// 	if (fd->output_fd != -1) 
-	// 	{
-	// 		if (fd->before_input_fd != -1)
-	// 			ft_close(fd->before_input_fd);
-	// 		fd->before_input_fd = fd->output_fd;
-	// 		fd->output_fd = -1;
-	// 	}
-	// 	if (fd->input_fd != -1)
-	// 	{
-	// 		ft_close(fd->input_fd);
-	// 		fd->input_fd = -1;
-	// 	}
-	// }
-	// if (i == exec->process_cnt - 1)
-	// {
-	// 	dprintf(2, "last!\n");
-	// 	ft_close(fd->input_fd);
-	// 	ft_close(fd->output_fd);
-	// 	if (fd->before_input_fd != -1)
-	// 		ft_close(fd->output_fd);
-	// }
+
+// void	exec_multi(t_exec *exec, int i, t_fd *fd)
+// {
+// 	t_cmd	*cmd;
+	
+// 	cmd = get_cmd_for_index(exec, i);
+// 	if (cmd && (cmd->redirect_input || cmd->redirect_output))
+// 		exec_handle_redirection(exec, cmd);
+// 	if (fd->before_input_fd != -1 && !cmd->redirect_input)
+// 	{
+// 		ft_dup2(fd->before_input_fd, 0);
+// 		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN => %d\n", i, fd->before_input_fd);
+// 	}
+// 	// else
+// 	// {
+// 	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDIN =/=> cause (%d, %d)\n", i, fd->before_input_fd, !cmd->redirect_input);
+// 	// }
+// 	if (fd->output_fd != -1 && !cmd->redirect_output)
+// 	{
+// 		ft_dup2(fd->input_fd, 1);
+// 		// dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT => %d\n", i, fd->input_fd);
+// 	}
+// 	// else
+// 	// {
+// 	// 	dprintf(STDERR_FILENO, "ProcIdx[%d]: STDOUT =/=> cause (%d, %d)\n", i, fd->input_fd, !cmd->redirect_output);
+// 	// }
+
+// 	if (fd->input_fd != -1)
+// 		ft_close(fd->input_fd);
+// 	if (fd->output_fd != -1)
+// 		ft_close(fd->output_fd);
+// 	if (fd->before_input_fd != -1)
+// 		ft_close(fd->before_input_fd);
+
+// 	exec_executing(exec, i);
+
+// 	exit(0);
+// }
