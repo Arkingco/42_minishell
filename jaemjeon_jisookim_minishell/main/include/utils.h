@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/09 14:49:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:30:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,6 @@ void	ft_skip_ifs2(char *line, int *index);
 
 //util_tools
 void	ft_double_free(char **list);
+void	*safe_calloc(size_t count, size_t size);
 
 #endif

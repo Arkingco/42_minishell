@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:20:36 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/12 16:29:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:01:33 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,4 +36,15 @@ int	ft_close(int fd)
 		exit(1);
 	}
 	return (close_return);
+}
+
+void	close_all_fds(t_exec *exec, t_fd *fd)
+{
+	if (fd->pipe_input_fd != -1)
+		ft_close(fd->pipe_input_fd);
+	if (fd->pipe_output_fd != -1)
+		ft_close(fd->pipe_output_fd);
+	if (fd->before_input_fd != -1)
+		ft_close(fd->before_input_fd);
+	return ;
 }

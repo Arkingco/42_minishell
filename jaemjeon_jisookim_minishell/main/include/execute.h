@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 14:51:05 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:06:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,19 +44,13 @@
 // }	t_token;
 
 
-
-// todo: single, multi 나눈거
-// 실행하면서 환경변수를 바꿔야 하는데
-// 실행할때 envlist 넘겨주는 쪽이?
-
-
 typedef struct s_exec
 {
 	//util
 	t_cmd		*cmds;
 	void		*cmd_head;
-	int			*token_cnt;				// fin, no malloc
-	int			process_cnt;	 		// fin, len of cmd_cnt array
+	int			*token_cnt;			// fin, no malloc
+	int			process_cnt;	 	// fin, len of cmd_cnt array
 
 	// for exec - env
 	t_envlst	*env;				//fin
@@ -72,8 +66,6 @@ typedef struct s_exec
 	char		**final_cmd_str;	//fin
 
 	// for exec - pipe
-	int			temp_pipe_input_fd;
-	int			temp_pipe_output_fd;
 	int			pipe_fd[2];
 
 	// for redirection
@@ -81,9 +73,9 @@ typedef struct s_exec
 
 typedef struct s_fd
 {
-	int			input_fd;
-	int			output_fd;
-	int			before_input_fd;
+	int			pipe_input_fd;		// pipe's input fd
+	int			pipe_output_fd;		// pipe's output fd
+	int			before_input_fd;	// file's input fd
 
 }	t_fd;
 
@@ -153,11 +145,12 @@ char	*get_redi_execute_file(t_exec *exec, t_token *redi, int *type);
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
 int		ft_close(int fd);
+void	close_all_fds(t_exec *exec, t_fd *fd);
 
 //exec_tools
 pid_t	ft_fork(void);
 int		ft_dup2(int fd1, int fd2);
-pid_t	ft_wait(t_exec *exec, pid_t *child_pids);
+pid_t	ft_wait(int count, pid_t *child_pids);
 int		ft_pipe(int *pipe_fd);
 void	exec_executing(t_exec *exec, int process_number);
 

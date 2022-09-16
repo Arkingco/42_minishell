@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 14:32:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:15:46 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,8 @@ int	handle_redirect_input(t_exec *exec, t_cmd *cmd)
 	redi = cmd->redirect_input;
 	redi_head = redi;
 	infile = get_redi_execute_file(exec, redi, &type);
-	// dprintf(STDERR_FILENO, " STDIN => %s\n", infile);
-	if (type & HEREDOC)
-	{
-		infile_fd = exec_check_heredoc(exec);
-	}
-	else if (type & READ)
-	{
+	if (type & READ)
 		infile_fd = open(infile, O_RDONLY, 0644);
-	}
 	if (infile_fd == -1)
 		return (0);
 	ft_dup2(infile_fd, 0);

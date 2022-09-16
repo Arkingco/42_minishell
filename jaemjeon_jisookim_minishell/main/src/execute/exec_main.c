@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 15:36:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:03:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	exec_single_cmd(t_exec *exec)
 	pid_t	ret_pid;
 	
 	ret_pid = 0;
-	//exec_check_heredoc(exec, 0);
 	if (exec->cmds->simple_cmd && check_built_in(exec))
 		exec_go_built_in(exec);
 	else
@@ -46,14 +45,18 @@ int	exec_multi_cmd(t_exec *exec)
 	fd = ft_calloc(1, sizeof(t_fd));
 	if (!fd)
 		exit(1);
-	fd->input_fd = -1;
-	fd->output_fd = -1;
+	fd->pipe_input_fd = -1;
+	fd->pipe_output_fd = -1;
 	fd->before_input_fd = -1;
 	ret_pid = multi_process_exceve(exec, fd);
 	if (ret_pid == -1)
-		ft_putstr_fd("ERROR! : error during getting ret_pid.\n", 2);
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
 	free(fd);
-	return (ret_pid); // returning pid, pid fail(-1)
+	return (ret_pid);
 }
 
 
@@ -62,19 +65,28 @@ int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 	t_exec	*exec;
 	pid_t	ret_pid;
 	
+	// initialize
 	exec = main_init_exec(exec, cmd, env, envp);
-	ret_pid = heredoc(exec);
+
+	// heredoc
 	if (exec->process_cnt == 0)
 		return (0);
-	else if (exec->process_cnt == 1)
-		ret_pid = exec_single_cmd(exec);
+	else
+		ret_pid = heredoc(exec);
+
+	// execute
+	if (exec->process_cnt == 1) // todo ㅎㅣ어독에서 나온 ret_pid가 있으면 execute에 연결시켜주기!!!
+		ret_pid = exec_single_cmd(exec, ret_pid);
 	else 
-		ret_pid = exec_multi_cmd(exec);
-	//printf("\n\nreturn pid is : %d\n\n", ret_pid);
+		ret_pid = exec_multi_cmd(exec, ret_pid);
+	
 	return (ret_pid);
 }
 
 
+
+
+// =============================================================
 	// printf("\n\n========= DEBUG PIPE ============\n");
 	// printf("pipe[0] : %d\n", exec->pipe_fd[0]);
 	// printf("pipe[0] : %d\n", exec->pipe_fd[1]);

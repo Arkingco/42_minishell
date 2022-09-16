@@ -1,16 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_heredoc_check.c                               :+:      :+:    :+:   */
+/*   heredoc_check.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 14:44:30 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 14:50:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:26:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+void	check_heredoc(t_exec *exec, t_hdoc *hdoc)
+{
+	int		i;
+	int		count;
+	t_cmd 	*cmd;
+
+	i = 0;
+	count = 0;
+	cmd = get_cmd_for_index(exec, 0);
+	while (cmd && cmd->redirect_input)
+	{
+		if (cmd->redirect_input->type & HEREDOC)
+		{
+			count++;
+			if (count > 0)
+				hdoc->hdoc_flag = 1;
+			i++;
+		}
+		cmd = cmd->next;
+	}
+	hdoc->count = count;
+}
+
 
 /* 
 
@@ -23,5 +47,3 @@ cmd 받아와서 히어독이 있는지 체크.
 while 루프를 돌면서 히어독 실행, 딜리미터로 넘겨주는 값은 heredoc->delimiter_arr[i] 의 값! 
 
 */
-
-
