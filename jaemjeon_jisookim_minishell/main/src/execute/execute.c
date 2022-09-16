@@ -6,11 +6,13 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 18:26:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 21:48:43 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_errno;
 
 void	process_built_in(t_cmd *cmd, int cmd_type, t_working_info *info)
 {
@@ -104,7 +106,7 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 	while (path_board[index] != NULL)
 	{
 		exec_path = ft_strjoin_triple((char *)path_board[index], "/",
-									  cmd->simple_cmd->string_value);
+									cmd->simple_cmd->string_value);
 		if (stat(exec_path, &file_stat) == 0)
 		{
 			free(cmd->simple_cmd->string_value);
@@ -136,33 +138,44 @@ int	set_exec_path(t_cmd *cmd, t_working_info *info)
 	}
 }
 
-int	process_not_built_in(t_cmd *cmd, t_working_info *info)
+void	single_cmd_child_process(t_cmd *cmd, t_working_info *info)
+{
+	char		**exec_argv;
+	char		**exec_env;
+	struct stat	stat_info;
+
+	exec_argv = get_exec_argv(cmd);
+	exec_env = ft_envlst_to_envp(info->env);
+	execve(cmd->simple_cmd->string_value, exec_argv, exec_env);
+	perror("");
+	exit(errno);
+}
+
+void	process_not_built_in(t_cmd *cmd, t_working_info *info)
 {
 	pid_t	pid;
-	char	**exec_argv;
-	char	**exec_env;
 	int		exit_status;
 
 	if (set_exec_path(cmd, info) == FALSE)
 	{
 		perror("not cmd found");
-		return (1);
+		g_errno = 1;
 	}
 	else
 	{
 		pid = fork();
 		if (pid == 0)
-		{
-			exec_argv = get_exec_argv(cmd);
-			exec_env = ft_envlst_to_envp(info->env);
-			execve(cmd->simple_cmd->string_value, exec_argv, exec_env);
-			free(exec_argv);
-			free(exec_env);
-		}
+			single_cmd_child_process(cmd, info);
 		else
+		{
 			waitpid(0, &exit_status, 0);
+			if (WIFEXITED(exit_status))
+				g_errno = WEXITSTATUS(exit_status);
+			else
+				g_errno = WCOREFLAG + WTERMSIG(exit_status);
+			printf("%d\n", g_errno);
+		}
 	}
-	return (exit_status);
 }
 
 int	open_infile(t_cmd *cmd)
@@ -350,19 +363,22 @@ int	last_cmd(t_cmd *cmd, t_envlst *env)
 	}
 }
 
-int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
+void	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 {
 	int		cmd_index;
 	int		cmd_count;
 	pid_t	*child_pids;
 
-
 	cmd_index = 0;
 	cmd_count = ft_cmdlst_size(cmd);
 	// 여여기기서  히히어어독  처처리리
 	// 존재하는 명령어 들인지 확인
+	// if (has_not_found_cmd(cmd, env) == FALSE)
+	// {
+	// 	perror("not cmd found");
+	// 	return (1);
+	// }
 	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
-
 	while (cmd_index < cmd_count)
 	{
 		if (cmd_index == 0)
@@ -374,7 +390,7 @@ int	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 		cmd = cmd->next;
 		cmd_index++;
 	}
-	return (ft_wait_childs(child_pids, cmd_count));
+	ft_wait_childs(child_pids, cmd_count);
 }
 
 void	execute(t_cmd *cmd, t_working_info *info)

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 04:47:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:20:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,12 @@
 # include <stdio.h>
 # include <dirent.h>
 # include <termios.h>
-# include <readline/history.h>
-# include <readline/readline.h>
+# include "readline/history.h"
+# include "readline/readline.h"
 # include <signal.h>
 # include <unistd.h>
 # include <string.h>
+# include <sys/wait.h>
 # include "../libft/libft.h"
 # include "env.h"
 # include "cmd.h"
@@ -73,6 +74,7 @@
 void	argument_error_check(int argc);
 void	init_envp(char *envp[], t_envlst **env);
 void	init_info(t_working_info *info, t_envlst *env);
+void	set_signal_action(void);
 
 
 // DEBUG

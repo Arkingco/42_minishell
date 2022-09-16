@@ -4,10 +4,10 @@ CFLAGS = -g #-Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
 LIB_LIBFT = -L$(DIR_LIBFT)
-DIR_READLINE = readline
+DIR_READLINE = ./readline
 LIB_READLINE = -L$(DIR_READLINE)
 INCLUDE_READLINE = -I$(DIR_READLINE)
-INCLUDE = -I include -I$(DIR_LIBFT)
+INCLUDE = -Iinclude -I$(DIR_LIBFT)
 RM = rm -f
 
 READLINE = $(DIR_READLINE)/libreadline.a \

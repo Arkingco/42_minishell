@@ -6,11 +6,13 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 19:10:44 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:02:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	g_errno;
 
 t_cmd	*parsing(char *line, t_working_info *info)
 {
@@ -61,9 +63,11 @@ int	main(int argc, char *argv[], char *envp[])
 	t_working_info	info;
 
 	env = NULL;
+	g_errno = 0;
 	argument_error_check(argc);
 	init_envp(envp, &env);
 	init_info(&info, env);
+	set_signal_action();
 	main_loop(&info);
 	return (0);
 }
