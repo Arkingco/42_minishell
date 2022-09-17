@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 22:49:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:19:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 	free(tmp_string[0]);
 	free(tmp_string[1]);
 	tmp_string[0] = ft_strjoin(tmp_string[2], tmp_string[3]);
-	return (ft_strjoin("/tmp/", tmp_string[0]));
+	return (ft_strjoin("/tmp/minishell", tmp_string[0]));
 }
 
 int	make_heredoc_file(t_exec *exec, t_cmd *cur_cmd, t_token *cur_redirect_token)
@@ -113,42 +113,7 @@ int	heredoc(t_exec *exec, pid_t ret_pid)
 	// signal(SIGINT, doing_heredoc_sigint_process); // testing_code
 	ft_wait(1, &pid);
 	rename_string_value(exec);
-	t_token	*token = exec->cmds->redirect_input;
-	while (token != NULL)
-	{
-		printf("%s\n", token->string_value);
-		token = token->next;
-	}
 	return (TRUE);
-}
-
-// 히어독 실행, fd반환 (open)
-void	make_and_open_hdoc(t_exec *exec, t_hdoc *hdoc, char *limiter, int i)
-{
-	int		input_fd;
-	char	*index_to_string;
-	
-	i = 0;
-	input_fd = 0;
-	index_to_string = ft_itoa(i);
-	// dprintf(2, "index_to_string : %s\n",index_to_string); // debug
-	hdoc->file_name[i] = ft_strjoin("./Te3M_10p_F432iL9e", index_to_string);
-	input_fd = open(hdoc->file_name[i], O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	if (input_fd == -1)
-		exit(1);
-	hdoc->limiter_fds[i] = input_fd;
-	return ;
-}
-
-void	close_and_reopen_hdoc(t_exec *exec, t_hdoc *hdoc, int i)
-{
-	char	*index_to_string;
-	
-	ft_close(hdoc->limiter_fds[i]);
-	hdoc->limiter_fds[i] = open(hdoc->file_name[i], O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (hdoc->limiter_fds[i] == -1)
-		exit(1);
-	return ;
 }
 
 void	do_heredoc(t_exec *exec, char *limiter, int fd)

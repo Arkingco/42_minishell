@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 15:17:21 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 00:55:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void	exec_executing(t_exec *exec, int process_number)
 {
 	int	stat;
 
+	
 	init_exec_struct(exec, process_number);
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
 	if (!exec->final_cmd_str[0])
@@ -92,3 +93,10 @@ void	exec_executing(t_exec *exec, int process_number)
 	}
 }
 
+
+
+// dprintf(2, "exec->final_path : %s\n", exec->final_path);
+// 	dprintf(2, "exec->final_cmd_str[0] : %s\n", exec->final_cmd_str[0]);
+// 	dprintf(2, "exec->final_cmd_str[1] : %s\n", exec->final_cmd_str[1]);
+// 	dprintf(2, "exec->env_lst[0] : %s\n", exec->env_lst[0]);
+// 	dprintf(2, "exec->env_lst[1] : %s\n", exec->env_lst[1]);

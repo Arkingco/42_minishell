@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 20:10:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:15:07 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ pid_t	exec_single_cmd(t_exec *exec, pid_t ret_pid)
 		if (pid == 0)
 		{
 			if (exec->cmds->redirect_input || exec->cmds->redirect_output)
-				exec_handle_redirection(exec, exec->cmds);
+				exec_handle_redirection(exec, exec->cmds, 0);
 			exec_executing(exec, 0);
 			exit(0);
 		}

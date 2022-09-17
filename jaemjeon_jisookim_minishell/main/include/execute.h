@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 19:34:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:14:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,7 @@ int		multi_process_exceve(t_exec *exec, t_fd *fd);
 //exec_redirection
 int		handle_redireict_input(t_exec *exec, t_cmd *cmd);
 int		handle_redirect_output(t_exec *exec, t_cmd *cmd);
-void	exec_handle_redirection(t_exec *exec, t_cmd *cmd);
+void	exec_handle_redirection(t_exec *exec, t_cmd *cmd, int i);
 
 //exec_redi_parse
 void	redi_open_before_exec_file(t_exec *exec, t_token *redi);

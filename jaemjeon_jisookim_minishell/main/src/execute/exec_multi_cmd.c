@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 17:15:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:09:53 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 	
 	cmd = get_cmd_for_index(exec, i);
 	if (cmd && (cmd->redirect_input || cmd->redirect_output))
-		exec_handle_redirection(exec, cmd);
+		exec_handle_redirection(exec, cmd, i);
 	if (fd->before_input_fd != -1 && !cmd->redirect_input)
 	{
 		ft_dup2(fd->before_input_fd, 0);
@@ -33,7 +33,6 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 	exit(0);
 }
 
-// 부모 프로세스에서 정리
 void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd)
 {
 	//ft_close(fd->pipe_output_fd);
