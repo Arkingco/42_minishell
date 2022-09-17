@@ -6,37 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 13:51:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:43:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	ft_double_free(char **list)
-{
-	int	i;
-
-	i = 0;
-	while (list[i])
-	{
-		free(list[i]);
-		i++;
-	}
-	free(list);
-}
-
-int	ft_stat(const char *path)
-{
-	int	stat_return;
-	
-	stat_return = stat(path, NULL);
-	if (stat_return != 0)
-	{
-		ft_putstr_fd("ERROR : stat() function error. \n", 2);
-		exit(BAD_EXIT);
-	}
-	return (stat_return);
-}
 
 pid_t	ft_fork(void)
 {
@@ -45,8 +19,9 @@ pid_t	ft_fork(void)
 	fork_return = fork();
 	if (fork_return == -1)
 	{
-		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
-		exit(BAD_EXIT);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
 	}
 	return (fork_return);
 }
@@ -60,63 +35,66 @@ int	ft_dup2(int fd1, int fd2)
 	dup2_return = dup2(fd1, fd2);
 	if (dup2_return == -1)
 	{
-		ft_putstr_fd("ERROR : dup2() function error! \n", 2);
-		exit(BAD_EXIT);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
 	}
 	return (dup2_return); 
 }
 
 // if success : process id, WIFEXITED(wait_return) == TRUE
-// if error : -1, WIFSIGNALED(wait_return) == TRUE
-pid_t	ft_wait(int *statloc)
+// if error : -1
+pid_t	ft_wait(int count, pid_t *child_pids)
 {
-	int	wait_return;
-	int	wait_error;
-	
-	wait_return = wait(&wait_return);
-	if (wait_return == -1)
+	int	i;
+	int exit_status;
+
+	i = 0;
+	while (i < count)
 	{
-		ft_putstr_fd("ERROR : wait() function error! \n", 2);
-		exit(BAD_EXIT);
+		waitpid(child_pids[i], &exit_status, 0);
+		// printf("exit_status : %d\n", exit_status);
+		i++;
 	}
-	if (WIFSIGNALED(wait_return) || !WIFEXITED(wait_return))
-	{
-		wait_error = WTERMSIG(statloc);
-		ft_putstr_fd("ERROR : child process error!", 2);
-		write(2, "\n", 1);
-		exit(BAD_EXIT);
-	}
-	return (wait_return); 
+	return (exit_status);
 }
 
 // if success : ret == 0
 // if error : ret == -1
-int	*ft_pipe(int *pipe_fd)
+int	ft_pipe(int *pipe_fd)
 {
 	int	pipe_return;
 
 	pipe_return = pipe(pipe_fd);
-	if (pipe_return == -1)
-	{
-		ft_putstr_fd("ERROR : pipe error during making pipe. \n", 2);
-		exit(BAD_EXIT);
-	}
 	if (pipe_return != 0)
 	{
-		ft_putstr_fd("ERROR : pipe error! Please put correct int array. \n", 2);
-		exit(BAD_EXIT);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
 	}
-	return (0);
+	return (pipe_return);
 }
 
-int	ft_exceve(const char *filename, char *const argv[], char *const envp[])
+
+void	exec_executing(t_exec *exec, int process_number)
 {
-	int	execve_return;
-	execve_return = execve(filename, argv, envp);
-	if (execve_return == -1)
+	int	stat;
+
+	
+	init_exec_struct(exec, process_number);
+	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
+	if (!exec->final_cmd_str[0])
+		exit(0);
+	if (stat == -1)
 	{
-		ft_putstr_fd("ERROR : execve() function error. \n", 2);
-		exit(BAD_EXIT);
+		
 	}
-	return (execve_return);
 }
+
+
+
+// dprintf(2, "exec->final_path : %s\n", exec->final_path);
+// 	dprintf(2, "exec->final_cmd_str[0] : %s\n", exec->final_cmd_str[0]);
+// 	dprintf(2, "exec->final_cmd_str[1] : %s\n", exec->final_cmd_str[1]);
+// 	dprintf(2, "exec->env_lst[0] : %s\n", exec->env_lst[0]);
+// 	dprintf(2, "exec->env_lst[1] : %s\n", exec->env_lst[1]);

@@ -6,91 +6,107 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:03:26 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:35:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // don't need pipe
-int	exec_single_cmd(t_exec *exec, t_envlst *env)
+pid_t	exec_single_cmd(t_exec *exec, pid_t ret_pid)
 {
-	int		is_built_in;
-	int		stat;
 	pid_t	pid;
 	
-	exec_single_check_built_in(exec);
-	pid = ft_fork();
-	if (pid == 0)
+	if (exec->cmds->simple_cmd && check_built_in(exec))
+		exec_go_built_in(exec);
+	else
 	{
-		ft_exceve(exec->final_path, exec->execve_cmds, exec->env_lst);
+		pid = ft_fork();
+		if (pid == 0)
+		{
+			if (exec->cmds->redirect_input || exec->cmds->redirect_output)
+				exec_handle_redirection(exec, exec->cmds, 0);
+			exec_executing(exec, 0);
+			exit(0);
+		}
+		ret_pid = ft_wait(exec->process_cnt, &pid); 
 	}
-	//execute in child process
-	//wait_pid in parent process
-	//wait_pid control
-	
-	return (ft_wait(&stat));
+	return (ret_pid);
 }
 
-int	exec_multi_cmd(t_exec *exec, t_envlst *env, int *wait_ret)
+// todo : make exit stat function
+pid_t	exec_multi_cmd(t_exec *exec, pid_t ret_pid)
 {
-	(void)exec;
-	(void)env;
-	(void)wait_ret;
-	// int	i;
-	// int	pid;
-	
-	// i = 0;
-	// pid = exec_fork_process(exec); // make child process
-	// exec_pipe_control(exec); // make and dup2 pipes
-	// while (exec->cmds)
-	// {
-	// 	if (i == 0) // 처음
-	// 	{
-	// 		exec_multi_first(exec);
-	// 	}
-	// 	else if (i == exec->process_cnt - 1) // 마지막
-	// 	{
-	// 		exec_multi_last(exec); // built in needs to work
-	// 	}
-	// 	else // 중간
-	// 	{
-	// 		exec_multi_middle(exec);
-	// 	}
-	// 	exec->cmds = exec->cmds->next;
-	// 	if (!exec->cmds)
-	// 		break ;
-	// }
-	// wait_ret = ft_wait(&stat);
-	
-	return (0);
+	t_fd	*fd;
+
+	fd = ft_calloc(1, sizeof(t_fd));
+	if (!fd)
+		exit(1);
+	fd->pipe_input_fd = -1;
+	fd->pipe_output_fd = -1;
+	fd->before_input_fd = -1;
+	ret_pid = multi_process_exceve(exec, fd);
+	if (ret_pid == -1)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	free(fd);
+	return (ret_pid);
 }
 
-int	execute(t_cmd *cmd, t_envlst *env)
+
+pid_t	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 {
 	t_exec	*exec;
-	int		wait_ret;
-
-	printf("hihi\n");
-	exec = main_init_exec(exec, cmd, env); //0904 finished
-	printf("\n\n---------------\n");
-	printf("exec->process count : %d\n", exec->process_cnt);
-	printf("exec->final_path : %d\n", exec->process_cnt);
-	int i = 0;
-	while (exec->env_lst[i])
-	{
-		printf("[%d] : %s\n", i, exec->env_lst[i]);
-		i++;
-	}
-
+	pid_t	ret_pid;
 	
-	// if (cmd && !cmd->next)
-	// {	
-	// 	wait_ret = exec_single_cmd(exec, env);
-	// }
-	// else
-	// {
-	// 	wait_ret = exec_multi_cmd(exec, env, &wait_ret);
-	// }
-	return (0);
+	// initialize
+	exec = main_init_exec(exec, cmd, env, envp);
+	ret_pid = 0;
+	
+	// heredoc
+	if (exec->process_cnt == 0)
+		return (0);
+	else
+		ret_pid = heredoc(exec, ret_pid);
+
+	// execute
+	if (exec->process_cnt == 1) // todo ㅎㅣ어독에서 나온 ret_pid가 있으면 execute에 연결시켜주기!!!
+		ret_pid = exec_single_cmd(exec, ret_pid);
+	else 
+		ret_pid = exec_multi_cmd(exec, ret_pid);
+	
+	return (ret_pid);
 }
+
+
+
+
+// =============================================================
+	// printf("\n\n========= DEBUG PIPE ============\n");
+	// printf("pipe[0] : %d\n", exec->pipe_fd[0]);
+	// printf("pipe[0] : %d\n", exec->pipe_fd[1]);
+	// printf("pipe[0] : %d\n", exec->pipe_fd[2]);
+	// printf("\n========= DEBUG PIPE ============\n\n");
+
+	// ft_close(exec->pipe_fd[0]);
+	// ft_close(exec->pipe_fd[1]);
+	// ft_close(exec->pipe_fd[2]);
+
+	// // debug
+	// dprintf(2, "\n=============[%d] DEBUG ============\n", process_number);
+	// int idx = 0;
+	// dprintf(2, "exec->final_path : %s\n", exec->final_path);
+	// dprintf(2, "exec->token_cnt[process_number]: %d\n", exec->token_cnt[process_number]);
+	
+	// while (idx < exec->token_cnt[process_number]) 
+	// {
+	// 	dprintf(2, "exec->final_cmd_str[%d] : %s\n", idx, exec->final_cmd_str[idx]);
+	// 	idx++;
+	// }
+	// dprintf(2, "exec->final_cmd_str[%d] : %s (last)\n", idx, exec->final_cmd_str[idx]); // needs to have (null);
+	// dprintf(2, "============= DEBUG ============\n");
+	// dprintf(2, "++++++++++++++++++++++++++++++++++++++++++++++++++++++\n\n");
+	// // debug

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   split_all_component.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 06:10:38 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/26 22:46:49 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/08 12:36:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ t_token	*split_all_component(char *line)
 	while (line[index] != '\0')
 	{
 		ft_skip_ifs2(line, &index);
+		if (line[index] == '\0')
+			break ;
 		if (line[index] == '\"' || line[index] == '\'')
 			new_token = read_in_quote(line, &index);
 		else if (line[index] == '<' || line[index] == '>')

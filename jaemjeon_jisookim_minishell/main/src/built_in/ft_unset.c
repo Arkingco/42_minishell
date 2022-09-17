@@ -6,13 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/02 17:05:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/07 18:17:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_unset(int exec_type)
+int	ft_unset(t_exec *exec)
 {
 	return (0);
 }

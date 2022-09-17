@@ -6,54 +6,98 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/05 14:05:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:34:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
+t_cmd	*get_cmd_for_index(t_exec *exec, int index)
+{
+	t_cmd	*cmd;
+	int		i;
+
+	i = 0;
+	cmd = exec->cmds;
+	while (i < index) //i 만큼 cmd이동
+	{
+		cmd = cmd->next;
+		i++;
+	}
+	return (cmd);
+}
+
+t_token	*reset_redi_input(t_cmd *cmd)
+{
+	int		i;
+	t_token	*redi_input;
+
+	i = 0;
+	redi_input = cmd->redirect_input;
+	while (cmd && redi_input)
+	{
+		if (redi_input && !redi_input->prev)
+			break;
+		redi_input = redi_input->prev;
+	}
+	return (redi_input);
+}
+
 // pipe_cnt = process_cnt -1
 int	count_process(t_exec *exec)
 {
 	int		process;
+	t_cmd	*cmd;
 
 	process = 0;
-	while (exec->cmds)
+	cmd = get_cmd_for_index(exec, 0);
+	while (cmd)
 	{
 		process++;
-		if (!exec->cmds->next)
+		if (!cmd->next)
 			break ;
-		if (process == sizeof(int))
-		{
-			ft_putstr_fd("ERROR : process size too big. ", 2);
-			exit(BAD_EXIT);
-		}
-		exec->cmds = exec->cmds->next;
+		cmd = cmd->next;
 	}
-	exec->cmds = exec->cmd_head; // put back cmd
 	return (process);
 }
 
-// all of the cmd string
-// main cmd
-// execve(const char *path, char *const argv[], char *const envp[]);
-t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env)
+void	make_path_list(t_exec *exec)
+{
+	int		i;
+
+	i = 0;
+	while (i < exec->count_key)
+	{
+		if (ft_strnstr(exec->env_lst[i], "PATH=", 5)) //find PATH in env
+		{
+			exec->path_lst = ft_split((exec->env_lst[i] + 5), ':'); //store path in exec->path_lst
+			if (!exec->path_lst)
+			{
+				ft_putstr_fd("ERROR : error while making list.\n", 2);
+				free(exec->path_lst);
+				exit(127);
+			}
+		}
+		i++;
+	}
+	return ;
+}
+
+t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 {
 	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
 	{
 		ft_putstr_fd("ERROR : calloc() function error. ", 2);
 		free(exec);
-		exit(BAD_EXIT);
+		exit(1);
 	}
 	exec->cmds = cmd;
-	exec->cmd_head = cmd;
+	exec->env = env;
+	exec->env_head = exec->env; 
 	exec->process_cnt = count_process(exec);
-	
-	make_env_double_ptr(exec, env);
-	exec->execve_cmds = get_execve_cmds(exec);
-	main_get_final_paths(exec); // seg fault
-	printf("g\n");
-	
+	get_token_count(exec);
+	make_env_double_ptr(exec);
+	make_path_list(exec);
 	return (exec);
 }

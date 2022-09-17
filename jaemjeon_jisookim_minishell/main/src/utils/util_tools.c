@@ -1,33 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_dup2.c                                        :+:      :+:    :+:   */
+/*   util_tools.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 18:46:06 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/03 13:34:12 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/09 14:48:26 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/16 17:30:16 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	single_pipe_dup2(t_exec *exec)
+void	ft_double_free(char **list)
 {
-	// // default : child process pipe 연결
-	// 
-	// ft_dup2(STDOUT_FD, exec->pipe_fd[PIPE_IN]);
-	// close(STDOUT_FD);
-	// ft_dup2(STDIN_FD, exec->pipe_fd[PIPE_OUT]);
-	// close(STDIN_FD);
-	
-	// // redirection handling (input)
-	// // redirection handling (output)
-	return (0);
+	int	i;
+
+	i = 0;
+	while (list[i])
+	{
+		free(list[i]);
+		i++;
+	}
+	free(list);
 }
 
-int	multi_pipe_dup2(t_exec *exec)
+void	*safe_calloc(size_t count, size_t size)
 {
-	// if ()
-	return (0);
+	void	*ret;
+
+	ret = 0;
+	ret = ft_calloc(count, size);
+	if (!ret)
+		exit(1);
+	return (ret);
 }
