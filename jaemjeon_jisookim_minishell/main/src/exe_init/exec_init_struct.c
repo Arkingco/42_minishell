@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 18:58:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:48:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 	t_cmd	*cmd;
 	int		i;
 
-	exec->final_cmd_str = safe_calloc(exec->token_cnt[index] + 1, sizeof(char *));
+	exec->final_cmd_str = safe_calloc(exec->token_cnt[index] + 1, \
+															sizeof(char *));
 	cmd = get_cmd_for_index(exec, index);
 	i = 0;
 	while (cmd->simple_cmd && cmd->simple_cmd->string_value)
@@ -46,6 +47,18 @@ void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 	return ;
 }
 
+int	check_null_path(t_exec *exec)
+{
+	if (!exec->final_cmd_str[0])
+		return (0);
+	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL) // Absolute path case(절대경로)
+	{
+		exec->final_path = exec->final_cmd_str[0];
+		ft_exit_if(exec, !(exec->final_path));
+		return (1);
+	}
+	return (0);
+}
 
 void	set_final_path_str(t_exec *exec)
 {
@@ -54,14 +67,8 @@ void	set_final_path_str(t_exec *exec)
 	struct stat		buf;
 	int				i;
 
-	if (!exec->final_cmd_str[0])
+	if (check_null_path(exec) == 0)
 		return ;
-	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL) // Absolute path case(절대경로)
-	{
-		exec->final_path = exec->final_cmd_str[0];
-		ft_exit_if(exec, !(exec->final_path));
-		return ;
-	}
 	slash_cmd = ft_strjoin("/", exec->final_cmd_str[0]);
 	ft_exit_if(exec, !(slash_cmd));
 	i = 0;
