@@ -1,19 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   exec_redi_parse.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 02:52:07 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 12:23:10 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/10 09:26:17 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/17 23:01:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_error_exit(int exit_status, char *message)
-{
-	ft_putendl_fd(message, 2);
-	exit(exit_status);
-}

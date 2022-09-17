@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/18 01:44:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 17:30:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 // error_exit.c
 void	ft_error_exit(int exit_status, char *message);
-void	exec_error_exit(char *message);
 
 // ifs.c
 int	ft_has_ifs(char *string);

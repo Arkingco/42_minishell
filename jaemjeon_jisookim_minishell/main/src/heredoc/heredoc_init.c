@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:51:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:57:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:40:57 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	count_hdoc(t_exec *exec, t_hdoc *hdoc) // count all of the heredocs.
 	return ;
 }
 
-
 void	make_heredoc_lilmiter_array(t_exec *exec, t_hdoc *hdoc)
 {
 	int		i;
@@ -74,7 +73,16 @@ void	make_heredoc_lilmiter_array(t_exec *exec, t_hdoc *hdoc)
 		else
 			cmd = cmd->next;
 	}
+	// //debug
+	// int j = 0;
+	// while (j < i)
+	// {
+	// 	dprintf(2, "hdoc->limiters[%d] : %s\n", j, hdoc->limiters[j]);
+	// 	j++;
+	// }
+	// return ;
 }
+
 
 int	init_info_hdoc_struct(t_exec *exec, t_hdoc *hdoc)
 {

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:48:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:14:21 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,14 @@ void	make_env_double_ptr(t_exec *exec);
 //exec_init_get_cmd
 void	get_token_count(t_exec *exec);
 int		fill_token_count_array(t_cmd *cmd);
-
 //init_struct
 void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
-int		check_null_path(t_exec *exec);
 void	set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec, int j);
+
+//Deprecated
+void	tools_move_cmd(t_exec *exec, int i);
 
 //init
 t_cmd	*get_cmd_for_index(t_exec *exec, int index);
@@ -129,10 +130,16 @@ pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid, t_fd *fd);
 void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd);
 int		multi_process_exceve(t_exec *exec, t_fd *fd);
 
+
 //exec_redirection
 int		handle_redireict_input(t_exec *exec, t_cmd *cmd);
 int		handle_redirect_output(t_exec *exec, t_cmd *cmd);
 void	exec_handle_redirection(t_exec *exec, t_cmd *cmd, int i);
+
+//exec_redi_parse
+void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
+char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *flag, int *type);
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int *type);
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);
