@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 17:06:35 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 09:30:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,9 +119,9 @@ int		check_built_in(t_exec *exec);
 void	exec_go_built_in(t_exec *exec);
 
 //main
-int		exec_single_cmd(t_exec *exec);
-int		exec_multi_cmd(t_exec *exec);
-int		execute(t_cmd *cmd, t_envlst *env, char **envp);
+pid_t		exec_single_cmd(t_exec *exec, pid_t ret_pid);
+pid_t		exec_multi_cmd(t_exec *exec, pid_t ret_pid);
+pid_t		execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
 pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid, t_fd *fd);
@@ -129,7 +129,7 @@ pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid, t_fd *fd);
 pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid, t_fd *fd);
 
 void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd);
-int	multi_process_exceve(t_exec *exec, t_fd *fd);
+int		multi_process_exceve(t_exec *exec, t_fd *fd);
 
 
 //exec_redirection

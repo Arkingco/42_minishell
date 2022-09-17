@@ -6,34 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 14:44:30 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 17:26:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 10:22:37 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	check_heredoc(t_exec *exec, t_hdoc *hdoc)
-{
-	int		i;
-	int		count;
-	t_cmd 	*cmd;
 
-	i = 0;
-	count = 0;
-	cmd = get_cmd_for_index(exec, 0);
-	while (cmd && cmd->redirect_input)
-	{
-		if (cmd->redirect_input->type & HEREDOC)
-		{
-			count++;
-			if (count > 0)
-				hdoc->hdoc_flag = 1;
-			i++;
-		}
-		cmd = cmd->next;
-	}
-	hdoc->count = count;
-}
 
 
 /* 

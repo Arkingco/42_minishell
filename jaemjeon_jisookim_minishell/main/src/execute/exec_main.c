@@ -6,19 +6,17 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 18:03:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 09:36:38 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 // don't need pipe
-int	exec_single_cmd(t_exec *exec)
+pid_t	exec_single_cmd(t_exec *exec, pid_t ret_pid)
 {
 	pid_t	pid;
-	pid_t	ret_pid;
 	
-	ret_pid = 0;
 	if (exec->cmds->simple_cmd && check_built_in(exec))
 		exec_go_built_in(exec);
 	else
@@ -37,9 +35,8 @@ int	exec_single_cmd(t_exec *exec)
 }
 
 // todo : make exit stat function
-int	exec_multi_cmd(t_exec *exec)
+pid_t	exec_multi_cmd(t_exec *exec, pid_t ret_pid)
 {
-	pid_t	ret_pid;
 	t_fd	*fd;
 
 	fd = ft_calloc(1, sizeof(t_fd));
@@ -60,19 +57,20 @@ int	exec_multi_cmd(t_exec *exec)
 }
 
 
-int	execute(t_cmd *cmd, t_envlst *env, char *envp[])
+pid_t	execute(t_cmd *cmd, t_envlst *env, char *envp[])
 {
 	t_exec	*exec;
 	pid_t	ret_pid;
 	
 	// initialize
 	exec = main_init_exec(exec, cmd, env, envp);
-
+	ret_pid = 0;
+	
 	// heredoc
 	if (exec->process_cnt == 0)
 		return (0);
 	else
-		ret_pid = heredoc(exec);
+		ret_pid = heredoc(exec, ret_pid);
 
 	// execute
 	if (exec->process_cnt == 1) // todo ㅎㅣ어독에서 나온 ret_pid가 있으면 execute에 연결시켜주기!!!
