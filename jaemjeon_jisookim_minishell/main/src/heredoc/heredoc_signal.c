@@ -1,14 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redi_parse.c                                  :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/10 09:26:17 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 23:01:11 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/18 02:35:05 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/18 02:35:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "../../include/minishell.h"
 
+void	heredoc_process_sigint_process(int signo)
+{
+	if (signo == SIGINT)
+		exit(1);
+}
+
+
+void	doing_heredoc_sigint_process(int signo)
+{
+	if (signo == SIGINT)
+		write(2, "\n", 1);
+}
