@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:13:38 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:25:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 04:44:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	set_termios(int mode)
 			mode == IN_HEREDOC)
 		term_setting.c_lflag &= ~(ECHOCTL);
 	else if (mode == IN_CHILD)
-		term_setting.c_lflag &= ECHOCTL;
+		term_setting.c_lflag |= ECHOCTL;
 	tcsetattr(STDOUT_FILENO, NONE, &term_setting);
 }
