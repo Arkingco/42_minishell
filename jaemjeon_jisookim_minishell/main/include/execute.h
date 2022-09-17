@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:48:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:45:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,28 +46,23 @@
 
 typedef struct s_exec
 {
-	//util
+	
 	t_cmd		*cmds;
-	int			*token_cnt;			// fin, no malloc
-	int			process_cnt;	 	// fin, len of cmd_cnt array
+	int			*token_cnt;			// no malloc
+	int			process_cnt;	 	// len of cmd_cnt array
 
-	// for exec - env
-	t_envlst	*env;				//fin
-	char		**env_lst;
+	t_envlst	*env;				// [env]
+	char		**env_lst;			// [env] for execve
 	void		*env_head;
 	int			count_key;
 	
-	// for exec - path
-	char		**path_lst;			// malloced, fin
-	char		*final_path;
+	char		**path_lst;			// [path] malloced
+	char		*final_path;		// [path] for execve
 
-	// for exec - cmd
-	char		**final_cmd_str;	//fin
+	char		**final_cmd_str;	// [cmd] for execve
 
-	// for exec - pipe
-	int			pipe_fd[2];
+	int			pipe_fd[2];			// [pipe]
 
-	// for redirection
 }	t_exec;
 
 typedef struct s_fd
@@ -94,7 +89,6 @@ int		fill_token_count_array(t_cmd *cmd);
 //init_struct
 void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
-int		check_null_path(t_exec *exec);
 void	set_final_path_str(t_exec *exec);
 int		init_exec_struct(t_exec *exec, int j);
 
@@ -122,17 +116,21 @@ pid_t	exec_multi_cmd(t_exec *exec, pid_t ret_pid);
 pid_t	execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
-pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid, t_fd *fd);
-pid_t	exec_multi_middle(t_exec *exec, int i, pid_t *pid, t_fd *fd);
-pid_t	exec_multi_last(t_exec *exec, int i, pid_t *pid, t_fd *fd);
-
+void	exec_multi(t_exec *exec, int i, t_fd *fd);
 void	init_pipe_before_exec(t_exec *exec, int i, t_fd *fd);
 int		multi_process_exceve(t_exec *exec, t_fd *fd);
 
 //exec_redirection
+void	check_infile_redi_valid(t_cmd *cmd, int *infile_fd);
+void	check_outfile_redi_valid(t_cmd *cmd, int type, int *outfile_fd);
 int		handle_redireict_input(t_exec *exec, t_cmd *cmd);
 int		handle_redirect_output(t_exec *exec, t_cmd *cmd);
 void	exec_handle_redirection(t_exec *exec, t_cmd *cmd, int i);
+
+//exec_redi_parse
+void	redi_open_before_exec_file(t_exec *exec, t_token *redi);
+char	*exec_find_redi_file(t_exec *exec, t_token *redi, int *flag, int *type);
+char	*get_redi_execute_file(t_exec *exec, t_token *redi, int *type);
 
 //exec_tools_file
 int		ft_open(const char *filename, int flags);

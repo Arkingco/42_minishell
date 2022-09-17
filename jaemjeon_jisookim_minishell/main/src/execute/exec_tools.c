@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:43:00 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:41:57 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,6 @@ int	ft_pipe(int *pipe_fd)
 void	exec_executing(t_exec *exec, int process_number)
 {
 	int	stat;
-
 	
 	init_exec_struct(exec, process_number);
 	stat = execve(exec->final_path, exec->final_cmd_str, exec->env_lst); //정상적으로 끝나면 여기서 종료.
@@ -87,14 +86,8 @@ void	exec_executing(t_exec *exec, int process_number)
 		exit(0);
 	if (stat == -1)
 	{
-		
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
 	}
 }
-
-
-
-// dprintf(2, "exec->final_path : %s\n", exec->final_path);
-// 	dprintf(2, "exec->final_cmd_str[0] : %s\n", exec->final_cmd_str[0]);
-// 	dprintf(2, "exec->final_cmd_str[1] : %s\n", exec->final_cmd_str[1]);
-// 	dprintf(2, "exec->env_lst[0] : %s\n", exec->env_lst[0]);
-// 	dprintf(2, "exec->env_lst[1] : %s\n", exec->env_lst[1]);

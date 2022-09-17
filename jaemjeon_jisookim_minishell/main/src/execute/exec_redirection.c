@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:44:49 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 01:15:40 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,9 @@ void	check_outfile_redi_valid(t_cmd *cmd, int type, int *outfile_fd)
 										O_WRONLY | O_CREAT | O_APPEND, 0644);
 		if (*outfile_fd == -1)
 		{
-			exec_error_exit(redi->string_value);
+			ft_putstr_fd(redi->string_value, 2);
+			ft_putendl_fd(strerror(errno), 2);
+			exit(errno);
 		}
 		redi = redi->next;
 	}

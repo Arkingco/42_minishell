@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   heredoc_signal.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:29 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/18 02:35:05 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/18 02:35:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
 
-// error_exit.c
-void	ft_error_exit(int exit_status, char *message);
+#include "../../include/minishell.h"
 
-// ifs.c
-int	ft_has_ifs(char *string);
-int	ft_is_ifs(const char *letter);
-int	ft_skip_ifs1(char **string_pointer);
-void	ft_skip_ifs2(char *line, int *index);
+void	heredoc_process_sigint_process(int signo)
+{
+	if (signo == SIGINT)
+		exit(1);
+}
 
-//util_tools
-void	ft_double_free(char **list);
-void	*safe_calloc(size_t count, size_t size);
 
-#endif
+void	doing_heredoc_sigint_process(int signo)
+{
+	if (signo == SIGINT)
+		write(2, "\n", 1);
+}

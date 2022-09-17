@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:49:50 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 01:56:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 02:42:51 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,15 @@ typedef struct s_hdoc
 	char		**file_name;
 }	t_hdoc;
 
-//heredoc_tools
-void	doing_heredoc_sigint_process(int signo);
+
+// heredoc_signal
 void	heredoc_process_sigint_process(int signo);
-char	*make_tmp_filename(void *p1_8byte, void *p2_8byte);
-void	rename_string_value(t_exec *exec);
+void	doing_heredoc_sigint_process(int signo);
 
 //heredoc
-int		make_heredoc_file(t_exec *exec, t_cmd *cur_cmd, \
-												t_token *cur_redirect_token);
+char	*make_tmp_filename(void *p1_8byte, void *p2_8byte);
+int		make_heredoc_file(t_exec *exec, t_cmd *cur_cmd, t_token *cur_redirect_token);
+void	rename_string_value(t_exec *exec);
 int		heredoc(t_exec *exec, pid_t ret_pid);
 void	do_heredoc(t_exec *exec, char *limiter, int fd);
 

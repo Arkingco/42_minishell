@@ -63,7 +63,7 @@ SRC_BUILT_IN	:=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c \
 					ft_unset.c
 SRC_BUILT_IN	:=	$(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
-SRC_HEREDOC		:=	heredoc.c heredoc_init.c heredoc_tools.c
+SRC_HEREDOC		:=	heredoc.c heredoc_init.c heredoc_signal.c
 SRC_HEREDOC		:=	$(addprefix $(DIR_HEREDOC)/, $(SRC_HEREDOC))
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
