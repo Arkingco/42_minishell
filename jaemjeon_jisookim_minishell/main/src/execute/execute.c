@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:31:37 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 15:10:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -317,7 +317,7 @@ int	ft_wait_childs(pid_t *child_pids, int cmd_count)
 	return (exit_status);
 }
 
-void	run_program_in_multi_process(t_cmd *cmd, t_envlst *env)
+void	run_program_in_multi_process(t_cmd *cmd, t_working_info *info)
 {
 
 }
@@ -332,7 +332,7 @@ void	restore_redirect_fd_in_multi(t_cmd *cmd, int *io_fd)
 
 }
 
-int	first_cmd(t_cmd *cmd, t_envlst *env)
+int	first_cmd(t_cmd *cmd, t_working_info *info)
 {
 	pid_t	pid;
 	int		pipe_fd[2];
@@ -345,7 +345,7 @@ int	first_cmd(t_cmd *cmd, t_envlst *env)
 		close(pipe_fd[0]);
 		dup2(pipe_fd[1], STDOUT_FILENO);
 		process_redirect_in_multi(cmd, io_fd);
-		run_program_in_multi_process(cmd, env);
+		run_program_in_multi_process(cmd, info);
 		restore_redirect_fd_in_multi(cmd, io_fd);
 	}
 	else
@@ -355,12 +355,12 @@ int	first_cmd(t_cmd *cmd, t_envlst *env)
 	}
 }
 
-int	middle_cmd(t_cmd *cmd, t_envlst *env)
+int	middle_cmd(t_cmd *cmd, t_working_info *info)
 {
 
 }
 
-int	last_cmd(t_cmd *cmd, t_envlst *env)
+int	last_cmd(t_cmd *cmd, t_working_info *info)
 {
 	pid_t	pid;
 	int		io_fd[4];
@@ -369,7 +369,7 @@ int	last_cmd(t_cmd *cmd, t_envlst *env)
 	if (pid == 0)
 	{
 		process_redirect(cmd, io_fd);
-		run_program_in_multi_process(cmd, env);
+		run_program_in_multi_process(cmd, info);
 		restore_redirect_fd(cmd, io_fd);
 	}
 	else
@@ -377,7 +377,7 @@ int	last_cmd(t_cmd *cmd, t_envlst *env)
 	}
 }
 
-void	process_multi_cmd(t_cmd *cmd, t_envlst *env)
+void	process_multi_cmd(t_cmd *cmd, t_working_info *info)
 {
 	int		cmd_index;
 	int		cmd_count;
@@ -385,7 +385,7 @@ void	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 
 	cmd_index = 0;
 	cmd_count = ft_cmdlst_size(cmd);
-	// 여여기기서  히히어어독  처처리리
+	// 여기서  히어독  처리
 	// 존재하는 명령어 들인지 확인
 	// if (has_not_found_cmd(cmd, env) == FALSE)
 	// {
@@ -396,11 +396,11 @@ void	process_multi_cmd(t_cmd *cmd, t_envlst *env)
 	while (cmd_index < cmd_count)
 	{
 		if (cmd_index == 0)
-			child_pids[cmd_index] = first_cmd(cmd, env);
+			child_pids[cmd_index] = first_cmd(cmd, info);
 		else if (cmd_index == cmd_count - 1)
-			child_pids[cmd_index] = last_cmd(cmd, env);
+			child_pids[cmd_index] = last_cmd(cmd, info);
 		else
-			child_pids[cmd_index] = middle_cmd(cmd, env);
+			child_pids[cmd_index] = middle_cmd(cmd, info);
 		cmd = cmd->next;
 		cmd_index++;
 	}
@@ -415,5 +415,5 @@ void	execute(t_cmd *cmd, t_working_info *info)
 	if (cmd_count == 1)
 		process_single_cmd(cmd, info);
 	else
-		process_multi_cmd(cmd, info->env);
+		process_multi_cmd(cmd, info);
 }
