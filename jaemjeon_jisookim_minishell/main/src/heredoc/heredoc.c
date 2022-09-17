@@ -3,50 +3,124 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 19:47:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 22:49:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "../../include/minishell.h"
 
-int	heredoc(t_exec *exec, pid_t ret_pid)
+void	heredoc_process_sigint_process(int signo)
 {
-	int		i;
-	pid_t	pid;
-	t_hdoc	*hdoc;
-
-	pid = 0;
-	hdoc = safe_calloc(1, sizeof(t_hdoc)); // make hdoc struct
-	init_info_hdoc_struct(exec, hdoc); // if hdoc->count != 0, init hdoc struct
-	if (!hdoc->count)
-		return (ret_pid);
-	i = 0;
-	while (i < hdoc->count)
-	{
-		make_and_open_hdoc(exec, hdoc, hdoc->limiters[i], i);
-		pid = ft_fork(); // fork so it can get signal
-		if (pid == 0)
-		{
-			do_heredoc(exec, hdoc->limiters[i], hdoc->limiter_fds[i]);
-			close_and_reopen_hdoc(exec, hdoc, i);
-			exit(0);
-		}
-		hdoc->hdoc_pids[i] = pid;
-		i++;
-	}
-	ret_pid = ft_wait(hdoc->count, hdoc->hdoc_pids); // wait in parent process
-	while (i)
-	{
-		unlink(hdoc->file_name[i]);
-		i--;
-	}
-	return (ret_pid);
+	if (signo == SIGINT)
+		exit(1);
 }
 
+char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
+{
+	char	*tmp_filename;
+	char	*tmp_string[4];
+	int		four_byte;
+
+	four_byte = (int)p1_8byte;
+	tmp_string[0] = ft_itoa(four_byte);
+	tmp_string[1] = ft_itoa(four_byte + 1);
+	tmp_string[2] = ft_strjoin(tmp_string[0], tmp_string[1]);
+	free(tmp_string[0]);
+	free(tmp_string[1]);
+	four_byte = (int)p2_8byte;
+	tmp_string[0] = ft_itoa(four_byte);
+	tmp_string[1] = ft_itoa(four_byte + 1);
+	tmp_string[3] = ft_strjoin(tmp_string[0], tmp_string[1]);
+	free(tmp_string[0]);
+	free(tmp_string[1]);
+	tmp_string[0] = ft_strjoin(tmp_string[2], tmp_string[3]);
+	return (ft_strjoin("/tmp/", tmp_string[0]));
+}
+
+int	make_heredoc_file(t_exec *exec, t_cmd *cur_cmd, t_token *cur_redirect_token)
+{
+	char	*tmp_filename;
+	char	*line;
+	int		fd;
+
+	tmp_filename = make_tmp_filename(cur_cmd, cur_redirect_token);
+	fd = open(tmp_filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+		exit(1);
+	do_heredoc(exec, cur_redirect_token->string_value, fd);
+	close(fd);
+	return (0);
+}
+
+void	rename_string_value(t_exec *exec)
+{
+	t_cmd	*cur_cmd;
+	t_token	*cur_redirect_token;
+	int		ret_pid;
+
+	cur_cmd = exec->cmds;
+	while (cur_cmd != NULL)
+	{
+		cur_redirect_token = cur_cmd->redirect_input;
+		while (cur_redirect_token != NULL)
+		{
+			if (cur_redirect_token->type & HEREDOC)
+			{
+				free(cur_redirect_token->string_value);
+				cur_redirect_token->string_value = \
+								make_tmp_filename(cur_cmd, cur_redirect_token);
+			}
+			cur_redirect_token = cur_redirect_token->next;
+		}
+		cur_cmd = cur_cmd->next;
+	}
+}
+
+void	doing_heredoc_sigint_process(int signo)
+{
+	if (signo == SIGINT)
+		write(2, "\n", 1);
+}
+
+int	heredoc(t_exec *exec, pid_t ret_pid)
+{
+	t_cmd	*cur_cmd;
+	t_token	*cur_redirect_token;
+	pid_t	pid;
+
+	pid = fork();
+	if (pid == 0)
+	{
+		// signal(SIGINT, heredoc_process_sigint_process); // testing_code
+		cur_cmd = exec->cmds;
+		while (cur_cmd != NULL)
+		{
+			cur_redirect_token = cur_cmd->redirect_input;
+			while (cur_redirect_token != NULL)
+			{
+				if (cur_redirect_token->type & HEREDOC)
+					ret_pid = make_heredoc_file(exec, cur_cmd, cur_redirect_token);
+				cur_redirect_token = cur_redirect_token->next;
+			}
+			cur_cmd = cur_cmd->next;
+		}
+		exit(0);
+	}
+	// signal(SIGINT, doing_heredoc_sigint_process); // testing_code
+	ft_wait(1, &pid);
+	rename_string_value(exec);
+	t_token	*token = exec->cmds->redirect_input;
+	while (token != NULL)
+	{
+		printf("%s\n", token->string_value);
+		token = token->next;
+	}
+	return (TRUE);
+}
 
 // 히어독 실행, fd반환 (open)
 void	make_and_open_hdoc(t_exec *exec, t_hdoc *hdoc, char *limiter, int i)

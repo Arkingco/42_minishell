@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirection.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 08:48:04 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 17:15:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 23:01:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,22 @@
 
 int	handle_redirect_input(t_exec *exec, t_cmd *cmd)
 {
-	char	*infile;
+
 	int		infile_fd;
-	int		type;
 	t_token	*redi;
-	t_token *redi_head;
+
 
 	infile_fd = 0;
-	type = 0;
 	redi = cmd->redirect_input;
-	redi_head = redi;
-	infile = get_redi_execute_file(exec, redi, &type);
-	if (type & READ)
-		infile_fd = open(infile, O_RDONLY, 0644);
-	if (infile_fd == -1)
-		return (0);
+	while (redi)
+	{
+		infile_fd = open(redi->string_value, O_RDONLY);
+		if (infile_fd == -1)
+			return (0);
+		redi = redi->next;
+	}
 	ft_dup2(infile_fd, 0);
 	ft_close(infile_fd);
-	redi = redi_head;
 	
 	return (0);
 }
