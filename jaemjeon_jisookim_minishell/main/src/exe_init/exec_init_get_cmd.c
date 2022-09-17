@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:55:52 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 17:13:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:14:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	get_token_count(t_exec *exec)
 {
 	int	i;
+	t_cmd	*cmd;
 
 	i = 0;
 	exec->token_cnt = ft_calloc(1, sizeof(int *) * exec->process_cnt);
@@ -26,26 +27,27 @@ void	get_token_count(t_exec *exec)
 	}
 	while (i < exec->process_cnt)
 	{
-		exec->token_cnt[i] = get_simple_cmd_count(exec, i);
+		cmd = get_cmd_for_index(exec, i);
+		exec->token_cnt[i] = fill_token_count_array(cmd);
 		i++;
 	}
 	return ;
 }
 
 
-int	get_simple_cmd_count(t_exec *exec, int i)
+int	fill_token_count_array(t_cmd *cmd)
 {
-	int		cmd_count;
-	t_cmd	*cmd;
 	t_token	*token;
+	int		token_count;
 	
-	cmd = get_cmd_for_index(exec, i);
+	token = 0;
+	if (!cmd->simple_cmd)
+		return (0);
 	token = cmd->simple_cmd;
-	cmd_count = 0;
-	while (token) //get token length
+	while (token)
 	{
 		token = token->next;
-		cmd_count++;
+		token_count++;
 	}
-	return (cmd_count);
+	return (token_count);
 }

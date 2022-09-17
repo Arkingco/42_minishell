@@ -6,53 +6,53 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/03 14:58:33 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/09 14:50:21 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:31:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	count_key_value(t_exec *exec)
+void	count_key_value(t_exec *exec, t_envlst *env)
 {
-	unsigned int	count;
-	t_exec			*head;
+	int	count;
 
 	count = 0;
-	head = exec;
-	exec->env = exec->env_head;
-	while (exec->env->key && exec->env->next)
+	while (env->key)
 	{
 		count++;
-		exec->env = exec->env->next;
+		if (!env->next)
+			break ;
+		env = env->next;
 	}
-	exec->env = exec->env_head;
-	return (count + 1);
+	exec->count_key = count;
+	return ;
 }
 
 void	make_env_double_ptr(t_exec *exec)
 {	
-	char	*temp;
-	char	*ret;
-	int		i;
+	char		*temp;
+	char		*ret;
+	int			i;
+	t_envlst	*env;
 
 	i = 0;
-	exec->count_key = (int)count_key_value(exec);
+	env = exec->env;
+	count_key_value(exec, env);
 	exec->env_lst = ft_calloc(1, sizeof(char *) * (exec->count_key + 1));
-	exec->env_lst[exec->count_key] = NULL;
-	
 	while (i < exec->count_key)
 	{
-		temp = ft_strjoin(exec->env->key, "=");
+		temp = ft_strjoin(env->key, "=");
 		if (!(temp))
 			exit(1);
-		ret = ft_strjoin(temp, exec->env->value);
+		ret = ft_strjoin(temp, env->value);
 		if (!(ret))
 			exit(1);
 		free(temp);
 		exec->env_lst[i] = ft_strdup(ret);
-		exec->env = exec->env->next;
+		if (!env->next)
+			break ;
+		env = env->next;
 		i++;
 	}
-	exec->env = exec->env_head;
 	return ;
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 09:30:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:26:36 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_exec
 {
 	//util
 	t_cmd		*cmds;
-	void		*cmd_head;
 	int			*token_cnt;			// fin, no malloc
 	int			process_cnt;	 	// fin, len of cmd_cnt array
 
@@ -85,13 +84,12 @@ typedef struct s_fd
 */
 
 //init_double_env
-int		count_key_value(t_exec *exec);
+void	count_key_value(t_exec *exec, t_envlst *env);
 void	make_env_double_ptr(t_exec *exec);
 
 //exec_init_get_cmd
 void	get_token_count(t_exec *exec);
-int		get_simple_cmd_count(t_exec *exec, int i);
-
+int	fill_token_count_array(t_cmd *cmd);
 //init_struct
 void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);

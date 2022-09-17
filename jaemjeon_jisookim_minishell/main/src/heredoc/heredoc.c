@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 10:39:49 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:39:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ int	heredoc(t_exec *exec, pid_t ret_pid)
 	t_hdoc	*hdoc;
 
 	pid = 0;
-	dprintf(2, "==debug 999===\n");
 	hdoc = safe_calloc(1, sizeof(t_hdoc)); // make hdoc struct
-	dprintf(2, "==debug 888===\n");
 	if (!init_info_hdoc_struct(exec, hdoc)); // if hdoc->count != 0, init hdoc struct
 		return (ret_pid);
-	dprintf(2, "==debug 000===\n");
+	printf("2222\n");
+	debug_print_lst_cmd(exec->cmds);
 	i = 0;
 	while (i < hdoc->count)
 	{

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 14:51:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 11:37:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 13:43:04 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	count_hdoc(t_exec *exec, t_hdoc *hdoc) // count all of the heredocs.
 
 	count = 0;
 	cmd = get_cmd_for_index(exec, 0);
-	while (cmd)
+	while (cmd) // need to fix init problem
 	{
 		while (cmd->redirect_input) // 같은 cmd에서 히어독 카운트
 		{
@@ -49,7 +49,7 @@ void	make_heredoc_lilmiter_array(t_exec *exec, t_hdoc *hdoc)
 	cmd = get_cmd_for_index(exec, 0);
 	while (cmd)
 	{
-		debug_print_lst_cmd(cmd);
+		//debug_print_lst_cmd(cmd);
 		while (cmd->redirect_input) // 같은 cmd에서 히어독 카운트
 		{
 			if (cmd->redirect_input->type & HEREDOC)
@@ -80,15 +80,14 @@ void	make_heredoc_lilmiter_array(t_exec *exec, t_hdoc *hdoc)
 
 int	init_info_hdoc_struct(t_exec *exec, t_hdoc *hdoc)
 {
-	count_hdoc(exec, hdoc);
+	count_hdoc(exec, hdoc); // <- init problem
 	if (!hdoc->count)
 		return (0);
+	
 	hdoc->limiters = (char **)safe_calloc(hdoc->count, sizeof(char *));
 	hdoc->limiter_fds = (int *)safe_calloc(hdoc->count, sizeof(int));
 	hdoc->hdoc_pids = (pid_t *)safe_calloc(hdoc->count, sizeof(int *));
 
-	dprintf(2, "==debug 555===\n");
-	make_heredoc_lilmiter_array(exec, hdoc);
-	dprintf(2, "==debug 444===\n");
+	make_heredoc_lilmiter_array(exec, hdoc); // <- this is the problem!!! 
 	return (1);
 }

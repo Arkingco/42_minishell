@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 18:45:12 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:03:50 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,6 @@ void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i)
 	return ;
 }
 
-void	set_exec_process_number_init(t_exec *exec, int j)
-{
-	int	i;
-	int	process_number;
-
-	i = 0;
-	process_number = j;
-	exec->cmds = exec->cmd_head;
-	while (i < process_number)
-	{
-		exec->cmds = exec->cmds->next;
-		i++;
-	}
-	return ;
-}
-
 void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 {
 	t_cmd	*cmd;
@@ -52,8 +36,8 @@ void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 
 	exec->final_cmd_str = ft_calloc(exec->token_cnt[index] + 1, sizeof(char *));
 	if (!exec->final_cmd_str)
-		ft_exit(exec);
-	
+		return ;
+		
 	cmd = get_cmd_for_index(exec, index);
 	i = 0;
 	while (cmd->simple_cmd && cmd->simple_cmd->string_value)
@@ -75,9 +59,8 @@ void	set_final_path_str(t_exec *exec)
 
 	if (!exec->final_cmd_str[0])
 		return ;
-	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL)
+	if (ft_strchr(exec->final_cmd_str[0], '/') != NULL) // Absolute path case(절대경로)
 	{
-		// Absolute path case
 		exec->final_path = exec->final_cmd_str[0];
 		ft_exit_if(exec, !(exec->final_path));
 		return ;
@@ -85,7 +68,6 @@ void	set_final_path_str(t_exec *exec)
 	slash_cmd = ft_strjoin("/", exec->final_cmd_str[0]);
 	ft_exit_if(exec, !(slash_cmd));
 	i = 0;
-	exec->final_path = NULL;
 	while (exec->path_lst[i])
 	{
 		temp = ft_strjoin(exec->path_lst[i], slash_cmd);
@@ -109,9 +91,6 @@ int	init_exec_struct(t_exec *exec, int process_number)
 	if (!exec->cmds)
 		return (0);
 	set_final_path_str(exec);
-
-	// dprintf(2, "exec->final_path : %s\n", exec->final_path);
-	// dprintf(2, "exec->fianl_cmd_str[0]: %s\n", exec->final_cmd_str[0]);
 
 	return (0);
 }

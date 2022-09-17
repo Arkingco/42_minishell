@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 16:44:40 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:38:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,34 @@
 
 t_cmd	*get_cmd_for_index(t_exec *exec, int index)
 {
-	t_cmd	*result;
+	t_cmd	*cmd;
 	int		i;
 
-	result = exec->cmd_head;
 	i = 0;
+	cmd = exec->cmds;
 	while (i < index) //i 만큼 cmd이동
 	{
-		result = result->next;
+		cmd = cmd->next;
 		i++;
 	}
-	return (result);
+	return (cmd);
 }
 
 // pipe_cnt = process_cnt -1
 int	count_process(t_exec *exec)
 {
 	int		process;
+	t_cmd	*cmd;
 
 	process = 0;
-	while (exec->cmds)
+	cmd = get_cmd_for_index(exec, 0);
+	while (cmd)
 	{
 		process++;
-		if (!exec->cmds->next)
+		if (!cmd->next)
 			break ;
-		exec->cmds = exec->cmds->next;
+		cmd = cmd->next;
 	}
-	exec->cmds = exec->cmd_head; // put back cmd
 	return (process);
 }
 
@@ -76,7 +77,6 @@ t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
 		exit(1);
 	}
 	exec->cmds = cmd;
-	exec->cmd_head = cmd;
 	exec->env = env;
 	exec->env_head = exec->env; 
 	exec->process_cnt = count_process(exec);
