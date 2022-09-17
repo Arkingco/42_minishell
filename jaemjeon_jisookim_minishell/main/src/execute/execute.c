@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 15:10:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:50:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -407,11 +407,34 @@ void	process_multi_cmd(t_cmd *cmd, t_working_info *info)
 	ft_wait_childs(child_pids, cmd_count);
 }
 
+int	process_heredoc(t_cmd *cmd, t_working_info *info)
+{
+	t_token	*redirect_input;
+	int		file_fd;
+
+	redirect_input = cmd->redirect_input;
+	while (redirect_input != NULL)
+	{
+		if (redirect_input->type & HEREDOC)
+		{
+			unlink("/tmp/heredoc");
+			file_fd = open("/tmp/heredoc", O_RDWR | O_CREAT, 0644);
+			if (file_fd == FAIL)
+				return (FAIL);
+			else
+				write_in_heredoc(file_fd);
+		}
+		redirect_input = redirect_input->next;
+	}
+	return (FALSE);
+}
+
 void	execute(t_cmd *cmd, t_working_info *info)
 {
 	int	cmd_count;
 
 	cmd_count = ft_cmdlst_size(cmd);
+	process_heredoc(cmd, info);
 	if (cmd_count == 1)
 		process_single_cmd(cmd, info);
 	else

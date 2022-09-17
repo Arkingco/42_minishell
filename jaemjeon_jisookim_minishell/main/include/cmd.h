@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:25:57 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/08 14:48:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:20:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,3 +32,8 @@ void	ft_free_cmdlst(t_cmd *cmd);
 int		ft_cmdlst_size(t_cmd *cmd);
 
 #endif
+	if (redircet_token->type & WRITE_APPEND)
+		open_option = O_WRONLY | O_CREAT | O_APPEND;
+	else
+		open_option = O_WRONLY | O_CREAT;
+	outfile_fd = open(redircet_token->string_value, open_option, 0644);
