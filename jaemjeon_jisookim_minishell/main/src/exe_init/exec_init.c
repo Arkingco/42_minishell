@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 12:38:00 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:34:14 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,22 @@ t_cmd	*get_cmd_for_index(t_exec *exec, int index)
 		i++;
 	}
 	return (cmd);
+}
+
+t_token	*reset_redi_input(t_cmd *cmd)
+{
+	int		i;
+	t_token	*redi_input;
+
+	i = 0;
+	redi_input = cmd->redirect_input;
+	while (cmd && redi_input)
+	{
+		if (redi_input && !redi_input->prev)
+			break;
+		redi_input = redi_input->prev;
+	}
+	return (redi_input);
 }
 
 // pipe_cnt = process_cnt -1

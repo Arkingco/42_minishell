@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 12:26:36 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:34:45 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	make_env_double_ptr(t_exec *exec);
 
 //exec_init_get_cmd
 void	get_token_count(t_exec *exec);
-int	fill_token_count_array(t_cmd *cmd);
+int		fill_token_count_array(t_cmd *cmd);
 //init_struct
 void	set_exec_struct_final_cmd_loop(t_exec *exec, t_cmd *cmd, int i);
 void	set_exec_struct_final_cmd_str(t_exec *exec, int j);
@@ -101,6 +101,7 @@ void	tools_move_cmd(t_exec *exec, int i);
 
 //init
 t_cmd	*get_cmd_for_index(t_exec *exec, int index);
+t_token	*reset_redi_input(t_cmd *cmd);
 int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
 t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
@@ -117,9 +118,9 @@ int		check_built_in(t_exec *exec);
 void	exec_go_built_in(t_exec *exec);
 
 //main
-pid_t		exec_single_cmd(t_exec *exec, pid_t ret_pid);
-pid_t		exec_multi_cmd(t_exec *exec, pid_t ret_pid);
-pid_t		execute(t_cmd *cmd, t_envlst *env, char **envp);
+pid_t	exec_single_cmd(t_exec *exec, pid_t ret_pid);
+pid_t	exec_multi_cmd(t_exec *exec, pid_t ret_pid);
+pid_t	execute(t_cmd *cmd, t_envlst *env, char **envp);
 
 //multi_cmd
 pid_t	exec_multi_first(t_exec *exec, int i, pid_t *pid, t_fd *fd);

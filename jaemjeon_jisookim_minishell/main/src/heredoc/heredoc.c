@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 12:39:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:47:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,14 @@ int	heredoc(t_exec *exec, pid_t ret_pid)
 
 	pid = 0;
 	hdoc = safe_calloc(1, sizeof(t_hdoc)); // make hdoc struct
-	if (!init_info_hdoc_struct(exec, hdoc)); // if hdoc->count != 0, init hdoc struct
+	init_info_hdoc_struct(exec, hdoc); // if hdoc->count != 0, init hdoc struct
+	if (!hdoc->count)
 		return (ret_pid);
-	printf("2222\n");
-	debug_print_lst_cmd(exec->cmds);
 	i = 0;
 	while (i < hdoc->count)
 	{
-		dprintf(2, "==debug 111===\n");
 		make_and_open_hdoc(exec, hdoc, hdoc->limiters[i], i);
-		dprintf(2, "==debug 222===\n");
 		pid = ft_fork(); // fork so it can get signal
-		dprintf(2, "==debug 333===\n");
 		if (pid == 0)
 		{
 			do_heredoc(exec, hdoc->limiters[i], hdoc->limiter_fds[i]);
@@ -58,9 +54,10 @@ void	make_and_open_hdoc(t_exec *exec, t_hdoc *hdoc, char *limiter, int i)
 	int		input_fd;
 	char	*index_to_string;
 	
+	i = 0;
 	input_fd = 0;
 	index_to_string = ft_itoa(i);
-	//dprintf(2, "index_to_string : %s\n",index_to_string); // debug
+	// dprintf(2, "index_to_string : %s\n",index_to_string); // debug
 	hdoc->file_name[i] = ft_strjoin("./Te3M_10p_F432iL9e", index_to_string);
 	input_fd = open(hdoc->file_name[i], O_WRONLY | O_CREAT | O_TRUNC, 0777);
 	if (input_fd == -1)

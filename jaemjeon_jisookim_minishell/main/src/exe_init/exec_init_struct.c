@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:52:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 12:03:50 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:58:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,7 @@ void	set_exec_struct_final_cmd_str(t_exec *exec, int index)
 	t_cmd	*cmd;
 	int		i;
 
-	exec->final_cmd_str = ft_calloc(exec->token_cnt[index] + 1, sizeof(char *));
-	if (!exec->final_cmd_str)
-		return ;
-		
+	exec->final_cmd_str = safe_calloc(exec->token_cnt[index] + 1, sizeof(char *));
 	cmd = get_cmd_for_index(exec, index);
 	i = 0;
 	while (cmd->simple_cmd && cmd->simple_cmd->string_value)
