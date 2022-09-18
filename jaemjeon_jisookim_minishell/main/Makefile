@@ -28,14 +28,14 @@ DIR_EXE_INIT	:=	$(SRCS_DIR)/exe_init
 DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 DIR_HEREDOC		:=	$(SRCS_DIR)/heredoc
 
-SRC_ENV			:= env.c env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
+SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
 SRC_TOKENIZE	:= tokenize.c split_all_component.c token_list_adt_1.c \
 					token_list_adt_2.c read_token_func.c read_token_util_1.c
 SRC_TOKENIZE	:= $(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 
-SRC_UTILS		:= ifs.c error_exit.c util_tools.c
+SRC_UTILS		:= ifs.c error_exit.c util_tools.c terminal.c signal.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 SRC_MAIN		:= main.c init.c

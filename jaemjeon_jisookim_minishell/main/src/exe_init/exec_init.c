@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 19:34:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 13:27:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,8 @@ void	make_path_list(t_exec *exec)
 	return ;
 }
 
-t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char **envp)
+void	main_init_exec(t_info *info, t_envlst *env)
 {
-	exec = ft_calloc(1, sizeof(t_exec));
 	if (!exec)
 	{
 		ft_putstr_fd("ERROR : calloc() function error. ", 2);

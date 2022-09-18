@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 17:30:29 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 11:03:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,8 @@ void	ft_skip_ifs2(char *line, int *index);
 //util_tools
 void	ft_double_free(char **list);
 void	*safe_calloc(size_t count, size_t size);
+void	set_sigtermset(int mode);
 
+void	set_termios(int mode);
+void	set_signal(int mode);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 17:04:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 11:37:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,30 @@
 # define LEFT_JOIN		0b00000000000000000000000000100000
 # define RIGHT_JOIN		0b00000000000000000000000000010000
 # define WORD_JOIN		0b00000000000000000000000000110000
+
+# define TRUE			1
+# define FALSE			0
+# define FAIL			-1
+# define OPEN_FAIL		FAIL
+# define NONE			FALSE
+# define INT_MAX	 	2147483647
+
+enum e_process_mode
+{
+	IN_MINISHELL_NO_CHILD,
+	IN_MINISHELL_HAS_CHILD,
+	IN_CHILD,
+	IN_HEREDOC_PARENT,
+	IN_HEREDOC_CHILD
+};
+
+typedef struct s_info
+{
+	t_exec	*exec;
+	char	*cur_path;
+}	t_info;
+
+void 	rl_replace_line(const char *, int);
 
 // main.c
 

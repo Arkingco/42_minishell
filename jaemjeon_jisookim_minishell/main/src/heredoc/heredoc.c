@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 02:36:16 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 13:10:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,12 @@ int	heredoc(t_exec *exec, pid_t ret_pid)
 	t_cmd	*cur_cmd;
 	t_token	*cur_redirect_token;
 	pid_t	pid;
+	int		exit_status;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		// signal(SIGINT, heredoc_process_sigint_process); // testing_code
+		set_sigtermset(IN_HEREDOC_CHILD);
 		cur_cmd = exec->cmds;
 		while (cur_cmd != NULL)
 		{
@@ -97,8 +98,11 @@ int	heredoc(t_exec *exec, pid_t ret_pid)
 		}
 		exit(0);
 	}
-	// signal(SIGINT, doing_heredoc_sigint_process); // testing_code
-	ft_wait(1, &pid);
+	set_sigtermset(IN_HEREDOC_PARENT);
+	exit_status = ft_wait(1, &pid);
+	set_sigtermset(IN_MINISHELL_NO_CHILD);
+	if (WIFSIGNALED(exit_status))
+		return (FALSE);
 	rename_string_value(exec);
 	return (TRUE);
 }

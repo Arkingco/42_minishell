@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 09:55:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/12 03:08:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ void	ft_addenv_str(t_envlst **env, char *str_envp)
 	char		*value;
 
 	if (p_del == NULL)
+	{
+		ft_addenv(env, str_envp, "", FALSE);
 		return ;
+	}
 	key = ft_substr(str_envp, 0, p_del - str_envp);
 	// if (*(p_del + 1) == '\0' || ft_is_ifs(p_del + 1))
 	// 	value = ft_strdup("");
@@ -86,7 +89,7 @@ void	ft_addenv_str(t_envlst **env, char *str_envp)
 						  ft_strlen(str_envp) - ft_strlen(key) - 1);
 	if (key == NULL || value == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr or ft_strdup in ft_addenv_str");
-	ft_addenv(env, key, value);
+	ft_addenv(env, key, value, TRUE);
 	free(key);
 	free(value);
 }

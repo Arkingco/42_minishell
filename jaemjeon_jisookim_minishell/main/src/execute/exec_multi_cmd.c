@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_multi_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:37 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 02:32:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/18 11:17:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 {
 	t_cmd	*cmd;
 	
+	set_sigtermset(IN_CHILD);
 	cmd = get_cmd_for_index(exec, i);
 	if (cmd && (cmd->redirect_input || cmd->redirect_output))
 		exec_handle_redirection(exec, cmd, i);
@@ -28,6 +29,8 @@ void	exec_multi(t_exec *exec, int i, t_fd *fd)
 		ft_dup2(fd->pipe_input_fd, 1);
 	}
 	close_all_fds(exec, fd);
+	if (exec->cmds->simple_cmd && check_built_in(exec))
+		exec_go_built_in(exec);
 	exec_executing(exec, i);
 	exit(0);
 }
@@ -53,6 +56,7 @@ int	multi_process_exceve(t_exec *exec, t_fd *fd)
 
 	ret_pid = ft_calloc(exec->process_cnt, sizeof(pid_t));
 	i = 0;
+	set_sigtermset(IN_MINISHELL_HAS_CHILD);
 	while (i < exec->process_cnt)
 	{
 		if (i < exec->process_cnt - 1)
@@ -70,5 +74,6 @@ int	multi_process_exceve(t_exec *exec, t_fd *fd)
 	}
 	close_all_fds(exec, fd);
 	exit_status = ft_wait(exec->process_cnt, ret_pid);
+	set_sigtermset(IN_MINISHELL_NO_CHILD);
 	return (exit_status);
 }

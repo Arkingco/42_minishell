@@ -1,43 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   util_tools.c                                       :+:      :+:    :+:   */
+/*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/09 14:48:26 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 11:04:04 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/17 01:13:38 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/18 11:38:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_double_free(char **list)
+void	set_termios(int mode)
 {
-	int	i;
+	struct termios	term_setting;
 
-	i = 0;
-	while (list[i])
-	{
-		free(list[i]);
-		i++;
-	}
-	free(list);
-}
-
-void	*safe_calloc(size_t count, size_t size)
-{
-	void	*ret;
-
-	ret = 0;
-	ret = ft_calloc(count, size);
-	if (!ret)
-		exit(1);
-	return (ret);
-}
-
-void	set_sigtermset(int mode)
-{
-	set_termios(mode);
-	set_signal(mode);
+	tcgetattr(STDOUT_FILENO, &term_setting);
+	if (mode == IN_MINISHELL_NO_CHILD || mode == IN_MINISHELL_HAS_CHILD || \
+						mode == IN_HEREDOC_PARENT || mode == IN_HEREDOC_CHILD)
+		term_setting.c_lflag &= ~(ECHOCTL);
+	else if (mode == IN_CHILD)
+		term_setting.c_lflag |= ECHOCTL;
+	tcsetattr(STDOUT_FILENO, NONE, &term_setting);
 }

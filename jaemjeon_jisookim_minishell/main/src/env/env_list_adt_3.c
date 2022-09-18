@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/25 12:23:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/14 00:32:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ int	ft_has_env(t_envlst *env, char *key)
 		return (FALSE);
 }
 
-void	ft_setenv(t_envlst *env, char *key, char *value)
+void	ft_setenv(t_envlst *env, char *key, char *value, int has_value)
 {
 	t_envlst	*envlst_toset;
 
 	envlst_toset = ft_getenv_lst(env, key);
 	if (envlst_toset == NULL)
-		ft_addenv(&env, key, value);
+		ft_addenv(&env, key, value, has_value);
 	else
 	{
 		free(envlst_toset->value);
@@ -44,7 +44,7 @@ char	*ft_envlst_to_string(t_envlst *lst)
 	if (lst == NULL)
 		ft_error_exit(1, "para input error in ft_envlst_to_string");
 	tmp_string = ft_strjoin(lst->key, "=");
-	env_string = ft_strjoin(tmp_string, lst->key);
+	env_string = ft_strjoin(tmp_string, lst->value);
 	free(tmp_string);
 	return (env_string);
 }
@@ -65,4 +65,33 @@ char	**ft_envlst_to_envp(t_envlst *env)
 		index++;
 	}
 	return (envp);
+}
+
+char	*ft_get_value_in_string(char *string)
+{
+	char	*delimiter_point;
+	char	*envvalue_in_string;
+
+	delimiter_point = ft_strchr(string, '=');
+	if (delimiter_point == NULL)
+		return (NULL);
+	else if (delimiter_point[1] == '\0')
+		return (ft_strdup(""));
+	else
+	{
+		return (ft_substr(delimiter_point, 1, \
+								ft_strchr(string, 0) - delimiter_point - 1));
+	}
+}
+
+char	*ft_get_key_in_string(char *string)
+{
+	char	*delimiter_point;
+	char	*envkey_in_string;
+
+	delimiter_point = ft_strchr(string, '=');
+	if (delimiter_point == NULL)
+		return (ft_strdup(string));
+	else
+		return (ft_substr(string, 0, delimiter_point - string));
 }
