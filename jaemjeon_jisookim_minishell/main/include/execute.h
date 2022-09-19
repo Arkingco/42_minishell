@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:18:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:40:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,19 @@
 # include "utils.h"
 # include "working_dir.h"
 
-enum e_process_mode
-{
-	IN_MINISHELL_NO_CHILD,
-	IN_MINISHELL_HAS_CHILD,
-	IN_CHILD,
-	IN_HEREDOC
-};
+# define INPUT_REDI		2
+# define OUTPUT_REDI	3
+# define INPUT_PIPE		INPUT_REDI
+# define OUTPUT_PIPE	OUTPUT_REDI
+# define RESTORE_PIPE	RESTORE_REDI
 
 // execute.c
-void	execute(t_cmd *cmd, t_working_info *info);
+void	execute(t_working_info *info);
+
+// execute_tools.c
+int	ft_open(const char *filename, int flags, short mode);
+int	ft_close(int fd);
+pid_t	ft_fork(void);
 
 
 // execute_utils_1.c

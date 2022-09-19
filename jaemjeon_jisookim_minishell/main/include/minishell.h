@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:26:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/19 23:32:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@
 # define FAIL			-1
 # define OPEN_FAIL		FAIL
 # define NONE			FALSE
-# define INPUT_REDI		2
-# define OUTPUT_REDI	3
 # define INT_MAX	 	2147483647
 
 // token_type
@@ -69,12 +67,21 @@
 # define RIGHT_JOIN		0b00000000000000000000000000010000
 # define WORD_JOIN		0b00000000000000000000000000110000
 
+enum e_process_mode
+{
+	MINISHELL_NO_CHILD,
+	MINISHELL_HAS_CHILD,
+	EXECUTE_CHILD,
+	HEREDOC_CHILD,
+	HEREDOC_PARENT
+};
+
 // main.c
 
 // init.c
 void	argument_error_check(int argc);
-void	init_envp(char *envp[], t_envlst **env);
-void	init_info(t_working_info *info, t_envlst *env);
+void	init_envp(t_working_info *info, char *envp[]);
+void	init_cur_path(t_working_info *info);
 // void	set_signal_action(void);
 void 	rl_replace_line(const char *, int);
 

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:46:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/10 21:03:45 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:23:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,10 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1024
+# endif
 
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
@@ -58,4 +62,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(char *dest, const char *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 
+// ft_gnl.c
+char	*get_next_line(int fd);
+
+// ft_gnl_utils.c
+int		ft_gnl_strlen(char *s);
+void	ft_gnl_free(char **s1);
+char	*ft_gnl_strchr(char *s, int c);
+char	*strjoin_process(char *s1, char *s2, char *str);
+char	*ft_gnl_strjoin(char *s1, char *s2);
 #endif

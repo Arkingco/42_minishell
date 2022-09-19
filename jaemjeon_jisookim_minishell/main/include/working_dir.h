@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 02:12:58 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 02:49:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/19 18:49:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 typedef struct s_working_info
 {
 	char		*cur_path;
-	DIR			*dp;
 	t_envlst	*env;
+	t_cmd		*cmd;
 }	t_working_info;
 
 #endif

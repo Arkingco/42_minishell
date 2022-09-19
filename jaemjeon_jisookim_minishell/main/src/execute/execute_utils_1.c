@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/11 12:56:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:54:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 
 int	get_cmd_type(t_cmd *cmd)
 {
-	char	*cmd_string;
-	int		index;
-	static const char * built_in_board[] = {
-		[T_ECHO] = "echo",
-		[T_CD] = "cd",
-		[T_PWD] = "pwd",
-		[T_EXPORT] = "export",
-		[T_UNSET] = "unset",
-		[T_ENV] = "env",
-		[T_EXIT] = "exit"
+	char				*cmd_string;
+	int					index;
+	static const char	*built_in_board[] = \
+	{
+	[T_ECHO] = "echo",
+	[T_CD] = "cd",
+	[T_PWD] = "pwd",
+	[T_EXPORT] = "export",
+	[T_UNSET] = "unset",
+	[T_ENV] = "env",
+	[T_EXIT] = "exit"
 	};
 
 	cmd_string = cmd->simple_cmd->string_value;
@@ -62,6 +63,8 @@ char	**get_exec_argv(t_cmd *cmd)
 	cmd_lst = cmd->simple_cmd;
 	exec_argv = \
 			(char **)ft_calloc(ft_token_lstsize(cmd_lst) + 1, sizeof(char *));
+	if (exec_argv == NULL)
+		return (NULL);
 	while (cmd_lst != NULL)
 	{
 		exec_argv[index] = cmd_lst->string_value;

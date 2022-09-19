@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:38:59 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 17:41:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:11:24 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,37 @@ void	sigint_handler(int signo)
 	}
 }
 
+void	sigint_handler_in_heredoc(int signo)
+{
+	if (signo == SIGINT)
+		write(2, "\n", 1);
+}
+
 void	set_signal(int mode)
 {
-	if (mode == IN_MINISHELL_NO_CHILD)
+	if (mode == MINISHELL_NO_CHILD)
 	{
 		signal(SIGINT, sigint_handler);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (mode == IN_MINISHELL_HAS_CHILD)
+	else if (mode == MINISHELL_HAS_CHILD)
 	{
 		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
-	else if (mode == IN_CHILD)
+	else if (mode == EXECUTE_CHILD)
 	{
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 	}
-	else if (mode == IN_HEREDOC)
+	else if (mode == HEREDOC_PARENT)
 	{
-		signal(SIGINT, sigint_handler);
+		signal(SIGINT, sigint_handler_in_heredoc);
+		signal(SIGQUIT, SIG_IGN);
+	}
+	else if (mode == HEREDOC_CHILD)
+	{
+		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_IGN);
 	}
 }

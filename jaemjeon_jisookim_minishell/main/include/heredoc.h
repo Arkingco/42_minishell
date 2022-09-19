@@ -1,34 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   heredoc.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 18:39:23 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/19 19:02:53 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/19 19:04:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#ifndef HEREDOC_H
+# define HEREDOC_H
 
-// error_exit.c
-void	ft_error_exit(int exit_status, char *message);
+# include "working_dir.h"
 
-// ifs.c
-int	ft_has_ifs(char *string);
-int	ft_is_ifs(const char *letter);
-int	ft_skip_ifs1(char **string_pointer);
-void	ft_skip_ifs2(char *line, int *index);
+// heredoc.c
+int	heredoc(t_working_info *info);
 
-// signal.c
-void	set_signal(int mode);
-
-// terminal.c
-void	set_termios(int mode);
-
-//setting.c
-void	sigtermset(int mode);
+// heredoc_util.c
+int	has_heredoc(t_working_info *info);
 
 #endif

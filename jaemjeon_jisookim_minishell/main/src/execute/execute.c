@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 19:50:32 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:50:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 extern int	g_errno;
 
-void	process_built_in(t_cmd *cmd, int cmd_type, t_working_info *info)
+void	process_built_in(t_working_info *info, int cmd_type)
 {
-	void	(*built_in_func)(t_cmd*, t_working_info*);
+	void	(*built_in_func)(t_working_info*);
 	static void (*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
 	= {
 		[T_ECHO] = ft_echo,
@@ -29,16 +29,12 @@ void	process_built_in(t_cmd *cmd, int cmd_type, t_working_info *info)
 	};
 
 	built_in_func = built_in_func_board[cmd_type];
-	built_in_func(cmd, info);
+	built_in_func(info);
 }
 
 int	is_already_exec_path(char *cmd_string)
 {
-	if (ft_strlen(cmd_string) < 2)
-		return (FALSE);
-	if (ft_strncmp("./", cmd_string, 2) == 0 || \
-		ft_strncmp("~/", cmd_string, 2) == 0 || \
-		ft_strncmp("/", cmd_string, 1) == 0)
+	if (ft_strchr(cmd_string, '/') != NULL)
 		return (TRUE);
 	else
 		return (FALSE);
@@ -128,26 +124,24 @@ int	set_exec_path(t_cmd *cmd, t_working_info *info)
 
 	cmd_string = cmd->simple_cmd->string_value;
 	if (is_already_exec_path(cmd_string) == TRUE)
-	{
-		expand_homepath(&cmd_string, info);
 		return (is_valid_cmd_path(cmd_string));
-	}
 	else
 	{
 		return (set_absolute_path(cmd, info));
 	}
 }
 
-void	single_cmd_child_process(t_cmd *cmd, t_working_info *info)
+void	single_cmd_child_process(t_working_info *info)
 {
 	char		**exec_argv;
 	char		**exec_env;
 	struct stat	stat_info;
 
-	exec_argv = get_exec_argv(cmd);
+	exec_argv = get_exec_argv(info->cmd);
 	exec_env = ft_envlst_to_envp(info->env);
-	execve(cmd->simple_cmd->string_value, exec_argv, exec_env);
-	perror("");
+	if (exec_argv == NULL || exec_env == NULL)
+		exit(errno);
+	execve(info->cmd->simple_cmd->string_value, exec_argv, exec_env);
 	exit(errno);
 }
 
@@ -156,39 +150,55 @@ void	set_child_termset(void)
 
 }
 
-void	process_not_built_in(t_cmd *cmd, t_working_info *info)
+void	exec_executing(t_working_info *info)
+{
+	char		**exec_argv;
+	char		**exec_env;
+	int			errno_tmp;
+	struct stat	stat_info;
+
+	if (set_exec_path(info->cmd, info) == FALSE)
+	{
+		ft_putendl_fd(strerror(errno), 2);
+		exit(1);
+	}
+	exec_argv = get_exec_argv(info->cmd);
+	exec_env = ft_envlst_to_envp(info->env);
+	if (exec_argv == NULL || exec_env == NULL)
+	{
+		errno_tmp = errno;
+		ft_putendl_fd(strerror(errno_tmp), 2);
+		exit(errno_tmp);
+	}
+	if (execve(info->cmd->simple_cmd->string_value, exec_argv, exec_env) \
+		== FAIL)
+	{
+		errno_tmp = errno;
+		ft_putendl_fd(strerror(errno_tmp), 2);
+		exit(errno_tmp);
+	}
+}
+
+void	process_not_built_in(t_working_info *info)
 {
 	pid_t	pid;
 	int		exit_status;
 
-	if (set_exec_path(cmd, info) == FALSE)
+	sigtermset(MINISHELL_HAS_CHILD);
+	pid = fork();
+	if (pid == 0)
 	{
-		perror("not cmd found");
-		g_errno = 1;
+		sigtermset(EXECUTE_CHILD);
+		exec_executing(info);
 	}
 	else
 	{
-		pid = fork();
-		if (pid == 0)
-		{
-			set_signal(IN_CHILD);
-			set_termios(IN_CHILD);
-			// set_child_termset();
-			single_cmd_child_process(cmd, info);
-		}
+		waitpid(0, &exit_status, 0);
+		sigtermset(MINISHELL_NO_CHILD);
+		if (WIFEXITED(exit_status))
+			g_errno = WEXITSTATUS(exit_status);
 		else
-		{
-			set_signal(IN_MINISHELL_HAS_CHILD);
-			set_termios(IN_MINISHELL_HAS_CHILD);
-			waitpid(0, &exit_status, 0);
-			if (WIFEXITED(exit_status))
-				g_errno = WEXITSTATUS(exit_status);
-			else
-				g_errno = WCOREFLAG + WTERMSIG(exit_status);
-			// printf("%d\n", g_errno);
-			set_signal(IN_MINISHELL_NO_CHILD);
-			set_termios(IN_MINISHELL_NO_CHILD);
-		}
+			g_errno = WCOREFLAG + WTERMSIG(exit_status);
 	}
 }
 
@@ -202,14 +212,20 @@ int	open_infile(t_cmd *cmd)
 		return (STDIN_FILENO);
 	infile_fd = open(redircet_token->string_value, O_RDONLY);
 	if (infile_fd == OPEN_FAIL)
+	{
 		perror("open error");
+		return (OPEN_FAIL);
+	}
 	while (redircet_token->next != NULL)
 	{
 		redircet_token = redircet_token->next;
 		close(infile_fd);
 		infile_fd = open(redircet_token->string_value, O_RDONLY);
 		if (infile_fd == OPEN_FAIL)
+		{
 			perror("open error");
+			return (OPEN_FAIL);
+		}
 	}
 	return (infile_fd);
 }
@@ -285,22 +301,21 @@ void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
 	}
 }
 
-void	process_single_cmd(t_cmd *cmd, t_working_info *info)
+void	process_single_cmd(t_working_info *info)
 {
 	int	cmd_type;
 	int	io_fd[4];
 
-	if (process_redirect(cmd, io_fd) == OPEN_FAIL)
-		return ;
-	if (cmd->simple_cmd)
+	if (info->cmd->simple_cmd)
 	{
-		cmd_type = get_cmd_type(cmd);
+		process_redirect(info->cmd, io_fd);
+		cmd_type = get_cmd_type(info->cmd);
 		if (cmd_type == NOT_BUILT_IN)
-			process_not_built_in(cmd, info);
+			process_not_built_in(info);
 		else
-			process_built_in(cmd, cmd_type, info);
+			process_built_in(info, cmd_type);
 	}
-	restore_redirect_fd(cmd, io_fd);
+	restore_redirect_fd(info->cmd, io_fd);
 }
 
 int	ft_wait_childs(pid_t *child_pids, int cmd_count)
@@ -377,34 +392,54 @@ int	last_cmd(t_cmd *cmd, t_working_info *info)
 	}
 }
 
-void	process_multi_cmd(t_cmd *cmd, t_working_info *info)
-{
-	int		cmd_index;
-	int		cmd_count;
-	pid_t	*child_pids;
+// void	process_multi_cmd(t_cmd *cmd, t_working_info *info)
+// {
+// 	int		cmd_index;
+// 	int		cmd_count;
+// 	pid_t	*child_pids;
 
-	cmd_index = 0;
-	cmd_count = ft_cmdlst_size(cmd);
-	// 여기서  히어독  처리
-	// 존재하는 명령어 들인지 확인
-	// if (has_not_found_cmd(cmd, env) == FALSE)
-	// {
-	// 	perror("not cmd found");
-	// 	return (1);
-	// }
-	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
-	while (cmd_index < cmd_count)
+// 	cmd_index = 0;
+// 	cmd_count = ft_cmdlst_size(cmd);
+// 	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
+// 	while (cmd_index < cmd_count)
+// 	{
+// 		if (cmd_index == 0)
+// 			child_pids[cmd_index] = first_cmd(cmd, info);
+// 		else if (cmd_index == cmd_count - 1)
+// 			child_pids[cmd_index] = last_cmd(cmd, info);
+// 		else
+// 			child_pids[cmd_index] = middle_cmd(cmd, info);
+// 		cmd = cmd->next;
+// 		cmd_index++;
+// 	}
+// 	ft_wait_childs(child_pids, cmd_count);
+// }
+
+pid_t	process_multi_cmd(t_working_info *info)
+{
+	pid_t	pid;
+	int		fd[2];
+	pid_t	*child_pids;
+	int		index;
+	t_cmd	*cur_cmd;
+
+	ft_memset(fd, -1, sizeof(int) * 2);
+	child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
+	// ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
+	cur_cmd = info->cmd;
+	index = 0;
+	while (cur_cmd != NULL)
 	{
-		if (cmd_index == 0)
-			child_pids[cmd_index] = first_cmd(cmd, info);
-		else if (cmd_index == cmd_count - 1)
-			child_pids[cmd_index] = last_cmd(cmd, info);
-		else
-			child_pids[cmd_index] = middle_cmd(cmd, info);
-		cmd = cmd->next;
-		cmd_index++;
+		if (cur_cmd->next != NULL)
+			ft_pipe(fd);
+		pid = ft_fork();
+		if (pid == 0)
+			execute_multi_child(info, fd);
+		child_pids[index] = pid;
+		//
+
 	}
-	ft_wait_childs(child_pids, cmd_count);
+	fd[INPUT_PIPE] = 
 }
 
 int	process_heredoc(t_cmd *cmd, t_working_info *info)
@@ -422,21 +457,28 @@ int	process_heredoc(t_cmd *cmd, t_working_info *info)
 			if (file_fd == FAIL)
 				return (FAIL);
 			else
-				write_in_heredoc(file_fd);
+				write_HEREDOC_CHILD(file_fd);
 		}
 		redirect_input = redirect_input->next;
 	}
 	return (FALSE);
 }
 
-void	execute(t_cmd *cmd, t_working_info *info)
+void	execute(t_working_info *info)
 {
 	int	cmd_count;
+	int	status;
 
-	cmd_count = ft_cmdlst_size(cmd);
-	process_heredoc(cmd, info);
-	if (cmd_count == 1)
-		process_single_cmd(cmd, info);
+	cmd_count = ft_cmdlst_size(info);
+	if (has_heredoc(info))
+		status = heredoc(info);
 	else
-		process_multi_cmd(cmd, info);
+		status = TRUE;
+	if (status == TRUE)
+	{
+		if (cmd_count == 1)
+			process_single_cmd(info);
+		else
+			process_multi_cmd(info);
+	}
 }

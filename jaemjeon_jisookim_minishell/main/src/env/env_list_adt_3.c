@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 00:32:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:53:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,8 @@ char	**ft_envlst_to_envp(t_envlst *env)
 
 	envlst = ft_env_lst_first(env);
 	envp = (char **)ft_calloc(sizeof(char *), ft_env_lstsize(envlst) + 1);
+	if (envp == NULL)
+		return (NULL);
 	index = 0;
 	while (envlst != NULL)
 	{

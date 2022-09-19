@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/17 20:03:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/19 19:08:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,11 @@ void	main_loop(t_working_info *info)
 		add_history(line);
 		if (line != NULL)
 		{
-			lst_cmd = parsing(line, info);
+			info->cmd = parsing(line, info);
 			// 여기서 문법검사를 함.
-			execute(lst_cmd, info);
+			execute(info);
 			// debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
-			ft_free_cmdlst(lst_cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
+			ft_free_cmdlst(info->cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
 			free(line);
 		}
 		else
@@ -57,17 +57,13 @@ void	main_loop(t_working_info *info)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	t_envlst		*env;
 	t_working_info	info;
 
-	env = NULL;
 	g_errno = 0;
 	argument_error_check(argc);
-	init_envp(envp, &env);
-	init_info(&info, env);
-	// set_signal_action();
-	set_signal(IN_MINISHELL_NO_CHILD);
-	set_termios(IN_MINISHELL_NO_CHILD);
+	init_envp(&info, envp);
+	init_cur_path(&info);
+	sigtermset(MINISHELL_NO_CHILD);
 	main_loop(&info);
 	return (0);
 }
