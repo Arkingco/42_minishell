@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 18:40:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/19 21:36:10 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,14 @@ parsing linked list 는 이후에 command program 을 실행하기 위해 사용
 #include "parser.h"
 #include <stdlib.h>
 
+/* ft_safe_malloc */
+#include "libft.h"
+
 /*
 *	print parsing list
 */
 #include <stdio.h>
+
 static void 	print_parsing_list(t_parsing_list *l_parsing)
 {
 	t_simple_cmd	*head_cmd;
@@ -81,7 +85,7 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 		}
 		// redirection input
 		printf("****Output_redirection****");
-		head_redir = l_parsing->redir_iter.l_input;
+		head_redir = l_parsing->redir_iter->l_input;
 		while (head_redir)
 		{
 			printf("redirection:	%s\n\n", head_redir->redir);
@@ -90,13 +94,40 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 		}
 		// redirection input
 		printf("****Input_redirection****");
-		head_redir = l_parsing->redir_iter.l_output;
+		head_redir = l_parsing->redir_iter->l_output;
 		while (head_redir)
 		{
 			printf("redirection:	%s\n\n", head_redir->redir);
 			printf("file_path:		%s\n\n", head_redir->file_name);
 			head_redir = head_redir->next;
 		}
+	}
+}
+
+static t_redir_chunk	*init_redirection_node(char *str_redir,
+							char *str_file_name)
+{
+	t_redir_chunk	*new;
+
+	new = (t_redir_chunk *)ft_safe_malloc(sizeof(t_redir_chunk));
+	new->redir = str_redir;
+	new->file_name = str_file_name;
+	new->next = NULL;
+	return (new);
+}
+
+static void	add_redir_chunk_node(t_redir_chunk **head, t_redir_chunk *node)
+{
+	t_redir_chunk	*last;
+
+	if (*head == NULL)
+		*head = node;
+	else
+	{
+		last = *head;
+		while (last->next)
+			last = last->next;
+		last->next = node;
 	}
 }
 
@@ -113,7 +144,7 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token, \
 		if (is_word(l_token->type))
 		{
 			node = init_simple_cmd_node(l_token->str);
-			add_simple_cmd_node(&l_parsing->l_simple_cmd, node);
+			add_simple_cmd_node(&l_parsing->l_simple_cmd, (t_simple_cmd *)node);
 		}
 		else if (is_redirection(l_token->type))
 		{
@@ -121,9 +152,11 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token, \
 				return (print_syntax_error());
 			node = init_redirection_node(l_token->str, l_token->next->str);
 			if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
-				add_linked_list();
+				add_redir_chunk_node(&l_parsing->redir_iter->l_input,
+					(t_redir_chunk *)node);
 			else
-				add_linked_list();
+				add_redir_chunk_node(&l_parsing->redir_iter->l_output,
+					(t_redir_chunk *)node);
 		}
 		// else // pipe
 		// {

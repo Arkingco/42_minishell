@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 17:59:01 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:01:18 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int main(int argc, char **argv, char **envp)
 		if (line)
 		{
 			token = tokenize(env, line);
+			if (token == NULL)
+				return (1);
 			l_parsing = parser(token);
 			// syntax_analysis();
 			// execute();

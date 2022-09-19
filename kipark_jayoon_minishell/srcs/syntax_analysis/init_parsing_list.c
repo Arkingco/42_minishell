@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 17:46:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 12:18:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:39:14 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ t_parsing_list	*init_parsing_list(void)
 {
 	t_parsing_list	*l_parsing;
 
-	l_parsing = ft_safe_malloc(sizeof(t_parsing_list));
+	l_parsing = (t_parsing_list *)ft_safe_malloc(sizeof(t_parsing_list));
 	l_parsing->l_simple_cmd = NULL;
 	l_parsing->next = NULL;
+	l_parsing->redir_iter 
+		= (t_redir_iter *)ft_safe_malloc(sizeof(t_redir_iter));
 	return (l_parsing);
 }
 

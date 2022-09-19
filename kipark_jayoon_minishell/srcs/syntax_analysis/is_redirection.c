@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_simple_cmd_node.c                             :+:      :+:    :+:   */
+/*   is_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:13:14 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/19 20:15:31 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/19 20:19:27 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/19 20:26:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include "parser.h"
-#include <stdlib.h>
+#include "lexer.h"
 
-void	*init_simple_cmd_node(char *str)
+int	is_redirection(t_token_type type)
 {
-	t_simple_cmd	*new;
-
-	new = (t_simple_cmd *)ft_safe_malloc(sizeof(t_simple_cmd));
-	new->str = str;
-	new->next = NULL;
-	return (new);
+	if (type == T_INPUT_REDIR || type == T_HERE_DOC 
+		|| type == T_OUTPUT_REDIR || type == T_APPEND_REDIR)
+		return (1);
+	return (0);
 }

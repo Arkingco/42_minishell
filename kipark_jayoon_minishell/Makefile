@@ -44,7 +44,8 @@ SRCS_SYNTAX_ANALYSIS		:=	parser.c \
 								free_parsing_list.c \
 								init_parsing_list.c \
 								init_simple_cmd_node.c \
-								is_word.c
+								is_word.c \
+								is_redirection.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
 SRCS_EXECUTION				:=	

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 17:44:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/19 20:29:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,15 +37,21 @@ typedef struct s_redir_iter
 typedef struct s_parsing_data_structure
 {
 	t_simple_cmd					*l_simple_cmd;
-	t_redir_iter					redir_iter;
+	t_redir_iter					*redir_iter;
 	struct s_parsing_data_structure	*next;
 }	t_parsing_list;
 
+/* parser */
 t_parsing_list	*parser(t_token *l_token);
 t_parsing_list	*init_parsing_list(void);
-void			free_parsing_list(t_parsing_list *l_parsing);
-int				is_word(t_token_type type);
 void			*init_simple_cmd_node(char *str);
 void			add_simple_cmd_node(t_simple_cmd **head, t_simple_cmd *node);
+
+/* util */
+int				is_word(t_token_type type);
+int				is_redirection(t_token_type type);
+
+/* extern util */
+void			free_parsing_list(t_parsing_list *l_parsing);
 
 #endif
