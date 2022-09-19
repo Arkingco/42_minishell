@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 03:06:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 04:29:17 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,32 @@ pid_t	ft_wait(int count, pid_t *child_pids)
 		i++;
 	}
 	return (exit_status);
+}
+
+int	ft_dup2(int fd1, int fd2)
+{
+	int	dup2_return;
+	
+	dup2_return = dup2(fd1, fd2);
+	if (dup2_return == -1)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	return (dup2_return); 
+}
+
+int	ft_pipe(int *pipe_fd)
+{
+	int	pipe_return;
+
+	pipe_return = pipe(pipe_fd);
+	if (pipe_return != 0)
+	{
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
+		exit(1);
+	}
+	return (pipe_return);
 }

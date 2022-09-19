@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 03:11:43 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 04:39:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,11 +145,6 @@ void	single_cmd_child_process(t_working_info *info)
 	exit(errno);
 }
 
-void	set_child_termset(void)
-{
-
-}
-
 void	exec_executing(t_working_info *info)
 {
 	char		**exec_argv;
@@ -257,9 +252,23 @@ int	open_outfile(t_cmd *cmd)
 	return (outfile_fd);
 }
 
+void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
+{
+	if (cmd->redirect_input != NULL)
+	{
+		dup2(io_fd[STDIN_FILENO], STDIN_FILENO);
+		close(io_fd[STDIN_FILENO]);
+	}
+	if (cmd->redirect_output != NULL)
+	{
+		dup2(io_fd[STDOUT_FILENO], STDOUT_FILENO);
+		close(io_fd[STDOUT_FILENO]);
+	}
+}
+
 int	process_redirect(t_cmd *cmd, int *io_fd)
 {
-	ft_bzero(io_fd, sizeof(int) * 4);
+	ft_memset(io_fd, 0, sizeof(int) * 4);
 	if (cmd->redirect_input != NULL)
 		io_fd[INPUT_REDI] = open_infile(cmd);
 	if (cmd->redirect_output != NULL)
@@ -285,20 +294,6 @@ int	process_redirect(t_cmd *cmd, int *io_fd)
 		close(io_fd[OUTPUT_REDI]);
 	}
 	return (FALSE);
-}
-
-void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
-{
-	if (cmd->redirect_input != NULL)
-	{
-		dup2(io_fd[STDIN_FILENO], STDIN_FILENO);
-		close(io_fd[STDIN_FILENO]);
-	}
-	if (cmd->redirect_output != NULL)
-	{
-		dup2(io_fd[STDOUT_FILENO], STDOUT_FILENO);
-		close(io_fd[STDOUT_FILENO]);
-	}
 }
 
 void	process_single_cmd(t_working_info *info)
@@ -332,114 +327,148 @@ int	ft_wait_childs(pid_t *child_pids, int cmd_count)
 	return (exit_status);
 }
 
-void	run_program_in_multi_process(t_cmd *cmd, t_working_info *info)
+void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd)
 {
-
+	if (fd[BEFORE_INPUT_FD] != -1)
+		ft_close(fd[BEFORE_INPUT_FD]);
+	fd[BEFORE_INPUT_FD] = fd[MULTI_PIPE_OUTPUT];
+	if (fd[MULTI_PIPE_INPUT] != -1)
+		ft_close(fd[MULTI_PIPE_INPUT]);
+	fd[MULTI_PIPE_INPUT] = -1;
+	fd[MULTI_PIPE_OUTPUT] = -1;
+	return ;
 }
 
-void	process_redirect_in_multi(t_cmd *cmd, int *io_fd)
+int	check_and_get_infile(t_token *input)
 {
+	int	infile_fd;
 
-}
-
-void	restore_redirect_fd_in_multi(t_cmd *cmd, int *io_fd)
-{
-
-}
-
-int	first_cmd(t_cmd *cmd, t_working_info *info)
-{
-	pid_t	pid;
-	int		pipe_fd[2];
-	int		io_fd[4];
-
-	pipe(pipe_fd);
-	pid = fork();
-	if (pid == 0)
+	while (input)
 	{
-		close(pipe_fd[0]);
-		dup2(pipe_fd[1], STDOUT_FILENO);
-		process_redirect_in_multi(cmd, io_fd);
-		run_program_in_multi_process(cmd, info);
-		restore_redirect_fd_in_multi(cmd, io_fd);
+		infile_fd = open(input->string_value, O_RDONLY);
+		if (infile_fd == -1)
+		{
+			ft_putstr_fd(input->string_value, 2);
+			ft_putendl_fd(strerror(errno), 2);
+			exit(errno);
+		}
+		if (input->next != NULL)
+			close(infile_fd);
+		input = input->next;
 	}
-	else
-	{
-		close(pipe_fd[1]);
-		dup2(STDIN_FILENO, pipe_fd[0]);
-	}
+	return (infile_fd);
 }
 
-int	middle_cmd(t_cmd *cmd, t_working_info *info)
+int	check_and_get_outfile(t_token *output)
 {
+	int	outfile_fd;
 
+	while (output)
+	{
+		if (output->type & WRITE)
+			outfile_fd = open(output->string_value, \
+										O_WRONLY | O_CREAT | O_TRUNC, 0644);
+		else if (output->type & WRITE_APPEND)
+			outfile_fd = open(output->string_value, \
+										O_WRONLY | O_CREAT | O_APPEND, 0644);
+		if (outfile_fd == -1)
+		{
+			ft_putstr_fd(output->string_value, 2);
+			ft_putendl_fd(strerror(errno), 2);
+			exit(errno);
+		}
+		if (output->next != NULL)
+			close(outfile_fd);
+		output = output->next;
+	}
+	return (outfile_fd);
 }
 
-int	last_cmd(t_cmd *cmd, t_working_info *info)
+void	handle_redirect_input(t_token *input_redirection)
 {
-	pid_t	pid;
-	int		io_fd[4];
-
-	pid = fork();
-	if (pid == 0)
-	{
-		process_redirect(cmd, io_fd);
-		run_program_in_multi_process(cmd, info);
-		restore_redirect_fd(cmd, io_fd);
-	}
-	else
-	{
-	}
+	int		infile_fd;
+	
+	infile_fd = check_and_get_infile(input_redirection);
+	ft_dup2(infile_fd, 0);
+	ft_close(infile_fd);
 }
 
-// void	process_multi_cmd(t_cmd *cmd, t_working_info *info)
-// {
-// 	int		cmd_index;
-// 	int		cmd_count;
-// 	pid_t	*child_pids;
+void	handle_redirect_output(t_token *output_redirection)
+{
+	int		outfile_fd;
+	int		type;
 
-// 	cmd_index = 0;
-// 	cmd_count = ft_cmdlst_size(cmd);
-// 	child_pids = ft_calloc(cmd_count, sizeof(pid_t));
-// 	while (cmd_index < cmd_count)
-// 	{
-// 		if (cmd_index == 0)
-// 			child_pids[cmd_index] = first_cmd(cmd, info);
-// 		else if (cmd_index == cmd_count - 1)
-// 			child_pids[cmd_index] = last_cmd(cmd, info);
-// 		else
-// 			child_pids[cmd_index] = middle_cmd(cmd, info);
-// 		cmd = cmd->next;
-// 		cmd_index++;
-// 	}
-// 	ft_wait_childs(child_pids, cmd_count);
-// }
+	outfile_fd = check_and_get_outfile(output_redirection);
+	ft_dup2(outfile_fd, 1);
+	ft_close(outfile_fd);
+}
+
+void	handle_redirection_multi_cmd(t_cmd *cmd)
+{
+	if (cmd->redirect_input)
+		handle_redirect_input(cmd->redirect_input);
+	if (cmd->redirect_output)
+		handle_redirect_output(cmd->redirect_output);
+}
+
+void	close_useless_fds(int *fd)
+{
+	if (fd[0] != -1)
+		ft_close(fd[0]);
+	if (fd[1] != -1)
+		ft_close(fd[1]);
+	if (fd[2] != -1)
+		ft_close(fd[2]);
+}
+
+void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
+{
+	if (my_cmd->redirect_input || my_cmd->redirect_output)
+		handle_redirection_multi_cmd(my_cmd);
+	if (fd[BEFORE_INPUT_FD] != -1 && my_cmd->redirect_input == NULL)
+	{
+		ft_dup2(fd[BEFORE_INPUT_FD], 0);
+	}
+	if (fd[MULTI_PIPE_OUTPUT] != -1 && my_cmd->redirect_output == NULL)
+	{
+		ft_dup2(fd[MULTI_PIPE_INPUT], 1);
+	}
+	close_useless_fds(fd);
+	info->cmd = my_cmd;
+	exec_executing(info);
+	exit(0);
+}
 
 pid_t	process_multi_cmd(t_working_info *info)
 {
-	// pid_t	pid;
-	// int		fd[2];
-	// pid_t	*child_pids;
-	// int		index;
-	// t_cmd	*cur_cmd;
+	pid_t	pid;
+	int		fd[3];
+	pid_t	*child_pids;
+	int		index;
+	t_cmd	*cur_cmd;
 
-	// ft_memset(fd, -1, sizeof(int) * 2);
-	// child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
-	// // ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
-	// cur_cmd = info->cmd;
-	// index = 0;
-	// while (cur_cmd != NULL)
-	// {
-	// 	if (cur_cmd->next != NULL)
-	// 		ft_pipe(fd);
-	// 	pid = ft_fork();
-	// 	if (pid == 0)
-	// 		execute_multi_child(info, fd);
-	// 	child_pids[index] = pid;
-	// 	//
-
-	// }
-	// fd[INPUT_PIPE] = 
+	ft_memset(fd, -1, sizeof(int) * 3);
+	child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
+	// ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
+	cur_cmd = info->cmd;
+	index = 0;
+	while (cur_cmd != NULL)
+	{
+		if (cur_cmd->next != NULL)
+			ft_pipe(fd);
+		sigtermset(MINISHELL_HAS_CHILD);
+		pid = ft_fork();
+		if (pid == 0)
+		{
+			sigtermset(EXECUTE_CHILD);
+			execute_multicmd_child(info, cur_cmd, fd);
+		}
+		child_pids[index] = pid;
+		ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd));
+		init_pipe_before_next_cmd(cur_cmd, fd);
+		index++;
+		cur_cmd = cur_cmd->next;
+	}
 }
 
 void	execute(t_working_info *info)
