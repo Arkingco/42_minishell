@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 01:50:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:11:43 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 extern int	g_errno;
 
-void	process_built_in(t_working_info *info, int cmd_type)
+void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 {
-	void	(*built_in_func)(t_working_info*);
+	void	(*built_in_func)(t_cmd *cmd, t_working_info*);
 	static void (*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
 	= {
 		[T_ECHO] = ft_echo,
@@ -29,7 +29,7 @@ void	process_built_in(t_working_info *info, int cmd_type)
 	};
 
 	built_in_func = built_in_func_board[cmd_type];
-	built_in_func(info);
+	built_in_func(cmd, info);
 }
 
 int	is_already_exec_path(char *cmd_string)
@@ -313,7 +313,7 @@ void	process_single_cmd(t_working_info *info)
 		if (cmd_type == NOT_BUILT_IN)
 			process_not_built_in(info);
 		else
-			process_built_in(info, cmd_type);
+			process_built_in(info->cmd, info, cmd_type);
 	}
 	restore_redirect_fd(info->cmd, io_fd);
 }
@@ -417,51 +417,29 @@ int	last_cmd(t_cmd *cmd, t_working_info *info)
 
 pid_t	process_multi_cmd(t_working_info *info)
 {
-	pid_t	pid;
-	int		fd[2];
-	pid_t	*child_pids;
-	int		index;
-	t_cmd	*cur_cmd;
+	// pid_t	pid;
+	// int		fd[2];
+	// pid_t	*child_pids;
+	// int		index;
+	// t_cmd	*cur_cmd;
 
-	ft_memset(fd, -1, sizeof(int) * 2);
-	child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
-	// ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
-	cur_cmd = info->cmd;
-	index = 0;
-	while (cur_cmd != NULL)
-	{
-		if (cur_cmd->next != NULL)
-			ft_pipe(fd);
-		pid = ft_fork();
-		if (pid == 0)
-			execute_multi_child(info, fd);
-		child_pids[index] = pid;
-		//
+	// ft_memset(fd, -1, sizeof(int) * 2);
+	// child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
+	// // ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
+	// cur_cmd = info->cmd;
+	// index = 0;
+	// while (cur_cmd != NULL)
+	// {
+	// 	if (cur_cmd->next != NULL)
+	// 		ft_pipe(fd);
+	// 	pid = ft_fork();
+	// 	if (pid == 0)
+	// 		execute_multi_child(info, fd);
+	// 	child_pids[index] = pid;
+	// 	//
 
-	}
-	fd[INPUT_PIPE] = 
-}
-
-int	process_heredoc(t_cmd *cmd, t_working_info *info)
-{
-	t_token	*redirect_input;
-	int		file_fd;
-
-	redirect_input = cmd->redirect_input;
-	while (redirect_input != NULL)
-	{
-		if (redirect_input->type & HEREDOC)
-		{
-			unlink("/tmp/heredoc");
-			file_fd = open("/tmp/heredoc", O_RDWR | O_CREAT, 0644);
-			if (file_fd == FAIL)
-				return (FAIL);
-			else
-				write_HEREDOC_CHILD(file_fd);
-		}
-		redirect_input = redirect_input->next;
-	}
-	return (FALSE);
+	// }
+	// fd[INPUT_PIPE] = 
 }
 
 void	execute(t_working_info *info)
@@ -469,7 +447,7 @@ void	execute(t_working_info *info)
 	int	cmd_count;
 	int	status;
 
-	cmd_count = ft_cmdlst_size(info);
+	cmd_count = ft_cmdlst_size(info->cmd);
 	if (has_heredoc(info))
 		status = heredoc(info);
 	else

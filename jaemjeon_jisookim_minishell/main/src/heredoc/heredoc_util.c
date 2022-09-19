@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 19:01:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:08:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	has_heredoc(t_working_info *info)
 		while (cur_input_redirection != NULL)
 		{
 			if (cur_input_redirection->type & HEREDOC)
-				reutrn (TRUE);
+				return (TRUE);
 			cur_input_redirection = cur_input_redirection->next;
 		}
 		cur_cmd = cur_cmd->next;

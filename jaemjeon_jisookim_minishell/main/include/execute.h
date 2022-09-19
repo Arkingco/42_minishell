@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 01:40:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:06:20 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ void	execute(t_working_info *info);
 int	ft_open(const char *filename, int flags, short mode);
 int	ft_close(int fd);
 pid_t	ft_fork(void);
+pid_t	ft_wait(int count, pid_t *child_pids);
 
 
 // execute_utils_1.c

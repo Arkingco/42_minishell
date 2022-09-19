@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 23:32:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:03:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include "execute.h"
 # include "built_in.h"
 # include "working_dir.h"
+# include "heredoc.h"
 // # include "sigset.h"
 
 # define TRUE			1

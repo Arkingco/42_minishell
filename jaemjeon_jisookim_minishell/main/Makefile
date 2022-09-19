@@ -48,7 +48,7 @@ SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:= $(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
-SRC_EXECUTE		:= execute.c execute_utils_1.c
+SRC_EXECUTE		:= execute.c execute_utils_1.c execute_tools.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 SRC_HEREDOC		:= heredoc.c heredoc_util.c

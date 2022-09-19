@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 01:39:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:06:07 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,19 @@ pid_t	ft_fork(void)
 		exit(1);
 	}
 	return (fork_return);
+}
+
+pid_t	ft_wait(int count, pid_t *child_pids)
+{
+	int	i;
+	int exit_status;
+
+	i = 0;
+	while (i < count)
+	{
+		waitpid(child_pids[i], &exit_status, 0);
+		// printf("exit_status : %d\n", exit_status);
+		i++;
+	}
+	return (exit_status);
 }

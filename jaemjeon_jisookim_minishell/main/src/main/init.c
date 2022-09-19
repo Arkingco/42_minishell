@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 18:53:35 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 03:12:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ void	init_envp(t_working_info *info, char *envp[])
 {
 	while (*envp != NULL)
 	{
-		ft_addenv_str(info->env, *envp);
+		ft_addenv_str(&info->env, *envp);
 		envp++;
 	}
-	update_shlvl(info->env);
+	update_shlvl(&info->env);
 }
