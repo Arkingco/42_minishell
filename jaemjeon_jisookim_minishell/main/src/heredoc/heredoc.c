@@ -6,21 +6,25 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 15:53:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 16:31:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-// char	*heredoc_expand(t_working_info *info, char *line)
-// {
-// 	// char	*to_expand_pointer;
+char	*heredoc_expand(t_working_info *info, char *line)
+{
+	t_token	tmp_token_to_expand;
 
-// 	// while (1)
-// 	// {
-// 	// 	to_expand_pointer =
-// 	// }
-// }
+	while (1)
+	{
+		tmp_token_to_expand.string_value = line;
+		tmp_token_to_expand.type = WORD;
+		expand_pidenv(&tmp_token_to_expand);
+		// expand_env(&tmp_token_to_expand, info->env); // 여기서 free_Error
+	}
+	return (tmp_token_to_expand.string_value);
+}
 
 void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 {
@@ -40,16 +44,19 @@ void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 		}
 		else
 		{
-			// if (redirec_token->type & QUOTE == FALSE)
+			// if (!(redirec_token->type & QUOTE))
 			// {
 			// 	expanded_line = heredoc_expand(info, line);
 			// 	ft_putendl_fd(expanded_line, fd);
 			// 	free(expanded_line);
 			// }
 			// else
+			{
 				ft_putendl_fd(line, fd);
-			free(line);
+				free(line);
+			}
 		}
+
 	}
 }
 
