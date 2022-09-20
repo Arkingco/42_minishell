@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 04:29:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:40:03 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # define INPUT_PIPE			INPUT_REDI
 # define OUTPUT_PIPE		OUTPUT_REDI
 # define RESTORE_PIPE		RESTORE_REDI
-# define MULTI_PIPE_INPUT	0
-# define MULTI_PIPE_OUTPUT	1
+# define MULTI_PIPE_OUTPUT	0
+# define MULTI_PIPE_INPUT	1
 # define BEFORE_INPUT_FD	2
 
 // execute.c

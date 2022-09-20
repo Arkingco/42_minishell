@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 03:12:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 12:55:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	update_shlvl(t_envlst **env)
 
 void	init_envp(t_working_info *info, char *envp[])
 {
+	info->env = NULL;
 	while (*envp != NULL)
 	{
 		ft_addenv_str(&info->env, *envp);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:38:59 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 19:11:24 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:04:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sigint_handler(int signo)
 	}
 }
 
-void	sigint_handler_in_heredoc(int signo)
+void	sigint_handler_print_newline(int signo)
 {
 	if (signo == SIGINT)
 		write(2, "\n", 1);
@@ -38,7 +38,7 @@ void	set_signal(int mode)
 	}
 	else if (mode == MINISHELL_HAS_CHILD)
 	{
-		signal(SIGINT, SIG_IGN);
+		signal(SIGINT, sigint_handler_print_newline);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == EXECUTE_CHILD)
@@ -48,7 +48,7 @@ void	set_signal(int mode)
 	}
 	else if (mode == HEREDOC_PARENT)
 	{
-		signal(SIGINT, sigint_handler_in_heredoc);
+		signal(SIGINT, sigint_handler_print_newline);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == HEREDOC_CHILD)

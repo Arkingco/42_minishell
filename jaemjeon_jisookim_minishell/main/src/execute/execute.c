@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 04:39:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 13:44:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -387,7 +387,7 @@ int	check_and_get_outfile(t_token *output)
 void	handle_redirect_input(t_token *input_redirection)
 {
 	int		infile_fd;
-	
+
 	infile_fd = check_and_get_infile(input_redirection);
 	ft_dup2(infile_fd, 0);
 	ft_close(infile_fd);
@@ -423,6 +423,7 @@ void	close_useless_fds(int *fd)
 
 void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 {
+	info->cmd = my_cmd;
 	if (my_cmd->redirect_input || my_cmd->redirect_output)
 		handle_redirection_multi_cmd(my_cmd);
 	if (fd[BEFORE_INPUT_FD] != -1 && my_cmd->redirect_input == NULL)
@@ -434,7 +435,6 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 		ft_dup2(fd[MULTI_PIPE_INPUT], 1);
 	}
 	close_useless_fds(fd);
-	info->cmd = my_cmd;
 	exec_executing(info);
 	exit(0);
 }
@@ -464,11 +464,12 @@ pid_t	process_multi_cmd(t_working_info *info)
 			execute_multicmd_child(info, cur_cmd, fd);
 		}
 		child_pids[index] = pid;
-		ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd));
 		init_pipe_before_next_cmd(cur_cmd, fd);
 		index++;
 		cur_cmd = cur_cmd->next;
 	}
+	close_useless_fds(fd);
+	return (ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd)));
 }
 
 void	execute(t_working_info *info)
