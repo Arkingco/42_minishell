@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/20 02:58:39 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:29:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 		if (info->cur_path != NULL)
 			free(info->cur_path);
 		info->cur_path = tmp_path;
+		if (ft_has_env(info->env, "PWD"))
+			ft_setenv(info->env, "OLDPWD", ft_getenv(info->env, "PWD"), TRUE);
+		ft_setenv(info->env, "PWD", tmp_path, TRUE);
 	}
 	else
 	{
