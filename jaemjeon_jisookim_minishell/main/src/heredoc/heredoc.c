@@ -3,31 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 03:08:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 15:53:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	get_input_heredoc(t_working_info *info, char *delimiter, int fd)
+// char	*heredoc_expand(t_working_info *info, char *line)
+// {
+// 	// char	*to_expand_pointer;
+
+// 	// while (1)
+// 	// {
+// 	// 	to_expand_pointer =
+// 	// }
+// }
+
+void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 {
-	// char	*line;
+	const char	*delimiter = redirec_token->string_value;
+	char		*line;
+	char		*expanded_line;
 
-	// while (1)
-	// {
-	// 	line = readline("> ");
-	// 	if (line == NULL || ft_strncmp(line, delimiter, INT_MAX))
-	// 	{
-			
-	// 	}
-	// 	else
-	// 	{
-
-	// 	}
-	// }
+	while (1)
+	{
+		line = readline("> ");
+		if (line == NULL)
+			break ;
+		else if (ft_strncmp(line, delimiter, INT_MAX) == 0)
+		{
+			free(line);
+			break ;
+		}
+		else
+		{
+			// if (redirec_token->type & QUOTE == FALSE)
+			// {
+			// 	expanded_line = heredoc_expand(info, line);
+			// 	ft_putendl_fd(expanded_line, fd);
+			// 	free(expanded_line);
+			// }
+			// else
+				ft_putendl_fd(line, fd);
+			free(line);
+		}
+	}
 }
 
 char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
@@ -95,7 +118,7 @@ void	process_cur_heredoc(t_working_info *info, t_cmd *cur_cmd, \
 		perror("open_fail in heredoc");
 		exit(FAIL);
 	}
-	get_input_heredoc(info, cur_redirection->string_value, fd);
+	get_input_heredoc(info, cur_redirection, fd);
 	close(fd);
 }
 
