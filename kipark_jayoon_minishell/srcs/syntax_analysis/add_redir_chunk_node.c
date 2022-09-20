@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   add_redir_chunk_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/20 21:16:52 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/20 21:48:21 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/20 21:49:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libft.h"
-#include "env.h"
+#include "parser.h"
+#include <stdlib.h>
 
-t_env	*set_shell_env_list(char **envp)
+void	add_redir_chunk_node(t_redir_chunk **head, t_redir_chunk *node)
 {
-	t_env *env_head;
+	t_redir_chunk	*last;
 
-	env_head = malloc(sizeof(t_env));
-	if (env_head == NULL)
-		return (NULL);
-	env_head->str = NULL;
-	env_head->next = NULL;
-	set_env_list(env_head, envp);
-	return (env_head);
+	if (*head == NULL)
+		*head = node;
+	else
+	{
+		last = *head;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
 }

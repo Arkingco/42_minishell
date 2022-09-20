@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/20 10:33:37 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/20 21:54:41 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,19 @@ typedef struct s_parsing_data_structure
 
 /* parser */
 t_parsing_list	*parser(t_token *l_token);
+void			check_syntax_and_set_parsing_list(t_token *l_token,
+				t_parsing_list *l_parsing);
+
+/* init linked list node */
 t_parsing_list	*init_parsing_list(void);
 void			*init_simple_cmd_node(char *str);
+t_redir_chunk	*init_redirection_node(char *str_redir, char *str_file_name);
+
+/* add node at end of linked list */
 void			add_simple_cmd_node(t_simple_cmd **head, t_simple_cmd *node);
+void			add_parsing_list_node(t_parsing_list *l_parsing,
+					t_parsing_list *node);
+void			add_redir_chunk_node(t_redir_chunk **head, t_redir_chunk *node);
 
 /* util */
 int				is_word(t_token_type type);
