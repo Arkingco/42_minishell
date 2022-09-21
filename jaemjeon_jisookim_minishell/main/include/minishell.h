@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 03:03:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:41:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@
 # include <unistd.h>
 # include <string.h>
 # include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/dir.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include "../libft/libft.h"
@@ -33,6 +37,10 @@
 # include "built_in.h"
 # include "working_dir.h"
 # include "heredoc.h"
+# include "structs/t_cmd.h"
+# include "structs/t_env.h"
+# include "structs/t_token.h"
+# include "structs/t_working_dir.h"
 // # include "sigset.h"
 
 # define TRUE			1

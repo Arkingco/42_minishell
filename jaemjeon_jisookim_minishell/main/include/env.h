@@ -3,25 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 04:40:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:26:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-typedef struct s_envlst
-{
-	char			*key;
-	char			*value;
-	int				has_value;
-	struct s_envlst	*next;
-	struct s_envlst	*prev;
-}	t_envlst;
-
+# include "structs/t_env.h"
 
 // env_list_adt_1.c
 void		ft_env_lstadd_back(t_envlst **lst, t_envlst *new);

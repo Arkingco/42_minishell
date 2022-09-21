@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 04:52:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:41:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILT_IN
 # define BUILT_IN
 
-# include "working_dir.h"
+# include "structs/t_working_dir.h"
+# include "structs/t_cmd.h"
 
 enum	e_type_built_in
 {

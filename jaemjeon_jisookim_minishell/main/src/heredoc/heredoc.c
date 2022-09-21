@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 16:31:36 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:30:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*heredoc_expand(t_working_info *info, char *line)
 		tmp_token_to_expand.string_value = line;
 		tmp_token_to_expand.type = WORD;
 		expand_pidenv(&tmp_token_to_expand);
-		// expand_env(&tmp_token_to_expand, info->env); // 여기서 free_Error
+		expand_env(&tmp_token_to_expand, info->env); // 여기서 free_Error
 	}
 	return (tmp_token_to_expand.string_value);
 }

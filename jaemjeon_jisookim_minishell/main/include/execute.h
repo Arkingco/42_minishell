@@ -6,23 +6,16 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 13:40:03 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:42:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTE_H
 # define EXECUTE_H
 
-# include <fcntl.h>
-# include <unistd.h>
-# include <sys/dir.h>
-# include <sys/stat.h>
-# include <errno.h>
-# include "cmd.h"
-# include "env.h"
-# include "../libft/libft.h"
-# include "utils.h"
-# include "working_dir.h"
+# include "structs/t_working_dir.h"
+# include "structs/t_env.h"
+# include "structs/t_cmd.h"
 
 # define INPUT_REDI			2
 # define OUTPUT_REDI		3
