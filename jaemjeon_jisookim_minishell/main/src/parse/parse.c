@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/18 04:52:28 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 13:28:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ t_cmd	*parsing(char *line, t_envlst *env)
 
 	// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.
 	lst_token = tokenize(line); // word, quote, redirect, pipe로 토큰을 나눔.
+	check_syntax(lst_token);
 	expander(&lst_token, env);	// 확장하고 필요없는 토큰을 지우고 word_split을 하고 양쪽 문맥을 보고 token을 join시킴
 	remove_trash_token(&lst_token);
 	quote_remove(&lst_token);
