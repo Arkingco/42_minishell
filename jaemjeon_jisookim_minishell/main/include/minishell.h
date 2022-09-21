@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/18 11:37:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:11:45 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@
 # include "execute.h"
 # include "built_in.h"
 # include "heredoc.h"
+# include "syntax.h"
 
 # define TRUE			1
 # define FALSE			0
@@ -85,6 +86,7 @@ typedef struct s_info
 void 	rl_replace_line(const char *, int);
 
 // main.c
+
 
 // init.c
 void	argument_error_check(int argc);

@@ -38,7 +38,7 @@ SRC_TOKENIZE	:= $(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 SRC_UTILS		:= ifs.c error_exit.c util_tools.c terminal.c signal.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
-SRC_MAIN		:= main.c init.c
+SRC_MAIN		:= main.c init.c syntax.c
 SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
 SRC_EXPAND		:= expand.c expand_util_1.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_main.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 13:27:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:12:02 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,14 @@ pid_t	execute(t_info *info, t_envlst *env)
 	if (info->exec->process_cnt == 0)
 		return (0);
 	else
-		ret_pid = heredoc(exec, ret_pid);
+		ret_pid = heredoc(info->exec, ret_pid);
 	if (ret_pid == FALSE)
 		return (FALSE);
 	// execute
-	if (exec->process_cnt == 1)
-		ret_pid = exec_single_cmd(exec, ret_pid);
+	if (info->exec->process_cnt == 1)
+		ret_pid = exec_single_cmd(info->exec, ret_pid);
 	else 
-		ret_pid = exec_multi_cmd(exec, ret_pid);
+		ret_pid = exec_multi_cmd(info->exec, ret_pid);
 	
 	return (ret_pid);
 }

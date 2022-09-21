@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 14:12:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 02:45:34 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 15:06:27 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_cmd	*get_cmd_for_index(t_exec *exec, int index);
 t_token	*reset_redi_input(t_cmd *cmd);
 int		count_process(t_exec *exec);
 void	make_path_list(t_exec *exec);
-t_exec	*main_init_exec(t_exec *exec, t_cmd *cmd, t_envlst *env, char *envp[]);
+void	main_init_exec(t_info *info, t_envlst *env);
 
 //exit
 void	ft_exit_if(t_exec *exec, int condition);
@@ -113,7 +113,7 @@ void	exec_go_built_in(t_exec *exec);
 //main
 pid_t	exec_single_cmd(t_exec *exec, pid_t ret_pid);
 pid_t	exec_multi_cmd(t_exec *exec, pid_t ret_pid);
-pid_t	execute(t_cmd *cmd, t_envlst *env, char **envp);
+pid_t	execute(t_info *info, t_envlst *env);
 
 //multi_cmd
 void	exec_multi(t_exec *exec, int i, t_fd *fd);
