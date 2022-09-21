@@ -6,23 +6,24 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:43:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/20 23:20:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:25:21 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "error.h"
 #include "lexer.h"
 #include "parser.h"
 #include <stdlib.h>
 
-static void	do_it_at_word(void)
-{
-}
-static void	do_it_at_redirection(void)
-{
-}
-static void	do_it_at_pipe(void)
-{
-}
+// static void	do_it_at_word(void)
+// {
+// }
+// static void	do_it_at_redirection(void)
+// {
+// }
+// static void	do_it_at_pipe(void)
+// {
+// }
 
 // simple command(exec_path) or redir_iter(redirection)
 static int	is_right_next_pipe(char type)

@@ -6,10 +6,11 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:53:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/20 21:54:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:25:54 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "parser.h"
 #include <stdlib.h>
 

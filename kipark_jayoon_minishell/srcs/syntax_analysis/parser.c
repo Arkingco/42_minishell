@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/20 23:11:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/21 15:37:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 	while (l_parsing)
 	{
 		// simple cmd
-		printf("****simple cmd****");
+		printf("****simple cmd****\n");
 		head_cmd = l_parsing->l_simple_cmd;
 		while (head_cmd)
 		{
@@ -36,23 +36,25 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 			head_cmd = head_cmd->next;
 		}
 		// redirection input
-		printf("****Output_redirection****");
+		printf("****Input_redirection****\n");
 		head_redir = l_parsing->redir_iter->l_input;
 		while (head_redir)
 		{
-			printf("redirection:	%s\n\n", head_redir->redir);
+			printf("redirection:	%s\n", head_redir->redir);
 			printf("file_path:		%s\n\n", head_redir->file_name);
 			head_redir = head_redir->next;
 		}
-		// redirection input
-		printf("****Input_redirection****");
+		// redirection output
+		printf("****Output_redirection****\n");
 		head_redir = l_parsing->redir_iter->l_output;
 		while (head_redir)
 		{
-			printf("redirection:	%s\n\n", head_redir->redir);
+			printf("redirection:	%s\n", head_redir->redir);
 			printf("file_path:		%s\n\n", head_redir->file_name);
 			head_redir = head_redir->next;
 		}
+		printf("------------------ next -------------- \n\n");	
+		l_parsing = l_parsing->next;
 	}
 }
 
