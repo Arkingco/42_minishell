@@ -1,28 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   is_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/19 20:19:27 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/19 20:26:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "lexer.h"
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+int	is_redirection(t_token_type type)
 {
-	SUCCESS,
-	FAIL
-};
-
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	if (type == T_INPUT_REDIR || type == T_HERE_DOC 
+		|| type == T_OUTPUT_REDIR || type == T_APPEND_REDIR)
+		return (1);
+	return (0);
+}

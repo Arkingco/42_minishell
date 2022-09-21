@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_check_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/08/31 18:08:03 by jayoon            #+#    #+#             */
+/*   Updated: 2022/08/31 18:20:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include <stdio.h>
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	ft_check_error(t_error e, ssize_t data)
 {
-	SUCCESS,
-	FAIL
-};
-
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	if (e == E_LIBFT && data == 0)
+	{
+		ft_putstr_fd("Error: libft error\n", 2);
+		exit(1);
+	}
+	else if (e == E_SYSTEM_CALL && data == -1)
+	{
+		perror("system call");
+		exit(1);
+	}
+	else if (e == E_MALLOC && data == 0)
+	{
+		perror("malloc");
+		exit(1);
+	}
+}

@@ -1,28 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_parsing_list_node.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/20 21:45:12 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/20 21:45:39 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	add_parsing_list_node(t_parsing_list *l_parsing, t_parsing_list *node)
 {
-	SUCCESS,
-	FAIL
-};
-
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	l_parsing->next = node;
+}

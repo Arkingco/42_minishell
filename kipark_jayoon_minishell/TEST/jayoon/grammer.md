@@ -42,3 +42,34 @@
 
 <file_path>   ::= WORD
 	/bin/ls
+
+
+
+// 기존 statement
+<pipeline>		::= <cmd>
+				|	<pipeline> '|' <cmd>
+
+<cmd>			::= <simple_cmd> 
+				|	<simple_cmd> <redirects>
+
+<simple_cmd>	::= <exec_path>
+				|	<argv>
+
+<argv>			::= <file_path> <args>
+
+<redirects>		::= <io_redirect>
+				|	<redirects> <io_redirect>
+
+<io_redirect>	::= '<'   <filename>
+				|	'<<'  <filename>
+				|	'>'   <filename>
+				|	'>>'  <filename>
+
+<args>			::=	WORD 
+				|	<args> WORD
+
+<filename>		::= WORD
+
+<exec_path>		::= WORD
+
+<file_path>		::= WORD

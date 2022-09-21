@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 11:38:46 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/20 23:09:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@ static void	check_argument(int argc, char **argv)
 
 int main(int argc, char **argv, char **envp)
 {
-	char	*line;
-	t_token *token;
-	t_env	*env;
-
+	char			*line;
+	t_token 		*token;
+	t_parsing_list	*l_parsing;
+	t_env			*env;
+	
+	l_parsing = NULL;
 	init_terminal();
 	check_argument(argc, argv);
 	env = set_shell_env_list(envp);
@@ -44,11 +46,17 @@ int main(int argc, char **argv, char **envp)
 		if (line)
 		{
 			token = tokenize(env, line);
-			parser(token);
+			l_parsing = parser(token);
+			if (l_parsing == NULL)
+			{
+				add_history(line);
+				free_all(line, token, l_parsing);
+				continue ;
+			}
 			// syntax_analysis();
 			// execute();
 			add_history(line);
-			free_main_line_and_token(line, token);
+			free_all(line, token, l_parsing);
 		}
 		else
 			exit_readline_return_null();

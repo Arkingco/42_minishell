@@ -1,28 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_safe_malloc.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/08/31 17:52:16 by jayoon            #+#    #+#             */
+/*   Updated: 2022/08/31 18:24:13 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	*ft_safe_malloc(size_t size)
 {
-	SUCCESS,
-	FAIL
-};
+	void	*ptr;
 
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	ptr = malloc(size);
+	ft_check_error(E_MALLOC, (ssize_t)ptr);
+	return (ptr);
+}

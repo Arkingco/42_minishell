@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   init_simple_cmd_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/02 16:13:14 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/19 20:15:31 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "libft.h"
+#include "parser.h"
+#include <stdlib.h>
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	*init_simple_cmd_node(char *str)
 {
-	SUCCESS,
-	FAIL
-};
+	t_simple_cmd	*new;
 
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	new = (t_simple_cmd *)ft_safe_malloc(sizeof(t_simple_cmd));
+	new->str = str;
+	new->next = NULL;
+	return (new);
+}

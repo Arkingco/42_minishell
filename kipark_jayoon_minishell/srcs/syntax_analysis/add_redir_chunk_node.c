@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   add_redir_chunk_node.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:13:31 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/02 16:09:06 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/20 21:48:21 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/20 21:49:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
-# define MINISHELL_H
+#include "parser.h"
+#include <stdlib.h>
 
-# include "lexer.h"
-# include "parser.h"
-
-enum e_exit_status_code
+void	add_redir_chunk_node(t_redir_chunk **head, t_redir_chunk *node)
 {
-	SUCCESS,
-	FAIL
-};
+	t_redir_chunk	*last;
 
-void	exit_readline_return_null(void);
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing);
-
-#endif
+	if (*head == NULL)
+		*head = node;
+	else
+	{
+		last = *head;
+		while (last->next)
+			last = last->next;
+		last->next = node;
+	}
+}
