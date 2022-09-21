@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:40:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 15:07:36 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 19:57:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,3 +113,4 @@ void	check_syntax(t_token *lst_token)
 	free(tok_types);
 	return (0);
 }
+
