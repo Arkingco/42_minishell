@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 15:11:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:05:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,12 @@
 # define NONE			FALSE
 # define INT_MAX	 	2147483647
 
+typedef struct s_info
+{
+	t_exec	*exec;
+	char	*cur_path;
+}	t_info;
+
 enum e_process_mode
 {
 	IN_MINISHELL_NO_CHILD,
@@ -77,11 +83,10 @@ enum e_process_mode
 	IN_HEREDOC_CHILD
 };
 
-typedef struct s_info
-{
-	t_exec	*exec;
-	char	*cur_path;
-}	t_info;
+
+void	main_init_exec(t_info *info, t_envlst *env);
+pid_t	execute(t_info *info, t_envlst *env);
+
 
 void 	rl_replace_line(const char *, int);
 

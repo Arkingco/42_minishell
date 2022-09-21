@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:40:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 20:07:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:09:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,12 @@ int	check_front_and_back_tokens(int front, int back)
 		return (0);
 	else if (front & REDIRECT)
 	{
-		if (back & REDIRECT || back & PIPE || back == NULL)
+		if (back & REDIRECT || back & PIPE || back == 0)
 			return (1);
 	}
 	else if (front & PIPE)
 	{
-		if (back & PIPE || back == NULL)
+		if (back & PIPE || back == 0)
 			return (1);
 	}
 	else if (front & EXPANDER)
@@ -107,11 +107,10 @@ void	check_syntax(t_token *lst_token)
 	if (check_syntax_token(tok, tok_types))
 	{
 		free(tok_types);
-		ft_putstr_fd("syntax error near unexpected token`%s'\n", tok->string_value);
+		ft_putstr_fd("syntax error near unexpected token`", 2);
+		ft_putstr_fd(tok->string_value, 2);
+		ft_putstr_fd("'\n", 2);
 		exit (1);
 	}
 	free(tok_types);
-	return (0);
 }
-
-

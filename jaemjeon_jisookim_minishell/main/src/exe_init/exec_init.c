@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_init.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 15:24:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 13:27:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:10:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,15 @@ void	make_path_list(t_exec *exec)
 
 void	main_init_exec(t_info *info, t_envlst *env)
 {
-	if (!exec)
+	if (!info->exec)
 	{
 		ft_putstr_fd("ERROR : calloc() function error. ", 2);
-		free(exec);
+		free(info->exec);
 		exit(1);
 	}
-	exec->cmds = cmd;
-	exec->env = env;
-	exec->env_head = exec->env; 
-	exec->process_cnt = count_process(exec);
-	get_token_count(exec);
-	make_env_double_ptr(exec);
-	make_path_list(exec);
-	return (exec);
+	
+	info->exec->process_cnt = count_process(info->exec);
+	get_token_count(info->exec);
+	make_env_double_ptr(info->exec);
+	make_path_list(info->exec);
 }
