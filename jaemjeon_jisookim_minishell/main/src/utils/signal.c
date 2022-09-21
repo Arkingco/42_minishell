@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:38:59 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 14:04:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:04:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	set_signal(int mode)
 	}
 	else if (mode == MINISHELL_HAS_CHILD)
 	{
-		signal(SIGINT, sigint_handler_print_newline);
+		signal(SIGINT, SIG_IGN);
 		signal(SIGQUIT, SIG_IGN);
 	}
 	else if (mode == EXECUTE_CHILD)
