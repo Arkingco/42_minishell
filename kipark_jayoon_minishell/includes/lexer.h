@@ -6,12 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/27 17:11:16 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/08/30 14:38:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
+
+#include "env.h"
 
 typedef enum e_metacharacter
 {
@@ -44,7 +46,7 @@ typedef struct s_token
 }	t_token;
 
 // lexer.c
-t_token	*tokenize(char *str);
+t_token	*tokenize(t_env *env_head, char *readline);
 void	word_token_add(t_token *token_head, t_token_type t_type, \
 															char *expand_str);
 int	get_quote_type_return_index(char *rl, int i, \
@@ -57,7 +59,7 @@ void	print_token_list(t_token *token_head);
 void	token_free(t_token *token);
 
 // token_expand*.c
-char	*expand_this_word_token(char *expand_str);
+char	*expand_this_word_token(t_env *env_head, char *expand_str);
 
 // lexer_util*.c
 int		pass_ifs(char *rl, int i);

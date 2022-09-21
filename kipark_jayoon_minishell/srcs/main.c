@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/01 11:45:28 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/21 20:25:50 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,25 +19,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "terminal.h"
+#include "minishell.h"
+#include "env.h"
 
-int main(void)
+static void	check_argument(int argc, char **argv)
+{
+	if (argc > 2)
+		exit(1);
+	if (argv[1] != NULL)
+		exit(1);
+	return ;
+}
+
+int main(int argc, char **argv, char **envp)
 {
 	char			*line;
 	t_token 		*token;
-	t_parsing_list	l_parsing;
+	t_parsing_list	*l_parsing;
+	t_env			*env;
 	
+	l_parsing = NULL;
 	init_terminal();
+	check_argument(argc, argv);
+	env = set_shell_env_list(envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (line)
 		{
-			token = tokenize(line);
-			parser(token, &l_parsing);
-			execute_cmd(&l_parsing);
+			token = tokenize(env, line);
+			l_parsing = parser(token);
+			if (l_parsing == NULL)
+			{
+				add_history(line);
+				free_all(line, token, l_parsing);
+				continue ;
+			}
+			// syntax_analysis();
+			// execute();
 			add_history(line);
-			free(line);
-			line = NULL;
+			free_all(line, token, l_parsing);
 		}
 		else
 			exit_readline_return_null();
