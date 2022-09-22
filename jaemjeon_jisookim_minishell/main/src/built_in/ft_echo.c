@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/15 15:15:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:27:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ void	printing_tokens(t_token *to_print_tokenlst, int n_option_flag)
 {
 	while (to_print_tokenlst != NULL)
 	{
-		printf("%s ", to_print_tokenlst->string_value);
+		ft_putstr_fd(to_print_tokenlst->string_value, 1);
+		ft_putchar_fd(' ', 1);
 		to_print_tokenlst = to_print_tokenlst->next;
 	}
 	if (n_option_flag == TRUE)
-		printf("\b");
+		ft_putstr_fd("\b", 1);
 	else
-		printf("\b\n");
+		ft_putendl_fd("\b", 1);
 }
 
 void	ft_echo(t_cmd *cmd, t_working_info *info)
