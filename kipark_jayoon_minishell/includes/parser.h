@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/20 23:05:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 16:53:45 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 /* init linked list node */
 t_parsing_list	*init_parsing_list(void);
 void			*init_simple_cmd_node(char *str);
-t_redir_chunk	*init_redirection_node(char *str_redir, char *str_file_name);
+t_redir_chunk	*init_redir_chunk_node(char *str_redir, char *str_file_name);
 
 /* add node at end of linked list */
 void			add_simple_cmd_node(t_simple_cmd **head, t_simple_cmd *node);

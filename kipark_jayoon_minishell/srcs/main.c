@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 15:50:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 21:45:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ int main(int argc, char **argv, char **envp)
 	char			*line;
 	t_token 		*token;
 	t_parsing_list	*l_parsing;
-	t_env			*env;
+	t_env			*curr_envp;
 	
 	l_parsing = NULL;
 	init_terminal();
 	check_argument(argc, argv);
-	env = set_shell_env_list(envp);
+	curr_envp = set_shell_env_list(envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (line)
 		{
-			token = tokenize(env, line);
+			token = tokenize(curr_envp, line);
 			l_parsing = parser(token);
 			if (l_parsing == NULL)
 			{
@@ -54,9 +54,7 @@ int main(int argc, char **argv, char **envp)
 				free_all(line, token, l_parsing);
 				continue ;
 			}
-			// syntax_analysis();
-			// execute();
-			execute_cmd(l_parsing);
+			execute_cmd(l_parsing, curr_envp);
 			add_history(line);
 			free_all(line, token, l_parsing);
 		}
