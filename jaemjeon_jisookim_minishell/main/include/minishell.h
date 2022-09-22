@@ -3,22 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/16 17:04:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:41:12 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <dirent.h>
 # include <stdio.h>
+# include <dirent.h>
 # include <termios.h>
+# include <signal.h>
+# include <unistd.h>
+# include <string.h>
+# include <sys/wait.h>
+# include <sys/stat.h>
+# include <sys/dir.h>
+# include <fcntl.h>
+# include <errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <signal.h>
 # include "../libft/libft.h"
 # include "env.h"
 # include "cmd.h"
@@ -28,10 +35,19 @@
 # include "parse.h"
 # include "execute.h"
 # include "built_in.h"
+# include "working_dir.h"
 # include "heredoc.h"
+# include "structs/t_cmd.h"
+# include "structs/t_env.h"
+# include "structs/t_token.h"
+# include "structs/t_working_dir.h"
+// # include "sigset.h"
 
 # define TRUE			1
 # define FALSE			0
+# define FAIL			-1
+# define OPEN_FAIL		FAIL
+# define NONE			FALSE
 # define INT_MAX	 	2147483647
 
 // token_type
@@ -60,11 +76,23 @@
 # define RIGHT_JOIN		0b00000000000000000000000000010000
 # define WORD_JOIN		0b00000000000000000000000000110000
 
+enum e_process_mode
+{
+	MINISHELL_NO_CHILD,
+	MINISHELL_HAS_CHILD,
+	EXECUTE_CHILD,
+	HEREDOC_CHILD,
+	HEREDOC_PARENT
+};
+
 // main.c
 
 // init.c
 void	argument_error_check(int argc);
-void	init_envp(char *envp[], t_envlst **env);
+void	init_envp(t_working_info *info, char *envp[]);
+void	init_cur_path(t_working_info *info);
+// void	set_signal_action(void);
+void 	rl_replace_line(const char *, int);
 
 
 // DEBUG

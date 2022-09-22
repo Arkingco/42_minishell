@@ -6,26 +6,14 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:46:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 16:52:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:30:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TOKEN_H
 # define TOKEN_H
 
-typedef struct s_token
-{
-	unsigned int	type;
-	char			*string_value;
-	struct s_token	*next;
-	struct s_token	*prev;
-}	t_token;
-
-typedef struct s_readstate
-{
-	int				index_word_start;
-	unsigned int	state;
-}	t_readstate;
+# include "structs/t_token.h"
 
 // tokenize.c
 t_token		*tokenize(char *line);

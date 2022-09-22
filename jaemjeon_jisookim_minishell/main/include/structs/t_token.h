@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   t_token.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:44:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/15 15:20:33 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/21 13:39:36 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/21 13:40:00 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef T_TOKEN_H
+# define T_TOKEN_H
 
-void	ft_unset(t_cmd *cmd, t_working_info *info)
+typedef struct s_token
 {
-	t_token	*to_unset_token;
+	unsigned int	type;
+	char			*string_value;
+	struct s_token	*next;
+	struct s_token	*prev;
+}	t_token;
 
-	to_unset_token = cmd->simple_cmd->next;
-	while (to_unset_token != NULL)
-	{
-		ft_delenv(&info->env,to_unset_token->string_value);
-		to_unset_token = to_unset_token->next;
-	}
-}
+typedef struct s_readstate
+{
+	int				index_word_start;
+	unsigned int	state;
+}	t_readstate;
+
+#endif

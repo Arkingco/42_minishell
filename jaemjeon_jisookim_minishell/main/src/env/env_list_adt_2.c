@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 16:57:51 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/29 09:55:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/20 14:59:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,30 +40,45 @@ char	*ft_getenv(t_envlst *env, char *key)
 	return (NULL);
 }
 
+t_envlst	*get_env_new_head(t_envlst *env)
+{
+	if (env->prev == NULL && env->next == NULL)
+		return (NULL);
+	else if (env->prev == NULL)
+		return (env->next);
+	else
+		return (ft_env_lst_first(env));
+}
+
 int	ft_delenv(t_envlst **env, char *key)
 {
 	t_envlst	*lst_cur;
 	t_envlst	*lst_new_first;
 
 	lst_cur = ft_env_lst_first(*env);
-	if (ft_strncmp(lst_cur->key, key, INT_MAX) == 0)
+	// if (ft_strncmp(lst_cur->key, key, INT_MAX) == 0)
+	// {
+	// 	lst_new_first = get_env_new_head(*env);
+	// 	if (lst_new_first != NULL)
+	// 		lst_new_first->prev = NULL;
+	// 	ft_free_envlst(lst_cur);
+	// 	*env = lst_new_first;
+	// 	return (TRUE);
+	// }
+	while (lst_cur != NULL)
 	{
-		lst_new_first = lst_cur->next;
-		lst_new_first->prev = NULL;
-		ft_free_envlst(lst_cur);
-		*env = lst_new_first;
-		return (TRUE);
-	}
-	while (lst_cur->next != NULL)
-	{
-		lst_cur = lst_cur->next;
 		if (ft_strncmp(lst_cur->key, key, INT_MAX) == 0)
 		{
-			lst_cur->prev->next = lst_cur->next;
-			lst_cur->next->prev = lst_cur->prev;
+			lst_new_first = get_env_new_head(lst_cur);
+			*env = lst_new_first;
+			if (lst_cur->next != NULL)
+				lst_cur->next->prev = lst_cur->prev;
+			if (lst_cur->prev != NULL)
+				lst_cur->prev->next = lst_cur->next;
 			ft_free_envlst(lst_cur);
 			return (TRUE);
 		}
+		lst_cur = lst_cur->next;
 	}
 	return (FALSE);
 }
@@ -75,7 +90,10 @@ void	ft_addenv_str(t_envlst **env, char *str_envp)
 	char		*value;
 
 	if (p_del == NULL)
+	{
+		ft_addenv(env, str_envp, "", FALSE);
 		return ;
+	}
 	key = ft_substr(str_envp, 0, p_del - str_envp);
 	// if (*(p_del + 1) == '\0' || ft_is_ifs(p_del + 1))
 	// 	value = ft_strdup("");
@@ -86,7 +104,7 @@ void	ft_addenv_str(t_envlst **env, char *str_envp)
 						  ft_strlen(str_envp) - ft_strlen(key) - 1);
 	if (key == NULL || value == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr or ft_strdup in ft_addenv_str");
-	ft_addenv(env, key, value);
+	ft_addenv(env, key, value, TRUE);
 	free(key);
 	free(value);
 }

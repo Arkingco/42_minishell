@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:47:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/07 11:12:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 12:38:17 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,17 @@ void	expand_env(t_token *token, t_envlst *env)
 	token->string_value = result;
 }
 
+int	is_heredoc_delimiter_token(t_token *token)
+{
+	while (token->prev && token->type & WORD && token->prev->type & WORD && \
+													token->type & LEFT_JOIN)
+		token = token->prev;
+	if (token->prev && token->prev->type & HEREDOC)
+		return (TRUE);
+	else
+		return (FALSE);
+}
+
 void	expander(t_token **tokne_lst, t_envlst *env)
 {
 	t_token	*cur_token;
@@ -114,6 +125,11 @@ void	expander(t_token **tokne_lst, t_envlst *env)
 	cur_token = *tokne_lst;
 	while (cur_token != NULL)
 	{
+		if (is_heredoc_delimiter_token(cur_token))
+		{
+			cur_token = cur_token->next;
+			continue;
+		}
 		if ((cur_token->type & WORD) && !(cur_token->type & SQUOTE))
 		{
 			expand_pidenv(cur_token);

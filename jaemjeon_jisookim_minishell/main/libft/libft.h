@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:46:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 17:13:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:23:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,12 @@
 # define LIBFT_H
 
 # include <stdlib.h>
-# include <stdio.h>
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 # endif
 
-// ft_gnl.c
-char	*get_next_line(int fd);
-
-// ft_gnl_utils.c
-int		ft_gnl_strlen(char *s);
-void	ft_gnl_free(char **s1);
-char	*ft_gnl_strchr(char *s, int c);
-char	*strjoin_process(char *s1, char *s2, char *str);
-char	*ft_gnl_strjoin(char *s1, char *s2);
-
-// original libft by jaemjeon
 int		ft_atoi(const char *str);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
@@ -42,6 +30,7 @@ int		ft_memcmp(const void *s1, const void *s2, size_t n);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
+int		ft_str_chrset_cnt(char *string, char *chrset);
 
 size_t	ft_strlcat(char *dst, const char *src, size_t size);
 size_t	ft_strlcpy(char *dst, const char *src, size_t size);
@@ -56,6 +45,7 @@ char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(const char *s1, const char *set);
 char	*ft_substr(char const *s, unsigned int start, size_t size);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
+char	*ft_strjoin_triple(char *s1, char *s2, char *s3);
 char	**ft_split(const char *s, char c);
 
 void	ft_bzero(void *s, size_t n);
@@ -72,6 +62,13 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(char *dest, const char *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 
+// ft_gnl.c
+char	*get_next_line(int fd);
 
-
+// ft_gnl_utils.c
+int		ft_gnl_strlen(char *s);
+void	ft_gnl_free(char **s1);
+char	*ft_gnl_strchr(char *s, int c);
+char	*strjoin_process(char *s1, char *s2, char *str);
+char	*ft_gnl_strjoin(char *s1, char *s2);
 #endif

@@ -3,14 +3,60 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/16 17:13:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 02:36:16 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/22 12:47:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+char	*heredoc_expand(t_working_info *info, char *line)
+{
+	t_token	tmp_token_to_expand;
+
+	ft_memset(&tmp_token_to_expand, 0, sizeof(t_token));
+	tmp_token_to_expand.string_value = line;
+	tmp_token_to_expand.type = WORD;
+	expand_pidenv(&tmp_token_to_expand);
+	expand_env(&tmp_token_to_expand, info->env);
+	return (tmp_token_to_expand.string_value);
+}
+
+void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
+{
+	const char	*delimiter = redirec_token->string_value;
+	char		*line;
+	char		*expanded_line;
+
+	while (1)
+	{
+		line = readline("> ");
+		if (line == NULL)
+			break ;
+		else if (ft_strncmp(line, delimiter, INT_MAX) == 0)
+		{
+			free(line);
+			break ;
+		}
+		else
+		{
+			if (!(redirec_token->type & QUOTE))
+			{
+				expanded_line = heredoc_expand(info, line);
+				ft_putendl_fd(expanded_line, fd);
+				free(expanded_line);
+			}
+			else
+			{
+				ft_putendl_fd(line, fd);
+				free(line);
+			}
+		}
+
+	}
+}
 
 char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 {
@@ -34,28 +80,13 @@ char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 	return (ft_strjoin("/tmp/minishell", tmp_string[0]));
 }
 
-int	make_heredoc_file(t_exec *exec, t_cmd *cur_cmd, t_token *cur_redirect_token)
-{
-	char	*tmp_filename;
-	char	*line;
-	int		fd;
-
-	tmp_filename = make_tmp_filename(cur_cmd, cur_redirect_token);
-	fd = open(tmp_filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
-	if (fd == -1)
-		exit(1);
-	do_heredoc(exec, cur_redirect_token->string_value, fd);
-	close(fd);
-	return (0);
-}
-
-void	rename_string_value(t_exec *exec)
+void	rename_string_value(t_working_info *info)
 {
 	t_cmd	*cur_cmd;
 	t_token	*cur_redirect_token;
 	int		ret_pid;
 
-	cur_cmd = exec->cmds;
+	cur_cmd = info->cmd;
 	while (cur_cmd != NULL)
 	{
 		cur_redirect_token = cur_cmd->redirect_input;
@@ -73,61 +104,62 @@ void	rename_string_value(t_exec *exec)
 	}
 }
 
-int	heredoc(t_exec *exec, pid_t ret_pid)
+void	process_cur_heredoc(t_working_info *info, t_cmd *cur_cmd, \
+													t_token *cur_redirection)
+{
+	char	*tmp_filename;
+	char	*line;
+	int		fd;
+
+	tmp_filename = make_tmp_filename(cur_cmd, cur_redirection);
+	if (tmp_filename == NULL)
+	{
+		perror("malloc_fail in heredoc");
+		exit(FAIL);
+	}
+	fd = open(tmp_filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (fd == -1)
+	{
+		perror("open_fail in heredoc");
+		exit(FAIL);
+	}
+	get_input_heredoc(info, cur_redirection, fd);
+	close(fd);
+}
+
+void	process_heredoc(t_working_info *info)
 {
 	t_cmd	*cur_cmd;
-	t_token	*cur_redirect_token;
+	t_token	*cur_redirection;
+
+	cur_cmd = info->cmd;
+	while (cur_cmd != NULL)
+	{
+		cur_redirection = cur_cmd->redirect_input;
+		while (cur_redirection != NULL)
+		{
+			if (cur_redirection->type & HEREDOC)
+				process_cur_heredoc(info, cur_cmd, cur_redirection);
+			cur_redirection = cur_redirection->next;
+		}
+		cur_cmd = cur_cmd->next;
+	}
+}
+
+int	heredoc(t_working_info *info)
+{
 	pid_t	pid;
 
+	sigtermset(HEREDOC_PARENT);
 	pid = fork();
 	if (pid == 0)
 	{
-		// signal(SIGINT, heredoc_process_sigint_process); // testing_code
-		cur_cmd = exec->cmds;
-		while (cur_cmd != NULL)
-		{
-			cur_redirect_token = cur_cmd->redirect_input;
-			while (cur_redirect_token != NULL)
-			{
-				if (cur_redirect_token->type & HEREDOC)
-					ret_pid = make_heredoc_file(exec, cur_cmd, cur_redirect_token);
-				cur_redirect_token = cur_redirect_token->next;
-			}
-			cur_cmd = cur_cmd->next;
-		}
+		sigtermset(HEREDOC_CHILD);
+		process_heredoc(info);
 		exit(0);
 	}
-	// signal(SIGINT, doing_heredoc_sigint_process); // testing_code
 	ft_wait(1, &pid);
-	rename_string_value(exec);
+	sigtermset(MINISHELL_NO_CHILD);
+	rename_string_value(info);
 	return (TRUE);
-}
-
-void	do_heredoc(t_exec *exec, char *limiter, int fd)
-{
-	char	*line;
-
-	line = 0;
-	while (1)
-	{
-		ft_putstr_fd("> ", 1);
-		line = get_next_line(0);
-		if (line)
-		{
-			line[ft_strlen(line) - 1] = '\0';
-			if (ft_strncmp(line, limiter, ft_strlen(limiter) + 1) == 0)
-			{
-				free(line);
-				line = 0;
-				break ;
-			}
-			ft_putstr_fd(line, fd);
-			ft_putstr_fd("\n", fd);
-			free(line);
-			line = 0;
-		}
-		else
-			break ;
-	}
-	return ;
 }

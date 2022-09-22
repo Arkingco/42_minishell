@@ -3,16 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/07 18:17:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/14 05:03:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_pwd(t_exec *exec)
+void	ft_pwd(t_cmd *cmd, t_working_info *info)
 {
-	return (0);
+	char	*cur_pwd;
+
+	if (info->cur_path != NULL)
+		printf("%s\n", info->cur_path);
+	else
+	{
+		cur_pwd = ft_getcwd(NULL, 0);
+		if (cur_pwd != NULL)
+		{
+			printf("%s\n", cur_pwd);
+			free(cur_pwd);
+		}
+	}
 }

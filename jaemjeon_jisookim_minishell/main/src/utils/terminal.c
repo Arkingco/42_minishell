@@ -1,26 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   terminal.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:44:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 03:26:39 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/17 01:13:38 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/19 19:12:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_env(t_cmd *cmd, t_working_info *info)
+void	set_termios(int mode)
 {
-	t_envlst	*env;
+	struct termios	term_setting;
 
-	env = info->env;
-	while (env != NULL)
-	{
-		if (env->has_value == TRUE)
-			printf("%s=%s\n", env->key, env->value);
-		env = env->next;
-	}
+	tcgetattr(STDOUT_FILENO, &term_setting);
+	if (mode == MINISHELL_NO_CHILD || mode == MINISHELL_HAS_CHILD || \
+						mode == HEREDOC_PARENT || mode == HEREDOC_CHILD)
+		term_setting.c_lflag &= ~(ECHOCTL);
+	else if (mode == EXECUTE_CHILD)
+		term_setting.c_lflag |= ECHOCTL;
+	tcsetattr(STDOUT_FILENO, NONE, &term_setting);
 }

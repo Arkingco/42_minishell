@@ -3,32 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/24 05:21:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:26:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
-typedef struct s_envlst
-{
-	char			*key;
-	char			*value;
-	struct s_envlst	*next;
-	struct s_envlst	*prev;
-}	t_envlst;
-
-
-// env.c
-void		built_in_env(t_envlst *env);
+# include "structs/t_env.h"
 
 // env_list_adt_1.c
 void		ft_env_lstadd_back(t_envlst **lst, t_envlst *new);
 int			ft_env_lstsize(t_envlst *lst);
-t_envlst	*ft_addenv(t_envlst **env, char *key, char *value);
+t_envlst	*ft_addenv(t_envlst **env, char *key, char *value, int has_value);
 void		ft_free_envlst(t_envlst *lst);
 t_envlst	*ft_env_lstlast(t_envlst *lst);
 
@@ -41,8 +31,10 @@ t_envlst	*ft_env_lst_first(t_envlst *lst);
 
 // env_list_adt_3.c
 int			ft_has_env(t_envlst *env, char *key);
-void		ft_setenv(t_envlst *env, char *key, char *value);
+void		ft_setenv(t_envlst *env, char *key, char *value, int has_value);
 char		**ft_envlst_to_envp(t_envlst *env);
 char		*ft_envlst_to_string(t_envlst *lst);
+char		*ft_get_value_in_string(char *string);
+char		*ft_get_key_in_string(char *string);
 
 #endif
