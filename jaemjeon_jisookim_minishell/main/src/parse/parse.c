@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 13:28:29 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:12:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,13 +163,13 @@ void	remove_trash_token(t_token **token_lst)
 	*token_lst = head_token;
 }
 
-t_cmd	*parsing(char *line, t_envlst *env)
+t_cmd	*parsing(t_info *info, char *line, t_envlst *env)
 {
 	t_token	*lst_token;
 
 	// quote의 짝이 맞는지에 대한 에러검사를 tokenize를 들어가기 전에 합니다.
 	lst_token = tokenize(line); // word, quote, redirect, pipe로 토큰을 나눔.
-	check_syntax(lst_token);
+	check_syntax(info, lst_token);
 	expander(&lst_token, env);	// 확장하고 필요없는 토큰을 지우고 word_split을 하고 양쪽 문맥을 보고 token을 join시킴
 	remove_trash_token(&lst_token);
 	quote_remove(&lst_token);

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 15:15:40 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 15:12:02 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:35:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,11 +68,16 @@ pid_t	execute(t_info *info, t_envlst *env)
 	main_init_exec(info, env);
 	ret_pid = 0;
 	
-	// heredoc
 	if (info->exec->process_cnt == 0)
 		return (0);
+	else if (info->exit_flag == 2)
+		print_syntax_err(info); // heredoc syntax error
 	else
-		ret_pid = heredoc(info->exec, ret_pid);
+		ret_pid = heredoc(info->exec, ret_pid); // heredoc
+		
+	if (info->exit_flag)
+		print_syntax_err(info); // normal syntax error, heredoc + errmsg
+		
 	if (ret_pid == FALSE)
 		return (FALSE);
 	// execute

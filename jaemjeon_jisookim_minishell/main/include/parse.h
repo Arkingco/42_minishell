@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:46:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 20:54:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:24:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	word_join(t_token **token_lst);
 void	quote_remove(t_token **token_lst);
 void	word_split(t_token **token_lst);
 void	remove_trash_token(t_token **token_lst);
-t_cmd	*parsing(char *line, t_envlst *env);
+
 
 //parse_util_1.c
 void	__skip_envkey(char **pointer);

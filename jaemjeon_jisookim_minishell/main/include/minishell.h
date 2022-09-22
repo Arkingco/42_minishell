@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 21:05:34 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:33:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ typedef struct s_info
 {
 	t_exec	*exec;
 	char	*cur_path;
+	int		exit_flag; // OK == 0, normal exit == 1, redirect exit == 2
+	char	*exit_str;
 }	t_info;
 
 enum e_process_mode
@@ -82,6 +84,16 @@ enum e_process_mode
 	IN_HEREDOC_PARENT,
 	IN_HEREDOC_CHILD
 };
+
+// syntax_check.c
+void	print_syntax_err(t_info *info);
+int	check_syntax_single_token(t_info* info, t_token *tok);
+int	check_syntax_multiple_token(t_info* info, t_token *tok);
+t_cmd	*parsing(t_info *info, char *line, t_envlst *env);
+void	check_syntax(t_info *info, t_token *lst_token);
+void	set_err_string(t_info *info, t_token *tok, int token);
+int		check_front_and_back_tokens(t_info *info, t_token *tok, int front, int back);
+int		check_syntax_token(t_info *info, t_token *tok, int *tok_types);
 
 
 void	main_init_exec(t_info *info, t_envlst *env);

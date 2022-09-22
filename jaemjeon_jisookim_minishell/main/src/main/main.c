@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 13:50:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:15:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	main_loop(t_info *info, t_envlst *env, char **envp)
 		line = readline("MINISHELL : ");
 		if (line != NULL)
 		{
-			lst_cmd = parsing(line, env);
+			lst_cmd = parsing(info, line, env);
 			info->exec->cmds = lst_cmd;
-		
 			execute(info, env); // execute
 			//debug_print_lst_cmd(lst_cmd); // 구조체에 들어간 토큰리스트를 출력함
 			ft_free_cmdlst(lst_cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.

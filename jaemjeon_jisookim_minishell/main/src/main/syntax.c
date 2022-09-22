@@ -6,31 +6,14 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 13:40:48 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/21 21:09:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/21 22:43:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	check_token_type(t_token *token)
-{
-	t_token *tok;
 
-	tok = token;
-	if (tok->string_value != NULL)
-	{
-		if (tok->type & EXPANDER)
-			return (EXPANDER);
-		else if (tok->type & REDIRECT)
-			return (REDIRECT);
-		else
-			return (PIPE);
-	}
-	else
-		return (WORD);
-}
-
-int	check_syntax_token(t_token *tok, int *tok_types)
+int	check_syntax_token(t_info *info, t_token *tok, int *tok_types)
 {
 	int	i;
 	int	j;
@@ -41,7 +24,7 @@ int	check_syntax_token(t_token *tok, int *tok_types)
 	while (tok)
 	{
 		j = i + 1;
-		flag = check_front_and_back_tokens(tok_types[i], tok_types[j]);
+		flag = check_front_and_back_tokens(info, tok, tok_types[i], tok_types[j]);
 		if (flag)
 			return (flag);
 		i++;
@@ -50,19 +33,28 @@ int	check_syntax_token(t_token *tok, int *tok_types)
 	return (flag);
 }
 
-int	check_front_and_back_tokens(int front, int back)
+int	check_front_and_back_tokens(t_info *info, t_token *tok, int front, int back)
 {
 	if (front & WORD)
+	{
+		printf("word!");
 		return (0);
+	}
 	else if (front & REDIRECT)
 	{
-		if (back & REDIRECT || back & PIPE || back == 0)
+		if (back & REDIRECT || back & PIPE || !back)
+		{
+			set_err_string(info, tok, back);
 			return (1);
+		}
 	}
 	else if (front & PIPE)
 	{
-		if (back & PIPE || back == 0)
+		if (back & PIPE || !back)
+		{
+			set_err_string(info, tok, back);
 			return (1);
+		}
 	}
 	else if (front & EXPANDER)
 	{
@@ -70,6 +62,7 @@ int	check_front_and_back_tokens(int front, int back)
 	}
 	return (0);
 }
+
 
 int	count_token(t_token *token)
 {
@@ -86,31 +79,37 @@ int	count_token(t_token *token)
 	return (count);
 }
 
-void	check_syntax(t_token *lst_token)
+void	check_syntax(t_info *info, t_token *lst_token)
 {
 	int		i;
 	t_token *tok;
 	int		*tok_types;
 
 	tok = lst_token;
+	info->exit_flag = 0;
 	i = count_token(tok);
 	if (i == 0)
-		return ;
-	tok_types = safe_calloc(i, sizeof(int));
-	i = 0;
-	while (tok)
-	{
-		tok_types[i] = check_token_type(tok);
-		i++;
-		tok = tok->next;
-	}
-	if (check_syntax_token(tok, tok_types))
-	{
-		free(tok_types);
-		ft_putstr_fd("syntax error near unexpected token`", 2);
-		ft_putstr_fd(tok->string_value, 2);
-		ft_putstr_fd("'\n", 2);
-		exit (1);
-	}
-	free(tok_types);
+		return ; // 아무것도 들어가지 않을 때
+	else if (i == 1)
+		info->exit_flag = check_syntax_single_token(info, tok);
+	else
+		info->exit_flag = check_syntax_multiple_token(info, tok);
+	if (info->exit_flag)
+			return ;
 }
+
+	// tok_types = safe_calloc(i, sizeof(int));
+	// i = 0;
+	// while (tok)
+	// {
+	// 	tok_types[i] = check_token_type(tok);
+	// 	i++;
+	// 	tok = tok->next;
+	// }
+	
+	// if (check_syntax_token(info, tok, tok_types))
+	// {
+	// 	free(tok_types);
+	// 	info->exit_flag = 1;
+	// }
+	// free(tok_types);
