@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 17:03:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:18:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,16 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 	while (l_parsing)
 	{
 		// simple cmd
-		head_cmd = l_parsing->l_simple_cmd;
-		while (head_cmd)
+		if (l_parsing->l_simple_cmd)
 		{
-			printf("****simple cmd****\n");
-			printf("simple cmd:		%s\n\n", head_cmd->str);
-			head_cmd = head_cmd->next;
+			head_cmd = l_parsing->l_simple_cmd;
+			while (head_cmd)
+			{
+				printf("****simple cmd****\n");
+				printf("simple cmd:		%s\n\n", head_cmd->str);
+				head_cmd = head_cmd->next;
+			}
 		}
-
 		// redirection
 		if (l_parsing->redir_iter)
 		{

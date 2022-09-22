@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:07:53 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 17:05:00 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:17:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ void	free_parsing_list(t_parsing_list *l_parsing)
 {
 	if (l_parsing == NULL)
 		return ;
-	free_simple_cmd_list(l_parsing->l_simple_cmd);
+	if (l_parsing->l_simple_cmd)
+		free_simple_cmd_list(l_parsing->l_simple_cmd);
 	if (l_parsing->redir_iter)
 	{
-		free_redir_chunk_list(l_parsing->redir_iter->l_input);
-		free_redir_chunk_list(l_parsing->redir_iter->l_output);
+		if (l_parsing->redir_iter->l_input)
+			free_redir_chunk_list(l_parsing->redir_iter->l_input);
+		if (l_parsing->redir_iter->l_output)
+			free_redir_chunk_list(l_parsing->redir_iter->l_output);
 		free(l_parsing->redir_iter);
-		free(l_parsing);
 	}
+	free(l_parsing);
 	l_parsing = NULL;
 }
