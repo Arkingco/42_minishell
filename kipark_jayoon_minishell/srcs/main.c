@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 17:03:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 22:45:56 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ int main(int argc, char **argv, char **envp)
 				syntax_error_continue(line, token, l_parsing);
 				continue ;
 			}
-			// syntax_analysis();
 			execute_cmd(l_parsing, env);
 			add_history(line);
 			free_all(line, token, l_parsing);

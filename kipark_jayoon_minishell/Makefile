@@ -35,8 +35,9 @@ SRCS_LEXICAL_ANALYSIS		:=	lexer_util.c			\
 								token_expand.c			\
 								token_quote_remove.c	\
 								env.c					\
-								env_util.c				\
-								env_list.c
+								env_add.c				\
+								env_print.c				\
+								env_util.c				
 SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
 SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
@@ -60,7 +61,6 @@ SRCS_BUILT_IN				:=	built_in.c		\
 								echo.c			\
 								env.c			\
 								exit.c			\
-								export_util.c	\
 								export.c		\
 								pwd.c			\
 								unset.c	
