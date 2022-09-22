@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:43:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/21 16:12:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:41:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,9 @@
 #include "lexer.h"
 #include "parser.h"
 #include <stdlib.h>
+
+//libft
+#include "libft.h"
 
 // static void	do_it_at_word(void)
 // {
@@ -33,6 +36,14 @@ static int	is_pipe(char type)
 	return (1);
 }
 
+static void	init_redir_iter(t_parsing_list *l_parsing)
+{
+	l_parsing->redir_iter 
+		= (t_redir_iter *)ft_safe_malloc(sizeof(t_redir_iter));
+	l_parsing->redir_iter->l_input = NULL;
+	l_parsing->redir_iter->l_output = NULL;
+}
+
 t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 				t_parsing_list *head)
 {
@@ -41,7 +52,9 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 
 	l_parsing = head;
 	l_token = l_token->next;
-	if (!l_token || l_token->type == T_PIPE)
+	if (!l_token)
+		return (NULL);
+	if (l_token->type == T_PIPE)
 		return ((t_parsing_list *)print_syntax_error());
 	while (l_token)
 	{
@@ -54,7 +67,9 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 		{
 			if (!l_token->next || l_token->next->type != T_WORD)
 				return (print_syntax_error());
-			node = init_redirection_node(l_token->str, l_token->next->str);
+			if (l_parsing->redir_iter == NULL)
+				init_redir_iter(l_parsing);
+			node = init_redir_chunk_node(l_token->str, l_token->next->str);
 			if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
 				add_redir_chunk_node(&l_parsing->redir_iter->l_input,
 					(t_redir_chunk *)node);
