@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/20 15:30:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 14:09:59 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ t_cmd	*parsing(char *line, t_working_info *info)
 	quote_remove(&lst_token);
 	word_split(&lst_token);
 	word_join(&lst_token);
+	
 	// debug_print_lst_token(lst_token);
 	combine_redirect_filename(lst_token); // 리다이렉션바로 뒤의 word토큰을 합침
 	lst_cmd = token_to_cmd(lst_token);	  // 토큰을 cmd구조체에 넣음
