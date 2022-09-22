@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_env.c                                           :+:      :+:    :+:   */
+/*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:44:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 03:26:39 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/20 03:08:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_env(t_cmd *cmd, t_working_info *info)
+int	has_heredoc(t_working_info *info)
 {
-	t_envlst	*env;
+	t_cmd	*cur_cmd;
+	t_token	*cur_input_redirection;
 
-	env = info->env;
-	while (env != NULL)
+	cur_cmd = info->cmd;
+	while (cur_cmd != NULL)
 	{
-		if (env->has_value == TRUE)
-			printf("%s=%s\n", env->key, env->value);
-		env = env->next;
+		cur_input_redirection = cur_cmd->redirect_input;
+		while (cur_input_redirection != NULL)
+		{
+			if (cur_input_redirection->type & HEREDOC)
+				return (TRUE);
+			cur_input_redirection = cur_input_redirection->next;
+		}
+		cur_cmd = cur_cmd->next;
 	}
+	return (FALSE);
 }

@@ -3,23 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/13 16:57:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/16 18:22:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_exit(t_exec *exec)
+int	is_alnum_string(char *string)
 {
-	return (0);
+	while (*string != '\0')
+	{
+		if (ft_isdigit(*string) == FALSE)
+			return (FALSE);
+		string++;
+	}
+	return (TRUE);
 }
 
-void	ft_exit_if(t_exec *exec, int condition)
+static void	print_error_message(char *arg_string)
 {
-	if (condition)
-		ft_exit(exec);
-	return ;
+	char	*result_message;
+	char	*tmp_string;
+
+	tmp_string = ft_strjoin_triple("exit: ", arg_string, ": ");
+	result_message = ft_strjoin(tmp_string, "numeric argument required");
+	free(tmp_string);
+	ft_putendl_fd(result_message, 2);
+}
+
+void	ft_exit(t_cmd *cmd, t_working_info *info)
+{
+	char	*arg_string;
+
+	ft_putendl_fd("exit", 2);
+	if (cmd->simple_cmd->next == NULL)
+		exit(0);
+	if (cmd->simple_cmd->next->next != NULL)
+	{
+		// errno를 1로 세팅해야함
+		ft_putendl_fd("exit: too many arguments", 2);
+	}
+	else
+	{
+		arg_string = cmd->simple_cmd->next->string_value;
+		if (is_alnum_string(arg_string) == FALSE)
+		{
+			print_error_message(arg_string);
+			exit(255);
+		}
+		else
+			exit(ft_atoi(arg_string));
+	}
 }

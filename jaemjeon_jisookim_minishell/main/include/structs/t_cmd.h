@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_unset.c                                         :+:      :+:    :+:   */
+/*   t_cmd.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:44:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/15 15:20:33 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/21 13:38:09 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/21 13:41:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#ifndef T_CMD_H
+# define T_CMD_H
 
-void	ft_unset(t_cmd *cmd, t_working_info *info)
+# include "t_token.h"
+
+typedef struct s_cmd
 {
-	t_token	*to_unset_token;
+	t_token			*simple_cmd;
+	t_token			*redirect_input;
+	t_token			*redirect_output;
+	struct s_cmd	*next;
+	struct s_cmd	*prev;
+}	t_cmd;
 
-	to_unset_token = cmd->simple_cmd->next;
-	while (to_unset_token != NULL)
-	{
-		ft_delenv(&info->env,to_unset_token->string_value);
-		to_unset_token = to_unset_token->next;
-	}
-}
+#endif

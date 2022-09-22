@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   heredoc_signal.c                                   :+:      :+:    :+:   */
+/*   t_env.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/18 02:35:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/18 02:35:08 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/21 13:37:22 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/21 13:37:57 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef T_ENV_H
+# define T_ENV_H
 
-#include "../../include/minishell.h"
-
-void	heredoc_process_sigint_process(int signo)
+typedef struct s_envlst
 {
-	if (signo == SIGINT)
-		exit(1);
-}
+	char			*key;
+	char			*value;
+	int				has_value;
+	struct s_envlst	*next;
+	struct s_envlst	*prev;
+}	t_envlst;
 
-
-void	doing_heredoc_sigint_process(int signo)
-{
-	if (signo == SIGINT)
-		write(2, "\n", 1);
-}
+#endif

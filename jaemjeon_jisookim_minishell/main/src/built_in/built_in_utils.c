@@ -1,34 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/19 18:39:23 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/14 04:44:52 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/14 04:52:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "../../include/minishell.h"
 
-// error_exit.c
-void	ft_error_exit(int exit_status, char *message);
+int	ft_chdir(char *path)
+{
+	int	ret_chdir;
 
-// ifs.c
-int	ft_has_ifs(char *string);
-int	ft_is_ifs(const char *letter);
-int	ft_skip_ifs1(char **string_pointer);
-void	ft_skip_ifs2(char *line, int *index);
+	ret_chdir = chdir(path);
+	if (ret_chdir == FAIL)
+		perror("error in chdir.. : ");
+	return (ret_chdir);
+}
 
-// signal.c
-void	set_signal(int mode);
+char	*ft_getcwd(char *buf, size_t buf_size)
+{
+	char	*cwd;
 
-// terminal.c
-void	set_termios(int mode);
-
-//setting.c
-void	sigtermset(int mode);
-
-#endif
+	cwd = getcwd(buf, buf_size);
+	if (cwd == NULL)
+		perror("error in getcwd.. : ");
+	return (cwd);
+}

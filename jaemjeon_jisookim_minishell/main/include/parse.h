@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:46:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/05 00:14:43 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/21 14:29:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSE_H
 # define PARSE_H
 
-# include "token.h"
+# include "structs/t_token.h"
+# include "structs/t_cmd.h"
 
 // parse.c
 void	combine_redirect_filename(t_token *token_lst);

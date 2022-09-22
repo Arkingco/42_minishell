@@ -3,64 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 16:53:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/10 08:38:14 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
+/*   Updated: 2022/09/21 14:41:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN_H
-# define BUILT_IN_H
+#ifndef BUILT_IN
+# define BUILT_IN
 
-# include "token.h"
-# include "env.h"
-# include "cmd.h"
-# include "execute.h"
+# include "structs/t_working_dir.h"
+# include "structs/t_cmd.h"
 
-// #include <stdio.h>
-// #include <unistd.h>
-// #include <fcntl.h> // open, close
-// #include <sys/wait.h> // wait
-// #include <sys/types.h> // pid_t
+enum	e_type_built_in
+{
+	T_ECHO = 0,
+	T_CD,
+	T_PWD,
+	T_EXPORT,
+	T_UNSET,
+	T_ENV,
+	T_EXIT,
+	T_BUILT_IN_COUNT
+};
 
-// typedef struct s_cmd
-// {
-// 	t_token			*simple_cmd;
-// 	t_token			*redirect_input;
-// 	t_token			*redirect_output;
-// 	struct s_cmd	*next;
-// }	t_cmd;
+# define BUILT_IN_COUNT T_BUILT_IN_COUNT
+# define NOT_BUILT_IN BUILT_IN_COUNT
 
-// typedef struct s_token
-// {
-// 	unsigned int	type;
-// 	char			*string_value;
-// 	struct s_token	*next;
-// 	struct s_token	*prev;
-// }	t_token;
+enum	e_envkey_to_handle
+{
+	T_SHLVL = 0,
+	T_ENVKEY_TO_HANDLE_COUNT
+};
 
+# define ENVKEY_TO_HANDLE_COUNT T_ENVKEY_TO_HANDLE_COUNT
 
+// built_ins
+void	ft_echo(t_cmd *cmd, t_working_info *info);
+void	ft_cd(t_cmd *cmd, t_working_info *info);
+void	ft_pwd(t_cmd *cmd, t_working_info *info);
+void	ft_export(t_cmd *cmd, t_working_info *info);
+void	ft_unset(t_cmd *cmd, t_working_info *info);
+void	ft_env(t_cmd *cmd, t_working_info *info);
+void	ft_exit(t_cmd *cmd, t_working_info *info);
 
-//cd
-int	ft_cd(t_exec *exec);
+// built_in_utils.c
+int		ft_chdir(char *path);
+char	*ft_getcwd(char *buf, size_t buf_size);
 
-//echo
-int	ft_echo(t_exec *exec);
-
-//env
-int	ft_env(t_exec *exec);
-
-//exit
-int	ft_exit(t_exec *exec);
-
-//export
-int	ft_export(t_exec *exec);
-
-//pwd
-int	ft_pwd(t_exec *exec);
-
-//unset
-int	ft_unset(t_exec *exec);
 
 #endif
