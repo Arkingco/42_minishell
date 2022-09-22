@@ -52,10 +52,10 @@ SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
 								parser.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS_EXECUTION				:=	
+SRCS_EXECUTION				:=	execute_cmd.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
-SRCS_BUILT_IN				:=	
+SRCS_BUILT_IN				:=	built_in.c
 SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
 
 SRCS_ERROR					:=	print_syntax_error_pipe.c \
