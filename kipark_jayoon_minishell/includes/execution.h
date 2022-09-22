@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/21 20:37:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 16:41:30 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 # define EXECUTION_H
 
 # include "parser.h"
+# include "env.h"
 
-void	execute_cmd(t_parsing_list *l_parsing);
+void	execute_cmd(t_parsing_list *l_parsing, t_env *env);
 
 #endif

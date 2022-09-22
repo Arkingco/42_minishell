@@ -2,7 +2,7 @@ NAME						=	minishell
 
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
-DEBUG						=	-g3 -fsanitize=address
+DEBUG						=	-g -fsanitize=address
 
 LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
@@ -55,7 +55,15 @@ SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANAL
 SRCS_EXECUTION				:=	execute_cmd.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
-SRCS_BUILT_IN				:=	built_in.c
+SRCS_BUILT_IN				:=	built_in.c		\
+								cd.c			\
+								echo.c			\
+								env.c			\
+								exit.c			\
+								export_util.c	\
+								export.c		\
+								pwd.c			\
+								unset.c	
 SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
 
 SRCS_ERROR					:=	print_syntax_error_pipe.c \

@@ -6,13 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 15:55:23 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 16:41:04 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
 #include "built.h"
+#include "env.h"
 #include <stdio.h>
 
 static int	is_single_cmd(t_parsing_list *next)
@@ -36,7 +37,7 @@ static int	is_single_cmd(t_parsing_list *next)
 	
 // }
 
-void	execute_cmd(t_parsing_list *l_parsing)
+void	execute_cmd(t_parsing_list *l_parsing, t_env *env)
 {
 	// int pipe_fd[3];
 
@@ -57,6 +58,7 @@ void	execute_cmd(t_parsing_list *l_parsing)
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 	{
 		printf("single built_in cmd\n");
+		execute_bulit_in(l_parsing->l_simple_cmd, env);
 	}
 	else
 	{

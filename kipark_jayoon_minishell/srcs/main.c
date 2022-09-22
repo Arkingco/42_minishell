@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 15:50:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 17:03:49 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,13 @@ static void	check_argument(int argc, char **argv)
 	return ;
 }
 
+static void	syntax_error_continue(char *line, t_token *token, \
+													t_parsing_list *l_parsing)
+{
+	add_history(line);
+	free_all(line, token, l_parsing);
+}
+
 int main(int argc, char **argv, char **envp)
 {
 	char			*line;
@@ -38,6 +45,7 @@ int main(int argc, char **argv, char **envp)
 	t_env			*env;
 	
 	l_parsing = NULL;
+	token = NULL;
 	init_terminal();
 	check_argument(argc, argv);
 	env = set_shell_env_list(envp);
@@ -47,16 +55,19 @@ int main(int argc, char **argv, char **envp)
 		if (line)
 		{
 			token = tokenize(env, line);
+			if (token == NULL)
+			{
+				syntax_error_continue(line, token, l_parsing);
+				continue ;
+			}
 			l_parsing = parser(token);
 			if (l_parsing == NULL)
 			{
-				add_history(line);
-				free_all(line, token, l_parsing);
+				syntax_error_continue(line, token, l_parsing);
 				continue ;
 			}
 			// syntax_analysis();
-			// execute();
-			execute_cmd(l_parsing);
+			execute_cmd(l_parsing, env);
 			add_history(line);
 			free_all(line, token, l_parsing);
 		}

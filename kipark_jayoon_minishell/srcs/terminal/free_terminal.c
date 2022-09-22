@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 11:36:24 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/02 14:07:01 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:00:35 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,17 @@
 
 void	free_all(char *line, t_token *token, t_parsing_list *l_parsing)
 {
-	free(line);
-	line = NULL;
-	token_free(token);
-	free_parsing_list(l_parsing);
+	if (line != NULL)
+	{
+		free(line);
+		line = NULL;
+	}
+	if (token != NULL)
+	{
+		token_free(token);
+	}
+	if (l_parsing != NULL)
+	{
+		free_parsing_list(l_parsing);
+	}
 }
