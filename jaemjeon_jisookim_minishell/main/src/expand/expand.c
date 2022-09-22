@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:47:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/22 12:38:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:52:26 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+extern int	g_errno;
 
 #include "../../include/minishell.h"
 
@@ -50,6 +52,11 @@ char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 	cpy_end = cpy_start + 1;
 	if (__is_to_remove_dollar(token, cpy_end)) //  지워야하는 $인지 판단
 		expanded_string = ft_strdup(""); // 지워야하는거면 $를 빈문자열 반환
+	else if (*cpy_end == '?')
+	{
+		expanded_string = ft_itoa(g_errno);
+		cpy_end++;
+	}
 	else
 	{
 		expanded_string = __get_envvalue(cpy_start, &cpy_end, env); // 확장하여 반환
@@ -118,11 +125,16 @@ int	is_heredoc_delimiter_token(t_token *token)
 		return (FALSE);
 }
 
-void	expander(t_token **tokne_lst, t_envlst *env)
+void	expand_exit_status(t_token *cur_token)
+{
+
+}
+
+void	expander(t_token **token_lst, t_envlst *env)
 {
 	t_token	*cur_token;
 
-	cur_token = *tokne_lst;
+	cur_token = *token_lst;
 	while (cur_token != NULL)
 	{
 		if (is_heredoc_delimiter_token(cur_token))

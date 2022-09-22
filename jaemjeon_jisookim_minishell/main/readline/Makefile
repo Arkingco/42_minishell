@@ -31,7 +31,7 @@ PACKAGE_TARNAME = readline
 srcdir = .
 
 top_srcdir = .
-BUILD_DIR = /Users/jaemjeon/42seoul/minishell/jaemjeon_jisookim_minishell/main/readline
+BUILD_DIR = /Users/jaemjeon/projects/minishell_new/jaemjeon_jisookim_minishell/main/readline
 
 INSTALL = /usr/bin/install -c
 INSTALL_PROGRAM = ${INSTALL}

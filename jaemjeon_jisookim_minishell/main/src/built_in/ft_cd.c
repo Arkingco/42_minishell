@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/20 14:29:32 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 21:50:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 int	is_exist_dir(char *dir_path)
 {
 	DIR	*dp;
+	struct dirent	*s_dir;
 
 	dp = opendir(dir_path);
 	if (dp == NULL)
