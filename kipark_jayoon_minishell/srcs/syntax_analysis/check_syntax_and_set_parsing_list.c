@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:43:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 17:01:50 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:41:30 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,9 @@ t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 
 	l_parsing = head;
 	l_token = l_token->next;
-	if (!l_token || l_token->type == T_PIPE)
+	if (!l_token)
+		return (NULL);
+	if (l_token->type == T_PIPE)
 		return ((t_parsing_list *)print_syntax_error());
 	while (l_token)
 	{

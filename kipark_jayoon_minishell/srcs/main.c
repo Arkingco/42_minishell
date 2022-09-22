@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 17:59:59 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:45:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "terminal.h"
 #include "execution.h"
 #include "minishell.h"
-#include "curr_envp.h"
+#include "env.h"
 
 static void	check_argument(int argc, char **argv)
 {
