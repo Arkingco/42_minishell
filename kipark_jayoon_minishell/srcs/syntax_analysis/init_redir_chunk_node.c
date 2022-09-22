@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_redirection_node.c                            :+:      :+:    :+:   */
+/*   init_redir_chunk_node.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:53:43 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/21 15:25:54 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 16:53:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "parser.h"
 #include <stdlib.h>
 
-t_redir_chunk	*init_redirection_node(char *str_redir, char *str_file_name)
+t_redir_chunk	*init_redir_chunk_node(char *str_redir, char *str_file_name)
 {
 	t_redir_chunk	*new;
 

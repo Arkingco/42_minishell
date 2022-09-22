@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/21 19:37:19 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 17:03:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,28 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 			printf("simple cmd:		%s\n\n", head_cmd->str);
 			head_cmd = head_cmd->next;
 		}
-		// redirection input
-		head_redir = l_parsing->redir_iter->l_input;
-		while (head_redir)
+
+		// redirection
+		if (l_parsing->redir_iter)
 		{
-			printf("****Input_redirection****\n");
-			printf("redirection:		%s\n", head_redir->redir);
-			printf("file_path:		%s\n\n", head_redir->file_name);
-			head_redir = head_redir->next;
-		}
-		// redirection output
-		head_redir = l_parsing->redir_iter->l_output;
-		while (head_redir)
-		{
-			printf("****Output_redirection****\n");
-			printf("redirection:		%s\n", head_redir->redir);
-			printf("file_path:		%s\n\n", head_redir->file_name);
-			head_redir = head_redir->next;
+			// redirection input
+			head_redir = l_parsing->redir_iter->l_input;
+			while (head_redir)
+			{
+				printf("****Input_redirection****\n");
+				printf("redirection:		%s\n", head_redir->redir);
+				printf("file_path:		%s\n\n", head_redir->file_name);
+				head_redir = head_redir->next;
+			}
+			// redirection output
+			head_redir = l_parsing->redir_iter->l_output;
+			while (head_redir)
+			{
+				printf("****Output_redirection****\n");
+				printf("redirection:		%s\n", head_redir->redir);
+				printf("file_path:		%s\n\n", head_redir->file_name);
+				head_redir = head_redir->next;
+			}
 		}
 		if (l_parsing->next)
 			printf("------------------ next -------------- \n\n");	

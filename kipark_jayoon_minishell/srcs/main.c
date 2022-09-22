@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 15:50:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 17:07:54 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,6 @@ int main(int argc, char **argv, char **envp)
 				free_all(line, token, l_parsing);
 				continue ;
 			}
-			// syntax_analysis();
-			// execute();
 			execute_cmd(l_parsing);
 			add_history(line);
 			free_all(line, token, l_parsing);
