@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/06 05:58:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 00:34:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,13 +79,15 @@ void	word_join(t_token **token_lst)
 		{
 			joined_string = \
 			ft_strjoin(cur_token->string_value, cur_token->next->string_value);
-			free(cur_token->string_value);
-			cur_token->string_value = joined_string;
-			if ((cur_token->next->type & RIGHT_JOIN) == FALSE)
-				cur_token->type &= ~RIGHT_JOIN;
-			ft_deltoken(&(cur_token->next));
+			free(cur_token->next->string_value);
+			cur_token->next->string_value = joined_string;
+			cur_token = cur_token->next;
+			if (cur_token->prev->prev == NULL)
+				*token_lst = cur_token;
+			ft_deltoken(&(cur_token->prev));
 		}
-		cur_token = cur_token->next;
+		else
+			cur_token = cur_token->next;
 	}
 }
 

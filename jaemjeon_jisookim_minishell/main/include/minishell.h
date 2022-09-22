@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:41:12 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 01:35:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ enum e_process_mode
 	EXECUTE_CHILD,
 	HEREDOC_CHILD,
 	HEREDOC_PARENT
+};
+
+enum e_error
+{
+	IDENTIFIER_ERR,
+	MANY_ARG_ERR,
+	CMD_NOT_FOUND_ERR,
+	NOT_NUM_ARG_ERR
 };
 
 // main.c
