@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 00:53:02 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/22 12:57:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,13 @@ void	ft_setenv(t_envlst *env, char *key, char *value, int has_value)
 		ft_addenv(&env, key, value, has_value);
 	else
 	{
+		if (has_value == FALSE && envlst_toset->has_value == TRUE)
+			return ;
 		free(envlst_toset->value);
 		envlst_toset->value = ft_strdup(value);
 		if (envlst_toset->value == NULL)
 			ft_error_exit(1, "malloc failed in ft_strdup of ft_setenv");
+		envlst_toset->has_value = has_value;
 	}
 }
 
