@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/22 12:47:29 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:25:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,6 @@ void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 				free(line);
 			}
 		}
-
 	}
 }
 
@@ -114,13 +113,13 @@ void	process_cur_heredoc(t_working_info *info, t_cmd *cur_cmd, \
 	tmp_filename = make_tmp_filename(cur_cmd, cur_redirection);
 	if (tmp_filename == NULL)
 	{
-		perror("malloc_fail in heredoc");
+		process_errno(1, tmp_filename, OPEN_FAIL_ERR);
 		exit(FAIL);
 	}
 	fd = open(tmp_filename, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fd == -1)
 	{
-		perror("open_fail in heredoc");
+		process_errno(1, tmp_filename, OPEN_FAIL_ERR);
 		exit(FAIL);
 	}
 	get_input_heredoc(info, cur_redirection, fd);

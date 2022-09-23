@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/23 02:18:20 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:59:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,54 @@
 
 int	g_errno;
 
+int	is_error_token(t_token *suspect_token)
+{
+	if ((suspect_token->prev == NULL) && (suspect_token->type & PIPE))
+		return (TRUE);
+	else if (suspect_token->next == NULL && suspect_token->type & REDIRECT)
+		return (TRUE);
+	else
+	{
+		if (suspect_token->prev->type & REDIRECT)
+		{
+			if (!(suspect_token->type & WORD))
+				return (TRUE);
+		}
+		else if (suspect_token->prev->type & PIPE)
+		{
+			if (suspect_token->type & PIPE)
+				return (TRUE);
+		}
+	}
+	return (FALSE);
+}
+
 int	check_syntax_grammar(t_token *lst_token)
 {
-	t_token	*cur_token;
-	t_token	*next_token;
-
-	cur_token = lst_token;
-	next_token = cur_token->next;
-	while (next_token != NULL)
+	while (lst_token != NULL)
 	{
-		if (cur_token->type & REDIRECT)
+		if (is_error_token(lst_token))
 		{
-			if (!(next_token->type & WORD))
-				return (FALSE);
+			if (lst_token->next == NULL && lst_token->type & REDIRECT)
+				process_errno(258, "newline", SYNTAX_ERR);
+			else if (lst_token->prev == NULL && lst_token->type & PIPE)
+				process_errno(258, "|", SYNTAX_ERR);
+			else
+			{
+				if (lst_token->type & PIPE)
+					process_errno(258, "|", SYNTAX_ERR);
+				else if (lst_token->type & WRITE)
+					process_errno(258, ">", SYNTAX_ERR);
+				else if (lst_token->type & WRITE_APPEND)
+					process_errno(258, ">>", SYNTAX_ERR);
+				else if (lst_token->type & READ)
+					process_errno(258, "<", SYNTAX_ERR);
+				else if (lst_token->type & HEREDOC)
+					process_errno(258, "<<", SYNTAX_ERR);
+			}
 		}
-		else if (cur_token->type & PIPE)
-		{
-			if ((next_token->type & PIPE))
-				return (FALSE);
-		}
-		cur_token = next_token;
-		next_token = next_token->next;
+		lst_token = lst_token->next;
 	}
-	if (!(cur_token->type & WORD))
-		return (FALSE);
-	return (TRUE);
 }
 
 t_cmd	*parsing(char *line, t_working_info *info)
@@ -50,7 +73,6 @@ t_cmd	*parsing(char *line, t_working_info *info)
 	lst_token = tokenize(line);		 // word, quote, redirect, pipe로 토큰을 나눔.
 	if (check_syntax_grammar(lst_token) == FALSE)
 	{
-		ft_putendl_fd("syntax error near unexpected token", 2);
 		ft_free_tokenlst(lst_token);
 		return (NULL);
 	}
@@ -92,14 +114,14 @@ void	main_loop(t_working_info *info)
 
 	while (1)
 	{
-		g_errno = 24;
 		line = readline("MINISHELL : ");
 		add_history(line);
 		if (line != NULL)
 		{
+			g_errno = 0;
 			if (check_syntax_quote(line) == FALSE)
 			{
-				printf("ㅇㅡㅇ악\n");
+				process_errno(258, "QUOTE", SYNTAX_ERR);
 				free(line);
 				continue ;
 			}

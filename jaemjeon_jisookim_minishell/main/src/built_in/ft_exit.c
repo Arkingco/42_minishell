@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 18:22:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 10:43:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,13 @@ void	ft_exit(t_cmd *cmd, t_working_info *info)
 	if (cmd->simple_cmd->next == NULL)
 		exit(0);
 	if (cmd->simple_cmd->next->next != NULL)
-	{
-		// errno를 1로 세팅해야함
-		ft_putendl_fd("exit: too many arguments", 2);
-	}
+		process_errno(1, "exit:", MANY_ARG_ERR);
 	else
 	{
 		arg_string = cmd->simple_cmd->next->string_value;
 		if (is_alnum_string(arg_string) == FALSE)
 		{
-			print_error_message(arg_string);
+			process_errno(255, "exit:", NOT_NUM_ARG_ERR);
 			exit(255);
 		}
 		else

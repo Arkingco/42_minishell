@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_utils_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:37:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 03:12:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_cmd_type(t_cmd *cmd)
 {
 	char				*cmd_string;
 	int					index;
-	static const char	*built_in_board[] = \
+	static char *const	built_in_board[] = \
 	{
 	[T_ECHO] = "echo",
 	[T_CD] = "cd",

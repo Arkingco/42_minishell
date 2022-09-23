@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 01:35:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 11:04:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,9 @@ enum e_error
 	IDENTIFIER_ERR,
 	MANY_ARG_ERR,
 	CMD_NOT_FOUND_ERR,
-	NOT_NUM_ARG_ERR
+	NOT_NUM_ARG_ERR,
+	SYNTAX_ERR,
+	OPEN_FAIL_ERR
 };
 
 // main.c

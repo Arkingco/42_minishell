@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 01:53:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/23 03:15:56 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ void	set_termios(int mode);
 
 //setting.c
 void	sigtermset(int mode);
+void	process_errno(int errno_num, char *string, int type);
 
 #endif
