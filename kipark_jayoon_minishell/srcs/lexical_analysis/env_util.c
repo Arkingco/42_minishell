@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/22 21:10:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/23 17:57:35 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	get_env_equal_location(char *env_str)
 	int	i;
 
 	i = 0;
-	while (env_str[i] != '=')
+	while (env_str[i] != '=' && env_str[i] != '\0')
 		++i;
 	if (env_str[i] == '=')
 		return (i);

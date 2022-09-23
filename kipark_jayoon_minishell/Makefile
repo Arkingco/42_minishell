@@ -46,7 +46,7 @@ SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
 								check_syntax_and_set_parsing_list.c \
 								free_parsing_list.c \
 								init_parsing_list.c \
-								init_redirection_node.c \
+								init_redir_chunk_node.c \
 								init_simple_cmd_node.c \
 								is_redirection.c \
 								is_word.c \
