@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 14:56:11 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:49:20 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,10 +98,10 @@ static void	read_readline(t_env *env_head, char *rl, t_token *token_head)
 		if (t_type == T_WORD)
 			word_token_add(token_head, t_type, \
 				expand_this_word_token(env_head, \
-										ft_substr(rl, start, end - start + 1)));
+								ft_safe_substr(rl, start, end - start + 1)));
 		else
 			token_add(token_head, t_type, \
-										ft_substr(rl, start, end - start + 1));
+								ft_safe_substr(rl, start, end - start + 1));
 		end++;
 	}
 }

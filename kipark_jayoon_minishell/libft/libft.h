@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:25:50 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 15:23:14 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:48:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,8 @@ t_list		*ft_lstmap(t_list *lst, void *(*f)(void *), \
 void		*ft_safe_malloc(size_t size);
 void		ft_check_error(t_error e, ssize_t data);
 int			ft_strchr_index(char *str, char word);
+char		*ft_safe_substr(char const *s, unsigned int start, size_t len);
+char		*ft_safe_strjoin(char const *s1, char const *s2);
+char		*ft_safe_strdup(const char *s1);
 
 #endif

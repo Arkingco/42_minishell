@@ -6,7 +6,7 @@
 #    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/09/24 15:22:57 by kipark           ###   ########seoul.kr   #
+#    Updated: 2022/09/24 15:48:24 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,10 @@ SRCS =		ft_isalnum.c			\
 			ft_safe_free.c			\
 			ft_safe_malloc.c		\
 			ft_check_error.c		\
-			ft_strchr_index.c
+			ft_strchr_index.c		\
+			ft_safe_strdup.c		\
+			ft_safe_strjoin.c		\
+			ft_safe_substr.c		\
 			
 		
 SRCS_B = 		ft_lstnew.c			\
