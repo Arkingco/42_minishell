@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 21:59:24 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/23 18:01:48 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,14 +84,11 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *curr_envp)
 {
 	t_args_execve	args_execve;
 	
-
-	curr_envp = NULL;
-
-
 	printf("\n*exeuction*\n");
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 	{
 		printf("single built_in cmd\n");
+		execute_bulit_in(l_parsing->l_simple_cmd, curr_envp);
 	}
 	else
 	{
@@ -104,7 +101,6 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *curr_envp)
 		}
 	}
 	printf("----------------------------------------\n\n\n");
-
 }
 
 // static void	set_in_out_fd(t_parsing_list *l_parsing, int *pipe_fd)
