@@ -1,34 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_util_1.c                                     :+:      :+:    :+:   */
+/*   parse_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/29 21:36:42 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/05 00:05:59 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/24 14:16:21 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/24 14:17:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-/*
-현재 포인터의 ifs부터 연속된 ifs들을 쭉 복사하여 반환함.
-*/
-char	*cpy_ifs_string(char **context)
-{
-	char	*cpy_start;
-	char	*cpy_end;
-	char	*copied_string;
-
-	cpy_start = *context; // 문맥 받아옴
-	cpy_end = cpy_start;
-	while (ft_is_ifs(cpy_end)) // ifs가 아닌 문자가 나올때까지 계속 읽음
-		cpy_end++;
-	copied_string = ft_substr(cpy_start, 0, cpy_end - cpy_start); // ifs덩어리를 복사
-	*context = cpy_end; // 문맥 교환
-	return (copied_string); // 복사한 ifs덩어리 반환
-}
 
 /*
 __get_envvlaue함수에서 envkey에 해당하는 만큼 포인터를 옮길때 사용함.
@@ -61,29 +43,6 @@ void	__skip_only_quote_and_letter(char **pointer)
 	while (**pointer != '\0' && **pointer != '$' && \
 			ft_is_ifs(*pointer) == FALSE)
 		(*pointer)++;
-}
-
-/*
-ifs로만 이루어진 문자열인지 판단
-*/
-int	is_ifs_word(char *string_value)
-{
-	while (ft_is_ifs(string_value) == TRUE && *string_value != '\0')
-		string_value++;
-	if (*string_value == '\0')
-		return (TRUE);
-	else
-		return (FALSE);
-}
-
-/*
-일단 word이고 quote밖에 있고 공백을 가지고 있다? -> 확장되서어 공백이 생긴것이므로 word_split을
-해야하는 토큰으로 판단.
-*/
-int	is_to_word_split(t_token *token)
-{
-	return ((token->type & WORD) && !(token->type & QUOTE) && \
-		ft_has_ifs(token->string_value));
 }
 
 /*

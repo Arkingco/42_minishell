@@ -30,20 +30,22 @@ DIR_PRINTF		:=	$(SRCS_DIR)/printf
 SRC_ENV			:= env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c
 SRC_ENV			:= $(addprefix $(DIR_ENV)/, $(SRC_ENV))
 
-SRC_TOKENIZE	:= tokenize.c split_all_component.c token_list_adt_1.c \
-					token_list_adt_2.c read_token_func.c read_token_util_1.c
+SRC_TOKENIZE	:=	token_free.c token_lst_adt_1.c token_lst_adt_2.c \
+					token_read_func.c token_read.c token_split.c tokenize.c
 SRC_TOKENIZE	:= $(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 
-SRC_UTILS		:= ifs.c error_exit.c signal.c terminal.c setting.c
+SRC_UTILS		:=	ifs.c error_exit.c signal.c terminal.c setting.c \
+					free.c ft_utils.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 SRC_MAIN		:= main.c init.c
 SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
-SRC_EXPAND		:= expand.c expand_util_1.c
+SRC_EXPAND		:= expand.c expand_tools.c expand_env.c expand_pid_env.c
 SRC_EXPAND		:= $(addprefix $(DIR_EXPAND)/, $(SRC_EXPAND))
 
-SRC_PARSE		:= parse.c cmd_adt_1.c parse_util_1.c
+SRC_PARSE		:=	parse_cmd_lst.c parse_free.c parse_ifs.c parse_remove.c \
+					parse_tools.c parse_word.c parse.c 
 SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 
 SRC_DEBUG		:= print_lst_token.c print_lst_cmd.c
@@ -54,7 +56,7 @@ SRC_EXECUTE		:=	exec_built_in.c exec_do.c exec_file.c exec_ft_tools.c \
 					exec_utils.c execute.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
-SRC_HEREDOC		:= heredoc.c heredoc_util.c
+SRC_HEREDOC		:= heredoc.c heredoc_util.c heredoc_do.c
 SRC_HEREDOC		:= $(addprefix $(DIR_HEREDOC)/, $(SRC_HEREDOC))
 
 SRC_PRINTF		:= ft_printf.c ft_printf_mode.c ft_printf_utils.c
@@ -87,7 +89,7 @@ $(READLINE)		:
 	$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	make -C $(DIR_READLINE) clean
+	# make -C $(DIR_READLINE) clean
 	make -C $(DIR_LIBFT) fclean
 	rm -f ${OBJS}
 

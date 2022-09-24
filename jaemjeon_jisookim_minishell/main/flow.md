@@ -1,5 +1,7 @@
 * todo : exit code
 
+* [expand.c] expand_exit_status; // todo expand exit status
+
 ==================================
 [HEREDOC]
 ==================================

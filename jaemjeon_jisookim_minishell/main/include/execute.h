@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 13:34:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:05:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,8 @@ int		ft_dup2(int fd1, int fd2);
 int		ft_pipe(int *pipe_fd);
 
 // exec_path_expand
-void	expand_homepath(char **cmd_string, t_working_info *info);
-int		expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info);
-
-// exec_pipe
-void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd);
+// void	expand_homepath(char **cmd_string, t_working_info *info);
+// int		expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info);
 
 // exec_path
 char	**get_path_board(t_envlst *env);
@@ -61,6 +58,9 @@ int		is_already_exec_path(char *cmd_string);
 int		is_valid_cmd_path(char *cmd_string);
 int		set_absolute_path(t_cmd *cmd, t_working_info *info);
 int		set_exec_path(t_cmd *cmd, t_working_info *info);
+
+// exec_pipe
+void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd);
 
 // exec_redirect
 void	handle_redirect_input(t_token *input_redirection);
@@ -70,20 +70,14 @@ void	restore_redirect_fd(t_cmd *cmd, int *io_fd);
 int		process_redirect(t_cmd *cmd, int *io_fd);
 
 // exec_utils
-
-void	execute(t_working_info *info);
-
-// execute_tools.c
-int	ft_close(int fd);
-pid_t	ft_fork(void);
-pid_t	ft_wait(int count, pid_t *child_pids);
-int	ft_dup2(int fd1, int fd2);
-int	ft_pipe(int *pipe_fd);
-
-
-// execute_utils_1.c
-int	get_cmd_type(t_cmd *cmd);
-char	**get_path_board(t_envlst *env);
+int		get_cmd_type(t_cmd *cmd);
 char	**get_exec_argv(t_cmd *cmd);
+void	close_useless_fds(int *fd);
+
+// execute
+void	process_single_cmd(t_working_info *info);
+void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd);
+pid_t	process_multi_cmd(t_working_info *info);
+void	execute(t_working_info *info);
 
 #endif

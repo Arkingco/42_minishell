@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_list_adt_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 16:51:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 14:54:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,27 +56,6 @@ t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_addtoken");
 	ft_token_lstadd_back(lst, token);
 	return (token);
-}
-
-void		ft_free_token(t_token *lst)
-{
-	free(lst->string_value);
-	lst->string_value = NULL;
-	free(lst);
-}
-
-void		ft_free_tokenlst(t_token *lst)
-{
-	t_token	*next_token;
-
-	while (1)
-	{
-		next_token = lst->next;
-		ft_free_token(lst);
-		lst = next_token;
-		if (lst == NULL)
-			return ;
-	}
 }
 
 t_token		*ft_token_lstlast(t_token *lst)
