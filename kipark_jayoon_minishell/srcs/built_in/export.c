@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/23 18:01:48 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:26:02 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static void execute_export(t_simple_cmd *simple_cmd, t_env *env)
 	// - epoxrt key → 불가능
 	int	equal_location;
 
-	equal_location = get_env_equal_location(simple_cmd->str);
+	equal_location = ft_strchr_index(simple_cmd->str, '=');
 	if (equal_location) // equal 이 있으면 여기 
 		env_add(env, simple_cmd->str);
 	else				// 없다면 sytax 에러

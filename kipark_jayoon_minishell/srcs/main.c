@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/23 18:01:44 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:13:06 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,19 +42,19 @@ int main(int argc, char **argv, char **envp)
 	char			*line;
 	t_token 		*token;
 	t_parsing_list	*l_parsing;
-	t_env			*curr_envp;
+	t_env			*l_env;
 	
 	l_parsing = NULL;
 	token = NULL;
 	init_terminal();
 	check_argument(argc, argv);
-	curr_envp = set_shell_env_list(envp);
+	l_env = set_shell_env_list(envp);
 	while (1)
 	{
 		line = readline("minishell$ ");
 		if (line)
 		{
-			token = tokenize(curr_envp, line);
+			token = tokenize(l_env, line);
 			if (token == NULL)
 			{
 				syntax_error_continue(line, token, l_parsing);
@@ -66,7 +66,7 @@ int main(int argc, char **argv, char **envp)
 				syntax_error_continue(line, token, l_parsing);
 				continue ;
 			}
-			execute_cmd(l_parsing, curr_envp);
+			execute_cmd(l_parsing, l_env);
 			add_history(line);
 			free_all(line, token, l_parsing);
 		}

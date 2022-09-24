@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/23 18:01:50 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:26:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,7 @@
 #include"env.h"
 #include <stdio.h>
 
-int	get_env_equal_location(char *env_str)
-{
-	int	i;
 
-	i = 0;
-	while (env_str[i] != '=' && env_str[i] != '\0')
-		++i;
-	if (env_str[i] == '=')
-		return (i);
-	return (0);
-}
 
 char *get_env_value(t_env *env_head, char *env_key)
 {
@@ -38,7 +28,7 @@ char *get_env_value(t_env *env_head, char *env_key)
 	while (env_list)
 	{
 		env_str = env_list->str;
-		env_str_equal_location = get_env_equal_location(env_str);
+		env_str_equal_location = ft_strchr_index(env_str, '=');
 		if (ft_strncmp(env_key, env_str, ft_strlen(env_key)) == 0 && \
 							(int)ft_strlen(env_key) == env_str_equal_location)
 			return (ft_substr(env_str, env_str_equal_location + 1, \

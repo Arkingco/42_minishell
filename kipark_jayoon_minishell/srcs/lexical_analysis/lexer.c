@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 16:54:10 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 14:56:11 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,9 +110,7 @@ t_token	*tokenize(t_env *env_head, char *readline)
 {
 	t_token *token_head;
 
-	token_head = malloc(sizeof(t_token));
-	if (token_head == NULL)
-		exit(1);
+	token_head = ft_safe_malloc(sizeof(t_token));
 	init_token_dummy_node(token_head);
 	if (check_readline_able_parse(readline))
 	{

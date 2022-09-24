@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/22 22:12:58 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:25:47 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ t_env *new_env_node(char *env_str)
 	new_env->str = ft_strdup(env_str);
 	new_env->key = ft_substr(env_str, 0, env_key_size);
 	new_env->value = ft_substr(env_str, \
-			get_env_equal_location(env_str) + 1, \
+			ft_strchr_index(env_str, '=') + 1, \
 			ft_strlen(env_str));
 	new_env->next = NULL;
 	return (new_env);
