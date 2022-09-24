@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 16:51:12 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 19:54:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,17 +88,9 @@ static void	process_execve_args(t_parsing_list *l_parsing,
 	process_path(p_args, l_env);
 	num_args = count_num_args(l_parsing->l_simple_cmd);
 	process_argv(l_parsing, p_args, num_args);
-
-	//printf
-	// int i = 0;
-	// while (p_args->argv[i])
-	// {
-	// 	printf("%d simple cmd : %s\n", i,p_args->argv[i]);
-	// 	i++;
-	// }
 }
 
-static void	execve_cmd(t_args_execve *p_args)
+static void	execve_cmd(t_args_execve *p_args, char **envp)
 {
 	size_t	i;
 	char	*file_path;
@@ -107,16 +99,54 @@ static void	execve_cmd(t_args_execve *p_args)
 	while (p_args->path[i])
 	{
 		file_path = ft_safe_strjoin(p_args->path[i], p_args->argv[0]);
-		// envp 넣기
-		execve(file_path, p_args->argv, NULL);
+		execve(file_path, p_args->argv, envp);
 		ft_safe_free(file_path);
 		i++;
 	}
 }
 
+static size_t	count_env(t_env *l_env)
+{
+	size_t	num_env;
+
+	num_env = 0;
+	while (l_env)
+	{
+		num_env++;
+		l_env = l_env->next;
+	}
+	return (num_env);
+}
+
+static void	put_in_str_in_curr_envp(char **curr_envp, t_env *l_env)
+{
+	size_t	i;
+
+	i = 0;
+	while (l_env)
+	{
+		curr_envp[i] = l_env->str;
+		i++;
+		l_env = l_env->next;
+	}
+	curr_envp[i] = NULL;
+}
+
+static char	**init_curr_envp(t_env *l_env)
+{
+	char	**curr_envp;
+	size_t	num_env;
+
+	num_env = count_env(l_env);
+	curr_envp = ft_safe_malloc(sizeof(char *) * (num_env + 1));
+	put_in_str_in_curr_envp(curr_envp, l_env);
+	return (curr_envp);
+}
+
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
+	char			**curr_envp;
 	
 	printf("\n*exeuction*\n");
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
@@ -127,13 +157,15 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 	else
 	{
 		printf("single & multi shell cmd\n\n");
+		l_env = l_env->next;
+		curr_envp = init_curr_envp(l_env);
 		while (l_parsing)
 		{
 			process_execve_args(l_parsing, &args_execve, l_env);
-			execve_cmd(&args_execve);
-			// execve("file path", "argv", curr_envp);
+			execve_cmd(&args_execve, curr_envp);
 			l_parsing = l_parsing->next;
 		}
+		ft_safe_free(curr_envp);
 	}
 	printf("----------------------------------------\n\n\n");
 }
