@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 16:46:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 17:37:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,9 @@ pid_t	process_multi_cmd(t_working_info *info)
 		cur_cmd = cur_cmd->next;
 	}
 	close_useless_fds(fd);
-	return (ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd)));
+	pid = ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd));
+	sigtermset(MINISHELL_NO_CHILD);
+	return (pid);
 }
 
 void	execute(t_working_info *info)

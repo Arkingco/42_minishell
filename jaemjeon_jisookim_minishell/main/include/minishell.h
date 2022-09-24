@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 16:26:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:58:59 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,8 @@ enum e_error
 	NOT_NUM_ARG_ERR,
 	SYNTAX_ERR,
 	OPEN_FAIL_ERR,
-	OPEN_ERR
+	OPEN_ERR,
+	MALLOC_FAILED_ERR
 };
 
 
