@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 17:37:49 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:46:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,16 @@ void	process_single_cmd(t_working_info *info)
 	int	io_fd[4];
 
 	ft_memset(io_fd, 0, sizeof(int) * 4);
-	if ((process_redirect(info->cmd, io_fd) != FAIL) && info->cmd->simple_cmd)
+	if (process_redirect(info->cmd, io_fd) != FAIL)
 	{
-		cmd_type = get_cmd_type(info->cmd);
-		if (cmd_type == NOT_BUILT_IN)
-			process_not_built_in(info);
-		else
-			process_built_in(info->cmd, info, cmd_type);
+		if (info->cmd->simple_cmd)
+		{
+			cmd_type = get_cmd_type(info->cmd);
+			if (cmd_type == NOT_BUILT_IN)
+				process_not_built_in(info);
+			else
+				process_built_in(info->cmd, info, cmd_type);
+		}
 		restore_redirect_fd(info->cmd, io_fd);
 	}
 }
@@ -93,8 +96,8 @@ void	execute(t_working_info *info)
 	if (has_heredoc(info))
 		status = heredoc(info);
 	else
-		status = TRUE;
-	if (status == TRUE)
+		status = 0;
+	if (status == 0)
 	{
 		if (cmd_count == 1)
 			process_single_cmd(info);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:00:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:29:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	process_heredoc(t_working_info *info)
 int	heredoc(t_working_info *info)
 {
 	pid_t	pid;
+	int		exit_status;
 
 	sigtermset(HEREDOC_PARENT);
 	pid = ft_fork();
@@ -66,8 +67,8 @@ int	heredoc(t_working_info *info)
 		process_heredoc(info);
 		exit(0);
 	}
-	ft_wait(1, &pid);
+	exit_status = ft_wait(1, &pid);
 	sigtermset(MINISHELL_NO_CHILD);
 	rename_string_value(info);
-	return (TRUE);
+	return (exit_status);
 }

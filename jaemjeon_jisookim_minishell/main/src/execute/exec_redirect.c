@@ -6,11 +6,13 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 16:49:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:09:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+extern int	g_errno;
 
 void	handle_redirect_input(t_token *input_redirection)
 {

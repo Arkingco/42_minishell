@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 15:46:37 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:11:52 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ void	main_loop(t_working_info *info)
 		add_history(line);
 		if (line != NULL)
 		{
-			g_errno = 0;
 			if (check_syntax_quote(line) == FALSE)
 			{
 				process_errno(258, "QUOTE", SYNTAX_ERR);
@@ -55,6 +54,7 @@ void	main_loop(t_working_info *info)
 				continue ;
 			}
 			info->cmd = parsing(line, info);
+			g_errno = 0;
 			// debug_print_lst_cmd(info->cmd);
 			if (info->cmd != NULL)
 			{

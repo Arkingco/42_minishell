@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 17:31:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 18:57:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void	exec_executing(t_working_info *info)
 	if (execve(info->cmd->simple_cmd->string_value, exec_argv, exec_env) \
 		== FAIL)
 	{
+		// printf("%d\n", errno);
 		process_errno(errno, info->cmd->simple_cmd->string_value, \
 			CMD_NOT_FOUND_ERR);
 		exit(g_errno);
