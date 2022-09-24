@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 15:37:14 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 16:53:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int main(int argc, char **argv, char **envp)
 				syntax_error_continue(line, token, l_parsing);
 				continue ;
 			}
-			l_parsing = parser(token);
+			l_parsing = parse_tokenized_data(token);
 			if (l_parsing == NULL)
 			{
 				syntax_error_continue(line, token, l_parsing);
