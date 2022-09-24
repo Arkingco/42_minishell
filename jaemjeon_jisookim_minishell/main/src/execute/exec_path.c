@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 10:56:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:31:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,6 @@ int	is_valid_cmd_path(char *cmd_string)
 	return (FALSE);
 }
 
-int	set_exec_path(t_cmd *cmd, t_working_info *info)
-{
-	char		*execv_path;
-	char		*cmd_string;
-
-	cmd_string = cmd->simple_cmd->string_value;
-	if (is_already_exec_path(cmd_string) == TRUE)
-		return (is_valid_cmd_path(cmd_string));
-	else
-	{
-		return (set_absolute_path(cmd, info));
-	}
-}
-
 int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 {
 	const char	**path_board = (const char **)get_path_board(info->env);
@@ -83,4 +69,18 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 	}
 	ft_free_double((char **)path_board);
 	return (FALSE);
+}
+
+int	set_exec_path(t_cmd *cmd, t_working_info *info)
+{
+	char		*execv_path;
+	char		*cmd_string;
+
+	cmd_string = cmd->simple_cmd->string_value;
+	if (is_already_exec_path(cmd_string) == TRUE)
+		return (is_valid_cmd_path(cmd_string));
+	else
+	{
+		return (set_absolute_path(cmd, info));
+	}
 }

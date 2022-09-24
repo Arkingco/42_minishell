@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 11:03:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:17:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	process_single_cmd(t_working_info *info)
 		process_redirect(info->cmd, io_fd);
 		cmd_type = get_cmd_type(info->cmd);
 		if (cmd_type == NOT_BUILT_IN)
-			process_not_built_in(info);
+			(info);
 		else
 			process_built_in(info->cmd, info, cmd_type);
 	}

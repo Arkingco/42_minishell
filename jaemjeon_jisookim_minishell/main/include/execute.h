@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 10:40:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:34:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,51 @@
 # define MULTI_PIPE_INPUT	1
 # define BEFORE_INPUT_FD	2
 
-// execute.c
+// exec_built_in
+void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type);
+void	process_not_built_in(t_working_info *info);
+
+// exec_do
+void	single_cmd_child_process(t_working_info *info);
+void	exec_executing(t_working_info *info);
+int		ft_wait_childs(pid_t *child_pids, int cmd_count);
+
+// exec_file
+int		open_infile(t_cmd *cmd);
+int		open_outfile(t_cmd *cmd);
+int		check_and_get_infile(t_token *input);
+int		check_and_get_outfile(t_token *output);
+
+// exec_ft_tools
+int		ft_close(int fd);
+pid_t	ft_fork(void);
+pid_t	ft_wait(int count, pid_t *child_pids);
+int		ft_dup2(int fd1, int fd2);
+int		ft_pipe(int *pipe_fd);
+
+// exec_path_expand
+void	expand_homepath(char **cmd_string, t_working_info *info);
+int		expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info);
+
+// exec_pipe
+void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd);
+
+// exec_path
+char	**get_path_board(t_envlst *env);
+int		is_already_exec_path(char *cmd_string);
+int		is_valid_cmd_path(char *cmd_string);
+int		set_absolute_path(t_cmd *cmd, t_working_info *info);
+int		set_exec_path(t_cmd *cmd, t_working_info *info);
+
+// exec_redirect
+void	handle_redirect_input(t_token *input_redirection);
+void	handle_redirect_output(t_token *output_redirection);
+void	handle_redirection_multi_cmd(t_cmd *cmd);
+void	restore_redirect_fd(t_cmd *cmd, int *io_fd);
+int		process_redirect(t_cmd *cmd, int *io_fd);
+
+// exec_utils
+
 void	execute(t_working_info *info);
 
 // execute_tools.c

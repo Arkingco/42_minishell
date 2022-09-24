@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 10:50:16 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:29:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ pid_t	ft_wait(int count, pid_t *child_pids)
 	while (i < count)
 	{
 		waitpid(child_pids[i], &exit_status, 0);
-		// printf("exit_status : %d\n", exit_status);
 		i++;
 	}
 	return (exit_status);

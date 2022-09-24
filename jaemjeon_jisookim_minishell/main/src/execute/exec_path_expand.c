@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_expand.c                                      :+:      :+:    :+:   */
+/*   exec_path_expand.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:37:45 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 10:38:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 13:30:24 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	expand_homepath(char **cmd_string, t_working_info *info)
 		*cmd_string = new_cmd_string;
 	}
 }
-
 
 int	expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info)
 {
