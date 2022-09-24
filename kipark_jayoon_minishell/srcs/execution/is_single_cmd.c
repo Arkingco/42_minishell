@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   is_single_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 21:28:40 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/24 21:09:25 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/24 21:10:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"parser.h"
-#include"built.h"
-#include"env.h"
+#include "parser.h"
+#include <stdlib.h>
 
-void	built_in_cd()
+int	is_single_cmd(t_parsing_list *next)
 {
-	
-	return ;
-}	
+	if (next == NULL)
+		return (1);
+	return (0);
+}

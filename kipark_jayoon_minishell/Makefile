@@ -53,7 +53,10 @@ SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
 								parser.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS_EXECUTION				:=	execute_cmd.c
+SRCS_EXECUTION				:=	execute_cmd.c \
+								init_curr_envp.c \
+								is_single_cmd.c \
+								process_execve_args.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
 SRCS_BUILT_IN				:=	built_in.c		\
@@ -99,7 +102,7 @@ debug:
 	$(MAKE) DEBUG_FLAG=1
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJS) $(NAME).dSYM
 	make clean -C $(DIR_LIBFT)
 
 fclean: clean

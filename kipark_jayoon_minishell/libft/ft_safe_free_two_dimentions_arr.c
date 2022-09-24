@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   ft_safe_free_two_dimentions_arr.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 21:28:40 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/24 21:47:14 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/24 21:49:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"parser.h"
-#include"built.h"
-#include"env.h"
+#include <libft.h>
 
-void	built_in_cd()
+void	ft_safe_free_two_dimentions_arr(char **arr)
 {
+	size_t	i;
 	
-	return ;
-}	
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	ft_safe_free(arr);
+}

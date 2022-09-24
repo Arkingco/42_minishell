@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 18:08:03 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/31 18:20:57 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 20:48:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,12 @@
 
 void	ft_check_error(t_error e, ssize_t data)
 {
+	ssize_t	ret;
+
 	if (e == E_LIBFT && data == 0)
 	{
-		ft_putstr_fd("Error: libft error\n", 2);
+		ret = ft_putstr_fd("Error: libft error\n", 2);
+		ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
 		exit(1);
 	}
 	else if (e == E_SYSTEM_CALL && data == -1)

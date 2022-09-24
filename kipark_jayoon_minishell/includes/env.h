@@ -6,13 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 17:01:41 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 22:21:12 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
+// There's a dummy node at head
 typedef struct s_env
 {
 	char			*str;
