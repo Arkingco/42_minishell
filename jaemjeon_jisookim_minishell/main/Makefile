@@ -38,7 +38,7 @@ SRC_UTILS		:=	ifs.c error_exit.c signal.c terminal.c setting.c \
 					free.c ft_utils.c
 SRC_UTILS		:= $(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
-SRC_MAIN		:= main.c init.c
+SRC_MAIN		:= main.c init.c check_error.c check_syntax.c
 SRC_MAIN		:= $(addprefix $(DIR_MAIN)/, $(SRC_MAIN))
 
 SRC_EXPAND		:= expand.c expand_tools.c expand_env.c expand_pid_env.c

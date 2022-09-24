@@ -6,20 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:47:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:13:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:23:32 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 extern int	g_errno;
 
 #include "../../include/minishell.h"
-
-
-void	expand_exit_status(t_token *cur_token)
-{
-	; // todo expand exit status
-}
-
 
 int	is_heredoc_delimiter_token(t_token *token)
 {

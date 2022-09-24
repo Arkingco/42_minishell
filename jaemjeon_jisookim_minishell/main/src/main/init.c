@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 12:55:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:40:20 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,6 @@ void	init_cur_path(t_working_info *info)
 	// if (info->dp == NULL)
 	// 	perror("initiating minishell.. error in opendir..");
 	ft_delenv(&info->env, "OLDPWD");
-}
-
-void	argument_error_check(int argc)
-{
-	if (argc != 1)
-		ft_error_exit(1, "too many arguments");
 }
 
 void	update_shlvl(t_envlst **env)

@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list_adt_1.c                                 :+:      :+:    :+:   */
+/*   token_lst_adt_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:54:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:36:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void		ft_token_lstadd_back(t_token **lst, t_token *new)
+void	ft_token_lstadd_back(t_token **lst, t_token *new)
 {
 	if (lst == NULL)
 		ft_error_exit(1, "input para error in ft_token_lstadd_back");
@@ -30,7 +30,7 @@ void		ft_token_lstadd_back(t_token **lst, t_token *new)
 	}
 }
 
-int			ft_token_lstsize(t_token *lst)
+int	ft_token_lstsize(t_token *lst)
 {
 	int	size;
 
@@ -43,7 +43,7 @@ int			ft_token_lstsize(t_token *lst)
 	return (size);
 }
 
-t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
+t_token	*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 {
 	t_token	*token;
 
@@ -58,7 +58,7 @@ t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 	return (token);
 }
 
-t_token		*ft_token_lstlast(t_token *lst)
+t_token	*ft_token_lstlast(t_token *lst)
 {
 	if (lst == NULL)
 		return (NULL);

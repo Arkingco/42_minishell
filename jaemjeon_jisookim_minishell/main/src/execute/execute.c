@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:14:09 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:11:49 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,16 +19,16 @@ void	process_single_cmd(t_working_info *info)
 	int	cmd_type;
 	int	io_fd[4];
 
-	if (info->cmd->simple_cmd)
+	ft_memset(io_fd, 0, sizeof(int) * 4);
+	if (info->cmd->simple_cmd && (process_redirect(info->cmd, io_fd) != FAIL))
 	{
-		process_redirect(info->cmd, io_fd);
 		cmd_type = get_cmd_type(info->cmd);
 		if (cmd_type == NOT_BUILT_IN)
 			process_not_built_in(info);
 		else
 			process_built_in(info->cmd, info, cmd_type);
+		restore_redirect_fd(info->cmd, io_fd);
 	}
-	restore_redirect_fd(info->cmd, io_fd);
 }
 
 void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
@@ -36,11 +36,11 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 	info->cmd = my_cmd;
 	if (my_cmd->redirect_input || my_cmd->redirect_output)
 		handle_redirection_multi_cmd(my_cmd);
-	if (fd[BEFORE_INPUT_FD] != -1 && my_cmd->redirect_input == NULL)
+	if (fd[BEFORE_INPUT_FD] != OPEN_FAIL && my_cmd->redirect_input == NULL)
 	{
 		ft_dup2(fd[BEFORE_INPUT_FD], 0);
 	}
-	if (fd[MULTI_PIPE_OUTPUT] != -1 && my_cmd->redirect_output == NULL)
+	if (fd[MULTI_PIPE_OUTPUT] != OPEN_FAIL && my_cmd->redirect_output == NULL)
 	{
 		ft_dup2(fd[MULTI_PIPE_INPUT], 1);
 	}

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 13:58:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:26:56 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,18 +92,24 @@ enum e_error
 	CMD_NOT_FOUND_ERR,
 	NOT_NUM_ARG_ERR,
 	SYNTAX_ERR,
-	OPEN_FAIL_ERR
+	OPEN_FAIL_ERR,
+	OPEN_ERR
 };
 
-// // tools
-// void	*exit_calloc(size_t count, size_t size);
+
+// check_error.c
+void	argument_error_check(int argc);
+int		is_error_token(t_token *suspect_token);
+
+// check_syntax.c
+int		check_syntax_quote(char *line);
+int		check_syntax_grammar(t_token *lst_token);
 
 // init.c
-void	argument_error_check(int argc);
-void	init_envp(t_working_info *info, char *envp[]);
 void	init_cur_path(t_working_info *info);
-// void	set_signal_action(void);
-void 	rl_replace_line(const char *, int);
+void	update_shlvl(t_envlst **env);
+void	init_envp(t_working_info *info, char *envp[]);
+
 
 
 // DEBUG
@@ -111,6 +117,8 @@ void 	rl_replace_line(const char *, int);
 void	debug_print_lst_token(t_token *lst);
 // print_lst_cmd.c
 void	debug_print_lst_cmd(t_cmd *lst);
-
+// void	set_signal_action(void);
+void 	rl_replace_line(const char *, int);
+void	argument_error_check(int argc);
 
 #endif

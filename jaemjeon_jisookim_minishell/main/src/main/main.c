@@ -6,116 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 14:28:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 15:46:37 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 int	g_errno;
-
-// int	is_error_token(t_token *suspect_token)
-// {
-// 	if (suspect_token->next == NULL)
-// 	{
-// 		if (suspect_token->type & REDIRECT)
-// 			return (TRUE);
-// 		else if (suspect_token->type & PIPE)
-// 			return (TRUE);
-// 		else
-// 			return (FALSE);
-// 	}
-// 	if (suspect_token->prev == NULL)
-// 	{
-// 		if (suspect_token->type & PIPE)
-// 			return (TRUE);
-// 		else
-// 			return (FALSE);
-// 	}
-// 	else
-// 	{
-// 		if (suspect_token->prev->type & REDIRECT)
-// 		{
-// 			if (!(suspect_token->type & WORD))
-// 				return (TRUE);
-// 		}
-// 		else if (suspect_token->prev->type & PIPE)
-// 		{
-// 			if (suspect_token->type & PIPE)
-// 				return (TRUE);
-// 		}
-// 	}
-// 	return (FALSE);
-// }
-
-int	is_error_token(t_token *suspect_token)
-{
-	if (suspect_token->prev == NULL && suspect_token->next == NULL)
-	{
-		if (!(suspect_token->type & WORD))
-			return (TRUE);
-		return (FALSE);
-	}
-	else if (suspect_token->prev == NULL)
-	{
-		if (suspect_token->type & PIPE)
-			return (TRUE);
-		return (FALSE);
-	}
-	else if (suspect_token->next == NULL)
-	{
-		if (!(suspect_token->type & WORD))
-			return (TRUE);
-	}
-	else
-	{
-		if (suspect_token->prev->type & REDIRECT)
-		{
-			if (!(suspect_token->type & WORD))
-				return (TRUE);
-			return (FALSE);
-		}
-		else if (suspect_token->prev->type & PIPE)
-		{
-			if (suspect_token->type & PIPE)
-				return (TRUE);
-			return (FALSE);
-		}
-	}
-	return (FALSE);
-}
-
-int	check_syntax_grammar(t_token *lst_token)
-{
-	while (lst_token != NULL)
-	{
-		if (is_error_token(lst_token))
-		{
-			if (lst_token->type & PIPE)
-				process_errno(258, "|", SYNTAX_ERR);
-			if (lst_token->type & REDIRECT)
-			{
-				if (lst_token->prev != NULL && \
-				(lst_token->prev->type & PIPE || lst_token->prev->type & REDIRECT))
-				{
-					if (lst_token->type & WRITE)
-						process_errno(258, ">", SYNTAX_ERR);
-					else if (lst_token->type & WRITE_APPEND)
-						process_errno(258, ">>", SYNTAX_ERR);
-					else if (lst_token->type & READ)
-						process_errno(258, "<", SYNTAX_ERR);
-					else if (lst_token->type & HEREDOC)
-						process_errno(258, "<<", SYNTAX_ERR);
-				}
-				else
-					process_errno(258, "newline", SYNTAX_ERR);
-			}
-			return (TRUE);
-		}
-		lst_token = lst_token->next;
-	}
-	return (FALSE);
-}
 
 t_cmd	*parsing(char *line, t_working_info *info)
 {
@@ -137,27 +34,6 @@ t_cmd	*parsing(char *line, t_working_info *info)
 	combine_redirect_filename(lst_token); // 리다이렉션바로 뒤의 word토큰을 합침
 	lst_cmd = token_to_cmd(lst_token);	  // 토큰을 cmd구조체에 넣음
 	return (lst_cmd);
-}
-
-int	check_syntax_quote(char *line)
-{
-	while (*line != '\0')
-	{
-		if (*line == '\'')
-		{
-			line = ft_strchr(line + 1, '\'');
-			if (line == NULL)
-				return (FALSE);
-		}
-		else if (*line == '\"')
-		{
-			line = ft_strchr(line + 1, '\"');
-			if (line == NULL)
-				return (FALSE);
-		}
-		line++;
-	}
-	return (TRUE);
 }
 
 void	main_loop(t_working_info *info)

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 22:59:43 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:15:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:23:32 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ char	*__get_envvalue(char *doller_p, char **envkey_end, t_envlst *env);
 char	*raise_buffer(char *prev, int raise_size);
 
 // expand.c
-void	expand_exit_status(t_token *cur_token);
 int		is_heredoc_delimiter_token(t_token *token);
 void	expander(t_token **token_lst, t_envlst *env);
 

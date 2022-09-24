@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:52:21 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 10:55:27 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:31:40 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	open_infile(t_cmd *cmd)
 	infile_fd = open(redircet_token->string_value, O_RDONLY);
 	if (infile_fd == OPEN_FAIL)
 	{
-		perror("open error");
+		process_errno(1, redircet_token->string_value, OPEN_ERR);
 		return (OPEN_FAIL);
 	}
 	while (redircet_token->next != NULL)
@@ -34,7 +34,7 @@ int	open_infile(t_cmd *cmd)
 		infile_fd = open(redircet_token->string_value, O_RDONLY);
 		if (infile_fd == OPEN_FAIL)
 		{
-			perror("open error");
+			process_errno(1, redircet_token->string_value, OPEN_ERR);
 			return (OPEN_FAIL);
 		}
 	}
@@ -56,14 +56,14 @@ int	open_outfile(t_cmd *cmd)
 		open_option = O_WRONLY | O_CREAT;
 	outfile_fd = open(redircet_token->string_value, open_option, 0644);
 	if (outfile_fd == OPEN_FAIL)
-		perror("open error");
+		process_errno(1, redircet_token->string_value, OPEN_ERR);
 	while (redircet_token->next != NULL)
 	{
 		redircet_token = redircet_token->next;
 		close(outfile_fd);
 		outfile_fd = open(redircet_token->string_value, open_option, 0644);
 		if (outfile_fd == OPEN_FAIL)
-			perror("open error");
+			process_errno(1, redircet_token->string_value, OPEN_ERR);
 	}
 	return (outfile_fd);
 }

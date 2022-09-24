@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:37:18 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 09:03:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:28:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,5 +36,7 @@ void	process_errno(int errno_num, char *string, int type)
 																	string);
 	else if (type == OPEN_FAIL_ERR)
 		printf_fd(2, "minishell: open fail file name '%s'\n", string);
+	else if (type == OPEN_ERR)
+		printf_fd(2, "minishell: %s: No such file or directory", string);
 }
 

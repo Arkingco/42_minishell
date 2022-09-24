@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:02:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 15:15:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:31:26 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,7 @@ char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 }
 
 
-/*
-현재토큰에서 확장을 해야하는 것들을 만나면 확장을 쭉해줌. 문자열덩어리, ifs덩어리, 확장된 덩어리들을
-한 덩어리씩 모아서 계속 버퍼를 늘려주고 strlcat을 하여 늘려줌(strjoin을 계속하는 느낌)
-*/
+
 void	expand_env(t_token *token, t_envlst *env)
 {
 	char	*cpy_start;
