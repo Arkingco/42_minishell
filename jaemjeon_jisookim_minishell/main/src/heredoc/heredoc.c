@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 11:25:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 10:40:04 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,7 +150,7 @@ int	heredoc(t_working_info *info)
 	pid_t	pid;
 
 	sigtermset(HEREDOC_PARENT);
-	pid = fork();
+	pid = ft_fork();
 	if (pid == 0)
 	{
 		sigtermset(HEREDOC_CHILD);

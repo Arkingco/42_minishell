@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_exit.c                                       :+:      :+:    :+:   */
+/*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/24 02:52:07 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 10:45:23 by jisookim         ###   ########.fr       */
+/*   Created: 2022/09/24 10:51:29 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/24 10:57:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_error_exit(int exit_status, char *message)
+void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd)
 {
-	ft_putendl_fd(message, 2);
-	exit(exit_status);
+	if (fd[BEFORE_INPUT_FD] != -1)
+		ft_close(fd[BEFORE_INPUT_FD]);
+	fd[BEFORE_INPUT_FD] = fd[MULTI_PIPE_OUTPUT];
+	if (fd[MULTI_PIPE_INPUT] != -1)
+		ft_close(fd[MULTI_PIPE_INPUT]);
+	fd[MULTI_PIPE_INPUT] = -1;
+	fd[MULTI_PIPE_OUTPUT] = -1;
+	return ;
 }
-

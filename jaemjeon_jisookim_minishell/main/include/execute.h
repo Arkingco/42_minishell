@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:42:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 10:40:31 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@
 void	execute(t_working_info *info);
 
 // execute_tools.c
-int	ft_open(const char *filename, int flags, short mode);
 int	ft_close(int fd);
 pid_t	ft_fork(void);
 pid_t	ft_wait(int count, pid_t *child_pids);

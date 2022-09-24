@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 11:04:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 10:49:08 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ enum e_error
 	OPEN_FAIL_ERR
 };
 
-// main.c
+// // tools
+// void	*exit_calloc(size_t count, size_t size);
 
 // init.c
 void	argument_error_check(int argc);
@@ -106,7 +107,6 @@ void 	rl_replace_line(const char *, int);
 
 
 // DEBUG
-
 // print_lst_token.c
 void	debug_print_lst_token(t_token *lst);
 // print_lst_cmd.c

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_1.c                                  :+:      :+:    :+:   */
+/*   exec_utils_1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 03:12:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 10:55:55 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,20 +38,6 @@ int	get_cmd_type(t_cmd *cmd)
 	return (index);
 }
 
-char	**get_path_board(t_envlst *env)
-{
-	char	*path_line;
-	char	**path_board;
-
-	path_line = ft_getenv(env, "PATH");
-	if (path_line == NULL)
-		return (NULL);
-	path_board = ft_split(path_line, ':');
-	if (path_board == NULL)
-		ft_error_exit(1, "malloc error in ft_split");
-	return (path_board);
-}
-
 char	**get_exec_argv(t_cmd *cmd)
 {
 	t_token *cmd_lst;
@@ -71,4 +57,14 @@ char	**get_exec_argv(t_cmd *cmd)
 		cmd_lst = cmd_lst->next;
 	}
 	return (exec_argv);
+}
+
+void	close_useless_fds(int *fd)
+{
+	if (fd[0] != -1)
+		ft_close(fd[0]);
+	if (fd[1] != -1)
+		ft_close(fd[1]);
+	if (fd[2] != -1)
+		ft_close(fd[2]);
 }
