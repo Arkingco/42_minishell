@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:25:50 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 15:48:52 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 21:50:13 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ int			ft_strchr_index(char *str, char word);
 char		*ft_safe_substr(char const *s, unsigned int start, size_t len);
 char		*ft_safe_strjoin(char const *s1, char const *s2);
 char		*ft_safe_strdup(const char *s1);
+void		ft_safe_free_two_dimentions_arr(char **arr);
 
 #endif
