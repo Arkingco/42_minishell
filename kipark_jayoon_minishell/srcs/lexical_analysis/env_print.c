@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_terminal.c                                    :+:      :+:    :+:   */
+/*   env_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 11:36:24 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/22 22:03:48 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/23 18:01:49 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "parser.h"
+#include "env.h"
+#include "libft.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing)
+void	print_env_list(t_env *env_head)
 {
-	if (line != NULL)
+	t_env *env_list;
+
+	env_list = env_head->next;
+	while (env_list)
 	{
-		free(line);
-		line = NULL;
-	}
-	if (token != NULL)
-	{
-		token_free(token);
-	}
-	if (l_parsing != NULL)
-	{
-		free_parsing_list(l_parsing);
+		printf("%s\n", env_list->str);
+		env_list = env_list->next;
 	}
 }

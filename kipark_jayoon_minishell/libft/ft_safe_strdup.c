@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_terminal.c                                    :+:      :+:    :+:   */
+/*   ft_safe_strdup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 11:36:24 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/22 22:03:48 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/24 15:38:17 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/24 16:00:59 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "parser.h"
-#include <stdlib.h>
+#include "libft.h"
 
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing)
+char	*ft_safe_strdup(const char *s1)
 {
-	if (line != NULL)
-	{
-		free(line);
-		line = NULL;
-	}
-	if (token != NULL)
-	{
-		token_free(token);
-	}
-	if (l_parsing != NULL)
-	{
-		free_parsing_list(l_parsing);
-	}
+	char	*str;
+
+	str = ft_strdup(s1);
+	if (str == NULL)
+		ft_check_error(E_MALLOC, (ssize_t)str);
+	return (str);
 }

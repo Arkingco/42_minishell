@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_terminal.c                                    :+:      :+:    :+:   */
+/*   ft_safe_strjoin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 11:36:24 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/22 22:03:48 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/24 15:38:19 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/24 16:00:13 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
-#include "parser.h"
-#include <stdlib.h>
+#include "libft.h"
 
-void	free_all(char *line, t_token *token, t_parsing_list *l_parsing)
+char	*ft_safe_strjoin(char const *s1, char const *s2)
 {
-	if (line != NULL)
-	{
-		free(line);
-		line = NULL;
-	}
-	if (token != NULL)
-	{
-		token_free(token);
-	}
-	if (l_parsing != NULL)
-	{
-		free_parsing_list(l_parsing);
-	}
+	char	*str;
+
+	str = ft_strjoin(s1, s2);
+	if (str == NULL)
+		ft_check_error(E_MALLOC, (ssize_t)str);
+	return (str);
 }

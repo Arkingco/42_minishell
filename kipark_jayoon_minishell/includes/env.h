@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/30 14:39:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:25:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 typedef struct s_env
 {
 	char			*str;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
 }	t_env;
 
