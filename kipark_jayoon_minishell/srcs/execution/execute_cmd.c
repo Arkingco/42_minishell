@@ -3,13 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 21:59:24 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 16:05:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "env.h"
 #include "execution.h"
 #include "parser.h"
 #include "libft.h"
@@ -25,9 +26,12 @@ static int	is_single_cmd(t_parsing_list *next)
 	return (0);
 }
 
-static void	parse_file_path(t_parsing_list *l_parsing, t_args_execve *p_args)
+static void	process_path(t_args_execve *p_args, t_env *l_env)
 {
-	p_args->path = l_parsing->l_simple_cmd->str;
+	char	*str_path_value;
+	
+	str_path_value = get_env_value(l_env, "PATH");
+	p_args->
 }
 
 static int	count_num_args(t_simple_cmd *l_simple_cmd)
@@ -43,7 +47,7 @@ static int	count_num_args(t_simple_cmd *l_simple_cmd)
 	return (num);
 }
 
-static void	parse_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
+static void	process_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
 				int num_args)
 {
 	int	i;
@@ -59,17 +63,15 @@ static void	parse_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
 	p_args->argv[i] = NULL;
 }
 
-static void	parse_simple_cmd(t_parsing_list *l_parsing, t_args_execve *p_args)
+static void	process_execve_args(t_parsing_list *l_parsing, 
+				t_args_execve *p_args, t_env *l_env)
 {
 	int	num_args;
 
-	parse_file_path(l_parsing, p_args);
-	
-	//printf
-	printf("path : %s\n", p_args->path);
+	process_path(p_args, l_env);
 
 	num_args = count_num_args(l_parsing->l_simple_cmd);
-	parse_argv(l_parsing, p_args, num_args);
+	process_argv(l_parsing, p_args, num_args);
 
 	//printf
 	int i = 0;
@@ -80,12 +82,12 @@ static void	parse_simple_cmd(t_parsing_list *l_parsing, t_args_execve *p_args)
 	}
 }
 
-void	execute_cmd(t_parsing_list *l_parsing, t_env *curr_envp)
+void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
 	
 
-	curr_envp = NULL;
+	l_env = NULL;
 
 
 	printf("\n*exeuction*\n");
@@ -98,7 +100,8 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *curr_envp)
 		printf("single & multi shell cmd\n\n");
 		while (l_parsing)
 		{
-			parse_simple_cmd(l_parsing, &args_execve);
+			// path 2차원 배열 만들고 끝에 NULL 넣음
+			process_execve_args(l_parsing, &args_execve, l_env);
 			// execve("file path", "argv", curr_envp);
 			l_parsing = l_parsing->next;
 		}
