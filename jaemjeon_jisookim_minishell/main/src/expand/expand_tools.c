@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 02:07:54 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:14:28 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:44:41 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,11 @@ char	*raise_buffer(char *prev, int raise_size)
 	char	*raised_buffer;
 
 	raised_buffer = (char *)ft_calloc(1, ft_strlen(prev) + raise_size + 1);
+	if (raised_buffer == NULL)
+	{
+		free(raised_buffer);
+		ft_error_exit(1, "exit with malloc error");
+	}
 	ft_strlcpy(raised_buffer, prev, ft_strlen(prev) + 1); // 널문자까지의 사이즈를 넣어줘야함
 	free(prev);
 	return (raised_buffer);

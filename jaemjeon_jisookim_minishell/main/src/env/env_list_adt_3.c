@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 19:53:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:30:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ char	**ft_envlst_to_envp(t_envlst *env)
 	envlst = ft_env_lst_first(env);
 	envp = (char **)ft_calloc(sizeof(char *), ft_env_lstsize(envlst) + 1);
 	if (envp == NULL)
+	{
+		envp = 0;
 		return (NULL);
+	}
 	index = 0;
 	while (envlst != NULL)
 	{

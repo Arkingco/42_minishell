@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:08:15 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:46:30 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,3 @@ void	process_not_built_in(t_working_info *info)
 			g_errno = WCOREFLAG + WTERMSIG(exit_status);
 	}
 }
-// 1000 0000

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_utils_1.c                                     :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 10:55:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:31:03 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,10 @@ char	**get_exec_argv(t_cmd *cmd)
 	exec_argv = \
 			(char **)ft_calloc(ft_token_lstsize(cmd_lst) + 1, sizeof(char *));
 	if (exec_argv == NULL)
+	{
+		exec_argv = 0;
 		return (NULL);
+	}
 	while (cmd_lst != NULL)
 	{
 		exec_argv[index] = cmd_lst->string_value;

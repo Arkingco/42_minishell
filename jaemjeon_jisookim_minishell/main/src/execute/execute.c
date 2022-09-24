@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 19:46:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:33:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ pid_t	process_multi_cmd(t_working_info *info)
 
 	ft_memset(fd, -1, sizeof(int) * 3);
 	child_pids = ft_calloc(ft_cmdlst_size(info->cmd), sizeof(pid_t));
-	// ft_calloc 널가드 -> 널가드를 포함하여 에러출력하고 종료하는 함수가 필요
+	if (child_pids == NULL)
+	{
+		child_pids = 0;
+		ft_error_exit(errno, "failed in malloc child pids");
+	}
 	cur_cmd = info->cmd;
 	index = 0;
 	while (cur_cmd != NULL)
