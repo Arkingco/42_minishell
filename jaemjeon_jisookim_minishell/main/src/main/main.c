@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 09:41:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 10:15:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,58 @@
 
 int	g_errno;
 
+// int	is_error_token(t_token *suspect_token)
+// {
+// 	if (suspect_token->next == NULL)
+// 	{
+// 		if (suspect_token->type & REDIRECT)
+// 			return (TRUE);
+// 		else if (suspect_token->type & PIPE)
+// 			return (TRUE);
+// 		else
+// 			return (FALSE);
+// 	}
+// 	if (suspect_token->prev == NULL)
+// 	{
+// 		if (suspect_token->type & PIPE)
+// 			return (TRUE);
+// 		else
+// 			return (FALSE);
+// 	}
+// 	else
+// 	{
+// 		if (suspect_token->prev->type & REDIRECT)
+// 		{
+// 			if (!(suspect_token->type & WORD))
+// 				return (TRUE);
+// 		}
+// 		else if (suspect_token->prev->type & PIPE)
+// 		{
+// 			if (suspect_token->type & PIPE)
+// 				return (TRUE);
+// 		}
+// 	}
+// 	return (FALSE);
+// }
+
 int	is_error_token(t_token *suspect_token)
 {
-	if (suspect_token->next == NULL)
+	if (suspect_token->prev == NULL && suspect_token->next == NULL)
 	{
-		if (suspect_token->type & REDIRECT)
+		if (!(suspect_token->type & WORD))
 			return (TRUE);
-		else if (suspect_token->type & PIPE)
-			return (TRUE);
-		else
-			return (FALSE);
+		return (FALSE);
 	}
-	if (suspect_token->prev == NULL)
+	else if (suspect_token->prev == NULL)
 	{
 		if (suspect_token->type & PIPE)
 			return (TRUE);
-		else
-			return (FALSE);
+		return (FALSE);
+	}
+	else if (suspect_token->next == NULL)
+	{
+		if (!(suspect_token->type & WORD))
+			return (TRUE);
 	}
 	else
 	{
@@ -38,11 +73,13 @@ int	is_error_token(t_token *suspect_token)
 		{
 			if (!(suspect_token->type & WORD))
 				return (TRUE);
+			return (FALSE);
 		}
 		else if (suspect_token->prev->type & PIPE)
 		{
 			if (suspect_token->type & PIPE)
 				return (TRUE);
+			return (FALSE);
 		}
 	}
 	return (FALSE);
@@ -54,22 +91,24 @@ int	check_syntax_grammar(t_token *lst_token)
 	{
 		if (is_error_token(lst_token))
 		{
-			if (lst_token->next == NULL && lst_token->type & REDIRECT)
-				process_errno(258, "newline", SYNTAX_ERR);
-			else if (lst_token->prev == NULL && lst_token->type & PIPE)
+			if (lst_token->type & PIPE)
 				process_errno(258, "|", SYNTAX_ERR);
-			else
+			if (lst_token->type & REDIRECT)
 			{
-				if (lst_token->type & PIPE)
-					process_errno(258, "|", SYNTAX_ERR);
-				else if (lst_token->type & WRITE)
-					process_errno(258, ">", SYNTAX_ERR);
-				else if (lst_token->type & WRITE_APPEND)
-					process_errno(258, ">>", SYNTAX_ERR);
-				else if (lst_token->type & READ)
-					process_errno(258, "<", SYNTAX_ERR);
-				else if (lst_token->type & HEREDOC)
-					process_errno(258, "<<", SYNTAX_ERR);
+				if (lst_token->prev != NULL && \
+				(lst_token->prev->type & PIPE || lst_token->prev->type & REDIRECT))
+				{
+					if (lst_token->type & WRITE)
+						process_errno(258, ">", SYNTAX_ERR);
+					else if (lst_token->type & WRITE_APPEND)
+						process_errno(258, ">>", SYNTAX_ERR);
+					else if (lst_token->type & READ)
+						process_errno(258, "<", SYNTAX_ERR);
+					else if (lst_token->type & HEREDOC)
+						process_errno(258, "<<", SYNTAX_ERR);
+				}
+				else
+					process_errno(258, "newline", SYNTAX_ERR);
 			}
 			return (TRUE);
 		}
