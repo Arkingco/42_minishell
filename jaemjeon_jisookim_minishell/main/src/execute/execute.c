@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 19:46:31 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:47:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	process_single_cmd(t_working_info *info)
 
 void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 {
+	int	cmd_type;
+
 	info->cmd = my_cmd;
 	if (my_cmd->redirect_input || my_cmd->redirect_output)
 		handle_redirection_multi_cmd(my_cmd);
@@ -48,8 +50,14 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 		ft_dup2(fd[MULTI_PIPE_INPUT], 1);
 	}
 	close_useless_fds(fd);
-	exec_executing(info);
-	exit(0);
+	if (info->cmd->simple_cmd)
+	{
+		cmd_type = get_cmd_type(info->cmd);
+		if (cmd_type == NOT_BUILT_IN)
+			exec_executing(info);
+		else
+			process_built_in(info->cmd, info, cmd_type);
+	}
 }
 
 pid_t	process_multi_cmd(t_working_info *info)
@@ -83,6 +91,10 @@ pid_t	process_multi_cmd(t_working_info *info)
 	}
 	close_useless_fds(fd);
 	pid = ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd));
+	if (WIFEXITED(pid))
+		g_errno = WEXITSTATUS(pid);
+	else
+		g_errno = WCOREFLAG + WTERMSIG(pid);
 	sigtermset(MINISHELL_NO_CHILD);
 	return (pid);
 }

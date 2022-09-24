@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:58:37 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:41:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ int	is_alnum_string(char *string)
 	return (TRUE);
 }
 
-static void	print_error_message(char *arg_string)
-{
-	char	*result_message;
-	char	*tmp_string;
+// static void	print_error_message(char *arg_string)
+// {
+// 	char	*result_message;
+// 	char	*tmp_string;
 
-	tmp_string = ft_strjoin_triple("exit: ", arg_string, ": ");
-	result_message = ft_strjoin(tmp_string, "numeric argument required");
-	free(tmp_string);
-	ft_putendl_fd(result_message, 2);
-}
+// 	tmp_string = ft_strjoin_triple("exit: ", arg_string, ": ");
+// 	result_message = ft_strjoin(tmp_string, "numeric argument required");
+// 	free(tmp_string);
+// 	ft_putendl_fd(result_message, 2);
+// }
 
 void	ft_exit(t_cmd *cmd, t_working_info *info)
 {
@@ -53,9 +53,6 @@ void	ft_exit(t_cmd *cmd, t_working_info *info)
 			exit(255);
 		}
 		else
-		{
-			print_error_message(arg_string); //TODO: 
 			exit(ft_atoi(arg_string));
-		}
 	}
 }
