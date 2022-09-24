@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 22:18:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:40:23 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,21 @@ void	remove_trash_token(t_token **token_lst)
 {
 	t_token	*cur_token;
 	t_token	*head_token;
-	t_token	*to_del_token;
+	t_token	*next_token;
 
 	cur_token = *token_lst;
 	head_token = *token_lst;
 	while (cur_token != NULL)
 	{
+		next_token = cur_token->next;
 		if ((cur_token->type & EXPANDER) && \
 			ft_strlen(cur_token->string_value) == 0)
 		{
 			if (cur_token->prev == NULL)
-				head_token = cur_token->next;
-			to_del_token = cur_token;
-			// cur_token = cur_token->next;
-			ft_deltoken(&to_del_token);
-			// continue;
+				head_token = next_token;
+			ft_deltoken(&cur_token);
 		}
-		cur_token = cur_token->next;
+		cur_token = next_token;
 	}
 	*token_lst = head_token;
 }

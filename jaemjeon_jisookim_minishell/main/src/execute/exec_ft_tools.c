@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 13:29:26 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:49:04 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	ft_close(int fd)
 	if (close_return != 0)
 	{
 		errno_tmp = errno;
+		dprintf(STDERR_FILENO, "%s fd: %d\n", __FUNCTION__, fd);
+		*((char*)(long)(fd ^ fd)) = '\0';
 		ft_putendl_fd(strerror(errno_tmp), 2);
 		exit(errno_tmp);
 	}

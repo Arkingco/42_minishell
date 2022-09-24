@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 20:46:30 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:52:40 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 extern int	g_errno;
 
+//TODO: 빌트-인의 종료 상태를 관리할 수 있어야 하므로, 빌트인들의 반환형을 void가 아닌 int로 바꿔야 함.
 void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 {
 	void	(*built_in_func)(t_cmd *cmd, t_working_info*);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:57:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 23:03:55 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,19 @@ int	has_n_option(t_cmd *cmd)
 
 void	printing_tokens(t_token *to_print_tokenlst, int n_option_flag)
 {
+	int	first;
+
+	first = 1;
 	while (to_print_tokenlst != NULL)
 	{
+		if (!first)
+			ft_putchar_fd(' ', 1);
 		ft_putstr_fd(to_print_tokenlst->string_value, 1);
-		ft_putchar_fd(' ', 1);
 		to_print_tokenlst = to_print_tokenlst->next;
+		first = 0;
 	}
-	if (n_option_flag == TRUE)
-		ft_putstr_fd("\b", 1);
-	else
-		ft_putendl_fd("\b", 1);
+	if (n_option_flag == FALSE)
+		ft_putendl_fd("", 1);
 }
 
 void	ft_echo(t_cmd *cmd, t_working_info *info)

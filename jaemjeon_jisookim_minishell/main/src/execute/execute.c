@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:54:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:55:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 		if (cmd_type == NOT_BUILT_IN)
 			exec_executing(info);
 		else
+			//TODO: exit(process_built_in(info->cmd, info, cmd_type));
 			process_built_in(info->cmd, info, cmd_type);
 	}
 }
@@ -87,6 +88,7 @@ pid_t	process_multi_cmd(t_working_info *info)
 		{
 			sigtermset(EXECUTE_CHILD);
 			execute_multicmd_child(info, cur_cmd, fd);
+			exit(EXIT_SUCCESS); //TODO: 임시 코드, 이 곳에서 이미 exit가 되었어야 함. 그런데 함수 내부에서 빌트-인의 경우 exit를 하지 않고 있음.
 		}
 		child_pids[index] = pid;
 		init_pipe_before_next_cmd(cur_cmd, fd);
