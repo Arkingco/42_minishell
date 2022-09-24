@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 16:11:49 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:46:07 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	process_single_cmd(t_working_info *info)
 	int	io_fd[4];
 
 	ft_memset(io_fd, 0, sizeof(int) * 4);
-	if (info->cmd->simple_cmd && (process_redirect(info->cmd, io_fd) != FAIL))
+	if ((process_redirect(info->cmd, io_fd) != FAIL) && info->cmd->simple_cmd)
 	{
 		cmd_type = get_cmd_type(info->cmd);
 		if (cmd_type == NOT_BUILT_IN)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 16:31:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 16:49:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,14 @@ int	process_redirect(t_cmd *cmd, int *io_fd)
 {
 	if (cmd->redirect_input != NULL)
 		io_fd[INPUT_REDI] = open_infile(cmd);
+	if (io_fd[INPUT_REDI] == OPEN_FAIL)
+		return (OPEN_FAIL);
 	if (cmd->redirect_output != NULL)
 		io_fd[OUTPUT_REDI] = open_outfile(cmd);
-	if (io_fd[INPUT_REDI] == OPEN_FAIL || io_fd[OUTPUT_REDI == OPEN_FAIL])
+	if (io_fd[OUTPUT_REDI] == OPEN_FAIL)
 	{
 		if (io_fd[INPUT_REDI] != OPEN_FAIL && io_fd[INPUT_REDI] != 0)
 			close(io_fd[INPUT_REDI]);
-		if (io_fd[OUTPUT_REDI] != OPEN_FAIL && io_fd[INPUT_REDI != 0])
-			close(io_fd[OUTPUT_REDI]);
 		return (OPEN_FAIL);
 	}
 	if (io_fd[INPUT_REDI] != 0)
