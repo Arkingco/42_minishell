@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_error.c                                   :+:      :+:    :+:   */
+/*   ft_safe_free_two_dimentions_arr.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 18:08:03 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 20:48:28 by jayoon           ###   ########.fr       */
+/*   Created: 2022/09/24 21:47:14 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/24 21:49:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include <libft.h>
 
-void	ft_check_error(t_error e, ssize_t data)
+void	ft_safe_free_two_dimentions_arr(char **arr)
 {
-	ssize_t	ret;
-
-	if (e == E_LIBFT && data == 0)
+	size_t	i;
+	
+	if (!arr)
+		return ;
+	i = 0;
+	while (arr[i])
 	{
-		ret = ft_putstr_fd("Error: libft error\n", 2);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
-		exit(1);
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
 	}
-	else if (e == E_SYSTEM_CALL && data == -1)
-	{
-		perror("system call");
-		exit(1);
-	}
-	else if (e == E_MALLOC && data == 0)
-	{
-		perror("malloc");
-		exit(1);
-	}
+	ft_safe_free(arr);
 }
