@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 19:54:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 21:05:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,10 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 		ft_safe_free(file_path);
 		i++;
 	}
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(p_args->argv[0], 2);
+	ft_putstr_fd(": command not found\n", 2);
+	exit(127);
 }
 
 static size_t	count_env(t_env *l_env)
