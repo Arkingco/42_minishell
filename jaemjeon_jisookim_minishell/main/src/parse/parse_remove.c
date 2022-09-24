@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 22:08:24 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:18:59 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ void	remove_trash_token(t_token **token_lst)
 			if (cur_token->prev == NULL)
 				head_token = cur_token->next;
 			to_del_token = cur_token;
+			// cur_token = cur_token->next;
 			ft_deltoken(&to_del_token);
+			// continue;
 		}
 		cur_token = cur_token->next;
 	}
