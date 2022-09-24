@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:37:18 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 11:25:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 09:03:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	process_errno(int errno_num, char *string, int type)
 {
 	g_errno = errno_num;
 	if (type == IDENTIFIER_ERR)
-		printf_fd(2, "MINISHELL : %s not a valid identifier\n", string);
+		printf_fd(2, "minishell : %s not a valid identifier\n", string);
 	else if (type == MANY_ARG_ERR)
 		printf_fd(2, "minishell: %s too many arguments\n", string);
 	else if (type == CMD_NOT_FOUND_ERR)
@@ -34,7 +34,7 @@ void	process_errno(int errno_num, char *string, int type)
 	else if (type == SYNTAX_ERR)
 		printf_fd(2, "minishell: syntax error near unexpected token `%s'\n", \
 																	string);
-	else if (type == OPEN_FAIL_ERR) 
+	else if (type == OPEN_FAIL_ERR)
 		printf_fd(2, "minishell: open fail file name '%s'\n", string);
 }
 
