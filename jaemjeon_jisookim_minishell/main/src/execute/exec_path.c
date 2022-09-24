@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:11:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:51:13 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,14 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 		{
 			free(cmd->simple_cmd->string_value);
 			cmd->simple_cmd->string_value = exec_path;
-			ft_free_double((char **)path_board);
+			// ft_free_double((char **)path_board);
 			return (TRUE);
 		}
 		free(exec_path);
 		exec_path = 0;
 		index++;
 	}
-	ft_free_double((char **)path_board);
+	// ft_free_double((char **)path_board);
 	return (FALSE);
 }
 
@@ -80,7 +80,5 @@ int	set_exec_path(t_cmd *cmd, t_working_info *info)
 	if (is_already_exec_path(cmd_string) == TRUE)
 		return (is_valid_cmd_path(cmd_string));
 	else
-	{
 		return (set_absolute_path(cmd, info));
-	}
 }

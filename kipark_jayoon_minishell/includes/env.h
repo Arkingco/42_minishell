@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 15:25:52 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 19:46:48 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENV_H
 # define ENV_H
 
+// There's a dummy node at head
 typedef struct s_env
 {
 	char			*str;
@@ -20,7 +21,6 @@ typedef struct s_env
 	char			*value;
 	struct s_env	*next;
 }	t_env;
-
 
 // env_util*.c
 char		*get_env_value(t_env *env_head, char *env_key);
