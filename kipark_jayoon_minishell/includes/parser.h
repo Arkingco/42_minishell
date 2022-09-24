@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 16:53:45 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 16:53:47 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_parsing_data_structure
 }	t_parsing_list;
 
 /* parser */
-t_parsing_list	*parser(t_token *l_token);
+t_parsing_list	*parse_tokenized_data(t_token *l_token);
 t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
 				t_parsing_list *head);
 
