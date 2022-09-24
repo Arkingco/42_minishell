@@ -6,15 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 15:50:40 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 16:16:15 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"libft.h"
 #include"env.h"
+#include"libft.h"
 #include <stdio.h>
-
-
 
 char *get_env_value(t_env *env_head, char *env_key)
 {

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 15:50:32 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 16:17:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,7 @@ t_env *new_env_node(char *env_str)
 	t_env	*new_env;
 	int		env_key_size;
 
-	new_env = malloc(sizeof(t_env));
-	if (new_env == NULL)
-	{
-		printf("alloc error\n");
-		exit(1);
-	}
+	new_env = ft_safe_malloc(sizeof(t_env));
 	init_env_dummy_node(new_env);
 	env_key_size = get_env_key_size(env_str);
 	new_env->str = ft_safe_strdup(env_str);
