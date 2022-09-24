@@ -82,7 +82,6 @@
 		type가 
 		(RIGHT_JOIN && LEFT_JOIN) 이면 join.
 		(ft_strjoin)
-
 }
 # 07 [combine redirect file name]
 # 08 [get token list to cmd structure (token -> cmd)]
@@ -93,15 +92,41 @@
 /*		02	EXECUTE			*/
 *:*:*:*:*:*:*:*:*:*:*:*:*:*:*:*
 
-[EXECUTE]
+# 01 [HEREDOC] (process heredoc)
+{
+	[1] make tmp filename
+	[2] open file(tmp_filename) and get fd
+	[3] get input heredoc
+		- if there is expand, do expand.
+}
 
-check redirect -> 
-get command type (check if it is built in or not) ->
-built in / not built in ->
-store redirect fd
+# 02 [EXECUTE]
+{
+	[1] process single cmd
+		- check if is process redirect
+		- get cmd type
+		- 	(1) check if is built in -> built_in
+			(2) not built in -> execute
+		- restore redirect fd
+		- close_useless_fds
 
+	[2] process multi cmd
+		- check if is process redirect
+		- get cmd type
+		- 	(1) check if is built in -> built_in
+			(2) not built in -> execute
+		- restore redirect fd
+		- init_pipe_before_next_cmd ( and loop ...)
+		
+	- close_useless_fds
+}
 
-[HEREDOC]
+AND MORE ...?
+====================================================================
+# 00 [REDIRECTION]
+	[1] check redirect input & output
+	[2] dup2 redirection fd
+	[3] 
 
 
 
