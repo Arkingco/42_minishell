@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/22 12:57:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:53:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ char	**ft_envlst_to_envp(t_envlst *env)
 char	*ft_get_value_in_string(char *string)
 {
 	char	*delimiter_point;
-	char	*envvalue_in_string;
 
 	delimiter_point = ft_strchr(string, '=');
 	if (delimiter_point == NULL)
@@ -92,7 +91,6 @@ char	*ft_get_value_in_string(char *string)
 char	*ft_get_key_in_string(char *string)
 {
 	char	*delimiter_point;
-	char	*envkey_in_string;
 
 	delimiter_point = ft_strchr(string, '=');
 	if (delimiter_point == NULL)

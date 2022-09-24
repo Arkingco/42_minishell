@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/22 12:57:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:58:58 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ void	print_export_env(t_envlst *env)
 	}
 }
 
-void	check_input_error_in_env(char **envkey, char **envvalue)
-{
-	static char	*to_check_envkey[ENVKEY_TO_HANDLE_COUNT] = {
-		[T_SHLVL] = "SHLVL"
-	};
-	int	index;
+// void	check_input_error_in_env(char **envkey, char **envvalue)
+// {
+// 	static char	*to_check_envkey[ENVKEY_TO_HANDLE_COUNT] = {
+// 		[T_SHLVL] = "SHLVL"
+// 	};
+// 	int	index;
 
-	// index = 0;
-}
+// 	// index = 0;
+// }
 
 void	add_new_envs(t_token *cmd_argv, t_envlst *env)
 {

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_token_func.c                                  :+:      :+:    :+:   */
+/*   token_read_func.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:59:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/26 22:55:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:53:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ t_token		*read_in_pipe(char *line, int *index)
 {
 	t_token	*new_token;
 
+	(void)&line;
 	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in read_token");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 13:31:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:55:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 
 int	set_exec_path(t_cmd *cmd, t_working_info *info)
 {
-	char		*execv_path;
 	char		*cmd_string;
 
 	cmd_string = cmd->simple_cmd->string_value;

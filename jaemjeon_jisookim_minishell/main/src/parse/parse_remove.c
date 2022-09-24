@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:46:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:04:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

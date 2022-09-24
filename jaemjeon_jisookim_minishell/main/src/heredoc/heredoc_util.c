@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:59:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:01:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,16 @@ char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 	tmp_string[3] = ft_strjoin(tmp_string[0], tmp_string[1]);
 	free(tmp_string[0]);
 	free(tmp_string[1]);
-	tmp_string[0] = ft_strjoin(tmp_string[2], tmp_string[3]);
-	return (ft_strjoin("/tmp/minishell", tmp_string[0]));
+	tmp_filename = ft_strjoin(tmp_string[2], tmp_string[3]);
+	free(tmp_string[2]);
+	free(tmp_string[3]);
+	return (ft_strjoin("/tmp/minishell", tmp_filename));
 }
 
 void	rename_string_value(t_working_info *info)
 {
 	t_cmd	*cur_cmd;
 	t_token	*cur_redirect_token;
-	int		ret_pid;
 
 	cur_cmd = info->cmd;
 	while (cur_cmd != NULL)

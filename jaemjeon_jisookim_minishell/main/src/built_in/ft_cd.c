@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/22 21:50:08 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:57:21 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 {
 	char	*tmp_path;
 
+	(void)&cmd;
 	tmp_path = ft_getcwd(NULL, 0);
 	if (tmp_path != NULL)
 	{
@@ -38,7 +39,6 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 int	is_exist_dir(char *dir_path)
 {
 	DIR	*dp;
-	struct dirent	*s_dir;
 
 	dp = opendir(dir_path);
 	if (dp == NULL)
@@ -69,8 +69,6 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 
 void	ft_cd(t_cmd *cmd, t_working_info *info)
 {
-	int		ret_chdir;
-	char	*error_message;
 	char	*togo_path;
 
 	if (cmd->simple_cmd->next != NULL)

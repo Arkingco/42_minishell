@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 19:29:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:59:25 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	process_cur_heredoc(t_working_info *info, t_cmd *cur_cmd, \
 													t_token *cur_redirection)
 {
 	char	*tmp_filename;
-	char	*line;
 	int		fd;
 
 	tmp_filename = make_tmp_filename(cur_cmd, cur_redirection);

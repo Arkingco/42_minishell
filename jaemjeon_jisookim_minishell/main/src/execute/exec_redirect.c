@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:09:34 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:55:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ void	handle_redirect_input(t_token *input_redirection)
 
 void	handle_redirect_output(t_token *output_redirection)
 {
-	int		outfile_fd;
-	int		type;
+	int	outfile_fd;
 
 	outfile_fd = check_and_get_outfile(output_redirection);
 	if (outfile_fd != OPEN_FAIL)

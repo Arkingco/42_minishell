@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/14 05:03:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:59:11 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	ft_pwd(t_cmd *cmd, t_working_info *info)
 {
 	char	*cur_pwd;
 
+	(void)&cmd;
 	if (info->cur_path != NULL)
 		printf("%s\n", info->cur_path);
 	else

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:02:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 18:56:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:54:54 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 	char	*cpy_start;
 	char	*cpy_end;
 	char	*expanded_string;
-	char	*env_key;
 
 	cpy_start = *context; // 현재 읽고 있는 토큰의 문자열 문맥을 받아옴
 	cpy_end = cpy_start + 1;
@@ -49,8 +48,6 @@ void	expand_env(t_token *token, t_envlst *env)
 	char	*cpy_start;
 	char	*result;
 	char	*copied_string;
-	char	*env_key;
-	char	*env_value;
 
 	cpy_start = token->string_value;
 	result = ft_strdup(""); // 확장을 다한 문자열이 들어갈 공간

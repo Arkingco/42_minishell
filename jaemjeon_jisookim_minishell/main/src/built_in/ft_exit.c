@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/23 10:43:19 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:58:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	ft_exit(t_cmd *cmd, t_working_info *info)
 {
 	char	*arg_string;
 
+	(void)&info;
 	ft_putendl_fd("exit", 2);
 	if (cmd->simple_cmd->next == NULL)
 		exit(0);
@@ -52,6 +53,9 @@ void	ft_exit(t_cmd *cmd, t_working_info *info)
 			exit(255);
 		}
 		else
+		{
+			print_error_message(arg_string); //TODO: 
 			exit(ft_atoi(arg_string));
+		}
 	}
 }

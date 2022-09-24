@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/22 16:27:35 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:57:30 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	ft_echo(t_cmd *cmd, t_working_info *info)
 	int		n_option_flag;
 	t_token	*cur_token;
 
+	(void)&info;
 	cur_token = cmd->simple_cmd->next;
 	if (cur_token == NULL)
 	{
