@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:57:21 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:29:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 	if (tmp_path != NULL)
 	{
 		if (info->cur_path != NULL)
+		{
 			free(info->cur_path);
+			info->cur_path = 0;
+		}
 		info->cur_path = tmp_path;
 		if (ft_has_env(info->env, "PWD"))
 			ft_setenv(info->env, "OLDPWD", ft_getenv(info->env, "PWD"), TRUE);
@@ -31,7 +34,10 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 	{
 		tmp_path = ft_strjoin_triple(info->cur_path, "/", path);
 		if (info->cur_path != NULL)
+		{
 			free(info->cur_path);
+			info->cur_path = 0;
+		}
 		info->cur_path = tmp_path;
 	}
 }
@@ -62,6 +68,7 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 		error_message = ft_strjoin("cd : ", path);
 		perror(error_message);
 		free(error_message);
+		error_message = 0;
 		ret_chdir = FAIL;
 	}
 	return (ret_chdir);

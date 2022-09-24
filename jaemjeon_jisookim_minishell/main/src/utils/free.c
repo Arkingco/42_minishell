@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:36:49 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:54:12 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:11:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void	ft_free_double(char **board)
 	while (*tmp_board != NULL)
 	{
 		free(*tmp_board);
+		tmp_board = 0;
 		tmp_board++;
 	}
 	free(board);
+	board = 0;
 }

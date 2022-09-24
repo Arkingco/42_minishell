@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 03:55:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:30:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:10:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,9 @@ t_envlst	*ft_env_lstlast(t_envlst *lst)
 void	ft_free_envlst(t_envlst *lst)
 {
 	free(lst->key);
+	lst->key = 0;
 	free(lst->value);
+	lst->value = 0;
 	free(lst);
+	lst = 0;
 }

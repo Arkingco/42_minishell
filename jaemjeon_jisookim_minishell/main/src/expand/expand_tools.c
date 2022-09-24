@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/05 02:07:54 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:44:41 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:12:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*__get_envvalue(char *doller_p, char **envkey_end, t_envlst *env)
 		else					// 3-(2)
 			expanded_string = ft_strdup("");
 		free(env_key);
+		env_key = 0;
 		return (expanded_string);
 	}
 }
@@ -60,5 +61,6 @@ char	*raise_buffer(char *prev, int raise_size)
 	}
 	ft_strlcpy(raised_buffer, prev, ft_strlen(prev) + 1); // 널문자까지의 사이즈를 넣어줘야함
 	free(prev);
+	prev = 0;
 	return (raised_buffer);
 }

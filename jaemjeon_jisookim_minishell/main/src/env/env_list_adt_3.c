@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:30:18 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:10:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void	ft_setenv(t_envlst *env, char *key, char *value, int has_value)
 		if (has_value == FALSE && envlst_toset->has_value == TRUE)
 			return ;
 		free(envlst_toset->value);
+		envlst_toset->value = 0;
 		envlst_toset->value = ft_strdup(value);
 		if (envlst_toset->value == NULL)
 			ft_error_exit(1, "malloc failed in ft_strdup of ft_setenv");
@@ -49,6 +50,7 @@ char	*ft_envlst_to_string(t_envlst *lst)
 	tmp_string = ft_strjoin(lst->key, "=");
 	env_string = ft_strjoin(tmp_string, lst->value);
 	free(tmp_string);
+	tmp_string = 0;
 	return (env_string);
 }
 

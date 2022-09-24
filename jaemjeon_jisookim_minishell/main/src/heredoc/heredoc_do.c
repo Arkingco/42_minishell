@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:58:13 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 15:00:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:12:59 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 		else if (ft_strncmp(line, delimiter, INT_MAX) == 0)
 		{
 			free(line);
+			line = 0;
 			break ;
 		}
 		else
@@ -47,11 +48,13 @@ void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 				expanded_line = heredoc_expand(info, line);
 				ft_putendl_fd(expanded_line, fd);
 				free(expanded_line);
+				expanded_line = 0;
 			}
 			else
 			{
 				ft_putendl_fd(line, fd);
 				free(line);
+				line = 0;
 			}
 		}
 	}

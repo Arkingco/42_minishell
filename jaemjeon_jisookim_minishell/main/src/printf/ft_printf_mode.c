@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf_mode.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/28 08:26:22 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/23 02:12:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:15:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int	ft_print_pointer(va_list ap, int fd)
 	write(fd, "0x", 2);
 	write(fd, output, len);
 	free(output);
+	output = 0;
 	return (len + 2);
 }
 
@@ -67,6 +68,7 @@ int	ft_print_decimal(va_list ap, int fd)
 	len = ft_strlen(output);
 	write(fd, output, len);
 	free(output);
+	output = 0;
 	return (len);
 }
 
@@ -88,5 +90,6 @@ int	ft_print_uibase(va_list ap, char type, int fd)
 	len = ft_strlen(output);
 	write(fd, output, len);
 	free(output);
+	output = 0;
 	return (len);
 }

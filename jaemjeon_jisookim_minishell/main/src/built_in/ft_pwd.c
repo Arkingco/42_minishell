@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:59:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:09:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ void	ft_pwd(t_cmd *cmd, t_working_info *info)
 		{
 			printf("%s\n", cur_pwd);
 			free(cur_pwd);
+			cur_pwd = 0;
 		}
 	}
 }

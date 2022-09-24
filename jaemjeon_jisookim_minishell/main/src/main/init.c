@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:40:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:14:11 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	update_shlvl(t_envlst **env)
 		shlvl_value_string = ft_itoa(shlvl_value_int);
 		ft_setenv(*env, "SHLVL", shlvl_value_string, TRUE);
 		free(shlvl_value_string);
+		shlvl_value_string = 0;
 	}
 }
 

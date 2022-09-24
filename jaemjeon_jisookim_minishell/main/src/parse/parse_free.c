@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:30:47 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 14:44:16 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:14:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	ft_free_cmd(t_cmd *cmd)
 	if (cmd->redirect_output != NULL)
 		ft_free_tokenlst(cmd->redirect_output);
 	free(cmd);
+	cmd = 0;
 }
 
 void	ft_free_cmdlst(t_cmd *cmd)

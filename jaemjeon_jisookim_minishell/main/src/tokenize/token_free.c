@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:54:31 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 14:54:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:54:35 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 void	ft_free_token(t_token *lst)
 {
 	free(lst->string_value);
-	lst->string_value = NULL;
+	lst->string_value = 0;
 	free(lst);
+	lst = 0;
 }
 
 void	ft_free_tokenlst(t_token *lst)

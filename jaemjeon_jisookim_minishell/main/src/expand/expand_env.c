@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:02:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:54:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:42:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 	return (expanded_string);
 }
 
-
-
 void	expand_env(t_token *token, t_envlst *env)
 {
 	char	*cpy_start;
@@ -63,6 +61,7 @@ void	expand_env(t_token *token, t_envlst *env)
 		ft_strlcat(result, copied_string, \
 							ft_strlen(result) + ft_strlen(copied_string) + 1); // 문자열 붙여줌
 		free(copied_string);
+		copied_string = 0;
 	}
 	free(token->string_value); // 확장된 문자열로 업데이트
 	token->string_value = result;

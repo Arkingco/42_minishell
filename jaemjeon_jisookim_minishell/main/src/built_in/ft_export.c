@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:58:58 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:09:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,12 @@ void	add_new_envs(t_token *cmd_argv, t_envlst *env)
 		else
 			ft_setenv(env, envkey_to_input, envvalue_to_input, TRUE);
 		free(envkey_to_input);
+		envkey_to_input = 0;
 		if (envvalue_to_input != NULL)
+		{
 			free(envvalue_to_input);
+			envkey_to_input = 0;
+		}
 		cmd_argv = cmd_argv->next;
 	}
 }

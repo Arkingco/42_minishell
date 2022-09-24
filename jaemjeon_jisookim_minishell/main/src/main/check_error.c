@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:40:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 15:45:38 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:59:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	argument_error_check(int argc)
 {
 	if (argc != 1)
-		ft_error_exit(1, "too many arguments");
+		ft_error_exit(1, "minishell: too many arguments");
 }
 
 int	is_error_token(t_token *suspect_token)

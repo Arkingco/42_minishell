@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 20:07:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:14:27 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	main_loop(t_working_info *info)
 
 	while (1)
 	{
-		line = readline("MINISHELL : ");
+		line = readline("minishell: ");
 		add_history(line);
 		if (line != NULL)
 		{
@@ -50,6 +50,7 @@ void	main_loop(t_working_info *info)
 			{
 				process_errno(258, "QUOTE", SYNTAX_ERR);
 				free(line);
+				line = 0;
 				continue ;
 			}
 			info->cmd = parsing(line, info);
@@ -61,6 +62,7 @@ void	main_loop(t_working_info *info)
 				ft_free_cmdlst(info->cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
 			}
 			free(line);
+			line = 0;
 		}
 		else
 			ft_error_exit(0, "exit");
