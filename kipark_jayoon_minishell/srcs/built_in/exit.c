@@ -6,7 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/19 23:32:46 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/22 16:33:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
+void	built_in_exit()
+{
+	return ;
+}

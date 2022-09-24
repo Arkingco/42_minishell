@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/01 09:18:28 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 15:50:40 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,7 @@
 #include"env.h"
 #include <stdio.h>
 
-static int	get_env_equal_location(char *env_str)
-{
-	int	i;
 
-	i = 0;
-	while (env_str[i] != '=')
-		++i;
-	return (i);
-}
 
 char *get_env_value(t_env *env_head, char *env_key)
 {
@@ -36,14 +28,14 @@ char *get_env_value(t_env *env_head, char *env_key)
 	while (env_list)
 	{
 		env_str = env_list->str;
-		env_str_equal_location = get_env_equal_location(env_str);
+		env_str_equal_location = ft_strchr_index(env_str, '=');
 		if (ft_strncmp(env_key, env_str, ft_strlen(env_key)) == 0 && \
 							(int)ft_strlen(env_key) == env_str_equal_location)
-			return (ft_substr(env_str, env_str_equal_location + 1, \
+			return (ft_safe_substr(env_str, env_str_equal_location + 1, \
 													ft_strlen(env_str)));
 		env_list = env_list->next;
 	}
-	return (ft_strdup(""));
+	return (ft_safe_strdup(""));
 }
 
 static int	is_env_key_word(char c)

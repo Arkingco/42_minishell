@@ -1,47 +1,47 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_list.c                                         :+:      :+:    :+:   */
+/*   env_add.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/02 18:13:06 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 15:50:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
+#include "libft.h"
 #include <stdio.h>
 #include <stdlib.h>
 
-void	print_env_list(t_env *env_head)
-{
-	t_env *env_list;
-
-	env_list = env_head->next;
-	while (env_list)
-	{
-		printf("%s\n", env_list->str);
-		env_list = env_list->next;
-	}
-}
-
-
 void	init_env_dummy_node(t_env *new_env)
 {
-	new_env->next = NULL;
 	new_env->str = NULL;
+	new_env->key = NULL;
+	new_env->value = NULL;
+	new_env->next = NULL;
 }
 
 t_env *new_env_node(char *env_str)
 {
-	t_env *new_env;
+	t_env	*new_env;
+	int		env_key_size;
 
 	new_env = malloc(sizeof(t_env));
 	if (new_env == NULL)
-		return (NULL);
+	{
+		printf("alloc error\n");
+		exit(1);
+	}
 	init_env_dummy_node(new_env);
-	new_env->str = env_str;
+	env_key_size = get_env_key_size(env_str);
+	new_env->str = ft_safe_strdup(env_str);
+	new_env->key = ft_safe_substr(env_str, 0, env_key_size);
+	new_env->value = ft_safe_substr(env_str, \
+			ft_strchr_index(env_str, '=') + 1, \
+			ft_strlen(env_str));
+	new_env->next = NULL;
 	return (new_env);
 }
 
@@ -53,8 +53,6 @@ void	env_add(t_env *env_head, char *env_str)
 	while (curr->next != NULL)
 		curr = curr->next;
 	curr->next = new_env_node(env_str);
-	if (curr->next == NULL)
-		printf("allocate error\n");
 }
 
 void	set_env_list(t_env *env_head, char **envp)

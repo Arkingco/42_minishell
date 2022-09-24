@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/20 21:16:52 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/22 21:26:21 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ t_env	*set_shell_env_list(char **envp)
 	if (env_head == NULL)
 		return (NULL);
 	env_head->str = NULL;
+	env_head->key = NULL;
+	env_head->value = NULL;
 	env_head->next = NULL;
 	set_env_list(env_head, envp);
 	return (env_head);
