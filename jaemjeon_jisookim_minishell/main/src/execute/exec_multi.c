@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:14:16 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:24:56 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:24:46 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ pid_t	*init_exec_multi(t_working_info *info, int fd[], \
 
 int	handle_wait_status(pid_t *child_pids, t_working_info *info, pid_t pid)
 {
-	int exit_status;
+	int	exit_status;
 
 	exit_status = 0;
 	exit_status = ft_wait_childs(child_pids, ft_cmdlst_size(info->cmd));
@@ -39,6 +39,20 @@ int	handle_wait_status(pid_t *child_pids, t_working_info *info, pid_t pid)
 		g_errno = WCOREFLAG + WTERMSIG(pid);
 	sigtermset(MINISHELL_NO_CHILD);
 	return (exit_status);
+}
+
+void	process_multi_cmd_do_fork(t_working_info *info, t_cmd *cur_cmd, \
+														int fd[], pid_t pid)
+{
+	if (cur_cmd->next != NULL)
+		ft_pipe(fd);
+	sigtermset(MINISHELL_HAS_CHILD);
+	pid = ft_fork();
+	if (pid == 0)
+	{
+		sigtermset(EXECUTE_CHILD);
+		execute_multicmd_child(info, cur_cmd, fd);
+	}
 }
 
 pid_t	process_multi_cmd(t_working_info *info, int fd[])
@@ -53,15 +67,7 @@ pid_t	process_multi_cmd(t_working_info *info, int fd[])
 	index = 0;
 	while (cur_cmd != NULL)
 	{
-		if (cur_cmd->next != NULL)
-			ft_pipe(fd);
-		sigtermset(MINISHELL_HAS_CHILD);
-		pid = ft_fork();
-		if (pid == 0)
-		{
-			sigtermset(EXECUTE_CHILD);
-			execute_multicmd_child(info, cur_cmd, fd);
-		}
+		process_multi_cmd_do_fork(info, cur_cmd, fd, pid);
 		child_pids[index] = pid;
 		init_pipe_before_next_cmd(cur_cmd, fd);
 		index++;

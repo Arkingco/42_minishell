@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 15:23:03 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:18:24 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
