@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/25 18:59:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/25 21:50:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 		curr_envp = init_curr_envp(l_env);
 		while (l_parsing)
 		{
-			pid = ft_safe_fork();
+			pid = safe_fork();
 			if (pid == 0)
 				do_it_child(l_parsing, &args_execve, l_env, curr_envp);
 			// else
