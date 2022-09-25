@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:43:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:55:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,24 @@ void	combine_redirect_filename(t_token *token_lst)
 	}
 }
 
+void	check_cur_token_type(t_token *cur_token, t_cmd *cur_cmd)
+{
+	if (cur_token->type & PIPE)
+	{
+		cur_cmd = cur_cmd->next;
+		ft_free_token(cur_token);
+	}
+	else if (cur_token->type & REDIRECT)
+	{
+		if (cur_token->type & (READ | HEREDOC))
+			ft_token_lstadd_back(&cur_cmd->redirect_input, cur_token);
+		else
+			ft_token_lstadd_back(&cur_cmd->redirect_output, cur_token);
+	}
+	else
+		ft_token_lstadd_back(&cur_cmd->simple_cmd, cur_token);
+}
+
 t_cmd	*token_to_cmd(t_token *token_lst)
 {
 	t_token	*cur_token;
@@ -44,20 +62,7 @@ t_cmd	*token_to_cmd(t_token *token_lst)
 	while (cur_token != NULL)
 	{
 		next_token = cur_token->next;
-		if (cur_token->type & PIPE)
-		{
-			cur_cmd = cur_cmd->next;
-			ft_free_token(cur_token);
-		}
-		else if (cur_token->type & REDIRECT)
-		{
-			if (cur_token->type & (READ | HEREDOC))
-				ft_token_lstadd_back(&cur_cmd->redirect_input, cur_token);
-			else
-				ft_token_lstadd_back(&cur_cmd->redirect_output, cur_token);
-		}
-		else
-			ft_token_lstadd_back(&cur_cmd->simple_cmd, cur_token);
+		check_cur_token_type(cur_token, cur_cmd);
 		cur_token = next_token;
 	}
 	return (first_cmd);

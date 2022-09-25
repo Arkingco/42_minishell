@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 15:36:35 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:57:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ int	ft_token_lstsize(t_token *lst)
 		size++;
 	}
 	return (size);
+}
+
+void	ft_insert_token(t_token *prev_to_insert, t_token *to_insert)
+{
+	t_token	*next_of_inserted;
+
+	if (to_insert == NULL)
+		return ;
+	next_of_inserted = prev_to_insert->next;
+	prev_to_insert->next = to_insert;
+	to_insert->prev = prev_to_insert;
+	while (to_insert->next != NULL)
+		to_insert = to_insert->next;
+	to_insert->next = next_of_inserted;
+	if (next_of_inserted != NULL)
+		next_of_inserted->prev = to_insert;
 }
 
 t_token	*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
