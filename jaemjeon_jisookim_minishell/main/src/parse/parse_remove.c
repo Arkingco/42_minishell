@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_remove.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:55:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:14:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ void	quote_remove(t_token **token_lst)
 		{
 			ft_memmove(cur_token->string_value, cur_token->string_value + 1, \
 										ft_strlen(cur_token->string_value));
-			cur_token->string_value[ft_strlen(cur_token->string_value) - 1]\
-																		 = '\0';
+			cur_token->string_value[ft_strlen(cur_token->string_value) - 1] \
+																		= '\0';
 		}
 		cur_token = cur_token->next;
 	}

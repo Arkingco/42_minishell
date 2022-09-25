@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:16:21 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:55:31 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:14:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_token	*__word_split(t_token *token)
 		{
 			new_token = ft_strtok_token(token->type, &string_value);
 			if (new_token == NULL)
-				break;
+				break ;
 			ft_token_lstadd_back(&splited_lst, new_token);
 		}
 	}
