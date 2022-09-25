@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 16:53:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/24 22:20:59 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ int main(int argc, char **argv, char **envp)
 			execute_cmd(l_parsing, l_env);
 			add_history(line);
 			free_all(line, token, l_parsing);
+			token = NULL;
+			l_parsing = NULL;
 		}
 		else
 			exit_readline_return_null();

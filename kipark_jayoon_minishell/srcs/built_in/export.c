@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 15:26:02 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 14:43:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	print_export(t_env *env)
 {
 	// print 하기 "declare -x " 붙여서
 	// 종료 상태 업데이트 싱글 커맨드면 그냥 업데이트 fork받은 값이면 exit으로 나가야함 ...
-	t_env 	*this_env;
+	t_env	*this_env;
 
 	this_env = env->next;
 	while (this_env)
@@ -31,7 +31,7 @@ static void	print_export(t_env *env)
 	}
 }
 
-static void execute_export(t_simple_cmd *simple_cmd, t_env *env)
+static void	execute_export(t_simple_cmd *simple_cmd, t_env *env)
 {
 	// - epoxrt key=vaule → 가능
 	// - export 중복된key=value → 업데이트
