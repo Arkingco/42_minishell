@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 20:15:09 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 14:34:15 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int is_built_in(t_simple_cmd *simple_cmd)
 void	execute_bulit_in(t_simple_cmd *simple_cmd, t_env *env)
 {
 	if (!ft_strncmp(simple_cmd->str, "cd", 3))
-		built_in_cd();
+		built_in_cd(simple_cmd, env);
 	else if (!ft_strncmp(simple_cmd->str, "echo", 5))
 		built_in_echo(simple_cmd);
 	else if (!ft_strncmp(simple_cmd->str, "env", 4))
