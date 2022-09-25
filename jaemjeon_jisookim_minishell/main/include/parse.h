@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:46:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:48:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:57:18 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "structs/t_token.h"
 # include "structs/t_cmd.h"
-
 
 // parse_cmd_lst
 t_cmd	*make_cmd_linkedlst(t_token *token_lst);
@@ -33,7 +32,6 @@ int		is_ifs_word(char *string_value);
 // parse_remove
 void	quote_remove(t_token **token_lst);
 void	remove_trash_token(t_token **token_lst);
-
 
 // parse_word
 int		is_to_word_split(t_token *token);

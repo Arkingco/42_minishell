@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 17:23:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:54:10 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BUILT_IN
-# define BUILT_IN
+#ifndef BUILT_IN_H
+# define BUILT_IN_H
 
 # include "structs/t_working_dir.h"
 # include "structs/t_cmd.h"
@@ -55,6 +55,5 @@ int		ft_exit(t_cmd *cmd, t_working_info *info);
 // built_in_utils.c
 int		ft_chdir(char *path);
 char	*ft_getcwd(char *buf, size_t buf_size);
-
 
 #endif

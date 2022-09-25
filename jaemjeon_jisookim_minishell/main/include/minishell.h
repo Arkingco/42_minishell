@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:52:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:58:37 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # include "parse.h"
 # include "execute.h"
 # include "built_in.h"
-# include "working_dir.h"
 # include "heredoc.h"
 # include "structs/t_cmd.h"
 # include "structs/t_env.h"
@@ -101,7 +100,6 @@ enum e_error
 	HOME_SET_ERR,
 };
 
-
 // check_error.c
 void	argument_error_check(int argc);
 int		is_error_token(t_token *suspect_token);
@@ -117,15 +115,15 @@ void	init_cur_path(t_working_info *info);
 void	update_shlvl(t_envlst **env);
 void	init_envp(t_working_info *info, char *envp[]);
 
-
-
 // DEBUG
 // print_lst_token.c
 void	debug_print_lst_token(t_token *lst);
+
 // print_lst_cmd.c
 void	debug_print_lst_cmd(t_cmd *lst);
+
 // void	set_signal_action(void);
-void 	rl_replace_line(const char *, int);
+void	rl_replace_line(const char *buf, int nullable);
 void	argument_error_check(int argc);
 
 #endif

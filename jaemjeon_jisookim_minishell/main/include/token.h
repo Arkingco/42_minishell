@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:46:39 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:55:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:57:55 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@ void		move_index_to_pair_quote(t_token *token, char *line, int *index);
 void		move_index_next_to_end_of_word(char *line, int *index);
 int			is_leftjoined(char *line, int left_idx);
 int			is_rightjoined(char *line, int right_idx);
-void		set_flag_joined(t_token *token, char *line, int start_idx, int end_idx);
+void		set_flag_joined(t_token *token, char *line, int start_idx, \
+																int end_idx);
 
 // token_list_adt_1.c
 void		ft_token_lstadd_back(t_token **lst, t_token *new);
