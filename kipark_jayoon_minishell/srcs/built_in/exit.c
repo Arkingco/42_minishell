@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 20:22:41 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 14:42:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 #include "libft.h"
 #include <stdio.h>
 
-int 	is_all_digit(char *str)
+int	is_all_digit(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] != '\0')

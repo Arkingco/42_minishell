@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:31:59 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 19:53:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 14:42:43 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void	return_new_line()
 
 void	built_in_echo(t_simple_cmd *simple_cmd)
 {
-	int n_flag;
+	int	n_flag;
 
 	if (simple_cmd->next == NULL)
 		return (return_new_line());
@@ -36,7 +36,7 @@ void	built_in_echo(t_simple_cmd *simple_cmd)
 	}
 	while (simple_cmd)
 	{
-		printf("%s ",simple_cmd->str);
+		printf("%s ", simple_cmd->str);
 		simple_cmd = simple_cmd->next;
 	}
 	if (n_flag)

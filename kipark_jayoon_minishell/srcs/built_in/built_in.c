@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:34:15 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 14:38:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include"libft.h"
 #include"env.h"
 
-int is_built_in(t_simple_cmd *simple_cmd)
+int	is_built_in(t_simple_cmd *simple_cmd)
 {
 	if (!ft_strncmp(simple_cmd->str, "cd", 3))
 		return (1);
