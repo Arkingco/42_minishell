@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:41:58 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:52:29 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:16:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	check_syntax_quote(char *line)
 
 void	check_redirection_grammar(t_token *lst_token)
 {
-	if (lst_token->prev != NULL &&
+	if (lst_token->prev != NULL && \
 		(lst_token->prev->type & PIPE || lst_token->prev->type & REDIRECT))
 	{
 		if (lst_token->type & WRITE)

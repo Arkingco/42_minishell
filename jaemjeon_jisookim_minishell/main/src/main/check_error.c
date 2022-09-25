@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:40:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:48:58 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:15:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,6 @@ int	is_error_token(t_token *suspect_token)
 			return (TRUE);
 	}
 	else
-		return(check_err_token_prev(suspect_token));
+		return (check_err_token_prev(suspect_token));
 	return (FALSE);
 }
