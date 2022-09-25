@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 21:48:13 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:33:36 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ void	main_loop(t_working_info *info)
 			line = 0;
 		}
 		else
-		{
-			system("leaks minishell");
 			ft_error_exit(0, "exit");
-		}
 	}
 }
 

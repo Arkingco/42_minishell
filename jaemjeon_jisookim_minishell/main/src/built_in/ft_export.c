@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 21:59:19 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:31:44 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 		envkey_to_input = ft_get_key_in_string(cmd_argv->string_value);
 		if (check_key_grammar(envkey_to_input))
 		{	
-			process_errno(1, "export", IDENTIFIER_ERR);
+			process_errno(1, cmd_argv->string_value, IDENTIFIER_ERR);
+			free(envkey_to_input);
 			return (1);
 		}
 		envvalue_to_input = ft_get_value_in_string(cmd_argv->string_value);
@@ -93,10 +94,5 @@ int	ft_export(t_cmd *cmd, t_working_info *info)
 		error_check_flag = print_export_env(info->env);
 	else
 		error_check_flag = add_new_envs(cmd_argv, info->env);
-	if (error_check_flag)
-	{
-		process_errno(1, cmd_argv->string_value, IDENTIFIER_ERR);
-		return (1);
-	}
-	return (0);
+	return (error_check_flag);
 }
