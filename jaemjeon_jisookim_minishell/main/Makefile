@@ -53,7 +53,7 @@ SRC_DEBUG		:=	$(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_built_in.c exec_do.c exec_file.c exec_ft_tools.c \
 					exec_path.c exec_pipe.c exec_redirect.c exec_utils.c \
-					execute.c exec_file_check.c exec_redirect_handler.c \
+					execute.c exec_file_check.c exec_redi_handler.c \
 					exec_multi_child.c exec_multi.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
