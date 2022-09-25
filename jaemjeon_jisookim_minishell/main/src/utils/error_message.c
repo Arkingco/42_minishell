@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:44:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 17:47:23 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:33:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	print_error_message(int has_minishell, char *s1, char *s2)
 {
 	if (has_minishell)
 		ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(s1, 2);
-	ft_putendl_fd(s2, 2);
+	if (s1 != NULL)
+		ft_putstr_fd(s1, 2);
+	if (s2 != NULL)
+		ft_putstr_fd(s2, 2);
+	ft_putchar_fd('\n', 2);
 }
 
 void	perror_with_header(char *string, int type)
@@ -51,7 +54,7 @@ void	perror_no_header(int type)
 	else if (type == GET_CWD_ERR)
 		print_error_message(FALSE,
 							  "getcwd: cannot access parent directories: \
-									No such file or directory", 0);
+No such file or directory", 0);
 	else if (type == CHANGE_DIR_ERR)
 		print_error_message(FALSE,
 							  "chdir: error retrieving current directory", 0);
@@ -60,8 +63,8 @@ void	perror_no_header(int type)
 void	process_errno(int errno_num, char *string, int type)
 {
 	g_errno = errno_num;
-	if (type < ERR_COUNT / 2)
-		perror_with_header(string, type);
-	else
+	if (type == CUR_PATH_ERR || type == GET_CWD_ERR || type == CHANGE_DIR_ERR)
 		perror_no_header(type);
+	else
+		perror_with_header(string, type);
 }

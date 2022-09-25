@@ -3,17 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:55:46 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:38:27 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
-void	check_home_env(t_cmd *cmd, t_working_info *info, char *togo_path)
-{}
 
 int	is_exist_dir(char *dir_path)
 {
@@ -33,12 +30,16 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 	ret_chdir = 0;
 	if (is_exist_dir(path))
 	{
-		chdir(path);
+		if (chdir(path) == FAIL)
+		{
+			process_errno(1, NULL, CHANGE_DIR_ERR);
+			ret_chdir = 1;
+		}
 		change_info_path(cmd, info, path);
 	}
 	else
 	{
-		process_errno(1, NULL, CHANGE_DIR_ERR);
+		process_errno(1, path, OPEN_ERR);
 		ret_chdir = 1;
 	}
 	return (ret_chdir);
@@ -51,8 +52,7 @@ int	ft_cd(t_cmd *cmd, t_working_info *info)
 	if (cmd->simple_cmd->next != NULL)
 	{
 		togo_path = cmd->simple_cmd->next->string_value;
-		if (processing_cd(cmd, info, togo_path) == FAIL)
-			return (1);
+		return (processing_cd(cmd, info, togo_path));
 	}
 	else
 	{
