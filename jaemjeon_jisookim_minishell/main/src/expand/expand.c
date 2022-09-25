@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/04 21:47:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 16:23:32 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:17:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-extern int	g_errno;
-
 #include "../../include/minishell.h"
+
+extern int	g_errno;
 
 int	is_heredoc_delimiter_token(t_token *token)
 {
@@ -35,7 +35,7 @@ void	expander(t_token **token_lst, t_envlst *env)
 		if (is_heredoc_delimiter_token(cur_token))
 		{
 			cur_token = cur_token->next;
-			continue;
+			continue ;
 		}
 		if ((cur_token->type & WORD) && !(cur_token->type & SQUOTE))
 		{
