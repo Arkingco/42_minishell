@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/30 16:30:03 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/24 16:17:43 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,9 +56,7 @@ t_token *new_token_node(t_token_type token_type, char *token_str)
 {
 	t_token *new_token;
 
-	new_token = malloc(sizeof(t_token));
-	if (new_token == NULL)
-		return (NULL);
+	new_token = ft_safe_malloc(sizeof(t_token));
 	init_token_dummy_node(new_token);
 	new_token->type = token_type;
 	new_token->str = token_str;
