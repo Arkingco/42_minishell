@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 15:23:03 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:20:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 {
 	int	ret;
 	int	(*built_in_func)(t_cmd *cmd, t_working_info*);
-	static int(*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
+
+	static int (*built_in_func_board[BUILT_IN_COUNT])(t_cmd *, t_working_info*) \
 	= {
 		[T_ECHO] = ft_echo,
 		[T_CD] = ft_cd,
