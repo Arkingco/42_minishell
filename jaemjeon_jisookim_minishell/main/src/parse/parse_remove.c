@@ -6,15 +6,12 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 22:40:23 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:55:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*
-quote로 둘러쌓인 토큰의 quote를 지움.
-*/
 void	quote_remove(t_token **token_lst)
 {
 	t_token	*cur_token;
