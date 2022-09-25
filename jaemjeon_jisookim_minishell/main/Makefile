@@ -25,7 +25,6 @@ DIR_DEBUG		:=	$(SRCS_DIR)/debug
 DIR_EXECUTE		:=	$(SRCS_DIR)/execute
 DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 DIR_HEREDOC		:=	$(SRCS_DIR)/heredoc
-DIR_PRINTF		:=	$(SRCS_DIR)/printf
 
 SRC_ENV			:= 	env_list_adt_1.c env_list_adt_2.c env_list_adt_3.c \
 					env_list_adt_4.c
@@ -36,7 +35,7 @@ SRC_TOKENIZE	:=	token_free.c token_lst_adt_1.c token_lst_adt_2.c \
 SRC_TOKENIZE	:=	$(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 
 SRC_UTILS		:=	ifs.c error_exit.c signal.c terminal.c setting.c \
-					free.c
+					free.c error_message.c
 SRC_UTILS		:=	$(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 SRC_MAIN		:= main.c init.c check_error.c check_syntax.c
@@ -60,16 +59,13 @@ SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 SRC_HEREDOC		:= heredoc.c heredoc_util.c heredoc_do.c
 SRC_HEREDOC		:= $(addprefix $(DIR_HEREDOC)/, $(SRC_HEREDOC))
 
-SRC_PRINTF		:= ft_printf.c ft_printf_mode.c ft_printf_utils.c
-SRC_PRINTF		:= $(addprefix $(DIR_PRINTF)/, $(SRC_PRINTF))
-
 SRC_BUILT_IN	:=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c \
-					ft_unset.c built_in_utils.c
+					ft_unset.c
 SRC_BUILT_IN	:=	$(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
 					$(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE) $(SRC_EXECUTE) \
-					$(SRC_BUILT_IN) $(SRC_HEREDOC) $(SRC_PRINTF)
+					$(SRC_BUILT_IN) $(SRC_HEREDOC)
 
 OBJS 			=	${SRCS:.c=.o}
 
