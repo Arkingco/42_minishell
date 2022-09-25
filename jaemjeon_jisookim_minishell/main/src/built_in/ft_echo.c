@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 11:16:44 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:24:30 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	has_n_option(t_cmd *cmd)
 	char	*suspect_string;
 
 	suspect_string = cmd->simple_cmd->next->string_value;
-	if (ft_strncmp(suspect_string, "-n", 2) == 0)
+	if (ft_strncmp(suspect_string, "-n", 3) == 0)
 		return (TRUE);
 	else
 		return (FALSE);

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 12:24:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:20:41 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	print_export_env(t_envlst *env)
 		printf("declare -x ");
 		printf("%s", env->key);
 		if (env->has_value == TRUE)
-			printf("=%s\n", env->value);
+			printf("\"=%s\"\n", env->value);
 		else
 			printf("\n");
 		env = env->next;
