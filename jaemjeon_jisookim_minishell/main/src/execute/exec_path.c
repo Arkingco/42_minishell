@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:47:34 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:32:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ int	is_valid_cmd_path(char *cmd_string)
 int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 {
 	const char	**path_board = (const char **)get_path_board(info->env);
-	int		index;
-	char	*exec_path;
+	int			index;
+	char		*exec_path;
 	struct stat	file_stat;
 
 	if (path_board == NULL)
@@ -72,7 +72,7 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 
 int	set_exec_path(t_cmd *cmd, t_working_info *info)
 {
-	char		*cmd_string;
+	char	*cmd_string;
 
 	cmd_string = cmd->simple_cmd->string_value;
 	if (is_already_exec_path(cmd_string) == TRUE)

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:02:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:30:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:33:33 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,21 +45,21 @@ void	expand_env(t_token *token, t_envlst *env)
 	char	*copied_string;
 
 	cpy_start = token->string_value;
-	result = ft_strdup(""); // 확장을 다한 문자열이 들어갈 공간
+	result = ft_strdup("");
 	while (*cpy_start != '\0')
 	{
-		if (*cpy_start == '$') // 확장가능성있는 문맥 발견
+		if (*cpy_start == '$')
 			copied_string = expand_env_withdollar(token, env, &cpy_start);
-		else if (ft_is_ifs(cpy_start)) // ifs를 발견
+		else if (ft_is_ifs(cpy_start))
 			copied_string = cpy_ifs_string(&cpy_start);
-		else // ifs도 아니고 확장가능성있는것도 아닌 일반 문자열또는 quote문자
+		else
 			copied_string = cpy_none_expander(&cpy_start);
-		result = raise_buffer(result, ft_strlen(copied_string)); // 확장된, 또는 복사해온 문자열길이만큼 버퍼를 키워줌.
+		result = raise_buffer(result, ft_strlen(copied_string));
 		ft_strlcat(result, copied_string, \
-							ft_strlen(result) + ft_strlen(copied_string) + 1); // 문자열 붙여줌
+							ft_strlen(result) + ft_strlen(copied_string) + 1);
 		free(copied_string);
 		copied_string = 0;
 	}
-	free(token->string_value); // 확장된 문자열로 업데이트
+	free(token->string_value);
 	token->string_value = result;
 }
