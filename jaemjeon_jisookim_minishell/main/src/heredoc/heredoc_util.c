@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:46:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:44:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,29 +32,35 @@ int	has_heredoc(t_working_info *info)
 	return (FALSE);
 }
 
-void	filename_join_free(char *s1, char *s2, char *s3, int four_byte)
+char	*filename_join_free(char *s1, char *s2, int *pointer)
 {
-	s1 = ft_itoa(four_byte);
-	s2 = ft_itoa(four_byte + 1);
-	s3 = ft_strjoin(s1, s2);
+	char	*result;
+
+	s1 = ft_itoa(*pointer);
+	s2 = ft_itoa(*(pointer + 1));
+	result = ft_strjoin(s1, s2);
 	free(s1);
 	free(s2);
+	return (result);
 }
 
 char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 {
 	char	*tmp_filename;
 	char	*tmp_string[4];
-	int		four_byte;
+	int		*pointer;
+	char	*return_val;
 
-	four_byte = (int)p1_8byte;
-	filename_join_free(tmp_string[0], tmp_string[1], tmp_string[2], four_byte);
-	four_byte = (int)p2_8byte;
-	filename_join_free(tmp_string[0], tmp_string[1], tmp_string[3], four_byte);
+	pointer = (int *)p1_8byte;
+	tmp_string[2] = filename_join_free(tmp_string[0], tmp_string[1], pointer);
+	pointer = (int *)p2_8byte;
+	tmp_string[3] = filename_join_free(tmp_string[0], tmp_string[1], pointer);
 	tmp_filename = ft_strjoin(tmp_string[2], tmp_string[3]);
 	free(tmp_string[2]);
 	free(tmp_string[3]);
-	return (ft_strjoin("/tmp/minishell", tmp_filename));
+	return_val = ft_strjoin("/tmp/minishell", tmp_filename);
+	free(tmp_filename);
+	return (return_val);
 }
 
 void	rename_string_value(t_working_info *info)
