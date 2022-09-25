@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   setting.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:37:18 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 12:06:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:45:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,14 @@ void	process_errno(int errno_num, char *string, int type)
 		printf_fd(2, "minishell: open fail file name '%s'\n", string);
 	else if (type == OPEN_ERR)
 		printf_fd(2, "minishell: %s: No such file or directory\n", string);
+	else if (type ==  CUR_PATH_ERR)
+		printf_fd(2, "pwd: error retrieving current directory\n", 0);
+	else if (type ==  GET_CWD_ERR)
+		printf_fd(2, "getcwd: cannot access parent directories: \
+											No such file or directory\n", 0);
+	else if (type ==  CHANGE_DIR_ERR)
+		printf_fd(2, "chdir: error retrieving current directory\n", 0);
+	else if (type == HOME_SET_ERR)
+		printf_fd(2, "minishell: cd: HOME not set\n", 0);
 }
 

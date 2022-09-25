@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 11:15:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:45:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
 	char	*tmp_path;
 
 	(void)&cmd;
-	tmp_path = ft_getcwd(NULL, 0);
+	tmp_path = getcwd(NULL, 0);
 	if (tmp_path != NULL)
 	{
 		if (info->cur_path != NULL)
@@ -58,18 +58,16 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 	int		ret_chdir;
 	char	*error_message;
 
+	ret_chdir = 0;
 	if (is_exist_dir(path))
 	{
-		ret_chdir = ft_chdir(path);
+		chdir(path);
 		change_info_path(cmd, info, path);
 	}
 	else
 	{
-		error_message = ft_strjoin("minishell: cd: ", path);
-		perror(error_message);
-		free(error_message);
-		error_message = 0;
-		ret_chdir = FAIL;
+		process_errno(1, NULL, CHANGE_DIR_ERR);
+		ret_chdir = 1;
 	}
 	return (ret_chdir);
 }
@@ -89,12 +87,12 @@ int	ft_cd(t_cmd *cmd, t_working_info *info)
 		if (ft_has_env(info->env, "HOME"))
 		{
 			togo_path = ft_getenv(info->env, "HOME");
-			processing_cd(cmd, info, togo_path);
+			return (processing_cd(cmd, info, togo_path));
 		}
 		else
 		{
-			ft_putendl_fd("minishell: cd: HOME not set", 2);
-			return (errno);
+			process_errno(1, NULL, HOME_SET_ERR);
+			return (1);
 		}
 	}
 	return (0);

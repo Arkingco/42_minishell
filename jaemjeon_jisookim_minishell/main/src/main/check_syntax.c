@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:41:58 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 15:45:51 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:28:50 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,24 @@ int	check_syntax_quote(char *line)
 	return (TRUE);
 }
 
+void	check_redirection_grammar(t_token *lst_token)
+{
+	if (lst_token->prev != NULL &&
+		(lst_token->prev->type & PIPE || lst_token->prev->type & REDIRECT))
+	{
+		if (lst_token->type & WRITE)
+			process_errno(258, ">", SYNTAX_ERR);
+		else if (lst_token->type & WRITE_APPEND)
+			process_errno(258, ">>", SYNTAX_ERR);
+		else if (lst_token->type & READ)
+			process_errno(258, "<", SYNTAX_ERR);
+		else if (lst_token->type & HEREDOC)
+			process_errno(258, "<<", SYNTAX_ERR);
+	}
+	else
+		process_errno(258, "newline", SYNTAX_ERR);
+}
+
 int	check_syntax_grammar(t_token *lst_token)
 {
 	while (lst_token != NULL)
@@ -43,20 +61,7 @@ int	check_syntax_grammar(t_token *lst_token)
 				process_errno(258, "|", SYNTAX_ERR);
 			if (lst_token->type & REDIRECT)
 			{
-				if (lst_token->prev != NULL && \
-				(lst_token->prev->type & PIPE || lst_token->prev->type & REDIRECT))
-				{
-					if (lst_token->type & WRITE)
-						process_errno(258, ">", SYNTAX_ERR);
-					else if (lst_token->type & WRITE_APPEND)
-						process_errno(258, ">>", SYNTAX_ERR);
-					else if (lst_token->type & READ)
-						process_errno(258, "<", SYNTAX_ERR);
-					else if (lst_token->type & HEREDOC)
-						process_errno(258, "<<", SYNTAX_ERR);
-				}
-				else
-					process_errno(258, "newline", SYNTAX_ERR);
+				check_redirection_grammar(lst_token);
 			}
 			return (TRUE);
 		}

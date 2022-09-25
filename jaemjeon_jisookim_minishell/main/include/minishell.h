@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 16:58:59 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:45:35 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,11 @@ enum e_error
 	SYNTAX_ERR,
 	OPEN_FAIL_ERR,
 	OPEN_ERR,
-	MALLOC_FAILED_ERR
+	MALLOC_FAILED_ERR,
+	CUR_PATH_ERR,
+	GET_CWD_ERR,
+	CHANGE_DIR_ERR,
+	HOME_SET_ERR
 };
 
 

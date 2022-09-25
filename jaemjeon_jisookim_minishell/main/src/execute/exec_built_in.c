@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_built_in.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 14:39:28 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:23:03 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 extern int	g_errno;
 
-//TODO: 빌트-인의 종료 상태를 관리할 수 있어야 하므로, 빌트인들의 반환형을 void가 아닌 int로 바꿔야 함.
 int	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 {
 	int	ret;

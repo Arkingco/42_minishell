@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 11:21:39 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:38:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ int	ft_exit(t_cmd *cmd, t_working_info *info)
 	char	*arg_string;
 
 	(void)cmd;
+	(void)info;
 	ft_putendl_fd("exit", 2);
 	if (cmd->simple_cmd->next == NULL)
 		exit(0);
 	if (cmd->simple_cmd->next->next != NULL)
 	{
-		process_errno(1, "exit:", MANY_ARG_ERR);
+		process_errno(1, "exit", MANY_ARG_ERR);
 		return (1);
 	}
 	else
@@ -41,7 +42,7 @@ int	ft_exit(t_cmd *cmd, t_working_info *info)
 		arg_string = cmd->simple_cmd->next->string_value;
 		if (is_alnum_string(arg_string) == FALSE)
 		{
-			process_errno(255, "exit:", NOT_NUM_ARG_ERR);
+			process_errno(255, "exit", NOT_NUM_ARG_ERR);
 			exit(255);
 		}
 		else

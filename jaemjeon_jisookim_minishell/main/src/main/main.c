@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 10:43:18 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:47:31 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,10 +54,10 @@ void	main_loop(t_working_info *info)
 				continue ;
 			}
 			info->cmd = parsing(line, info);
-			g_errno = 0;
 			// debug_print_lst_cmd(info->cmd);
 			if (info->cmd != NULL)
 			{
+				g_errno = 0;
 				execute(info);
 				ft_free_cmdlst(info->cmd); // cmd구조체와 그 안의 토큰 리스트 전부 할당해제함.
 			}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 12:26:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 16:05:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,8 @@ char	**ft_envlst_to_envp(t_envlst *env)
 	index = 0;
 	while (envlst != NULL)
 	{
-		envp[index] = ft_envlst_to_string(envlst);
+		if (envlst->has_value)
+			envp[index] = ft_envlst_to_string(envlst);
 		envlst = envlst->next;
 		index++;
 	}
