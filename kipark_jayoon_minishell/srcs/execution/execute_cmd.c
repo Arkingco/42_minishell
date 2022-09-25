@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 22:21:24 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 16:39:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 		ft_safe_free(file_path);
 		i++;
 	}
-	ft_safe_free_two_dimentions_arr(p_args->path);
-	ft_safe_free_two_dimentions_arr(p_args->argv);
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(p_args->argv[0], 2);
 	ft_putstr_fd(": command not found\n", 2);
+	ft_safe_free_two_dimentions_arr(p_args->path);
+	ft_safe_free_two_dimentions_arr(p_args->argv);
 	exit(127);
 }
 
