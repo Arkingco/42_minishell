@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_4.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 12:26:22 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:35:15 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:02:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_has_env(t_envlst *env, char *key)
 void	ft_setenv(t_envlst *env, char *key, char *value, int has_value)
 {
 	t_envlst	*envlst_toset;
-	
+
 	envlst_toset = ft_getenv_lst(env, key);
 	if (envlst_toset == NULL)
 		ft_addenv(&env, key, value, has_value);
