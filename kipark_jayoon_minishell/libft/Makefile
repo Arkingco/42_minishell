@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/09/24 21:49:39 by jayoon           ###   ########.fr        #
+#    Updated: 2022/09/25 16:47:52 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,6 +54,7 @@ SRCS =		ft_isalnum.c			\
 			ft_putnbr_fd.c			\
 			get_next_line.c			\
 			get_next_line_utils.c	\
+			ft_safe_fork.c			\
 			ft_safe_free.c			\
 			ft_safe_free_two_dimentions_arr.c \
 			ft_safe_malloc.c		\

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/20 18:25:50 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 21:50:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/25 16:46:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,5 +149,6 @@ char		*ft_safe_substr(char const *s, unsigned int start, size_t len);
 char		*ft_safe_strjoin(char const *s1, char const *s2);
 char		*ft_safe_strdup(const char *s1);
 void		ft_safe_free_two_dimentions_arr(char **arr);
+int			ft_safe_fork(void);
 
 #endif

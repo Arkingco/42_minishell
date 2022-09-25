@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/25 16:39:29 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/25 18:59:42 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,29 +40,35 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 	exit(127);
 }
 
+static void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
+	t_env *l_env, char **envp)
+{
+	process_execve_args(l_parsing, p_args_execve, l_env);
+	execve_cmd(p_args_execve, envp);
+}
+
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
 	char			**curr_envp;
+	pid_t			pid;
 	
-	printf("\n*exeuction*\n");
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
-	{
-		printf("single built_in cmd\n");
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env);
-	}
 	else
 	{
-		printf("single & multi shell cmd\n\n");
 		l_env = l_env->next;
 		curr_envp = init_curr_envp(l_env);
 		while (l_parsing)
 		{
-			process_execve_args(l_parsing, &args_execve, l_env);
-			execve_cmd(&args_execve, curr_envp);
+			pid = ft_safe_fork();
+			if (pid == 0)
+				do_it_child(l_parsing, &args_execve, l_env, curr_envp);
+			// else
+				// do_it_parent();
 			l_parsing = l_parsing->next;
 		}
+		wait_all_child(pid);
 		ft_safe_free(curr_envp);
 	}
-	printf("----------------------------------------\n\n\n");
 }

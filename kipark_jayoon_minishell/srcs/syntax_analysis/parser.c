@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 16:53:38 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/25 16:58:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,7 @@ static void 	print_parsing_list(t_parsing_list *l_parsing)
 	t_redir_chunk	*head_redir;
 
 	if (!l_parsing)
-	{
-		printf("Parsing list is empty\n");
 		return ;
-	}
 
 	printf("\n\n*parsing list*\n\n");
 	while (l_parsing)
