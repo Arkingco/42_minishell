@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:22:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:31:51 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	process_single_cmd(t_working_info *info)
 			else
 				process_built_in(info->cmd, info, cmd_type);
 		}
-		restore_redirect_fd(info->cmd, io_fd);
+		restore_redirect_fds(info->cmd, io_fd);
 	}
 }
 

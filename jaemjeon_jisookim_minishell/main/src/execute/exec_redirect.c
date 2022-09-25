@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:02:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:31:39 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,6 @@ int	process_redirect(t_cmd *cmd, int *io_fd)
 			close(io_fd[INPUT_REDI]);
 		return (OPEN_FAIL);
 	}
-	dup2_io_fds(io_fd);
+	dup2_io_fd(io_fd);
 	return (TRUE);
 }

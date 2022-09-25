@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:29:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:48:48 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,8 @@ void	handle_redi_multicmd_child(int *fd, t_cmd *my_cmd);
 void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd);
 
 // exec_multi.c
-pid_t	*init_exec_multi(t_working_info *info, int fd[], \
-											pid_t *child_pids, t_cmd *cur_cmd);
-int		handle_wait_status(pid_t *child_pids, t_working_info *info, pid_t pid);
+pid_t	*init_child_pids(t_working_info *info, int fd[]);
+int		handle_wait_status(pid_t *child_pids, t_working_info *info);
 pid_t	process_multi_cmd(t_working_info *info, int fd[]);
 
 // exec_path
@@ -70,7 +69,7 @@ int		set_absolute_path(t_cmd *cmd, t_working_info *info);
 int		set_exec_path(t_cmd *cmd, t_working_info *info);
 
 // exec_pipe
-void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd);
+void	init_pipe_before_next_cmd(int *fd);
 
 // exec_redirect_handler
 void	handle_redirect_input(t_token *input_redirection);
