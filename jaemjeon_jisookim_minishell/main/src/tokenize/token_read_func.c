@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:59:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 19:59:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:08:07 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,24 @@ t_token	*read_in_redirect(char *line, int *index)
 {
 	t_token	*new_token;
 
-	if ((new_token = (t_token *)ft_calloc(1, sizeof(t_token))) == NULL)
+	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
+	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in read_token");
 	if (line[*index] == '<' && line[*index + 1] == '<')
 	{
-		(*index) += 2;
+		(*index) += 1;
 		new_token->type |= (REDIRECT | HEREDOC);
 	}
 	else if (line[*index] == '>' && line[*index + 1] == '>')
 	{
-		(*index) += 2;
+		(*index) += 1;
 		new_token->type |= (REDIRECT | WRITE_APPEND);
 	}
 	else if (line[*index] == '<' && line[*index + 1] != '<')
-	{
-		(*index) += 1;
 		new_token->type |= (REDIRECT | READ);
-	}
 	else if (line[*index] == '>' && line[*index + 1] != '>')
-	{
-		(*index) += 1;
 		new_token->type |= (REDIRECT | WRITE);
-	}
+	(*index) += 1;
 	return (new_token);
 }
 
