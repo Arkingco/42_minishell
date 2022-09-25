@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:52:21 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:44:21 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:28:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ int	open_infile_check_next(t_token *redircet_token, int infile_fd)
 
 int	open_infile(t_cmd *cmd)
 {
-	t_token *redircet_token;
-	int	infile_fd;
+	t_token	*redircet_token;
+	int		infile_fd;
 
 	redircet_token = cmd->redirect_input;
 	if (redircet_token == NULL)
@@ -59,7 +59,7 @@ void	open_outfile_check_next(t_token *redircet_token, int outfile_fd, \
 
 int	open_outfile(t_cmd *cmd)
 {
-	t_token *redircet_token;
+	t_token	*redircet_token;
 	int		open_option;
 	int		outfile_fd;
 

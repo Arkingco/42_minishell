@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:31:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:29:25 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	get_cmd_type(t_cmd *cmd)
 
 char	**get_exec_argv(t_cmd *cmd)
 {
-	t_token *cmd_lst;
+	t_token	*cmd_lst;
 	char	**exec_argv;
 	int		index;
 

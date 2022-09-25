@@ -6,12 +6,11 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:43:49 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:44:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:28:09 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-
 
 int	check_and_get_infile(t_token *input)
 {

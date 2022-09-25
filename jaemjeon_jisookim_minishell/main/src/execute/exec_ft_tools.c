@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 10:39:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:28:59 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	ft_close(int fd)
 pid_t	ft_fork(void)
 {
 	pid_t	fork_return;
-	
+
 	fork_return = fork();
 	if (fork_return == -1)
 	{
@@ -44,7 +44,7 @@ pid_t	ft_fork(void)
 pid_t	ft_wait(int count, pid_t *child_pids)
 {
 	int	i;
-	int exit_status;
+	int	exit_status;
 
 	i = 0;
 	while (i < count)
@@ -58,7 +58,7 @@ pid_t	ft_wait(int count, pid_t *child_pids)
 int	ft_dup2(int fd1, int fd2)
 {
 	int	dup2_return;
-	
+
 	dup2_return = dup2(fd1, fd2);
 	if (dup2_return == -1)
 	{
@@ -66,7 +66,7 @@ int	ft_dup2(int fd1, int fd2)
 		ft_putstr_fd("/n", 2);
 		exit(1);
 	}
-	return (dup2_return); 
+	return (dup2_return);
 }
 
 int	ft_pipe(int *pipe_fd)

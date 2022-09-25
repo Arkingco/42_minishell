@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:32:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:27:41 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 	index = 0;
 	while (path_board[index] != NULL)
 	{
-		exec_path = ft_strjoin_triple((char *)path_board[index], "/",
-									cmd->simple_cmd->string_value);
+		exec_path = ft_strjoin_triple((char *)path_board[index], "/", \
+												cmd->simple_cmd->string_value);
 		if (stat(exec_path, &file_stat) == 0)
 		{
 			free(cmd->simple_cmd->string_value);

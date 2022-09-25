@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_redirect_handler.c                            :+:      :+:    :+:   */
+/*   exec_redi_handler.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:00:35 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:01:45 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:29:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 extern int	g_errno;
 
-
 void	handle_redirect_input(t_token *input_redirection)
 {
-	int		infile_fd;
+	int	infile_fd;
 
 	infile_fd = check_and_get_infile(input_redirection);
 	if (infile_fd != OPEN_FAIL)
