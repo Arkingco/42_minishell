@@ -6,15 +6,15 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:59:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 19:53:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:51:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token		*read_in_quote(char *line, int *index)
+t_token	*read_in_quote(char *line, int *index)
 {
-	t_token *new_token;
+	t_token	*new_token;
 	int		start_idx;
 
 	start_idx = *index;
@@ -35,7 +35,7 @@ t_token		*read_in_quote(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_redirect(char *line, int *index)
+t_token	*read_in_redirect(char *line, int *index)
 {
 	t_token	*new_token;
 
@@ -64,7 +64,7 @@ t_token		*read_in_redirect(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_pipe(char *line, int *index)
+t_token	*read_in_pipe(char *line, int *index)
 {
 	t_token	*new_token;
 
@@ -77,7 +77,7 @@ t_token		*read_in_pipe(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_expander(char *line, int *index)
+t_token	*read_in_expander(char *line, int *index)
 {
 	t_token	*new_token;
 	int		start_idx;
@@ -95,7 +95,7 @@ t_token		*read_in_expander(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_pureword(char *line, int *index)
+t_token	*read_in_pureword(char *line, int *index)
 {
 	t_token	*new_token;
 	int		start_idx;

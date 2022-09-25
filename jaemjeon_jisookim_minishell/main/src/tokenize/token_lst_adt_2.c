@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_adt_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 20:25:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:49:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_deltoken(t_token **lst)
 	}
 }
 
-t_token		*ft_token_lst_first(t_token *lst)
+t_token	*ft_token_lst_first(t_token *lst)
 {
 	if (lst == NULL)
 		return (NULL);
