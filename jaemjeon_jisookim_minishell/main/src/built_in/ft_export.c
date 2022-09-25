@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:30:00 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:11:08 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
-
-int		check_key_grammar(char *key)
+int	check_key_grammar(char *key)
 {
-	int	i;
-	char *temp;
+	int		i;
+	char	*temp;
 
 	temp = ft_strdup(key);
 	if (!ft_isalpha(temp[0]))
@@ -38,7 +36,6 @@ int		check_key_grammar(char *key)
 	temp = 0;
 	return (0);
 }
-
 
 int	print_export_env(t_envlst *env)
 {
@@ -92,10 +89,9 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 	return (0);
 }
 
-
 int	ft_export(t_cmd *cmd, t_working_info *info)
 {
-	t_token *cmd_argv;
+	t_token	*cmd_argv;
 	int		error_check_flag;
 
 	error_check_flag = 0;
@@ -107,7 +103,7 @@ int	ft_export(t_cmd *cmd, t_working_info *info)
 	if (error_check_flag)
 	{
 		process_errno(1, cmd_argv->string_value, IDENTIFIER_ERR);
-		return(1);
+		return (1);
 	}
 	return (0);
 }

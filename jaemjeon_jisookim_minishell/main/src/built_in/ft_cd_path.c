@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd_path.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:15:28 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:22:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 20:10:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	free_cur_path(t_working_info *info)
 {
 	if (info->cur_path != NULL)
-		{
-			free(info->cur_path);
-			info->cur_path = 0;
-		}
+	{
+		free(info->cur_path);
+		info->cur_path = 0;
+	}
 }
 
 void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
