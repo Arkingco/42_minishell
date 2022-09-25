@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:41:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:00:12 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ enum	e_envkey_to_handle
 # define ENVKEY_TO_HANDLE_COUNT T_ENVKEY_TO_HANDLE_COUNT
 
 // built_ins
-void	ft_echo(t_cmd *cmd, t_working_info *info);
-void	ft_cd(t_cmd *cmd, t_working_info *info);
-void	ft_pwd(t_cmd *cmd, t_working_info *info);
-void	ft_export(t_cmd *cmd, t_working_info *info);
-void	ft_unset(t_cmd *cmd, t_working_info *info);
-void	ft_env(t_cmd *cmd, t_working_info *info);
-void	ft_exit(t_cmd *cmd, t_working_info *info);
+int		ft_echo(t_cmd *cmd, t_working_info *info);
+int		ft_cd(t_cmd *cmd, t_working_info *info);
+int		ft_pwd(t_cmd *cmd, t_working_info *info);
+int		ft_export(t_cmd *cmd, t_working_info *info);
+int		ft_unset(t_cmd *cmd, t_working_info *info);
+int		ft_env(t_cmd *cmd, t_working_info *info);
+int		ft_exit(t_cmd *cmd, t_working_info *info);
 
 // built_in_utils.c
 int		ft_chdir(char *path);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:44:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:26:36 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:27:57 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ void		ft_addenv_str(t_envlst **env, char *str_envp);
 t_envlst	*ft_env_lst_first(t_envlst *lst);
 
 // env_list_adt_3.c
-int			ft_has_env(t_envlst *env, char *key);
-void		ft_setenv(t_envlst *env, char *key, char *value, int has_value);
 char		**ft_envlst_to_envp(t_envlst *env);
 char		*ft_envlst_to_string(t_envlst *lst);
 char		*ft_get_value_in_string(char *string);
 char		*ft_get_key_in_string(char *string);
+
+// env_list_adt_4.c
+int			ft_has_env(t_envlst *env, char *key);
+void		ft_setenv(t_envlst *env, char *key, char *value, int has_value);
 
 #endif

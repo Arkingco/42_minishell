@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:43:29 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 22:55:34 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:51:31 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 		if (cmd_type == NOT_BUILT_IN)
 			exec_executing(info);
 		else
-			//TODO: exit(process_built_in(info->cmd, info, cmd_type));
-			process_built_in(info->cmd, info, cmd_type);
+		{
+			g_errno = process_built_in(info->cmd, info, cmd_type);
+			exit(g_errno);
+		}
+		//TODO: exit(process_built_in(info->cmd, info, cmd_type));
 	}
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 04:44:52 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/14 04:52:01 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 10:37:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_chdir(char *path)
 
 	ret_chdir = chdir(path);
 	if (ret_chdir == FAIL)
-		perror("error in chdir.. : ");
+		perror("minishell: error in chdir() function : ");
 	return (ret_chdir);
 }
 
@@ -28,6 +28,6 @@ char	*ft_getcwd(char *buf, size_t buf_size)
 
 	cwd = getcwd(buf, buf_size);
 	if (cwd == NULL)
-		perror("error in getcwd.. : ");
+		perror("minishell: error in getcwd() function : ");
 	return (cwd);
 }

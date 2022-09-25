@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 22:52:40 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:25:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,11 @@
 extern int	g_errno;
 
 //TODO: 빌트-인의 종료 상태를 관리할 수 있어야 하므로, 빌트인들의 반환형을 void가 아닌 int로 바꿔야 함.
-void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
+int	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 {
-	void	(*built_in_func)(t_cmd *cmd, t_working_info*);
-	static void (*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
+	int	ret;
+	int	(*built_in_func)(t_cmd *cmd, t_working_info*);
+	static int(*built_in_func_board[BUILT_IN_COUNT])(t_cmd*, t_working_info*)\
 	= {
 		[T_ECHO] = ft_echo,
 		[T_CD] = ft_cd,
@@ -30,7 +31,9 @@ void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 	};
 
 	built_in_func = built_in_func_board[cmd_type];
-	built_in_func(cmd, info);
+	ret = built_in_func(cmd, info);
+	g_errno = ret;
+	return (ret);
 }
 
 void	process_not_built_in(t_working_info *info)

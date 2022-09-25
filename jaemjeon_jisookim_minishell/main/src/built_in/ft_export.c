@@ -6,13 +6,43 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:09:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 12:24:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	print_export_env(t_envlst *env)
+int		check_key_grammar(char *key)
+{
+	int	i;
+	char *temp;
+
+	temp = ft_strdup(key);
+	if (!(((temp[0] >= 'A') && (temp[0] <= 'Z')) \
+		|| ((temp[0] >= 'a') && (temp[0] <= 'z'))))
+			return (1);
+	i = 1;
+	while (temp[i])
+	{
+		if (temp[i] == '_' || ((temp[i] >= 'A') && (temp[i] <= 'Z')) \
+			|| ((temp[i] >= 'a') && (temp[i] <= 'z')) \
+			|| ((temp[i] >= '0') && (temp[i] <= '9')))
+		i++;
+		else
+		{
+			printf("temp[i] : %c\n", temp[i]);
+			free(temp);
+			temp = 0;
+			return (1);
+		}
+	}
+	free(temp);
+	temp = 0;
+	return (0);
+}
+
+
+int	print_export_env(t_envlst *env)
 {
 	while (env != NULL)
 	{
@@ -24,6 +54,7 @@ void	print_export_env(t_envlst *env)
 			printf("\n");
 		env = env->next;
 	}
+	return (0);
 }
 
 // void	check_input_error_in_env(char **envkey, char **envvalue)
@@ -31,19 +62,25 @@ void	print_export_env(t_envlst *env)
 // 	static char	*to_check_envkey[ENVKEY_TO_HANDLE_COUNT] = {
 // 		[T_SHLVL] = "SHLVL"
 // 	};
-// 	int	index;
-
+// 	// int	index;
 // 	// index = 0;
 // }
 
-void	add_new_envs(t_token *cmd_argv, t_envlst *env)
+int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 {
 	char	*envkey_to_input;
 	char	*envvalue_to_input;
+	int		err_flag;
 
+	err_flag = 0;
 	while (cmd_argv != NULL)
 	{
 		envkey_to_input = ft_get_key_in_string(cmd_argv->string_value);
+		if (check_key_grammar(envkey_to_input))
+		{	
+			process_errno(1, "export", IDENTIFIER_ERR);
+			return (1);
+		}
 		envvalue_to_input = ft_get_value_in_string(cmd_argv->string_value);
 		// check_input_error_in_env(&envkey_to_input, &envvalue_to_input);
 		if (envvalue_to_input == NULL)
@@ -59,15 +96,26 @@ void	add_new_envs(t_token *cmd_argv, t_envlst *env)
 		}
 		cmd_argv = cmd_argv->next;
 	}
+	return (0);
 }
 
-void	ft_export(t_cmd *cmd, t_working_info *info)
+int	ft_export(t_cmd *cmd, t_working_info *info)
 {
 	t_token *cmd_argv;
+	int		error_check_flag;
+	int		errno_ret;
 
+	error_check_flag = 0;
 	cmd_argv = cmd->simple_cmd->next;
 	if (cmd_argv == NULL)
-		print_export_env(info->env);
+		error_check_flag = print_export_env(info->env);
 	else
-		add_new_envs(cmd_argv, info->env);
+		error_check_flag = add_new_envs(cmd_argv, info->env);
+	if (error_check_flag)
+	{
+		errno_ret = errno;
+		ft_putendl_fd(strerror(errno_ret), 2);
+		return(errno_ret);
+	}
+	return (0);
 }

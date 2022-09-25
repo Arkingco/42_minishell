@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 01:17:09 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 22:49:04 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 10:39:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ int	ft_close(int fd)
 	if (close_return != 0)
 	{
 		errno_tmp = errno;
-		dprintf(STDERR_FILENO, "%s fd: %d\n", __FUNCTION__, fd);
-		*((char*)(long)(fd ^ fd)) = '\0';
 		ft_putendl_fd(strerror(errno_tmp), 2);
 		exit(errno_tmp);
 	}
@@ -37,7 +35,7 @@ pid_t	ft_fork(void)
 	if (fork_return == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd("/n", 2);
 		exit(1);
 	}
 	return (fork_return);
@@ -65,7 +63,7 @@ int	ft_dup2(int fd1, int fd2)
 	if (dup2_return == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd("/n", 2);
 		exit(1);
 	}
 	return (dup2_return); 
@@ -79,7 +77,7 @@ int	ft_pipe(int *pipe_fd)
 	if (pipe_return != 0)
 	{
 		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		ft_putstr_fd("/n", 2);
 		exit(1);
 	}
 	return (pipe_return);

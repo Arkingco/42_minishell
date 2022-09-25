@@ -6,13 +6,13 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:56 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:09:35 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:44:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_pwd(t_cmd *cmd, t_working_info *info)
+int	ft_pwd(t_cmd *cmd, t_working_info *info)
 {
 	char	*cur_pwd;
 
@@ -28,5 +28,11 @@ void	ft_pwd(t_cmd *cmd, t_working_info *info)
 			free(cur_pwd);
 			cur_pwd = 0;
 		}
+		else
+		{
+			ft_putstr_fd("minishell: annot access directories:", 2);
+			ft_putstr_fd("No such file or directory\n", 2);
+		}
 	}
+	return (0);
 }

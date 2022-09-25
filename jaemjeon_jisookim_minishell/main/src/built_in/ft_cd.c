@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:29:13 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:15:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 	}
 	else
 	{
-		error_message = ft_strjoin("cd : ", path);
+		error_message = ft_strjoin("minishell: cd: ", path);
 		perror(error_message);
 		free(error_message);
 		error_message = 0;
@@ -74,14 +74,15 @@ int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 	return (ret_chdir);
 }
 
-void	ft_cd(t_cmd *cmd, t_working_info *info)
+int	ft_cd(t_cmd *cmd, t_working_info *info)
 {
 	char	*togo_path;
 
 	if (cmd->simple_cmd->next != NULL)
 	{
 		togo_path = cmd->simple_cmd->next->string_value;
-		processing_cd(cmd, info, togo_path);
+		if (processing_cd(cmd, info, togo_path) == FAIL)
+			return (1);
 	}
 	else
 	{
@@ -92,8 +93,9 @@ void	ft_cd(t_cmd *cmd, t_working_info *info)
 		}
 		else
 		{
-			// errno를 세팅해줘야함
-			ft_putendl_fd("cd : HOME not set", 2);
+			ft_putendl_fd("minishell: cd: HOME not set", 2);
+			return (errno);
 		}
 	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:14:27 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 10:43:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	main_loop(t_working_info *info)
 
 	while (1)
 	{
-		line = readline("minishell: ");
+		line = readline("minishell-0.1$ ");
 		add_history(line);
 		if (line != NULL)
 		{

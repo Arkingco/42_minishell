@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:05:08 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 10:46:02 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 # define BEFORE_INPUT_FD	2
 
 // exec_built_in
-void	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type);
+int		process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type);
 void	process_not_built_in(t_working_info *info);
 
 // exec_do

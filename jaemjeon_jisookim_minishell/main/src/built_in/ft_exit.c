@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:08:55 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 11:21:39 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ int	is_alnum_string(char *string)
 	return (TRUE);
 }
 
-void	ft_exit(t_cmd *cmd, t_working_info *info)
+int	ft_exit(t_cmd *cmd, t_working_info *info)
 {
 	char	*arg_string;
 
-	(void)&info;
+	(void)cmd;
 	ft_putendl_fd("exit", 2);
 	if (cmd->simple_cmd->next == NULL)
 		exit(0);
 	if (cmd->simple_cmd->next->next != NULL)
+	{
 		process_errno(1, "exit:", MANY_ARG_ERR);
+		return (1);
+	}
 	else
 	{
 		arg_string = cmd->simple_cmd->next->string_value;
@@ -44,4 +47,5 @@ void	ft_exit(t_cmd *cmd, t_working_info *info)
 		else
 			exit(ft_atoi(arg_string));
 	}
+	return (0);
 }
