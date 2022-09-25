@@ -3,44 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 16:45:35 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:25:48 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	change_info_path(t_cmd *cmd, t_working_info *info, char *path)
-{
-	char	*tmp_path;
-
-	(void)&cmd;
-	tmp_path = getcwd(NULL, 0);
-	if (tmp_path != NULL)
-	{
-		if (info->cur_path != NULL)
-		{
-			free(info->cur_path);
-			info->cur_path = 0;
-		}
-		info->cur_path = tmp_path;
-		if (ft_has_env(info->env, "PWD"))
-			ft_setenv(info->env, "OLDPWD", ft_getenv(info->env, "PWD"), TRUE);
-		ft_setenv(info->env, "PWD", tmp_path, TRUE);
-	}
-	else
-	{
-		tmp_path = ft_strjoin_triple(info->cur_path, "/", path);
-		if (info->cur_path != NULL)
-		{
-			free(info->cur_path);
-			info->cur_path = 0;
-		}
-		info->cur_path = tmp_path;
-	}
-}
+void	check_home_env(t_cmd *cmd, t_working_info *info, char *togo_path)
+{}
 
 int	is_exist_dir(char *dir_path)
 {

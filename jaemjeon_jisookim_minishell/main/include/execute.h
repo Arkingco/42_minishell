@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 10:46:02 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:45:42 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,18 @@
 int		process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type);
 void	process_not_built_in(t_working_info *info);
 
-// exec_do
-void	single_cmd_child_process(t_working_info *info);
+// exec_d
 void	exec_executing(t_working_info *info);
 int		ft_wait_childs(pid_t *child_pids, int cmd_count);
 
 // exec_file
 int		open_infile(t_cmd *cmd);
+int		open_infile_check_next(t_token *redircet_token, int infile_fd);
 int		open_outfile(t_cmd *cmd);
+void	open_outfile_check_next(t_token *redircet_token, int outfile_fd, \
+															int open_option)
+
+// exec_file_check
 int		check_and_get_infile(t_token *input);
 int		check_and_get_outfile(t_token *output);
 

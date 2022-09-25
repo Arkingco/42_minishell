@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:01:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:33:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ int	printf_fd(int fd, const char *format, ...);
 void	ft_error_exit(int exit_status, char *message);
 
 // ifs.c
-int	ft_has_ifs(char *string);
-int	ft_is_ifs(const char *letter);
-int	ft_skip_ifs1(char **string_pointer);
+int		ft_has_ifs(char *string);
+int		ft_is_ifs(const char *letter);
+int		ft_skip_ifs1(char **string_pointer);
 void	ft_skip_ifs2(char *line, int *index);
 
 // signal.c
@@ -37,6 +37,6 @@ void	process_errno(int errno_num, char *string, int type);
 
 //free.c
 void	ft_free_double(char **board);
-
+void	free_two_strings(char *s1, char *s2);
 
 #endif

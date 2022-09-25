@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:36:49 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 22:36:07 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:33:11 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,12 @@ void	ft_free_double(char **board)
 	}
 	free(board);
 	board = 0;
+}
+
+void	free_two_strings(char *s1, char *s2)
+{
+	free(s1);
+	s1 = 0;
+	free(s2);
+	s2 = 0;
 }

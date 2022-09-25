@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 16:00:57 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:30:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+
 
 int		check_key_grammar(char *key)
 {
@@ -53,6 +55,17 @@ int	print_export_env(t_envlst *env)
 	return (0);
 }
 
+void	free_env_key_and_value(char *envkey_to_input, char *envvalue_to_input)
+{
+	free(envkey_to_input);
+	envkey_to_input = 0;
+	if (envvalue_to_input != NULL)
+	{
+		free(envvalue_to_input);
+		envkey_to_input = 0;
+	}
+}
+
 int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 {
 	char	*envkey_to_input;
@@ -73,17 +86,12 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 			ft_setenv(env, envkey_to_input, "", FALSE);
 		else
 			ft_setenv(env, envkey_to_input, envvalue_to_input, TRUE);
-		free(envkey_to_input);
-		envkey_to_input = 0;
-		if (envvalue_to_input != NULL)
-		{
-			free(envvalue_to_input);
-			envkey_to_input = 0;
-		}
+		free_env_key_and_value(envkey_to_input, envvalue_to_input);
 		cmd_argv = cmd_argv->next;
 	}
 	return (0);
 }
+
 
 int	ft_export(t_cmd *cmd, t_working_info *info)
 {

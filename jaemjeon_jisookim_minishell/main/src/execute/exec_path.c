@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_path.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:43:12 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 22:51:13 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:47:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,12 @@ int	set_absolute_path(t_cmd *cmd, t_working_info *info)
 		{
 			free(cmd->simple_cmd->string_value);
 			cmd->simple_cmd->string_value = exec_path;
-			// ft_free_double((char **)path_board);
 			return (TRUE);
 		}
 		free(exec_path);
 		exec_path = 0;
 		index++;
 	}
-	// ft_free_double((char **)path_board);
 	return (FALSE);
 }
 

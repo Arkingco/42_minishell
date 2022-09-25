@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_3.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/17 03:24:06 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 16:05:09 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:35:43 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ char	*ft_get_value_in_string(char *string)
 	}
 }
 
-char	*ft_get_key_in_string(char *string) // TODO : ft_setenv 에서 error 반환할지 여기에서 반환할지 고민!
+char	*ft_get_key_in_string(char *string)
 {
 	char	*delimiter_point;
 

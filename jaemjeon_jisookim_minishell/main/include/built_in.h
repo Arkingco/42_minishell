@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 11:00:12 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:23:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,10 @@ enum	e_envkey_to_handle
 };
 
 # define ENVKEY_TO_HANDLE_COUNT T_ENVKEY_TO_HANDLE_COUNT
+
+// cd_path.c
+void	free_cur_path(t_working_info *info);
+void	change_info_path(t_cmd *cmd, t_working_info *info, char *path);
 
 // built_ins
 int		ft_echo(t_cmd *cmd, t_working_info *info);

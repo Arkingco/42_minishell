@@ -54,7 +54,7 @@ SRC_DEBUG		:=	$(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_built_in.c exec_do.c exec_file.c exec_ft_tools.c \
 					exec_path.c exec_pipe.c exec_redirect.c exec_utils.c \
-					execute.c
+					execute.c exec_file_check.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 SRC_HEREDOC		:= heredoc.c heredoc_util.c heredoc_do.c
@@ -64,7 +64,7 @@ SRC_PRINTF		:= ft_printf.c ft_printf_mode.c ft_printf_utils.c
 SRC_PRINTF		:= $(addprefix $(DIR_PRINTF)/, $(SRC_PRINTF))
 
 SRC_BUILT_IN	:=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c \
-					ft_unset.c built_in_utils.c
+					ft_unset.c built_in_utils.c ft_path.c
 SRC_BUILT_IN	:=	$(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \

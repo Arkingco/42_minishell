@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 19:55:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:49:01 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,11 @@ void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
 		dup2(io_fd[STDOUT_FILENO], STDOUT_FILENO);
 		close(io_fd[STDOUT_FILENO]);
 	}
+}
+
+void	handle_redirect_fd(int *io_fd)
+{
+	io_fd[]
 }
 
 int	process_redirect(t_cmd *cmd, int *io_fd)
