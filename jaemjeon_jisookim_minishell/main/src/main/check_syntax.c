@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:41:58 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 15:28:50 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:52:29 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+
+int	do_check_syntax_quote(char *line)
+{
+	if (check_syntax_quote(line) == FALSE)
+	{
+		process_errno(258, "QUOTE", SYNTAX_ERR);
+		free(line);
+		line = 0;
+		return (1);
+	}
+	return (0);
+}
 
 int	check_syntax_quote(char *line)
 {

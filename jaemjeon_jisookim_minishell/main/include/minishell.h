@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:34:17 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:52:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,9 @@ void	argument_error_check(int argc);
 int		is_error_token(t_token *suspect_token);
 
 // check_syntax.c
+int		do_check_syntax_quote(char *line);
 int		check_syntax_quote(char *line);
+void	check_redirection_grammar(t_token *lst_token);
 int		check_syntax_grammar(t_token *lst_token);
 
 // init.c

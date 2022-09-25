@@ -6,17 +6,32 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:40:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 20:59:06 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:48:58 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-
 void	argument_error_check(int argc)
 {
 	if (argc != 1)
 		ft_error_exit(1, "minishell: too many arguments");
+}
+
+int	check_err_token_prev(t_token *suspect_token)
+{
+	if (suspect_token->prev->type & REDIRECT)
+	{
+		if (!(suspect_token->type & WORD))
+			return (TRUE);
+		return (FALSE);
+	}
+	else if (suspect_token->prev->type & PIPE)
+	{
+		if (suspect_token->type & PIPE)
+			return (TRUE);
+		return (FALSE);
+	}
 }
 
 int	is_error_token(t_token *suspect_token)
@@ -39,54 +54,6 @@ int	is_error_token(t_token *suspect_token)
 			return (TRUE);
 	}
 	else
-	{
-		if (suspect_token->prev->type & REDIRECT)
-		{
-			if (!(suspect_token->type & WORD))
-				return (TRUE);
-			return (FALSE);
-		}
-		else if (suspect_token->prev->type & PIPE)
-		{
-			if (suspect_token->type & PIPE)
-				return (TRUE);
-			return (FALSE);
-		}
-	}
+		return(check_err_token_prev(suspect_token));
 	return (FALSE);
 }
-
-// int	is_error_token(t_token *suspect_token)
-// {
-// 	if (suspect_token->next == NULL)
-// 	{
-// 		if (suspect_token->type & REDIRECT)
-// 			return (TRUE);
-// 		else if (suspect_token->type & PIPE)
-// 			return (TRUE);
-// 		else
-// 			return (FALSE);
-// 	}
-// 	if (suspect_token->prev == NULL)
-// 	{
-// 		if (suspect_token->type & PIPE)
-// 			return (TRUE);
-// 		else
-// 			return (FALSE);
-// 	}
-// 	else
-// 	{
-// 		if (suspect_token->prev->type & REDIRECT)
-// 		{
-// 			if (!(suspect_token->type & WORD))
-// 				return (TRUE);
-// 		}
-// 		else if (suspect_token->prev->type & PIPE)
-// 		{
-// 			if (suspect_token->type & PIPE)
-// 				return (TRUE);
-// 		}
-// 	}
-// 	return (FALSE);
-// }
-

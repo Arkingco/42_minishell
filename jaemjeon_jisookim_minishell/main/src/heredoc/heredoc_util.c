@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 21:13:57 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:46:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,15 @@ int	has_heredoc(t_working_info *info)
 	return (FALSE);
 }
 
+void	filename_join_free(char *s1, char *s2, char *s3, int four_byte)
+{
+	s1 = ft_itoa(four_byte);
+	s2 = ft_itoa(four_byte + 1);
+	s3 = ft_strjoin(s1, s2);
+	free(s1);
+	free(s2);
+}
+
 char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 {
 	char	*tmp_filename;
@@ -39,17 +48,9 @@ char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 	int		four_byte;
 
 	four_byte = (int)p1_8byte;
-	tmp_string[0] = ft_itoa(four_byte);
-	tmp_string[1] = ft_itoa(four_byte + 1);
-	tmp_string[2] = ft_strjoin(tmp_string[0], tmp_string[1]);
-	free(tmp_string[0]);
-	free(tmp_string[1]);
+	filename_join_free(tmp_string[0], tmp_string[1], tmp_string[2], four_byte);
 	four_byte = (int)p2_8byte;
-	tmp_string[0] = ft_itoa(four_byte);
-	tmp_string[1] = ft_itoa(four_byte + 1);
-	tmp_string[3] = ft_strjoin(tmp_string[0], tmp_string[1]);
-	free(tmp_string[0]);
-	free(tmp_string[1]);
+	filename_join_free(tmp_string[0], tmp_string[1], tmp_string[3], four_byte);
 	tmp_filename = ft_strjoin(tmp_string[2], tmp_string[3]);
 	free(tmp_string[2]);
 	free(tmp_string[3]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 16:03:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:49:09 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,6 @@ void	init_cur_path(t_working_info *info)
 		perror("initiating minishell.. error in getcwd..");
 	else
 		ft_setenv(info->env, "PWD", info->cur_path, TRUE);
-	// info->dp = opendir(info->cur_path);
-	// if (info->dp == NULL)
-	// 	perror("initiating minishell.. error in opendir..");
 	ft_delenv(&info->env, "OLDPWD");
 }
 
