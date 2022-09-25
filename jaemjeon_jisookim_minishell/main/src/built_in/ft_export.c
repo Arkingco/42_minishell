@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 20:11:08 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:59:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,25 +15,18 @@
 int	check_key_grammar(char *key)
 {
 	int		i;
-	char	*temp;
 
-	temp = ft_strdup(key);
-	if (!ft_isalpha(temp[0]))
+	i = 0;
+	if (key[i] != '_' && !ft_isalpha(key[0]))
 		return (1);
 	i = 1;
-	while (temp[i])
+	while (key[i])
 	{
-		if (temp[i] == '_' || ft_isalnum(temp[i]))
+		if (key[i] == '_' || ft_isalnum(key[i]))
 			i++;
 		else
-		{
-			free(temp);
-			temp = 0;
 			return (1);
-		}
 	}
-	free(temp);
-	temp = 0;
 	return (0);
 }
 

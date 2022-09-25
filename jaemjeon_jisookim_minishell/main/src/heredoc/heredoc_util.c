@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 21:44:48 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:20:34 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 	free(tmp_string[2]);
 	free(tmp_string[3]);
 	return_val = ft_strjoin("/tmp/minishell", tmp_filename);
-	free(tmp_filename);
+	if (!tmp_filename)
+		free(tmp_filename);
 	return (return_val);
 }
 
