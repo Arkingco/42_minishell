@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:56:53 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 12:25:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 14:39:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	process_built_in(t_cmd *cmd, t_working_info *info, int cmd_type)
 		[T_ENV] = ft_env,
 		[T_EXIT] = ft_exit
 	};
-
 	built_in_func = built_in_func_board[cmd_type];
 	ret = built_in_func(cmd, info);
 	g_errno = ret;

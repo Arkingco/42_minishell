@@ -36,7 +36,7 @@ SRC_TOKENIZE	:=	token_free.c token_lst_adt_1.c token_lst_adt_2.c \
 SRC_TOKENIZE	:=	$(addprefix $(DIR_TOKENIZE)/, $(SRC_TOKENIZE))
 
 SRC_UTILS		:=	ifs.c error_exit.c signal.c terminal.c setting.c \
-					free.c ft_utils.c
+					free.c
 SRC_UTILS		:=	$(addprefix $(DIR_UTILS)/, $(SRC_UTILS))
 
 SRC_MAIN		:= main.c init.c check_error.c check_syntax.c
@@ -53,8 +53,8 @@ SRC_DEBUG		:=	print_lst_token.c print_lst_cmd.c
 SRC_DEBUG		:=	$(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
 
 SRC_EXECUTE		:=	exec_built_in.c exec_do.c exec_file.c exec_ft_tools.c \
-					exec_path_expand.c exec_path.c exec_pipe.c exec_redirect.c \
-					exec_utils.c execute.c
+					exec_path.c exec_pipe.c exec_redirect.c exec_utils.c \
+					execute.c
 SRC_EXECUTE		:=	$(addprefix $(DIR_EXECUTE)/, $(SRC_EXECUTE))
 
 SRC_HEREDOC		:= heredoc.c heredoc_util.c heredoc_do.c
