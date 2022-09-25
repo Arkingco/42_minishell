@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 17:45:42 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:29:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int		open_infile(t_cmd *cmd);
 int		open_infile_check_next(t_token *redircet_token, int infile_fd);
 int		open_outfile(t_cmd *cmd);
 void	open_outfile_check_next(t_token *redircet_token, int outfile_fd, \
-															int open_option)
+															int open_option);
 
 // exec_file_check
 int		check_and_get_infile(t_token *input);
@@ -52,9 +52,15 @@ pid_t	ft_wait(int count, pid_t *child_pids);
 int		ft_dup2(int fd1, int fd2);
 int		ft_pipe(int *pipe_fd);
 
-// exec_path_expand
-// void	expand_homepath(char **cmd_string, t_working_info *info);
-// int		expand_homepath_and_check_is_there(t_cmd *cmd, t_working_info *info);
+// exec_multi_child.c
+void	handle_redi_multicmd_child(int *fd, t_cmd *my_cmd);
+void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd);
+
+// exec_multi.c
+pid_t	*init_exec_multi(t_working_info *info, int fd[], \
+											pid_t *child_pids, t_cmd *cur_cmd);
+int		handle_wait_status(pid_t *child_pids, t_working_info *info, pid_t pid);
+pid_t	process_multi_cmd(t_working_info *info, int fd[]);
 
 // exec_path
 char	**get_path_board(t_envlst *env);
@@ -66,11 +72,14 @@ int		set_exec_path(t_cmd *cmd, t_working_info *info);
 // exec_pipe
 void	init_pipe_before_next_cmd(t_cmd *cur_cmd, int *fd);
 
-// exec_redirect
+// exec_redirect_handler
 void	handle_redirect_input(t_token *input_redirection);
 void	handle_redirect_output(t_token *output_redirection);
 void	handle_redirection_multi_cmd(t_cmd *cmd);
-void	restore_redirect_fd(t_cmd *cmd, int *io_fd);
+
+// exec_redirect
+void	restore_redirect_fds(t_cmd *cmd, int *io_fd);
+void	dup2_io_fd(int *io_fd);
 int		process_redirect(t_cmd *cmd, int *io_fd);
 
 // exec_utils
@@ -80,8 +89,6 @@ void	close_useless_fds(int *fd);
 
 // execute
 void	process_single_cmd(t_working_info *info);
-void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd);
-pid_t	process_multi_cmd(t_working_info *info);
 void	execute(t_working_info *info);
 
 #endif

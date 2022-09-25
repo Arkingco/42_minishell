@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:02:03 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:42:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:30:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,16 @@
 
 extern int	g_errno;
 
-/*
-$를 만났을때 확장하여 그 확장된 문자열을 반환해 주는 함수.
-*/
 char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 {
 	char	*cpy_start;
 	char	*cpy_end;
 	char	*expanded_string;
 
-	cpy_start = *context; // 현재 읽고 있는 토큰의 문자열 문맥을 받아옴
+	cpy_start = *context;
 	cpy_end = cpy_start + 1;
-	if (__is_to_remove_dollar(token, cpy_end)) //  지워야하는 $인지 판단
-		expanded_string = ft_strdup(""); // 지워야하는거면 $를 빈문자열 반환
+	if (__is_to_remove_dollar(token, cpy_end))
+		expanded_string = ft_strdup("");
 	else if (*cpy_end == '?')
 	{
 		expanded_string = ft_itoa(g_errno);
@@ -34,10 +31,10 @@ char	*expand_env_withdollar(t_token *token, t_envlst *env, char **context)
 	}
 	else
 	{
-		expanded_string = __get_envvalue(cpy_start, &cpy_end, env); // 확장하여 반환
-		token->type |= EXPANDED; // 확장된 토큰이라는 flag설정
+		expanded_string = __get_envvalue(cpy_start, &cpy_end, env);
+		token->type |= EXPANDED;
 	}
-	*context = cpy_end; // 다음 $를 찾아 가야하니까 지금까지 읽은곳 다음 칸으로 문맥변경
+	*context = cpy_end;
 	return (expanded_string);
 }
 

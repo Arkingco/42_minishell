@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:49:01 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:02:06 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,39 +14,7 @@
 
 extern int	g_errno;
 
-void	handle_redirect_input(t_token *input_redirection)
-{
-	int		infile_fd;
-
-	infile_fd = check_and_get_infile(input_redirection);
-	if (infile_fd != OPEN_FAIL)
-	{
-		ft_dup2(infile_fd, 0);
-		ft_close(infile_fd);
-	}
-}
-
-void	handle_redirect_output(t_token *output_redirection)
-{
-	int	outfile_fd;
-
-	outfile_fd = check_and_get_outfile(output_redirection);
-	if (outfile_fd != OPEN_FAIL)
-	{
-		ft_dup2(outfile_fd, 1);
-		ft_close(outfile_fd);
-	}
-}
-
-void	handle_redirection_multi_cmd(t_cmd *cmd)
-{
-	if (cmd->redirect_input)
-		handle_redirect_input(cmd->redirect_input);
-	if (cmd->redirect_output)
-		handle_redirect_output(cmd->redirect_output);
-}
-
-void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
+void	restore_redirect_fds(t_cmd *cmd, int *io_fd)
 {
 	if (cmd->redirect_input != NULL && io_fd[STDIN_FILENO] != OPEN_FAIL)
 	{
@@ -60,9 +28,20 @@ void	restore_redirect_fd(t_cmd *cmd, int *io_fd)
 	}
 }
 
-void	handle_redirect_fd(int *io_fd)
+void	dup2_io_fd(int *io_fd)
 {
-	io_fd[]
+	if (io_fd[INPUT_REDI] != 0)
+	{
+		io_fd[STDIN_FILENO] = dup(STDIN_FILENO);
+		dup2(io_fd[INPUT_REDI], STDIN_FILENO);
+		close(io_fd[INPUT_REDI]);
+	}
+	if (io_fd[OUTPUT_REDI] != 0)
+	{
+		io_fd[STDOUT_FILENO] = dup(STDOUT_FILENO);
+		dup2(io_fd[OUTPUT_REDI], STDOUT_FILENO);
+		close(io_fd[OUTPUT_REDI]);
+	}
 }
 
 int	process_redirect(t_cmd *cmd, int *io_fd)
@@ -79,17 +58,6 @@ int	process_redirect(t_cmd *cmd, int *io_fd)
 			close(io_fd[INPUT_REDI]);
 		return (OPEN_FAIL);
 	}
-	if (io_fd[INPUT_REDI] != 0)
-	{
-		io_fd[STDIN_FILENO] = dup(STDIN_FILENO);
-		dup2(io_fd[INPUT_REDI], STDIN_FILENO);
-		close(io_fd[INPUT_REDI]);
-	}
-	if (io_fd[OUTPUT_REDI] != 0)
-	{
-		io_fd[STDOUT_FILENO] = dup(STDOUT_FILENO);
-		dup2(io_fd[OUTPUT_REDI], STDOUT_FILENO);
-		close(io_fd[OUTPUT_REDI]);
-	}
+	dup2_io_fds(io_fd);
 	return (TRUE);
 }
