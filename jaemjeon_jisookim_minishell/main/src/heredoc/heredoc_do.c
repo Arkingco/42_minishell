@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:58:13 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/24 21:12:59 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:40:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,30 @@ char	*heredoc_expand(t_working_info *info, char *line)
 	return (tmp_token_to_expand.string_value);
 }
 
+void	heredoc_check_dilimiter(t_working_info *info, t_token *redirec_token, \
+															char *line, int fd)
+{
+	char	*expanded_line;
+
+	if (!(redirec_token->type & QUOTE))
+	{
+		expanded_line = heredoc_expand(info, line);
+		ft_putendl_fd(expanded_line, fd);
+		free(expanded_line);
+		expanded_line = 0;
+	}
+	else
+	{
+		ft_putendl_fd(line, fd);
+		free(line);
+		line = 0;
+	}
+}
+
 void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 {
 	const char	*delimiter = redirec_token->string_value;
 	char		*line;
-	char		*expanded_line;
 
 	while (1)
 	{
@@ -43,19 +62,7 @@ void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 		}
 		else
 		{
-			if (!(redirec_token->type & QUOTE))
-			{
-				expanded_line = heredoc_expand(info, line);
-				ft_putendl_fd(expanded_line, fd);
-				free(expanded_line);
-				expanded_line = 0;
-			}
-			else
-			{
-				ft_putendl_fd(line, fd);
-				free(line);
-				line = 0;
-			}
+			heredoc_check_dilimiter(info, redirec_token, line, fd);
 		}
 	}
 }
