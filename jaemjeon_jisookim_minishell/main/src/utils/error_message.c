@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:44:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:33:35 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 18:48:33 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ void	perror_no_header(int type)
 {
 	if (type == CUR_PATH_ERR)
 		print_error_message(FALSE,
-							  "pwd: error retrieving current directory", 0);
+			"pwd: error retrieving current directory", 0);
 	else if (type == GET_CWD_ERR)
 		print_error_message(FALSE,
-							  "getcwd: cannot access parent directories: \
+			"getcwd: cannot access parent directories: \
 No such file or directory", 0);
 	else if (type == CHANGE_DIR_ERR)
 		print_error_message(FALSE,
-							  "chdir: error retrieving current directory", 0);
+			"chdir: error retrieving current directory", 0);
 }
 
 void	process_errno(int errno_num, char *string, int type)
