@@ -6,15 +6,12 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 04:04:48 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 17:33:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:56:13 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
-
-// ft_printf.c
-int	printf_fd(int fd, const char *format, ...);
 
 // error_exit.c
 void	ft_error_exit(int exit_status, char *message);

@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:25:48 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/25 17:55:46 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	is_exist_dir(char *dir_path)
 int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
 {
 	int		ret_chdir;
-	char	*error_message;
 
 	ret_chdir = 0;
 	if (is_exist_dir(path))
