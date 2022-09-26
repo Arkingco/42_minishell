@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:44:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 10:24:52 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:17:42 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	perror_with_header(char *string, int type)
 		print_error_message(TRUE, string, ": too many arguments");
 	else if (type == CMD_NOT_FOUND_ERR)
 		print_error_message(TRUE, string, ": command not found");
-	else if (type == PERMMISION_DENIED_ERR)
+	else if (type == PERMMISION_ERR)
 		perror_permission(string);
 	else if (type == NOT_NUM_ARG_ERR)
 		print_error_message(TRUE, string, ": numeric argument required");

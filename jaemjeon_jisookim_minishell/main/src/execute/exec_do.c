@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 22:49:41 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:17:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	exec_exit(t_working_info *info)
 	if (errno == 13)
 	{
 		process_errno(errno, info->cmd->simple_cmd->string_value, \
-			PERMMISION_DENIED_ERR);
+			PERMMISION_ERR);
 		exit(126);
 	}
 	if (errno == 2)

@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 21:49:49 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:24:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ int		open_infile_check_next(t_token *redircet_token, int *infile_fd);
 int		open_outfile(t_cmd *cmd);
 int		open_outfile_check_next(t_token *redircet_token, int *outfile_fd, \
 															int open_option);
+int	check_and_get_infile_noexit(t_token *output);
+int	check_and_get_outfile_noexit(t_token *output);
 
 // exec_file_check
 int		check_and_get_infile(t_token *input);

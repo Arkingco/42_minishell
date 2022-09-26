@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirect.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:50:57 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 13:01:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:15:45 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ void	dup2_io_fd(int *io_fd)
 int	process_redirect(t_cmd *cmd, int *io_fd)
 {
 	if (cmd->redirect_input != NULL)
-		io_fd[INPUT_REDI] = open_infile(cmd);
+		io_fd[INPUT_REDI] = check_and_get_infile_noexit(cmd->redirect_input);
 	if (io_fd[INPUT_REDI] == OPEN_FAIL)
 		return (OPEN_FAIL);
 	if (cmd->redirect_output != NULL)
-		io_fd[OUTPUT_REDI] = open_outfile(cmd);
+		io_fd[OUTPUT_REDI] = check_and_get_outfile_noexit(cmd->redirect_output);
 	if (io_fd[OUTPUT_REDI] == OPEN_FAIL)
 	{
 		if (io_fd[INPUT_REDI] != OPEN_FAIL && io_fd[INPUT_REDI] != 0)

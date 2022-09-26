@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 10:14:44 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:20:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 # include "structs/t_env.h"
 # include "structs/t_token.h"
 # include "structs/t_working_dir.h"
-// # include "sigset.h"
 
 # define TRUE			1
 # define FALSE			0
@@ -98,7 +97,7 @@ enum e_error
 	GET_CWD_ERR,
 	CHANGE_DIR_ERR,
 	HOME_SET_ERR,
-	PERMMISION_DENIED_ERR
+	PERMMISION_ERR
 };
 
 // check_error.c
