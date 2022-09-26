@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 23:32:16 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 21:49:49 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int		ft_wait_childs(pid_t *child_pids, int cmd_count);
 
 // exec_file
 int		open_infile(t_cmd *cmd);
-int		open_infile_check_next(t_token *redircet_token, int infile_fd);
+int		open_infile_check_next(t_token *redircet_token, int *infile_fd);
 int		open_outfile(t_cmd *cmd);
-void	open_outfile_check_next(t_token *redircet_token, int outfile_fd, \
+int		open_outfile_check_next(t_token *redircet_token, int *outfile_fd, \
 															int open_option);
 
 // exec_file_check

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_do.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 12:39:17 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:13:46 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	exec_executing(t_working_info *info)
 	char		**exec_argv;
 	char		**exec_env;
 
-	exec_remove_empty(&(info->cmd));
+	// exec_remove_empty(&(info->cmd));
 	set_exec_path(info->cmd, info);
 	exec_argv = get_exec_argv(info->cmd);
 	exec_env = ft_envlst_to_envp(info->env);
