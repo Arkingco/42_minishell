@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_do.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:58:13 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:40:19 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/27 01:16:09 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	heredoc_check_dilimiter(t_working_info *info, t_token *redirec_token, \
 
 void	get_input_heredoc(t_working_info *info, t_token *redirec_token, int fd)
 {
-	const char	*delimiter = redirec_token->string_value;
+	char *const	delimiter = redirec_token->string_value;
 	char		*line;
 
 	while (1)
