@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 19:18:10 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 12:30:00 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,19 @@ t_env *new_env_node(char *env_str)
 {
 	t_env	*new_env;
 	int		env_key_size;
+	int		env_str_eqaul_index;
 
 	new_env = ft_safe_malloc(sizeof(t_env));
 	init_env_dummy_node(new_env);
 	env_key_size = get_env_key_size(env_str);
+	env_str_eqaul_index = ft_strchr_index(env_str, '=');
 	new_env->str = ft_safe_strdup(env_str);
 	new_env->key = ft_safe_substr(env_str, 0, env_key_size);
-	new_env->value = ft_safe_substr(env_str, \
-			ft_strchr_index(env_str, '=') + 1, \
-			ft_strlen(env_str));
+	if (!env_str_eqaul_index)
+		new_env->value = ft_strdup("");
+	else
+		new_env->value = ft_safe_substr(env_str, \
+								env_str_eqaul_index + 1, ft_strlen(env_str));
 	new_env->next = NULL;
 	return (new_env);
 }
@@ -72,6 +76,9 @@ void	env_add(t_env *env_head, char *env_str)
 	{
 		free(dup_env->str);
 		free(dup_env->value);
+		///
+		/// value 비어 있을 때 처리 해야함
+		/// 
 		dup_env->str = ft_strdup(env_str);
 		dup_env->value = ft_safe_substr(env_str, \
 					ft_strchr_index(env_str, '=') + 1, ft_strlen(env_str));

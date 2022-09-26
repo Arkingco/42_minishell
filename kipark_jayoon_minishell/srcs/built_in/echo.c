@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:31:59 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:42:43 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 16:07:08 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,19 @@
 static void	return_new_line()
 {
 	printf("\n");
-	return ;
 }
 
-void	built_in_echo(t_simple_cmd *simple_cmd)
+int	built_in_echo(t_simple_cmd *simple_cmd)
 {
 	int	n_flag;
+	int	echo_exit_status;
 
+	echo_exit_status = 0;
 	if (simple_cmd->next == NULL)
-		return (return_new_line());
+	{
+		return_new_line();
+		return (echo_exit_status = 0);
+	}
 	n_flag = 1;
 	simple_cmd = simple_cmd->next;
 	if (!ft_strncmp(simple_cmd->str, "-n", 3))
@@ -41,7 +45,5 @@ void	built_in_echo(t_simple_cmd *simple_cmd)
 	}
 	if (n_flag)
 		printf("\n");
-	//
-	//	에러상태 넣기
-	//
+	return (echo_exit_status = 0);
 }

@@ -6,15 +6,14 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 16:22:34 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/26 20:38:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/wait.h>
+#include "exit_status.h"
+#include <stdlib.h>
+// #include <sys/wait.h>
 #include <unistd.h>
-
-// global variable
-int	g_exit_status;
 
 static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
 {
@@ -34,24 +33,29 @@ static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
 	return (this_stat_loc);
 }
 
-static void	init_exit_code(int status)
+static void	init_exit_status(int status)
 {
+	int	return_code;
+	int	signal_number;
+
+	return_code = 0;
+	signal_number = 0;
 	if (WIFEXITED(status))
-		g_exit_status = WEXITSTATUS(status);
+		return_code = WEXITSTATUS(status);
 	else
 	{
+		return_code = 127;
 		if (WIFSIGNALED(status))
-			WTERMSIG(status);
+			signal_number = WTERMSIG(status);
 		else
 		{
 			if (WIFSTOPPED(status))
-			;
-				//SIGSTOP 17
+				signal_number = SIGSTOP;
 			if (WIFCONTINUED(status))
-			;
-				//SIGCONT 19
+				signal_number = SIGCONT;
 		}			
 	}
+	g_exit_status = return_code + signal_number;
 }
 
 void	wait_all_child(pid_t last_fork_pid, size_t num_process)
@@ -59,5 +63,5 @@ void	wait_all_child(pid_t last_fork_pid, size_t num_process)
 	int	stat_loc;
 
 	stat_loc = init_stat_loc_after_wait(last_fork_pid, num_process);
-	init_exit_code(stat_loc);
+	init_exit_status(stat_loc);
 }

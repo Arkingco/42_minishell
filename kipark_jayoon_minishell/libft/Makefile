@@ -6,7 +6,7 @@
 #    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/09/25 21:48:40 by jayoon           ###   ########.fr        #
+#    Updated: 2022/09/26 16:53:54 by jayoon           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS =		ft_isalnum.c			\
 			ft_safe_strdup.c		\
 			ft_safe_strjoin.c		\
 			ft_safe_substr.c		\
-			
+			ft_multi_putendl_fd.c	
 		
 SRCS_B = 		ft_lstnew.c			\
 				ft_lstadd_front.c	\

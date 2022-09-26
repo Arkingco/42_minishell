@@ -1,36 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   ft_multi_putendl_fd.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 12:34:17 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/01/11 17:12:48 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/25 18:38:22 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-static int is_env_value_null(char env_word)
+void	ft_multi_putendl_fd(char *s1, char *s2, char *s3, int fd)
 {
-	if (env_word == '\0')
-		return (1);
-	return (0);
-}
-
-void	print_env_list(t_env *env_head)
-{
-	t_env *env_list;
-
-	env_list = env_head->next;
-	while (env_list)
-	{
-		if (!is_env_value_null(*(env_list->value)))
-			printf("%s=%s\n", env_list->key, env_list->value);
-		env_list = env_list->next;
-	}
+	if (!s1 || !s2 || !s3)
+		return ;
+	if (write(fd, s1, ft_strlen(s1)) < 0)
+		ft_check_error(E_LIBFT, 0);
+	if (write(fd, s2, ft_strlen(s2)) < 0)
+		ft_check_error(E_LIBFT, 0);
+	if (write(fd, s3, ft_strlen(s3)) < 0)
+		ft_check_error(E_LIBFT, 0);
+	if (write(fd, "\n", 1) < 0)
+		ft_check_error(E_LIBFT, 0);
+	return ;
 }
