@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 12:34:02 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 16:10:56 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,10 @@ static int	is_correct_export_syntax(char *str)
 
 	i = 0;
 	if (ft_isdigit(str[0]))
-		return (0);
-	str++;
+	{
+			return (0);
+		str++;
+	}
 	while (str[i] != '\0' && str[i] != '=')
 	{
 		if(!ft_isdigit(str[i]) && !ft_isalpha(str[i]))
@@ -34,20 +36,11 @@ static int	is_correct_export_syntax(char *str)
 	return (1);
 }
 
-static void	print_export(t_env *env)
+static int	execute_export(t_simple_cmd *simple_cmd, t_env *env)
 {
-	t_env	*this_env;
+	int export_error;
 
-	this_env = env->next;
-	while (this_env)
-	{
-		printf("declare -x %s=\"%s\"\n", this_env->key, this_env->value);
-		this_env = this_env->next;
-	}
-}
-
-static void	execute_export(t_simple_cmd *simple_cmd, t_env *env)
-{
+	export_error = 0;
 	while (simple_cmd)
 	{
 		if (is_correct_export_syntax(simple_cmd->str))
@@ -56,22 +49,40 @@ static void	execute_export(t_simple_cmd *simple_cmd, t_env *env)
 		{
 			ft_multi_putendl_fd("bash: export: '", simple_cmd->str, \
 												"': not a valid identifier", 2);
-			// error status 1로 핸들링 하기
-			break ;
+			export_error = 1;
 		}
 		simple_cmd = simple_cmd->next;
 	}
+	return (export_error);
 }
 
-void	built_in_export(t_simple_cmd *simple_cmd, t_env *env)
+static void	print_export(t_env *env)
 {
+	t_env	*this_env;
+
+	this_env = env->next;
+	while (this_env)
+	{
+		if (ft_strncmp(this_env->value, "", 1) == 0)
+			printf	("declare -x %s\n", this_env->key);
+		else
+			printf	("declare -x %s=\"%s\"\n", this_env->key, this_env->value);
+		this_env = this_env->next;
+	}
+}
+
+int	built_in_export(t_simple_cmd *simple_cmd, t_env *env)
+{
+	int export_exit_status;
+
+	export_exit_status = 0;
 	if (simple_cmd->next == NULL)
 	{
 		print_export(env);
-		return ;
+		return (export_exit_status = 0);
 	}
 	else
-		execute_export(simple_cmd->next, env);
+		return (export_exit_status = execute_export(simple_cmd->next, env));
 	//
 	// error handle
 	//

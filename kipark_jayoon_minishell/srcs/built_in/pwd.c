@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:50 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 16:56:15 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 15:56:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,17 @@
 #include "unistd.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+#include <errno.h>
 
-void	built_in_pwd(t_simple_cmd *simple_cmd)
+int	built_in_pwd(t_simple_cmd *simple_cmd)
 {
+	int		pwd_exit_status;
 	char	*curr_path;
+
+	pwd_exit_status = 0;
 	if (simple_cmd->str == NULL)
-		return ;
+		return (pwd_exit_status = 0);
 	curr_path = getcwd(NULL, 0);
 	if (curr_path)
 	{
@@ -28,8 +33,8 @@ void	built_in_pwd(t_simple_cmd *simple_cmd)
 	}
 	else
 	{
-		// error 띄우기
-		// errono 출력
-		printf("NULL\n");
+		strerror(errno);
+		return (errno);
 	}
+	return (pwd_exit_status);
 }
