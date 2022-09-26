@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 19:57:43 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:07:44 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ int	ft_token_lstsize(t_token *lst)
 	size = 0;
 	while (lst != NULL)
 	{
-		lst = lst->next;
 		size++;
+		lst = lst->next;
 	}
 	return (size);
 }
@@ -67,6 +67,7 @@ t_token	*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 	if (token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in ft_addtoken");
 	token->string_value = ft_strdup(string_value);
+	free(string_value);
 	token->type = type;
 	if (token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_addtoken");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 15:40:02 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 20:32:55 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:37:30 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

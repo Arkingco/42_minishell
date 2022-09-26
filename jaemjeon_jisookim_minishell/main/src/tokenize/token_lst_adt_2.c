@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_adt_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 20:08:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:01:15 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_token	*ft_make_newtoken(unsigned int type, char *string_value)
 	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in ft_make_newtoken");
 	new_token->type = type;
-	new_token->string_value = ft_strdup(string_value);
+	new_token->string_value = string_value;
 	if (new_token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_make_newtoken");
 	return (new_token);

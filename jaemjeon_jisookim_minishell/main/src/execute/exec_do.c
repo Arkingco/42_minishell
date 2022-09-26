@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 10:20:41 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:39:17 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,26 @@ static void	exec_exit(t_working_info *info)
 	exit(1);
 }
 
+void	exec_remove_empty(t_cmd **cmd)
+{
+	t_token *prev;
+
+	while (ft_strlen((*(cmd))->simple_cmd->string_value) == 0)
+	{
+		prev = (*(cmd))->simple_cmd;
+		(*(cmd))->simple_cmd = (*(cmd))->simple_cmd->next;
+		(*(cmd))->simple_cmd->prev = NULL;
+		free(prev->string_value);
+		free(prev);
+	}
+}
+
 void	exec_executing(t_working_info *info)
 {
 	char		**exec_argv;
 	char		**exec_env;
 
+	exec_remove_empty(&(info->cmd));
 	set_exec_path(info->cmd, info);
 	exec_argv = get_exec_argv(info->cmd);
 	exec_env = ft_envlst_to_envp(info->env);

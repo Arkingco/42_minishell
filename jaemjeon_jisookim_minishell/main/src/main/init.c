@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:49:09 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:55:10 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,11 @@ void	init_cur_path(t_working_info *info)
 {
 	info->cur_path = getcwd(NULL, 0);
 	if (info->cur_path == NULL)
-		perror("initiating minishell.. error in getcwd..");
+	{
+		ft_putstr_fd("minishell: ", 2);
+		ft_putendl_fd(strerror(errno), 2);
+		exit(1);
+	}
 	else
 		ft_setenv(info->env, "PWD", info->cur_path, TRUE);
 	ft_delenv(&info->env, "OLDPWD");
