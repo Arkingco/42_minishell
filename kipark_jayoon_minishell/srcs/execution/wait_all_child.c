@@ -6,16 +6,58 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/25 18:59:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/26 16:22:34 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <sys/wait.h>
 #include <unistd.h>
 
-void	wait_all_child(pid_t pid)
+// global variable
+int	g_exit_status;
+
+static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
 {
-	// 모든 child 기다림, simple cmd 의 개수를 알아야 함
-		// 실행 중인 자식 프로세스가 없다면 -1 반환하고 종료
-			// 그러므로 실패하거나 single cmd 가 없는 것을 고려할 필요가 없음
-	// pid 는 가장 마지막에 실행된 cmd 인데 이 cmd 의 exit status 를 불러와야 한다.
+	size_t	i;
+	int		wait_pid;
+	int		stat_loc;
+	int		this_stat_loc;
+
+	i = 0;
+	while (i < num_process)
+	{
+		wait_pid = wait(&stat_loc);
+		if (wait_pid == last_fork_pid)
+			this_stat_loc = stat_loc;
+		i++;
+	}
+	return (this_stat_loc);
+}
+
+static void	init_exit_code(int status)
+{
+	if (WIFEXITED(status))
+		g_exit_status = WEXITSTATUS(status);
+	else
+	{
+		if (WIFSIGNALED(status))
+			WTERMSIG(status);
+		else
+		{
+			if (WIFSTOPPED(status))
+			;
+				//SIGSTOP 17
+			if (WIFCONTINUED(status))
+			;
+				//SIGCONT 19
+		}			
+	}
+}
+
+void	wait_all_child(pid_t last_fork_pid, size_t num_process)
+{
+	int	stat_loc;
+
+	stat_loc = init_stat_loc_after_wait(last_fork_pid, num_process);
+	init_exit_code(stat_loc);
 }

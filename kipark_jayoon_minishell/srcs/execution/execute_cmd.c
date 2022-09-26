@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/25 21:50:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/26 15:04:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 static void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 	t_env *l_env, char **envp)
 {
-	process_execve_args(l_parsing, p_args_execve, l_env);
+	init_execve_args(l_parsing, p_args_execve, l_env);
 	execve_cmd(p_args_execve, envp);
 }
 
@@ -52,7 +52,9 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 	t_args_execve	args_execve;
 	char			**curr_envp;
 	pid_t			pid;
+	size_t			num_process;
 	
+	num_process = 0;
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env);
 	else
@@ -66,9 +68,10 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 				do_it_child(l_parsing, &args_execve, l_env, curr_envp);
 			// else
 				// do_it_parent();
+			num_process++;
 			l_parsing = l_parsing->next;
 		}
-		wait_all_child(pid);
+		wait_all_child(pid, num_process);
 		ft_safe_free(curr_envp);
 	}
 }
