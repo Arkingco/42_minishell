@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 12:55:50 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:30:32 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ t_cmd	*parsing(char *line, t_working_info *info)
 		return (NULL);
 	}
 	expander(&lst_token, info->env);
-	// remove_trash_token(&lst_token);
+	remove_trash_token(&lst_token);
 	quote_remove(&lst_token);
 	word_split(&lst_token);
 	word_join(&lst_token);

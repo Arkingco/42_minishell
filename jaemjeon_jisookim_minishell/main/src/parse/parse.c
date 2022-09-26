@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 11:19:14 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:21:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,12 @@ void	combine_redirect_filename(t_token *token_lst)
 	{
 		if (cur_token->type & REDIRECT)
 		{
+			if (cur_token->next == NULL || !(cur_token->next->type & WORD))
+			{
+				cur_token->string_value = ft_strdup("");
+				cur_token = cur_token->next;
+				continue ;
+			}
 			cur_token->string_value = ft_strdup(cur_token->next->string_value);
 			if (cur_token->string_value == NULL)
 				ft_error_exit(1, "malloc failed in ft_strdup in combine_token");
