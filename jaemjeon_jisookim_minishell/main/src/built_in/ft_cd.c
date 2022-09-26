@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:43:23 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 18:38:27 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:12:29 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ int	is_exist_dir(char *dir_path)
 	if (dp == NULL)
 		return (FALSE);
 	else
+	{
+		closedir(dp);
 		return (TRUE);
+	}
 }
 
 int	processing_cd(t_cmd *cmd, t_working_info *info, char *path)
