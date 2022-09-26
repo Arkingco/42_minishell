@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token_lst_adt_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 11:01:15 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:24:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ t_token	*ft_make_newtoken(unsigned int type, char *string_value)
 	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in ft_make_newtoken");
 	new_token->type = type;
-	new_token->string_value = string_value;
+	if (string_value != NULL)
+		new_token->string_value = ft_strdup(string_value);
+	else
+		new_token->string_value = ft_strdup("");
 	if (new_token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_make_newtoken");
 	return (new_token);
@@ -93,6 +96,7 @@ t_token	*ft_strtok_token(unsigned int type, char **string)
 	if (new_string == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr in ft_strtok_token");
 	output_token = ft_make_newtoken(type, new_string);
+	free(new_string);
 	*string = string_end;
 	return (output_token);
 }
