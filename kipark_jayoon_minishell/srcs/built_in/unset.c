@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:46:25 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 16:06:23 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,26 @@ static void	delete_env_node(char *str, t_env *env)
 	return ;
 }
 
-void	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
+int	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 {
+	int unset_exit_status;
+
+	unset_exit_status = 0;
 	if (simple_cmd->next == NULL)
-		return ;
+		return (0);
 	simple_cmd = simple_cmd->next;
 	while (simple_cmd)
 	{
 		if ((size_t)get_env_key_size(simple_cmd->str) != \
 													ft_strlen(simple_cmd->str))
 		{
-			printf("minishell: '%s':not a valid identifier\n", simple_cmd->str);
-			simple_cmd = simple_cmd->next;
-			continue ;
+			ft_multi_putendl_fd("minishell: '", simple_cmd->str, \
+											"':not a valid identifier\n", 2);
+			unset_exit_status = 1;
 		}
-		delete_env_node(simple_cmd->str, env);
+		else
+			delete_env_node(simple_cmd->str, env);
 		simple_cmd = simple_cmd->next;
 	}
+	return (unset_exit_status);
 }

@@ -6,12 +6,12 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/08/30 14:38:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 12:26:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PARSE_H
-# define PARSE_H
+#ifndef LEXER_H
+# define LEXER_H
 
 #include "env.h"
 

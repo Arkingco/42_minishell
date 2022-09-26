@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+         #
+#    By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/20 18:08:18 by jayoon            #+#    #+#              #
-#    Updated: 2022/09/24 21:49:39 by jayoon           ###   ########.fr        #
+#    Updated: 2022/09/25 18:12:56 by kipark           ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,7 +62,7 @@ SRCS =		ft_isalnum.c			\
 			ft_safe_strdup.c		\
 			ft_safe_strjoin.c		\
 			ft_safe_substr.c		\
-			
+			ft_multi_putendl_fd.c	
 		
 SRCS_B = 		ft_lstnew.c			\
 				ft_lstadd_front.c	\

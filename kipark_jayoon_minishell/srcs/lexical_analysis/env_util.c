@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 18:54:07 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 13:59:57 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ char *get_env_value(t_env *env_head, char *env_key)
 	t_env 	*env_list;
 
 	env_list = env_head->next;
-	// if (*env_key == '?') /// 종료상태 코드를 전역 변수로 가지고 온다면 처리 해주면 될 듯
-	//	return (error_status);
+	if (ft_strncmp(env_key, "?", 2) == 0)
+		return (ft_strdup("42"));
 	while (env_list)
 	{
 		if (ft_strncmp(env_key, env_list->key, ft_strlen(env_key) + 1) == 0)

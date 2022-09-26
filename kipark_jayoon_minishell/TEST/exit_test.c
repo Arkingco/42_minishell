@@ -1,36 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   exit_test.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 12:34:17 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/26 14:33:48 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/26 15:23:31 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "env.h"
-#include "libft.h"
+#include <unistd.h>
+#include <sys/wait.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-static int is_env_value_null(char env_word)
+#include "../includes/exit_status.h"
+int main()
 {
-	if (env_word == '\0')
-		return (1);
-	return (0);
-}
+    int pid;
+    int status;
 
-void	print_env_list(t_env *env_head)
-{
-	t_env *env_list;
+    pid = fork();
 
-	env_list = env_head->next;
-	while (env_list)
-	{
-		if (!is_env_value_null(*(env_list->value)))
-			printf("%s=%s\n", env_list->key, env_list->value);
-		env_list = env_list->next;
-	}
+    if (pid == 0)
+    {
+        exit(258);
+    }
+    else 
+    {
+        wait(&status);
+    }
+    printf("%d ", WEXITSTATUS(status));
+    g_exit_status = 10;
+    printf("%d \n", g_exit_status);
 }
