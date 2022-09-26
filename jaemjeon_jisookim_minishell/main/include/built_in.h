@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 09:43:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:45:38 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,9 @@ int		ft_env(t_cmd *cmd, t_working_info *info);
 int		ft_exit(t_cmd *cmd, t_working_info *info);
 int		ft_god(t_cmd *cmd, t_working_info *info);
 int		ft_jeongble(t_cmd *cmd, t_working_info *info);
+
+// export, unset util
+int		check_key_grammar(char *key);
 
 // built_in_utils.c
 int		ft_chdir(char *path);

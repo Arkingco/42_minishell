@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 01:31:07 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:40:40 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 		{
 			process_errno(1, cmd_argv->string_value, IDENTIFIER_ERR);
 			free(envkey_to_input);
-			return (1);
+			cmd_argv = cmd_argv->next;
+			continue ;
 		}
 		envvalue_to_input = ft_get_value_in_string(cmd_argv->string_value);
 		if (envvalue_to_input == NULL)
