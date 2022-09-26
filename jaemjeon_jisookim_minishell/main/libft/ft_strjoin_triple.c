@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin_triple.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 20:52:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 21:08:22 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:40:20 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,6 @@ char	*ft_strjoin_triple(char *s1, char *s2, char *s3)
 		first_joined = ft_strjoin(s1, s2);
 		second_joined = ft_strjoin(first_joined, s3);
 		free(first_joined);
-		first_joined = 0;
 		return (second_joined);
 	}
 }
