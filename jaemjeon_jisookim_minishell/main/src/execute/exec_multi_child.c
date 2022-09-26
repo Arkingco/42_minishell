@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:24:33 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 23:31:54 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:51:07 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,5 @@ void	execute_multicmd_child(t_working_info *info, t_cmd *my_cmd, int *fd)
 			exit(g_errno);
 		}
 	}
+	exit(0);
 }

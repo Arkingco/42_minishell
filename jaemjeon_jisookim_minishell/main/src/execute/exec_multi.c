@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_multi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:14:16 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 11:28:20 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:49:06 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ pid_t	process_multi_cmd_do_fork(t_working_info *info, t_cmd *cur_cmd, \
 	{
 		sigtermset(EXECUTE_CHILD);
 		execute_multicmd_child(info, cur_cmd, fd);
+		printf("hello\n");
 	}
 	return (pid);
 }

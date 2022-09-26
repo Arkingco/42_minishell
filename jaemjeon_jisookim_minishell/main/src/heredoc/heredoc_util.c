@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc_util.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:44:26 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 19:01:14 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:32:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,44 +32,24 @@ int	has_heredoc(t_working_info *info)
 	return (FALSE);
 }
 
-char	*filename_join_free(int *pointer)
-{
-	char	*result;
-	char	*tmp_string[2];
-
-	tmp_string[0] = ft_itoa(*pointer);
-	tmp_string[1] = ft_itoa(*(pointer + 1));
-	result = ft_strjoin(tmp_string[0], tmp_string[1]);
-	free(tmp_string[0]);
-	free(tmp_string[1]);
-	return (result);
-}
-
 char	*make_tmp_filename(void *p1_8byte, void *p2_8byte)
 {
-	char	*tmp_filename;
 	char	*tmp_string[2];
-	int		*pointer;
 	char	*return_val;
 
-	pointer = (int *)p1_8byte;
-	tmp_string[0] = filename_join_free(pointer);
+	tmp_string[0] = ft_itoa((int)p1_8byte);
 	if (tmp_string[0] == NULL)
 		return (NULL);
-	pointer = (int *)p2_8byte;
-	tmp_string[1] = filename_join_free(pointer);
+	tmp_string[1] = ft_itoa((int)p2_8byte);
 	if (tmp_string[1] == NULL)
 	{
 		free(tmp_string[0]);
 		return (NULL);
 	}
-	tmp_filename = ft_strjoin_triple("minishell", tmp_string[0], tmp_string[1]);
+	return_val = \
+			ft_strjoin_triple("/tmp/minishell", tmp_string[0], tmp_string[1]);
 	free(tmp_string[0]);
 	free(tmp_string[1]);
-	if (tmp_filename == NULL)
-		return (NULL);
-	return_val = ft_strjoin("/tmp/minishell", tmp_filename);
-	free(tmp_filename);
 	return (return_val);
 }
 
@@ -93,5 +73,22 @@ void	rename_string_value(t_working_info *info)
 			cur_redirect_token = cur_redirect_token->next;
 		}
 		cur_cmd = cur_cmd->next;
+	}
+}
+
+void	unlink_hdoc_tmpfiles(t_cmd *cmd)
+{
+	t_token	*redirect;
+
+	while (cmd)
+	{
+		redirect = cmd->redirect_input;
+		while (redirect)
+		{
+			if (redirect->type & HEREDOC)
+				unlink(redirect->string_value);
+			redirect = redirect->next;
+		}
+		cmd = cmd->next;
 	}
 }
