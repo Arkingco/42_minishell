@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 22:21:24 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 16:04:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 	{
 		printf("single built_in cmd\n");
-		execute_bulit_in(l_parsing->l_simple_cmd, l_env);
+		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	}
 	else
 	{

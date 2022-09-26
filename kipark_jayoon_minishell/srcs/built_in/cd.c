@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:42:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 15:41:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,20 @@ void	update_pwd(t_env *env)
 	char	*new_pwd;
 
 	curr_pwd = getcwd(NULL, 0);
+	if (curr_pwd == NULL)
+		ft_check_error(E_MALLOC, (ssize_t)curr_pwd);
 	new_pwd = ft_safe_strjoin("PWD=", curr_pwd);
 	env_add(env, new_pwd);
 	free(curr_pwd);
 	free(new_pwd);
 }
 
-void	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
+int	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
 {
 	int	chdir_status;	
 
 	if (simple_cmd->next == NULL)
-		return ;
+		return (0);
 	simple_cmd = simple_cmd->next;
 	chdir_status = chdir(simple_cmd->str);
 	if (chdir_status == 0)
@@ -46,5 +48,5 @@ void	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
 	//
 	// exit_status 핸들링
 	//
-	return ;
+	return (0);
 }

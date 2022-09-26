@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 21:40:33 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/26 16:08:41 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 # include "env.h"
 # include "parser.h"
+
+typedef enum e_execute_cmd_division
+{
+	SINGLE_CMD,
+	MULTI_CMD
+}	t_execute_cmd_division;
 
 typedef struct s_args_execve
 {
