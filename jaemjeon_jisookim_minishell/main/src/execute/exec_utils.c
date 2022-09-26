@@ -6,7 +6,7 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 20:29:25 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 09:42:16 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ int	get_cmd_type(t_cmd *cmd)
 	[T_EXPORT] = "export",
 	[T_UNSET] = "unset",
 	[T_ENV] = "env",
-	[T_EXIT] = "exit"
+	[T_EXIT] = "exit",
+	[T_GOD] = "god",
+	[T_JEONGBLE] = "jeongble"
 	};
 
 	cmd_string = cmd->simple_cmd->string_value;

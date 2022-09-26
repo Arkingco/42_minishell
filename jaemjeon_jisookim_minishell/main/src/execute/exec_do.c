@@ -6,13 +6,30 @@
 /*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 17:37:03 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:20:41 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
 extern int	g_errno;
+
+static void	exec_exit(t_working_info *info)
+{
+	if (errno == 13)
+	{
+		process_errno(errno, info->cmd->simple_cmd->string_value, \
+			PERMMISION_DENIED_ERR);
+		exit(126);
+	}
+	if (errno == 2)
+	{
+		process_errno(errno, info->cmd->simple_cmd->string_value, \
+			CMD_NOT_FOUND_ERR);
+		exit(127);
+	}
+	exit(1);
+}
 
 void	exec_executing(t_working_info *info)
 {
@@ -29,11 +46,7 @@ void	exec_executing(t_working_info *info)
 	}
 	if (execve(info->cmd->simple_cmd->string_value, exec_argv, exec_env) \
 		== FAIL)
-	{
-		process_errno(errno, info->cmd->simple_cmd->string_value, \
-			CMD_NOT_FOUND_ERR);
-		exit(g_errno);
-	}
+		exec_exit(info);
 }
 
 int	ft_wait_childs(pid_t *child_pids, int cmd_count)

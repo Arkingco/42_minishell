@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   error_message.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:44:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 18:48:33 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:24:52 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
+#include <dirent.h>
 
 extern int	g_errno;
 
@@ -25,6 +26,23 @@ void	print_error_message(int has_minishell, char *s1, char *s2)
 	ft_putchar_fd('\n', 2);
 }
 
+void	perror_permission(char *string)
+{
+	DIR		*hello;
+	int		temp;
+
+	temp = errno;
+	hello = opendir(string);
+	if (hello)
+	{
+		print_error_message(TRUE, string, ": is a directory");
+		closedir(hello);
+	}
+	else
+		print_error_message(TRUE, string, ": Permission denied");
+	errno = temp;
+}
+
 void	perror_with_header(char *string, int type)
 {
 	if (type == IDENTIFIER_ERR)
@@ -33,6 +51,8 @@ void	perror_with_header(char *string, int type)
 		print_error_message(TRUE, string, ": too many arguments");
 	else if (type == CMD_NOT_FOUND_ERR)
 		print_error_message(TRUE, string, ": command not found");
+	else if (type == PERMMISION_DENIED_ERR)
+		perror_permission(string);
 	else if (type == NOT_NUM_ARG_ERR)
 		print_error_message(TRUE, string, ": numeric argument required");
 	else if (type == SYNTAX_ERR)

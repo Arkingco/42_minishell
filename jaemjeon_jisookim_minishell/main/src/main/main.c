@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 23:26:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:26:34 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	main_loop(t_working_info *info)
 
 	while (1)
 	{
-		line = readline("minishell-0.1$ ");
+		line = readline("minishell-0.2$ ");
 		add_history(line);
 		if (line != NULL)
 		{

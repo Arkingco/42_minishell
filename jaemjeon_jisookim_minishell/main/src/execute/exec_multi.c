@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_multi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:14:16 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/25 20:50:22 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 09:29:07 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ int	handle_wait_status(pid_t *child_pids, t_working_info *info)
 	else
 		g_errno = WCOREFLAG + WTERMSIG(exit_status);
 	sigtermset(MINISHELL_NO_CHILD);
+	free(child_pids);
 	return (g_errno);
 }
 

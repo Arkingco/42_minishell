@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 19:58:37 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 10:14:44 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ enum e_error
 	GET_CWD_ERR,
 	CHANGE_DIR_ERR,
 	HOME_SET_ERR,
+	PERMMISION_DENIED_ERR
 };
 
 // check_error.c

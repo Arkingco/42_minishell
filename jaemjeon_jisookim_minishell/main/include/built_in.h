@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/10 15:37:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/25 19:54:10 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 09:43:22 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ enum	e_type_built_in
 	T_UNSET,
 	T_ENV,
 	T_EXIT,
+	T_GOD,
+	T_JEONGBLE,
 	T_BUILT_IN_COUNT
 };
 
@@ -51,6 +53,8 @@ int		ft_export(t_cmd *cmd, t_working_info *info);
 int		ft_unset(t_cmd *cmd, t_working_info *info);
 int		ft_env(t_cmd *cmd, t_working_info *info);
 int		ft_exit(t_cmd *cmd, t_working_info *info);
+int		ft_god(t_cmd *cmd, t_working_info *info);
+int		ft_jeongble(t_cmd *cmd, t_working_info *info);
 
 // built_in_utils.c
 int		ft_chdir(char *path);
