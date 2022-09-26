@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:46:25 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 15:17:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,7 @@ void	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 		delete_env_node(simple_cmd->str, env);
 		simple_cmd = simple_cmd->next;
 	}
+	//
+	//	error handle
+	//
 }

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:42:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 17:19:49 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ void	update_pwd(t_env *env)
 	char	*new_pwd;
 
 	curr_pwd = getcwd(NULL, 0);
+	if (curr_pwd == NULL)
+		ft_check_error(E_MALLOC, (ssize_t)curr_pwd);
 	new_pwd = ft_safe_strjoin("PWD=", curr_pwd);
 	env_add(env, new_pwd);
 	free(curr_pwd);

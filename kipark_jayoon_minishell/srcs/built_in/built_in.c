@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/25 14:38:50 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/25 16:56:32 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	execute_bulit_in(t_simple_cmd *simple_cmd, t_env *env)
 	else if (!ft_strncmp(simple_cmd->str, "export", 7))
 		built_in_export(simple_cmd, env);
 	else if (!ft_strncmp(simple_cmd->str, "pwd", 4))
-		built_in_pwd();
+		built_in_pwd(simple_cmd);
 	else if (!ft_strncmp(simple_cmd->str, "unset", 6))
 		built_in_unset(simple_cmd, env);
 	return ;
