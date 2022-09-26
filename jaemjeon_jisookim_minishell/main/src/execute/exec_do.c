@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 10:54:01 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 22:13:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:49:41 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	exec_exit(t_working_info *info)
 
 void	exec_remove_empty(t_cmd **cmd)
 {
-	t_token *prev;
+	t_token	*prev;
 
 	while (ft_strlen((*(cmd))->simple_cmd->string_value) == 0)
 	{

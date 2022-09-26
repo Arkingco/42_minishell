@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_tools.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 14:16:21 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 19:01:30 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:47:47 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ t_token	*__word_split(t_token *token)
 	splited_lst = NULL;
 	string_value = token->string_value;
 	if (is_ifs_word(string_value))
-		splited_lst =
+		splited_lst = \
 			ft_make_newtoken(token->type & ~(LEFT_JOIN | RIGHT_JOIN), "");
 	else
 	{
