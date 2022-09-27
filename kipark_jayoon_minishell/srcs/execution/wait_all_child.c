@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 20:38:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 21:29:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,10 @@ static void	init_exit_status(int status)
 	g_exit_status = return_code + signal_number;
 }
 
-void	wait_all_child(pid_t last_fork_pid, size_t num_process)
+void	wait_all_child(pid_t last_fork_pid, size_t num_proc)
 {
 	int	stat_loc;
 
-	stat_loc = init_stat_loc_after_wait(last_fork_pid, num_process);
+	stat_loc = init_stat_loc_after_wait(last_fork_pid, num_proc);
 	init_exit_status(stat_loc);
 }

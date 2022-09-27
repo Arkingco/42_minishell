@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/27 14:49:51 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 21:29:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,27 @@ typedef struct s_args_execve
 {
 	char	**path;
 	char	**argv;
+	char	**envp;
 }	t_args_execve;
+
+typedef struct s_fd_using_dup2
+{
+	int	input;
+	int	output;
+}	t_fd_using_dup2;
+
+typedef struct s_info_fd
+{
+	t_fd_using_dup2	updated_fd;
+	int				pipefd[2];
+}	t_info_fd;
+
+typedef struct s_info_process
+{
+	pid_t	pid;
+	size_t	idx_curr_proc;
+	size_t	num_proc;
+}	t_info_process;
 
 // main
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env);
