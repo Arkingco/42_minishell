@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:33:41 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 18:21:19 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:19:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	combine_redirect_filename(t_token *token_lst)
 	}
 }
 
-void	check_cur_token_type(t_token *cur_token, t_cmd **cur_cmd)
+void	input_token_to_cmd_struct(t_token *cur_token, t_cmd **cur_cmd)
 {
 	if (cur_token->type & PIPE)
 	{
@@ -68,7 +68,7 @@ t_cmd	*token_to_cmd(t_token *token_lst)
 	while (cur_token != NULL)
 	{
 		next_token = cur_token->next;
-		check_cur_token_type(cur_token, &cur_cmd);
+		input_token_to_cmd_struct(cur_token, &cur_cmd);
 		cur_token = next_token;
 	}
 	return (first_cmd);

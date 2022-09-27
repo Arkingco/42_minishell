@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_cmd_lst.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/29 21:36:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/24 14:46:32 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/27 09:17:01 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ t_cmd	*make_cmd_linkedlst(t_token *token_lst)
 	t_cmd	*cur_cmd;
 	t_cmd	*first_cmd;
 
+	if (token_lst == NULL)
+		return (NULL);
 	first_cmd = (t_cmd *)ft_calloc(1, sizeof(t_cmd));
 	cur_cmd = first_cmd;
 	while (token_lst != NULL)
