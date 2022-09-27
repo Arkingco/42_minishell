@@ -89,7 +89,7 @@ $(READLINE)		:
 	@$(CC) $(CFLAGS) -o $@ -c $< $(INCLUDE) $(INCLUDE_READLINE)
 
 clean :
-	# @make -C $(DIR_READLINE) clean
+	@make -C $(DIR_READLINE) clean
 	@make -C $(DIR_LIBFT) fclean
 	@rm -f ${OBJS}
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 12:55:10 by jisookim         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:09:15 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,7 @@ void	init_cur_path(t_working_info *info)
 {
 	info->cur_path = getcwd(NULL, 0);
 	if (info->cur_path == NULL)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putendl_fd(strerror(errno), 2);
-		exit(1);
-	}
+		process_errno(errno, "string", GET_CWD_ERR);
 	else
 		ft_setenv(info->env, "PWD", info->cur_path, TRUE);
 	ft_delenv(&info->env, "OLDPWD");
