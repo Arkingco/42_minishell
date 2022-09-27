@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/25 16:58:51 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 15:30:16 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,7 @@ t_parsing_list	*parse_tokenized_data(t_token *l_token)
 {
 	t_parsing_list	*l_parsing;
 
-	l_parsing = init_parsing_list();
-	l_parsing = check_syntax_and_set_parsing_list(l_token, l_parsing);
+	l_parsing = check_syntax_and_set_parsing_list(l_token);
 
 	//print parsing list
 	print_parsing_list(l_parsing);

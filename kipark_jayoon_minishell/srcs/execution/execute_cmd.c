@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 20:32:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 14:59:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 }
 
 static void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
-	t_env *l_env, char **envp)
+				char **envp)
 {
-	init_execve_args(l_parsing, p_args_execve, l_env);
+	init_execve_args(l_parsing, p_args_execve, envp);
 	execve_cmd(p_args_execve, envp);
 }
 
@@ -79,7 +79,7 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 			pid = safe_fork();
 			// pipe 넣기
 			if (pid == 0)
-				do_it_child(l_parsing, &args_execve, l_env, curr_envp);
+				do_it_child(l_parsing, &args_execve, curr_envp);
 			// else
 				// do_it_parent();
 			num_process++;

@@ -30,13 +30,18 @@ static void	strjoin_slash_to_path(t_args_execve *p_args)
 	}
 }
 
-static void	init_path(t_args_execve *p_args, t_env *l_env)
+static void	init_path(t_args_execve *p_args, char **envp)
 {
 	char	*str_path;
-	
-	str_path = get_env_value(l_env, "PATH");
+
+	while (*envp)
+	{
+		if (!ft_strncmp(*envp, "PATH=", 5))
+			break ;
+		envp++;
+	}
+	str_path = *envp + 5;
 	p_args->path = ft_split(str_path, ':');
-	ft_safe_free(str_path);
 	ft_check_error(E_LIBFT, (ssize_t)p_args->path);
 	strjoin_slash_to_path(p_args);
 }
@@ -71,11 +76,11 @@ static void	init_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
 }
 
 void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
-			t_env *l_env)
+			char **envp)
 {
 	int	num_args;
 
-	init_path(p_args, l_env);
+	init_path(p_args, envp);
 	num_args = count_num_args(l_parsing->l_simple_cmd);
 	init_argv(l_parsing, p_args, num_args);
 }
