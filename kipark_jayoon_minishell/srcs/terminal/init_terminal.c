@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/23 17:58:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 20:16:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ static void	set_terminal_sig_handler()
 	signal(SIGINT, sig_handler);
 }
 
+// ctrl + \ ignore 해결해야 함
 void	init_terminal(void)
 {
 	set_terminal_sig_handler();

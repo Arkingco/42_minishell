@@ -56,7 +56,9 @@ SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANAL
 SRCS_EXECUTION				:=	execute_cmd.c \
 								init_curr_envp.c \
 								is_single_cmd.c \
-								process_execve_args.c
+								init_execve_args.c \
+								safe_fork.c \
+								wait_all_child.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
 SRCS_BUILT_IN				:=	built_in.c		\
