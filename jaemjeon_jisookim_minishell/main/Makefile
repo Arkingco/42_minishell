@@ -1,6 +1,6 @@
 CC = cc
 NAME = minishell
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address -g3
+CFLAGS = -Wall -Wextra -Werror
 NAME_LIBFT = libft.a
 DIR_LIBFT = ./libft
 LIB_LIBFT = -L$(DIR_LIBFT)
@@ -21,7 +21,6 @@ DIR_UTILS		:=	$(SRCS_DIR)/utils
 DIR_MAIN		:=	$(SRCS_DIR)/main
 DIR_EXPAND		:=	$(SRCS_DIR)/expand
 DIR_PARSE		:=	$(SRCS_DIR)/parse
-DIR_DEBUG		:=	$(SRCS_DIR)/debug
 DIR_EXECUTE		:=	$(SRCS_DIR)/execute
 DIR_BUILT_IN	:=	$(SRCS_DIR)/built_in
 DIR_HEREDOC		:=	$(SRCS_DIR)/heredoc
@@ -48,9 +47,6 @@ SRC_PARSE		:=	parse_cmd_lst.c parse_free.c parse_ifs.c parse_remove.c \
 					parse_tools.c parse_word.c parse.c 
 SRC_PARSE		:= $(addprefix $(DIR_PARSE)/, $(SRC_PARSE))
 
-SRC_DEBUG		:=	print_lst_token.c print_lst_cmd.c
-SRC_DEBUG		:=	$(addprefix $(DIR_DEBUG)/, $(SRC_DEBUG))
-
 SRC_EXECUTE		:=	exec_built_in.c exec_do.c exec_file.c exec_ft_tools.c \
 					exec_path.c exec_pipe.c exec_redirect.c exec_utils.c \
 					execute.c exec_file_check.c exec_redi_handler.c \
@@ -65,7 +61,7 @@ SRC_BUILT_IN	:=	ft_cd.c ft_echo.c ft_env.c ft_exit.c ft_export.c ft_pwd.c \
 SRC_BUILT_IN	:=	$(addprefix $(DIR_BUILT_IN)/, $(SRC_BUILT_IN))
 
 SRCS			=	$(SRC_ENV) $(SRC_TOKENIZE) $(SRC_UTILS) $(SRC_MAIN) \
-					$(SRC_DEBUG) $(SRC_EXPAND) $(SRC_PARSE) $(SRC_EXECUTE) \
+					$(SRC_EXPAND) $(SRC_PARSE) $(SRC_EXECUTE) \
 					$(SRC_BUILT_IN) $(SRC_HEREDOC)
 
 OBJS 			=	${SRCS:.c=.o}
