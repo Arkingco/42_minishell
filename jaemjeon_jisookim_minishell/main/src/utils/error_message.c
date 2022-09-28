@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 17:44:01 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 23:17:42 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:41:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	print_error_message(int has_minishell, char *s1, char *s2)
 	ft_putchar_fd('\n', 2);
 }
 
-void	perror_permission(char *string)
+void	perror_open_fail(char *string)
 {
 	DIR		*hello;
 	int		temp;
@@ -39,7 +39,12 @@ void	perror_permission(char *string)
 		closedir(hello);
 	}
 	else
-		print_error_message(TRUE, string, ": Permission denied");
+	{
+		if (temp == 13)
+			print_error_message(TRUE, string, ": Permission denied");
+		else
+			print_error_message(TRUE, string, ": no such file or directory");
+	}
 	errno = temp;
 }
 
@@ -51,8 +56,8 @@ void	perror_with_header(char *string, int type)
 		print_error_message(TRUE, string, ": too many arguments");
 	else if (type == CMD_NOT_FOUND_ERR)
 		print_error_message(TRUE, string, ": command not found");
-	else if (type == PERMMISION_ERR)
-		perror_permission(string);
+	else if (type == OPEN_ERR)
+		perror_open_fail(string);
 	else if (type == NOT_NUM_ARG_ERR)
 		print_error_message(TRUE, string, ": numeric argument required");
 	else if (type == SYNTAX_ERR)
@@ -60,8 +65,6 @@ void	perror_with_header(char *string, int type)
 																	string);
 	else if (type == OPEN_FAIL_ERR)
 		print_error_message(TRUE, "open fail file name", string);
-	else if (type == OPEN_ERR)
-		print_error_message(TRUE, string, ": No such file or directory");
 	else if (type == HOME_SET_ERR)
 		print_error_message(TRUE, "cd: HOME not set", 0);
 }

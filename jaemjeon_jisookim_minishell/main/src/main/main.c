@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 14:05:11 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/27 00:32:00 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:18:02 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ t_cmd	*parsing(char *line, t_working_info *info)
 	return (lst_cmd);
 }
 
-void	main_loop(t_working_info *info)
+void main_loop(t_working_info *info)
 {
 	char		*line;
 
@@ -52,7 +52,6 @@ void	main_loop(t_working_info *info)
 			{
 				g_errno = 0;
 				execute(info);
-				unlink_hdoc_tmpfiles(info->cmd);
 				ft_free_cmdlst(info->cmd);
 			}
 			free(line);

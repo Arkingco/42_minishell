@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:40:32 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/26 23:20:04 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:40:17 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ enum e_error
 	GET_CWD_ERR,
 	CHANGE_DIR_ERR,
 	HOME_SET_ERR,
-	PERMMISION_ERR
 };
 
 // check_error.c
