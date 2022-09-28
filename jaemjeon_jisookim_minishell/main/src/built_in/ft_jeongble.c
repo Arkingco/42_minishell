@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigset.h                                           :+:      :+:    :+:   */
+/*   ft_jeongble.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 00:51:27 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:19:07 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/26 09:43:02 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGSET_H
-# define SIGSET_H
+#include "../../include/minishell.h"
 
-
-#endif
+int	ft_jeongble(t_cmd *cmd, t_working_info *info)
+{
+	(void)cmd;
+	(void)info;
+	printf("god\n");
+	return (0);
+}

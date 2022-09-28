@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   working_dir.h                                      :+:      :+:    :+:   */
+/*   ft_god.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 02:12:58 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:25:54 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/02 16:44:01 by jisookim          #+#    #+#             */
+/*   Updated: 2022/09/26 09:36:28 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORKING_DIR
-# define WORKING_DIR
+#include "../../include/minishell.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include "env.h"
-
-#endif
+int	ft_god(t_cmd *cmd, t_working_info *info)
+{
+	(void)cmd;
+	(void)info;
+	printf("jeamjeon & jisookim\n");
+	return (0);
+}

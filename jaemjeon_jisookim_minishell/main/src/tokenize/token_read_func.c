@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   read_token_func.c                                  :+:      :+:    :+:   */
+/*   token_read_func.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 14:59:46 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/26 22:55:05 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 11:32:54 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-t_token		*read_in_quote(char *line, int *index)
+t_token	*read_in_quote(char *line, int *index)
 {
-	t_token *new_token;
+	t_token	*new_token;
 	int		start_idx;
 
 	start_idx = *index;
@@ -35,39 +35,36 @@ t_token		*read_in_quote(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_redirect(char *line, int *index)
+t_token	*read_in_redirect(char *line, int *index)
 {
 	t_token	*new_token;
 
-	if ((new_token = (t_token *)ft_calloc(1, sizeof(t_token))) == NULL)
+	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
+	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in read_token");
 	if (line[*index] == '<' && line[*index + 1] == '<')
 	{
-		(*index) += 2;
+		(*index) += 1;
 		new_token->type |= (REDIRECT | HEREDOC);
 	}
 	else if (line[*index] == '>' && line[*index + 1] == '>')
 	{
-		(*index) += 2;
+		(*index) += 1;
 		new_token->type |= (REDIRECT | WRITE_APPEND);
 	}
 	else if (line[*index] == '<' && line[*index + 1] != '<')
-	{
-		(*index) += 1;
 		new_token->type |= (REDIRECT | READ);
-	}
 	else if (line[*index] == '>' && line[*index + 1] != '>')
-	{
-		(*index) += 1;
 		new_token->type |= (REDIRECT | WRITE);
-	}
+	(*index) += 1;
 	return (new_token);
 }
 
-t_token		*read_in_pipe(char *line, int *index)
+t_token	*read_in_pipe(char *line, int *index)
 {
 	t_token	*new_token;
 
+	(void)&line;
 	new_token = (t_token *)ft_calloc(1, sizeof(t_token));
 	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in read_token");
@@ -76,7 +73,7 @@ t_token		*read_in_pipe(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_expander(char *line, int *index)
+t_token	*read_in_expander(char *line, int *index)
 {
 	t_token	*new_token;
 	int		start_idx;
@@ -94,7 +91,7 @@ t_token		*read_in_expander(char *line, int *index)
 	return (new_token);
 }
 
-t_token		*read_in_pureword(char *line, int *index)
+t_token	*read_in_pureword(char *line, int *index)
 {
 	t_token	*new_token;
 	int		start_idx;

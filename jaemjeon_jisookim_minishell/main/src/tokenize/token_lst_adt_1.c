@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list_adt_1.c                                 :+:      :+:    :+:   */
+/*   token_lst_adt_1.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:07:12 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/30 16:51:46 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 18:10:22 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void		ft_token_lstadd_back(t_token **lst, t_token *new)
+void	ft_token_lstadd_back(t_token **lst, t_token *new)
 {
 	if (lst == NULL)
 		ft_error_exit(1, "input para error in ft_token_lstadd_back");
@@ -30,20 +30,36 @@ void		ft_token_lstadd_back(t_token **lst, t_token *new)
 	}
 }
 
-int			ft_token_lstsize(t_token *lst)
+int	ft_token_lstsize(t_token *lst)
 {
 	int	size;
 
 	size = 0;
 	while (lst != NULL)
 	{
-		lst = lst->next;
 		size++;
+		lst = lst->next;
 	}
 	return (size);
 }
 
-t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
+void	ft_insert_token(t_token *prev_to_insert, t_token *to_insert)
+{
+	t_token	*next_of_inserted;
+
+	if (to_insert == NULL)
+		return ;
+	next_of_inserted = prev_to_insert->next;
+	prev_to_insert->next = to_insert;
+	to_insert->prev = prev_to_insert;
+	while (to_insert->next != NULL)
+		to_insert = to_insert->next;
+	to_insert->next = next_of_inserted;
+	if (next_of_inserted != NULL)
+		next_of_inserted->prev = to_insert;
+}
+
+t_token	*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 {
 	t_token	*token;
 
@@ -58,28 +74,7 @@ t_token		*ft_addtoken(t_token **lst, unsigned int type, char *string_value)
 	return (token);
 }
 
-void		ft_free_token(t_token *lst)
-{
-	free(lst->string_value);
-	lst->string_value = NULL;
-	free(lst);
-}
-
-void		ft_free_tokenlst(t_token *lst)
-{
-	t_token	*next_token;
-
-	while (1)
-	{
-		next_token = lst->next;
-		ft_free_token(lst);
-		lst = next_token;
-		if (lst == NULL)
-			return ;
-	}
-}
-
-t_token		*ft_token_lstlast(t_token *lst)
+t_token	*ft_token_lstlast(t_token *lst)
 {
 	if (lst == NULL)
 		return (NULL);

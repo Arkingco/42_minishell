@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:05 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/16 18:22:47 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/25 15:38:04 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,30 @@ int	is_alnum_string(char *string)
 	return (TRUE);
 }
 
-static void	print_error_message(char *arg_string)
-{
-	char	*result_message;
-	char	*tmp_string;
-
-	tmp_string = ft_strjoin_triple("exit: ", arg_string, ": ");
-	result_message = ft_strjoin(tmp_string, "numeric argument required");
-	free(tmp_string);
-	ft_putendl_fd(result_message, 2);
-}
-
-void	ft_exit(t_cmd *cmd, t_working_info *info)
+int	ft_exit(t_cmd *cmd, t_working_info *info)
 {
 	char	*arg_string;
 
+	(void)cmd;
+	(void)info;
 	ft_putendl_fd("exit", 2);
 	if (cmd->simple_cmd->next == NULL)
 		exit(0);
 	if (cmd->simple_cmd->next->next != NULL)
 	{
-		// errno를 1로 세팅해야함
-		ft_putendl_fd("exit: too many arguments", 2);
+		process_errno(1, "exit", MANY_ARG_ERR);
+		return (1);
 	}
 	else
 	{
 		arg_string = cmd->simple_cmd->next->string_value;
 		if (is_alnum_string(arg_string) == FALSE)
 		{
-			print_error_message(arg_string);
+			process_errno(255, "exit", NOT_NUM_ARG_ERR);
 			exit(255);
 		}
 		else
 			exit(ft_atoi(arg_string));
 	}
+	return (0);
 }

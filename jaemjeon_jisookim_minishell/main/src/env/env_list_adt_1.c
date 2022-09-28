@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_list_adt_1.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/07 03:55:11 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/12 02:57:32 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 21:10:00 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,11 @@ t_envlst	*ft_addenv(t_envlst **env, char *key, char *value, int has_value)
 
 	node = (t_envlst *)ft_calloc(1, sizeof(t_envlst));
 	if (node == NULL)
+	{
+		free(node);
+		node = 0;
 		ft_error_exit(1, "failed in malloc env_node");
+	}
 	node->key = ft_strdup(key);
 	node->value = ft_strdup(value);
 	node->has_value = has_value;
@@ -70,6 +74,9 @@ t_envlst	*ft_env_lstlast(t_envlst *lst)
 void	ft_free_envlst(t_envlst *lst)
 {
 	free(lst->key);
+	lst->key = 0;
 	free(lst->value);
+	lst->value = 0;
 	free(lst);
+	lst = 0;
 }
