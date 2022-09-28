@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute_utils_1.c                                  :+:      :+:    :+:   */
+/*   exec_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:59:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:37:51 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:07:19 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	get_cmd_type(t_cmd *cmd)
 {
 	char				*cmd_string;
 	int					index;
-	static const char	*built_in_board[] = \
+	static char *const	built_in_board[] = \
 	{
 	[T_ECHO] = "echo",
 	[T_CD] = "cd",
@@ -24,7 +24,9 @@ int	get_cmd_type(t_cmd *cmd)
 	[T_EXPORT] = "export",
 	[T_UNSET] = "unset",
 	[T_ENV] = "env",
-	[T_EXIT] = "exit"
+	[T_EXIT] = "exit",
+	[T_GOD] = "god",
+	[T_JEONGBLE] = "jeongble"
 	};
 
 	cmd_string = cmd->simple_cmd->string_value;
@@ -38,23 +40,9 @@ int	get_cmd_type(t_cmd *cmd)
 	return (index);
 }
 
-char	**get_path_board(t_envlst *env)
-{
-	char	*path_line;
-	char	**path_board;
-
-	path_line = ft_getenv(env, "PATH");
-	if (path_line == NULL)
-		return (NULL);
-	path_board = ft_split(path_line, ':');
-	if (path_board == NULL)
-		ft_error_exit(1, "malloc error in ft_split");
-	return (path_board);
-}
-
 char	**get_exec_argv(t_cmd *cmd)
 {
-	t_token *cmd_lst;
+	t_token	*cmd_lst;
 	char	**exec_argv;
 	int		index;
 
@@ -63,7 +51,10 @@ char	**get_exec_argv(t_cmd *cmd)
 	exec_argv = \
 			(char **)ft_calloc(ft_token_lstsize(cmd_lst) + 1, sizeof(char *));
 	if (exec_argv == NULL)
+	{
+		exec_argv = 0;
 		return (NULL);
+	}
 	while (cmd_lst != NULL)
 	{
 		exec_argv[index] = cmd_lst->string_value;
@@ -71,4 +62,14 @@ char	**get_exec_argv(t_cmd *cmd)
 		cmd_lst = cmd_lst->next;
 	}
 	return (exec_argv);
+}
+
+void	close_useless_fds(int *fd)
+{
+	if (fd[0] != -1)
+		ft_close(fd[0]);
+	if (fd[1] != -1)
+		ft_close(fd[1]);
+	if (fd[2] != -1)
+		ft_close(fd[2]);
 }
