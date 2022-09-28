@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 16:44:07 by jisookim          #+#    #+#             */
-/*   Updated: 2022/09/26 22:40:40 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/28 12:53:23 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,16 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 {
 	char	*envkey_to_input;
 	char	*envvalue_to_input;
+	int		return_val;
 
+	return_val = 0;
 	while (cmd_argv != NULL)
 	{
 		envkey_to_input = ft_get_key_in_string(cmd_argv->string_value);
 		if (check_key_grammar(envkey_to_input))
 		{
 			process_errno(1, cmd_argv->string_value, IDENTIFIER_ERR);
+			return_val = 1;
 			free(envkey_to_input);
 			cmd_argv = cmd_argv->next;
 			continue ;
@@ -79,7 +82,7 @@ int	add_new_envs(t_token *cmd_argv, t_envlst *env)
 		free_env_key_and_value(envkey_to_input, envvalue_to_input);
 		cmd_argv = cmd_argv->next;
 	}
-	return (0);
+	return (return_val);
 }
 
 int	ft_export(t_cmd *cmd, t_working_info *info)
