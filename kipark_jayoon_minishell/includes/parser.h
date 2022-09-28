@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 15:33:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 16:53:47 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 15:32:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ typedef struct s_parsing_data_structure
 
 /* parser */
 t_parsing_list	*parse_tokenized_data(t_token *l_token);
-t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
-				t_parsing_list *head);
+t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token);
 
 /* init linked list node */
 t_parsing_list	*init_parsing_list(void);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_syntax_and_set_parsing_list.c                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:43:02 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/22 21:41:30 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/27 15:31:32 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,18 +44,19 @@ static void	init_redir_iter(t_parsing_list *l_parsing)
 	l_parsing->redir_iter->l_output = NULL;
 }
 
-t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token,
-				t_parsing_list *head)
+t_parsing_list	*check_syntax_and_set_parsing_list(t_token *l_token)
 {
 	void			*node;
 	t_parsing_list	*l_parsing;
+	t_parsing_list	*head;
 
-	l_parsing = head;
 	l_token = l_token->next;
 	if (!l_token)
 		return (NULL);
 	if (l_token->type == T_PIPE)
 		return ((t_parsing_list *)print_syntax_error());
+	l_parsing = init_parsing_list();
+	head = l_parsing;
 	while (l_token)
 	{
 		if (is_word(l_token->type))

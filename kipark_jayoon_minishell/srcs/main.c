@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 22:20:59 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/26 20:10:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static void	syntax_error_continue(char *line, t_token *token, \
 	free_all(line, token, l_parsing);
 }
 
+//norm
+#include "exit_status.h"
 int main(int argc, char **argv, char **envp)
 {
 	char			*line;
@@ -68,6 +70,8 @@ int main(int argc, char **argv, char **envp)
 			}
 			execute_cmd(l_parsing, l_env);
 			add_history(line);
+			// print exit status
+			printf("exit status : %d\n", g_exit_status);
 			free_all(line, token, l_parsing);
 			token = NULL;
 			l_parsing = NULL;

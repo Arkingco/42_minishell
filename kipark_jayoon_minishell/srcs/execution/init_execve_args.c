@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   process_execve_args.c                              :+:      :+:    :+:   */
+/*   init_execve_args.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:16:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 21:40:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/26 14:16:11 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,18 @@ static void	strjoin_slash_to_path(t_args_execve *p_args)
 	}
 }
 
-static void	process_path(t_args_execve *p_args, t_env *l_env)
+static void	init_path(t_args_execve *p_args, char **envp)
 {
 	char	*str_path;
-	
-	str_path = get_env_value(l_env, "PATH");
+
+	while (*envp)
+	{
+		if (!ft_strncmp(*envp, "PATH=", 5))
+			break ;
+		envp++;
+	}
+	str_path = *envp + 5;
 	p_args->path = ft_split(str_path, ':');
-	ft_safe_free(str_path);
 	ft_check_error(E_LIBFT, (ssize_t)p_args->path);
 	strjoin_slash_to_path(p_args);
 }
@@ -54,7 +59,7 @@ static int	count_num_args(t_simple_cmd *l_simple_cmd)
 	return (num);
 }
 
-static void	process_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
+static void	init_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
 				int num_args)
 {
 	int	i;
@@ -70,12 +75,12 @@ static void	process_argv(t_parsing_list *l_parsing, t_args_execve *p_args,
 	p_args->argv[i] = NULL;
 }
 
-void	process_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
-			t_env *l_env)
+void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
+			char **envp)
 {
 	int	num_args;
 
-	process_path(p_args, l_env);
+	init_path(p_args, envp);
 	num_args = count_num_args(l_parsing->l_simple_cmd);
-	process_argv(l_parsing, p_args, num_args);
+	init_argv(l_parsing, p_args, num_args);
 }
