@@ -6,7 +6,7 @@
 /*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 14:45:02 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/27 01:12:24 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/28 18:01:16 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	exec_executing(t_working_info *info);
 int		ft_wait_childs(pid_t *child_pids, int cmd_count);
 
 // exec_file
-int	check_and_get_infile_noexit(t_token *output);
-int	check_and_get_outfile_noexit(t_token *output);
+int		check_and_get_infile_noexit(t_token *output);
+int		check_and_get_outfile_noexit(t_token *output);
 
 // exec_file_check
 int		check_and_get_infile(t_token *input);
