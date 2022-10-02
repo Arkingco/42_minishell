@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_it_parent.c                                     :+:      :+:    :+:   */
+/*   init_redir_iter.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/28 21:23:29 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/02 14:23:32 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/02 14:24:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "libft.h"
+#include "parser.h"
 
-void	do_it_parent(int *fd, t_info_process *info_proc)
+void	init_redir_iter(t_parsing_list *l_parsing)
 {
-	if (info_proc->num_proc > 1)
-	{
-		if (info_proc->idx_curr_proc != 0)
-			safe_close(fd[2]);
-		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-		{
-			safe_close(fd[1]);
-			fd[2] = fd[0];
-		}
-	}
+	l_parsing->redir_iter 
+		= (t_redir_iter *)ft_safe_malloc(sizeof(t_redir_iter));
+	l_parsing->redir_iter->l_input = NULL;
+	l_parsing->redir_iter->l_output = NULL;
 }

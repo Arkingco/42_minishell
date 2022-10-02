@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 20:10:02 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/02 14:06:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int main(int argc, char **argv, char **envp)
 			}
 			execute_cmd(l_parsing, l_env);
 			add_history(line);
+
 			// print exit status
 			printf("exit status : %d\n", g_exit_status);
 			free_all(line, token, l_parsing);

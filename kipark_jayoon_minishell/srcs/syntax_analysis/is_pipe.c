@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_it_parent.c                                     :+:      :+:    :+:   */
+/*   is_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/28 21:23:29 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/02 14:22:22 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/02 14:22:52 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include "lexer.h"
 
-void	do_it_parent(int *fd, t_info_process *info_proc)
+int	is_pipe(char type)
 {
-	if (info_proc->num_proc > 1)
-	{
-		if (info_proc->idx_curr_proc != 0)
-			safe_close(fd[2]);
-		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-		{
-			safe_close(fd[1]);
-			fd[2] = fd[0];
-		}
-	}
+	if (type == T_PIPE)
+		return (0);
+	return (1);
 }

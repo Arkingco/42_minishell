@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/28 17:27:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/02 14:28:56 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,16 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 			int *fd, t_info_process *info_proc)
 {
+	// int	redir_fd[2];
+
 	init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
 	// redirection 으로 update fd
-	// 처음이 아닐 때
+	
 	if (info_proc->idx_curr_proc != 0)
 	{
 		safe_dup2(fd[2], 0);
 		safe_close(fd[2]);
 	}
-	// 마지막 프로세스가 아닐 때
 	if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
 	{
 		safe_close(fd[0]);
