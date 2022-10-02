@@ -43,21 +43,27 @@ SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_A
 SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
 								add_redir_chunk_node.c \
 								add_simple_cmd_node.c \
-								check_syntax_and_set_parsing_list.c \
 								free_parsing_list.c \
 								init_parsing_list.c \
 								init_redir_chunk_node.c \
 								init_simple_cmd_node.c \
 								is_redirection.c \
 								is_word.c \
-								parser.c
+								parser.c \
+								init_redir_iter.c \
+								is_pipe.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS_EXECUTION				:=	execute_cmd.c \
+SRCS_EXECUTION				:=	do_it_child.c \
+								do_it_parent.c \
+								execute_cmd.c \
 								init_curr_envp.c \
-								is_single_cmd.c \
 								init_execve_args.c \
+								is_single_cmd.c \
+								safe_close.c \
+								safe_dup2.c \
 								safe_fork.c \
+								safe_pipe.c \
 								wait_all_child.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
