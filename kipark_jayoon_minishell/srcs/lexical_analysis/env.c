@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:22:26 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 18:45:02 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 16:57:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 t_env	*set_shell_env_list(char **envp)
 {
-	t_env *env_head;
+	t_env	*env_head;
 
 	env_head = ft_safe_malloc(sizeof(t_env));
 	env_head->str = NULL;
@@ -25,4 +25,16 @@ t_env	*set_shell_env_list(char **envp)
 	env_head->next = NULL;
 	set_env_list(env_head, envp);
 	return (env_head);
+}
+
+void	set_env_list(t_env *env_head, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		env_add(env_head, envp[i]);
+		++i;
+	}
 }

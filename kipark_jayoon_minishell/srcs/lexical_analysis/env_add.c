@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 12:30:00 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/02 17:06:21 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-static t_env *get_dup_env(t_env *env, char *str)
+static t_env	*get_dup_env(t_env *env, char *str)
 {
-	int		str_key_size;
-	char	*str_key;
-	t_env	*this_env;
+	char		*str_key;
+	t_env		*this_env;
+	const int	str_key_size = ft_strlen(str_key);
 
 	str_key = get_env_key(str);
-	str_key_size = ft_strlen(str_key);
 	this_env = env->next;
 	while (this_env)
 	{
@@ -37,31 +36,19 @@ static t_env *get_dup_env(t_env *env, char *str)
 	return (NULL);
 }
 
-void	init_env_dummy_node(t_env *new_env)
+t_env	*new_env_node(char *env_str)
 {
-	new_env->str = NULL;
-	new_env->key = NULL;
-	new_env->value = NULL;
-	new_env->next = NULL;
-}
-
-t_env *new_env_node(char *env_str)
-{
-	t_env	*new_env;
-	int		env_key_size;
-	int		env_str_eqaul_index;
+	t_env		*new_env;
+	const int	equal_index = ft_strchr_index(env_str, '=');
 
 	new_env = ft_safe_malloc(sizeof(t_env));
-	init_env_dummy_node(new_env);
-	env_key_size = get_env_key_size(env_str);
-	env_str_eqaul_index = ft_strchr_index(env_str, '=');
 	new_env->str = ft_safe_strdup(env_str);
-	new_env->key = ft_safe_substr(env_str, 0, env_key_size);
-	if (!env_str_eqaul_index)
-		new_env->value = ft_strdup("");
+	new_env->key = ft_safe_substr(env_str, 0, get_env_key_size(env_str));
+	if (!equal_index)
+		new_env->value = NULL;
 	else
 		new_env->value = ft_safe_substr(env_str, \
-								env_str_eqaul_index + 1, ft_strlen(env_str));
+								equal_index + 1, ft_strlen(env_str));
 	new_env->next = NULL;
 	return (new_env);
 }
@@ -74,32 +61,19 @@ void	env_add(t_env *env_head, char *env_str)
 	dup_env = get_dup_env(env_head, env_str);
 	if (dup_env)
 	{
+		if ((size_t)get_env_key_size(env_str) == ft_strlen(env_str))
+			return ;
 		free(dup_env->str);
-		free(dup_env->value);
-		///
-		/// value 비어 있을 때 처리 해야함
-		/// 
+		if (dup_env->value != NULL)
+			free(dup_env->value);
 		dup_env->str = ft_strdup(env_str);
 		dup_env->value = ft_safe_substr(env_str, \
 					ft_strchr_index(env_str, '=') + 1, ft_strlen(env_str));
+		return ;
 	}
-	else
-	{
-		curr = env_head;
-		while (curr->next != NULL)
-			curr = curr->next;
-		curr->next = new_env_node(env_str);
-	}
-}
-
-void	set_env_list(t_env *env_head, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		env_add(env_head, envp[i]);
-		++i;
-	}
+	curr = env_head;
+	while (curr->next != NULL)
+		curr = curr->next;
+	curr->next = new_env_node(env_str);
+	
 }

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 16:06:23 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 15:43:01 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	env_node_free(t_env *env_node)
 {
 	free(env_node->key);
 	free(env_node->str);
-	free(env_node->value);
+	if (env_node->value != NULL)
+		free(env_node->value);
 	free(env_node);
 }
 
@@ -49,7 +50,7 @@ static void	delete_env_node(char *str, t_env *env)
 
 int	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 {
-	int unset_exit_status;
+	int	unset_exit_status;
 
 	unset_exit_status = 0;
 	if (simple_cmd->next == NULL)

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 15:41:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/27 20:28:59 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <string.h>
 #include <errno.h>
 #include <stdio.h>
+#include "exit_status.h"
 
 void	update_pwd(t_env *env)
 {
@@ -35,7 +36,8 @@ void	update_pwd(t_env *env)
 
 int	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
 {
-	int	chdir_status;	
+	int	chdir_status;
+	int	cd_exit_status;
 
 	if (simple_cmd->next == NULL)
 		return (0);
@@ -44,9 +46,9 @@ int	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
 	if (chdir_status == 0)
 		update_pwd(env);
 	else
+	{
 		ft_putendl_fd(strerror(errno), 2);
-	//
-	// exit_status 핸들링
-	//
+		return (cd_exit_status = errno);
+	}
 	return (0);
 }

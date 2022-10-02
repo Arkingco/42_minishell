@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/20 13:45:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/24 16:17:43 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 15:50:54 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 void	print_token_list(t_token *token_head)
 {
-	t_token *this_token;
+	t_token	*this_token;
 
 	this_token = token_head->next;
 	while (this_token)
@@ -37,8 +37,8 @@ void	init_token_dummy_node(t_token *new_token)
 
 void	token_free(t_token *token)
 {
-	t_token *this_token;
-	t_token *next;
+	t_token	*this_token;
+	t_token	*next;
 
 	this_token = token;
 	while (this_token)
@@ -52,9 +52,9 @@ void	token_free(t_token *token)
 	return ;
 }
 
-t_token *new_token_node(t_token_type token_type, char *token_str)
+t_token	*new_token_node(t_token_type token_type, char *token_str)
 {
-	t_token *new_token;
+	t_token	*new_token;
 
 	new_token = ft_safe_malloc(sizeof(t_token));
 	init_token_dummy_node(new_token);
@@ -73,5 +73,5 @@ void	token_add(t_token *token_head, t_token_type token_type, \
 		curr = curr->next;
 	curr->next = new_token_node(token_type, token_str);
 	if (curr->next == NULL)
-		printf("allocate error\n");
+		ft_check_error(E_MALLOC, (ssize_t)curr->next);
 }
