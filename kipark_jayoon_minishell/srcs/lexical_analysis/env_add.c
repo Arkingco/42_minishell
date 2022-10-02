@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 16:58:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/02 17:06:21 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 
 static t_env	*get_dup_env(t_env *env, char *str)
 {
-	char	*str_key;
-	t_env	*this_env;
+	char		*str_key;
+	t_env		*this_env;
+	const int	str_key_size = ft_strlen(str_key);
 
 	str_key = get_env_key(str);
 	this_env = env->next;
 	while (this_env)
 	{
-		if (ft_strncmp(this_env->key, str_key, ft_strlen(str_key)) == 0)
+		if (ft_strncmp(this_env->key, str_key, str_key_size + 1) == 0)
 		{
 			free(str_key);
 			return (this_env);
@@ -38,7 +39,7 @@ static t_env	*get_dup_env(t_env *env, char *str)
 t_env	*new_env_node(char *env_str)
 {
 	t_env		*new_env;
-	int			equal_index = ft_strchr_index(env_str, '=');
+	const int	equal_index = ft_strchr_index(env_str, '=');
 
 	new_env = ft_safe_malloc(sizeof(t_env));
 	new_env->str = ft_safe_strdup(env_str);
