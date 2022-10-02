@@ -37,7 +37,8 @@ SRCS_LEXICAL_ANALYSIS		:=	lexer_util.c			\
 								env.c					\
 								env_add.c				\
 								env_print.c				\
-								env_util.c				
+								env_util.c				\
+								env_key_value.c
 SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
 SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \

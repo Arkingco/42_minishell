@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_print.c                                        :+:      :+:    :+:   */
+/*   env_key_value.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 16:43:00 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/28 16:18:31 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/28 16:42:58 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "env.h"
 #include "libft.h"
-#include <stdio.h>
-#include <stdlib.h>
+#include "exit_status.h"
 
-void	print_env_list(t_env *env_head)
+char	*get_env_key(char *str)
+{
+	char	*env_key;
+
+	env_key = ft_safe_substr(str, 0, get_env_key_size(str));
+	return (env_key);
+}
+
+char	*get_env_value(t_env *env_head, char *env_key)
 {
 	t_env	*env_list;
 
 	env_list = env_head->next;
+	if (*env_key == '?')
+		return (ft_strdup(ft_itoa(g_exit_status)));
 	while (env_list)
 	{
-		if (env_list->value != NULL)
-			printf("%s=%s\n", env_list->key, env_list->value);
+		if (ft_strncmp(env_key, env_list->key, ft_strlen(env_key) + 1) == 0)
+		{
+			if (env_list->value == NULL)
+				return (ft_strdup(""));
+			return (ft_safe_strdup(env_list->value));
+		}
 		env_list = env_list->next;
 	}
+	return (ft_safe_strdup(""));
 }

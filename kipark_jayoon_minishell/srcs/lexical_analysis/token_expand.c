@@ -1,12 +1,12 @@
-
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   token_expand.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 11:18:15 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/23 11:37:59 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/09/28 15:51:00 by kipark            #+#    #+#             */
+/*   Updated: 2022/09/28 15:51:17 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ char	*expand_this_word_token(t_env *env_head, char *expand_str)
 	}
 	return (expand_str);
 }
-
 
 static int	set_word_token_return_index(char *rl, int i)
 {

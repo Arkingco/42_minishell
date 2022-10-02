@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 15:49:20 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/02 13:20:58 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ int	get_quote_type_return_index(char *rl, int i, \
 												t_token_type this_token_type)
 {
 	if (this_token_type == T_SINGLE_QUOTE)
+	{
 		while (rl[i] != M_SINGLE_QUOTE && rl[i + 1] != '\0')
 		{
 			++i;
 		}
+	}
 	else if (this_token_type == T_DOUBLE_QUOTE && rl[i + 1] != '\0')
+	{
 		while (rl[i] != M_DOUBLE_QUOTE && rl[i + 1] != '\0')
 			++i;
+	}
 	return (i);
 }
 
@@ -34,6 +38,7 @@ static int	set_token_type_return_index(char *rl, int i, \
 {
 	*t_type = this_token_type;
 	if (this_token_type == T_WORD)
+	{
 		while (rl[i + 1] != '\0')
 		{
 			if (rl[i] == M_SINGLE_QUOTE)
@@ -45,6 +50,7 @@ static int	set_token_type_return_index(char *rl, int i, \
 				return (i);
 			++i;
 		}
+	}
 	else if (this_token_type == T_INPUT_REDIR || this_token_type == \
 		T_OUTPUT_REDIR || this_token_type == T_PIPE)
 		i = i + 0;
@@ -69,7 +75,7 @@ static int	set_meta_token_type_return_end_index(char *rl, int i, \
 		if (rl[i + 1] == M_OUTPUT_REDIR)
 			return (set_token_type_return_index(rl, i, T_APPEND_REDIR, t_type));
 		else
-			return (set_token_type_return_index(rl, i, T_OUTPUT_REDIR, t_type));	
+			return (set_token_type_return_index(rl, i, T_OUTPUT_REDIR, t_type));
 	}
 	else if (rl[i] == M_PIPE)
 		return (set_token_type_return_index(rl, i, T_PIPE, t_type));
@@ -82,7 +88,6 @@ static void	read_readline(t_env *env_head, char *rl, t_token *token_head)
 	int				end;
 	t_token_type	t_type;
 
-	start = 0;
 	end = 0;
 	t_type = T_NULL;
 	while (rl[end] != '\0')
@@ -108,17 +113,16 @@ static void	read_readline(t_env *env_head, char *rl, t_token *token_head)
 
 t_token	*tokenize(t_env *env_head, char *readline)
 {
-	t_token *token_head;
+	t_token	*token_head;
 
 	token_head = ft_safe_malloc(sizeof(t_token));
 	init_token_dummy_node(token_head);
-	if (check_readline_able_parse(readline))
+	if (check_readline_quote_close(readline))
 	{
 		printf("syntax error\n");
 		return (NULL);
 	}
 	read_readline(env_head, readline, token_head);
 	remove_quote(token_head);
-	print_token_list(token_head);
 	return (token_head);
 }

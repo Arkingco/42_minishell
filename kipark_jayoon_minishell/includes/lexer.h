@@ -6,22 +6,22 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:37:04 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 12:26:32 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 17:01:05 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 
-#include "env.h"
+# include "env.h"
 
 typedef enum e_metacharacter
 {
-	M_DOUBLE_QUOTE 		= '\"',
-	M_SINGLE_QUOTE 		= '\'',
-	M_INPUT_REDIR 		= '<',
-	M_OUTPUT_REDIR 		= '>',
-	M_PIPE 				= '|',
+	M_DOUBLE_QUOTE		= '\"',
+	M_SINGLE_QUOTE		= '\'',
+	M_INPUT_REDIR		= '<',
+	M_OUTPUT_REDIR		= '>',
+	M_PIPE				= '|',
 	M_DOLLAR_EXPAND		= '$',
 }	t_metacharacter;
 
@@ -49,7 +49,7 @@ typedef struct s_token
 t_token	*tokenize(t_env *env_head, char *readline);
 void	word_token_add(t_token *token_head, t_token_type t_type, \
 															char *expand_str);
-int	get_quote_type_return_index(char *rl, int i, \
+int		get_quote_type_return_index(char *rl, int i, \
 												t_token_type this_token_type);
 // token*.c
 void	init_token_dummy_node(t_token *token_head);
@@ -65,11 +65,10 @@ char	*expand_this_word_token(t_env *env_head, char *expand_str);
 int		pass_ifs(char *rl, int i);
 int		ft_isifs(int c);
 int		is_metachar_not_include_quote(char c);
-int		check_readline_able_parse(char *rl);
+int		check_readline_quote_close(char *rl);
 void	pass_sigle_quote(char *str, int *i);
 
 // token_quote_*.c
 void	remove_quote(t_token *token_head);
-
 
 #endif

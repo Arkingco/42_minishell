@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 16:08:33 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 15:42:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	is_built_in(t_simple_cmd *simple_cmd)
 	return (0);
 }
 
-void	execute_bulit_in(t_simple_cmd *simple_cmd, t_env *env, 
+void	execute_bulit_in(t_simple_cmd *simple_cmd, t_env *env, \
 											t_execute_cmd_division division_cmd)
 {
-	int built_in_exit_status;
+	int	built_in_exit_status;
 
 	built_in_exit_status = 0;
 	if (!ft_strncmp(simple_cmd->str, "cd", 3))

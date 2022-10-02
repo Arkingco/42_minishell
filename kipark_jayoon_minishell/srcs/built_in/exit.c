@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/26 15:58:52 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 15:44:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_all_digit(char *str)
 
 int	built_in_exit(t_simple_cmd *simple_cmd)
 {
-	int exit_exit_status;
+	int	exit_exit_status;
 
 	exit_exit_status = 0;
 	if (simple_cmd->next == NULL)
@@ -49,7 +49,7 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 		}
 		else
 		{
-			printf("exit\nbash: exit: %s: numeric argument required\n", \
+			printf("minishell\n: exit: %s: numeric argument required\n", \
 														simple_cmd->next->str);
 			exit(255);
 		}

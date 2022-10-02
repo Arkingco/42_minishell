@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/26 20:16:56 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/09/28 16:00:19 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 static void	sig_handler(int signum)
 {
 	if (signum != SIGINT)
-		return;
+		return ;
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 1);

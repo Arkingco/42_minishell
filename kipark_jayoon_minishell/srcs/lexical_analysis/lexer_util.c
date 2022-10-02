@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_utils.c                                      :+:      :+:    :+:   */
+/*   lexer_util.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:05:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/08/27 15:46:01 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/09/28 17:00:56 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	pass_ifs(char *rl, int i)
 	return (i);
 }
 
-int	check_readline_able_parse(char *rl)
+int	check_readline_quote_close(char *rl)
 {
 	int	i;
 	int	type;
