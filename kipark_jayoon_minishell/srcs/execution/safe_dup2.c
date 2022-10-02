@@ -1,17 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sigset.h                                           :+:      :+:    :+:   */
+/*   safe_dup2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 00:51:27 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/17 01:19:07 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/28 14:19:12 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/28 14:19:23 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef SIGSET_H
-# define SIGSET_H
+#include "libft.h"
 
+void	safe_dup2(int from, int to)
+{
+	int	ret;
 
-#endif
+	ret = dup2(from, to);
+	ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
+}

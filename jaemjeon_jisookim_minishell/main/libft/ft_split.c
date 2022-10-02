@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: jisookim <jisookim@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/16 19:45:50 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/03/16 19:45:52 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/24 20:49:18 by jisookim         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ static void	free_back(char **table, int idx)
 	while (f_idx < idx)
 	{
 		free(table[f_idx]);
+		table[f_idx] = 0;
 		f_idx++;
 	}
 	free(table);

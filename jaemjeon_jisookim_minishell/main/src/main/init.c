@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jaemjeon <jaemjeon@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 02:51:03 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/20 12:55:38 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/27 13:09:15 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,10 @@ void	init_cur_path(t_working_info *info)
 {
 	info->cur_path = getcwd(NULL, 0);
 	if (info->cur_path == NULL)
-		perror("initiating minishell.. error in getcwd..");
+		process_errno(errno, "string", GET_CWD_ERR);
 	else
 		ft_setenv(info->env, "PWD", info->cur_path, TRUE);
-	// info->dp = opendir(info->cur_path);
-	// if (info->dp == NULL)
-	// 	perror("initiating minishell.. error in opendir..");
 	ft_delenv(&info->env, "OLDPWD");
-}
-
-void	argument_error_check(int argc)
-{
-	if (argc != 1)
-		ft_error_exit(1, "too many arguments");
 }
 
 void	update_shlvl(t_envlst **env)
@@ -47,6 +38,7 @@ void	update_shlvl(t_envlst **env)
 		shlvl_value_string = ft_itoa(shlvl_value_int);
 		ft_setenv(*env, "SHLVL", shlvl_value_string, TRUE);
 		free(shlvl_value_string);
+		shlvl_value_string = 0;
 	}
 }
 

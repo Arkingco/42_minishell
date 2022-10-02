@@ -1,6 +1,7 @@
 *.DS_Store
 *.vscode
 *libft.a
+./kipark_jayoon_minishell/minishell
 
 # Prerequisites
 *.d

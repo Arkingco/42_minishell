@@ -6,7 +6,11 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/09/28 16:00:27 by kipark           ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/10/02 14:06:20 by jayoon           ###   ########.fr       */
+>>>>>>> 92854da70dffa0a58fac521dd214c12566dc68b5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +74,7 @@ int main(int argc, char **argv, char **envp)
 			}
 			execute_cmd(l_parsing, l_env);
 			add_history(line);
+
 			// print exit status
 			printf("exit status : %d\n", g_exit_status);
 			free_all(line, token, l_parsing);

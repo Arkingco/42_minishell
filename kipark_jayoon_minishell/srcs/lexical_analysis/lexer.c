@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/02 13:20:58 by kipark           ###   ########seoul.kr  */
+=======
+/*   Updated: 2022/09/28 15:12:26 by jayoon           ###   ########.fr       */
+>>>>>>> 92854da70dffa0a58fac521dd214c12566dc68b5
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,5 +128,9 @@ t_token	*tokenize(t_env *env_head, char *readline)
 	}
 	read_readline(env_head, readline, token_head);
 	remove_quote(token_head);
+<<<<<<< HEAD
+=======
+	// print_token_list(token_head);
+>>>>>>> 92854da70dffa0a58fac521dd214c12566dc68b5
 	return (token_head);
 }

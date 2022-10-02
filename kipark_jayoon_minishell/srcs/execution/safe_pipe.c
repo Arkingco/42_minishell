@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   working_dir.h                                      :+:      :+:    :+:   */
+/*   safe_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/14 02:12:58 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/09/21 14:25:54 by jaemjeon         ###   ########.fr       */
+/*   Created: 2022/09/28 14:16:54 by jayoon            #+#    #+#             */
+/*   Updated: 2022/09/28 14:17:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WORKING_DIR
-# define WORKING_DIR
+#include "libft.h"
 
-# include <stdio.h>
-# include <dirent.h>
-# include "env.h"
+void	safe_pipe(int *fd)
+{
+	int	ret;
 
-#endif
+	ret = pipe(fd);
+	ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
+}

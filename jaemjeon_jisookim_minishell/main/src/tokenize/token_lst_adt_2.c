@@ -1,27 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   token_list_adt_2.c                                 :+:      :+:    :+:   */
+/*   token_lst_adt_2.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaemjeon <jaemjeon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 03:13:16 by jaemjeon          #+#    #+#             */
-/*   Updated: 2022/08/31 14:59:11 by jaemjeon         ###   ########.fr       */
+/*   Updated: 2022/09/26 17:24:19 by jaemjeon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	ft_deltoken(t_token **lst)
+void	ft_deltoken_handler(t_token *prev_token, t_token *next_token, \
+																t_token **lst)
 {
-	t_token	*to_free_token;
-	t_token	*prev_token;
-	t_token	*next_token;
-
-	to_free_token = *lst;
-	prev_token = to_free_token->prev;
-	next_token = to_free_token->next;
-	ft_free_token(to_free_token);
 	if (prev_token == NULL && next_token == NULL)
 		*lst = NULL;
 	else if (prev_token == NULL)
@@ -38,7 +31,20 @@ void	ft_deltoken(t_token **lst)
 	}
 }
 
-t_token		*ft_token_lst_first(t_token *lst)
+void	ft_deltoken(t_token **lst)
+{
+	t_token	*to_free_token;
+	t_token	*prev_token;
+	t_token	*next_token;
+
+	to_free_token = *lst;
+	prev_token = to_free_token->prev;
+	next_token = to_free_token->next;
+	ft_free_token(to_free_token);
+	ft_deltoken_handler(prev_token, next_token, lst);
+}
+
+t_token	*ft_token_lst_first(t_token *lst)
 {
 	if (lst == NULL)
 		return (NULL);
@@ -57,26 +63,13 @@ t_token	*ft_make_newtoken(unsigned int type, char *string_value)
 	if (new_token == NULL)
 		ft_error_exit(1, "malloc failed in ft_calloc in ft_make_newtoken");
 	new_token->type = type;
-	new_token->string_value = ft_strdup(string_value);
+	if (string_value != NULL)
+		new_token->string_value = ft_strdup(string_value);
+	else
+		new_token->string_value = ft_strdup("");
 	if (new_token->string_value == NULL)
 		ft_error_exit(1, "malloc failed in ft_strdup in ft_make_newtoken");
 	return (new_token);
-}
-
-void	ft_insert_token(t_token *prev_to_insert, t_token *to_insert)
-{
-	t_token	*next_of_inserted;
-
-	if (to_insert == NULL)
-		return ;
-	next_of_inserted = prev_to_insert->next;
-	prev_to_insert->next = to_insert;
-	to_insert->prev = prev_to_insert;
-	while (to_insert->next != NULL)
-		to_insert = to_insert->next;
-	to_insert->next = next_of_inserted;
-	if (next_of_inserted != NULL)
-		next_of_inserted->prev = to_insert;
 }
 
 t_token	*ft_strtok_token(unsigned int type, char **string)
@@ -103,6 +96,7 @@ t_token	*ft_strtok_token(unsigned int type, char **string)
 	if (new_string == NULL)
 		ft_error_exit(1, "malloc failed in ft_substr in ft_strtok_token");
 	output_token = ft_make_newtoken(type, new_string);
+	free(new_string);
 	*string = string_end;
 	return (output_token);
 }
