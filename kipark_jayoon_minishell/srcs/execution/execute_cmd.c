@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 14:07:14 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/03 15:57:59 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,26 @@ static size_t	count_the_number_of_processes(t_parsing_list *l_parsing)
 	return (num);
 }
 
+static void	init_std_fd(int *fd)
+{
+	fd[0] = 0;
+	fd[1] = 1;
+	fd[2] = 0;
+}
+
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
 	t_info_process	info_proc;
 	int				fd[3];
 	
+	// if (run_here_doc() == NULL)
+	// 	return ;
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	else
 	{
+		init_std_fd(fd);
 		info_proc.idx_curr_proc = 0;
 		info_proc.num_proc = count_the_number_of_processes(l_parsing);
 		l_env = l_env->next;
