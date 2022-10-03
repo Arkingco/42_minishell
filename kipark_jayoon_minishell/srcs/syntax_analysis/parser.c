@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 20:04:34 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 17:58:22 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,121 +14,76 @@
 #include "lexer.h"
 #include "parser.h"
 #include <stdlib.h>
-
-//libft
 #include "libft.h"
 
-//print parsing list
-// #include <stdio.h>
-// static void 	print_parsing_list(t_parsing_list *l_parsing)
-// {
-// 	t_simple_cmd	*head_cmd;
-// 	t_redir_chunk	*head_redir;
+static void	do_it_at_word(t_token *l_token, t_parsing_list *l_parsing)
+{
+	t_simple_cmd	*node;
 
-// 	if (!l_parsing)
-// 		return ;
+	node = init_simple_cmd_node(l_token->str);
+	add_simple_cmd_node(&l_parsing->l_simple_cmd, (t_simple_cmd *)node);
+}
 
-// 	printf("\n\n*parsing list*\n\n");
-// 	while (l_parsing)
-// 	{
-// 		// simple cmd
-// 		if (l_parsing->l_simple_cmd)
-// 		{
-// 			head_cmd = l_parsing->l_simple_cmd;
-// 			while (head_cmd)
-// 			{
-// 				printf("****simple cmd****\n");
-// 				printf("simple cmd:		%s\n\n", head_cmd->str);
-// 				head_cmd = head_cmd->next;
-// 			}
-// 		}
-// 		// redirection
-// 		if (l_parsing->redir_iter)
-// 		{
-// 			// redirection input
-// 			head_redir = l_parsing->redir_iter->l_input;
-// 			while (head_redir)
-// 			{
-// 				printf("****Input_redirection****\n");
-// 				printf("redirection:		%s\n", head_redir->redir);
-// 				printf("file_path:		%s\n\n", head_redir->file_name);
-// 				head_redir = head_redir->next;
-// 			}
-// 			// redirection output
-// 			head_redir = l_parsing->redir_iter->l_output;
-// 			while (head_redir)
-// 			{
-// 				printf("****Output_redirection****\n");
-// 				printf("redirection:		%s\n", head_redir->redir);
-// 				printf("file_path:		%s\n\n", head_redir->file_name);
-// 				head_redir = head_redir->next;
-// 			}
-// 		}
-// 		if (l_parsing->next)
-// 			printf("------------------ next -------------- \n\n");	
-// 		l_parsing = l_parsing->next;
-// 	}
-// }
+static void	*do_it_at_redirection(t_token *l_token, t_parsing_list *l_parsing)
+{
+	t_redir_chunk	*node;
 
+	if (!l_token->next || l_token->next->type != T_WORD)
+		return (print_syntax_error(l_token));
+	if (l_parsing->redir_iter == NULL)
+		init_redir_iter(l_parsing);
+	node = init_redir_chunk_node(l_token->str, l_token->next->str);
+	if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
+		add_redir_chunk_node(&l_parsing->redir_iter->l_input,
+			(t_redir_chunk *)node);
+	else
+		add_redir_chunk_node(&l_parsing->redir_iter->l_output,
+			(t_redir_chunk *)node);
+	return (node);
+}
 
+static void	*do_it_at_pipe(t_token *l_token, t_parsing_list *l_parsing)
+{
+	t_parsing_list	*node;
+	
+	if (!l_token->next || !is_pipe(l_token->next->type))
+		return (print_syntax_error(l_token));
+	node = init_parsing_list();
+	add_parsing_list_node(l_parsing, (t_parsing_list *)node);
+	return (node);
+}
 
-// static void	do_it_at_word(void)
-// {
-// }
-// static void	do_it_at_redirection(void)
-// {
-// }
-// static void	do_it_at_pipe(void)
-// {
-// }
-
+static t_parsing_list	*init_parser(t_parsing_list **l_parsing)
+{
+	*l_parsing = init_parsing_list();
+	return (*l_parsing);
+}
 
 t_parsing_list	*parse_tokenized_data(t_token *l_token)
 {
-	void			*node;
 	t_parsing_list	*l_parsing;
 	t_parsing_list	*head;
 
-	l_token = l_token->next;
-	if (!l_token)
-		return (NULL);
-	if (l_token->type == T_PIPE)
-		return ((t_parsing_list *)print_syntax_error());
-	l_parsing = init_parsing_list();
-	head = l_parsing;
+	if (!l_token->next || l_token->next->type == T_PIPE)
+		return ((t_parsing_list *)print_syntax_error(l_token->next));
+	head = init_parser(&l_parsing);
 	while (l_token)
 	{
 		if (is_word(l_token->type))
-		{
-			node = init_simple_cmd_node(l_token->str);
-			add_simple_cmd_node(&l_parsing->l_simple_cmd, (t_simple_cmd *)node);
-		}
+			do_it_at_word(l_token, l_parsing);
 		else if (is_redirection(l_token->type))
 		{
-			if (!l_token->next || l_token->next->type != T_WORD)
-				return (print_syntax_error());
-			if (l_parsing->redir_iter == NULL)
-				init_redir_iter(l_parsing);
-			node = init_redir_chunk_node(l_token->str, l_token->next->str);
-			if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
-				add_redir_chunk_node(&l_parsing->redir_iter->l_input,
-					(t_redir_chunk *)node);
-			else
-				add_redir_chunk_node(&l_parsing->redir_iter->l_output,
-					(t_redir_chunk *)node);
+			if (do_it_at_redirection(l_token, l_parsing) == NULL)
+				return (NULL);
 			l_token = l_token->next;
 		}
 		else
 		{
-			if (!l_token->next || !is_pipe(l_token->next->type))
-				return (print_syntax_error());
-			node = init_parsing_list();
-			add_parsing_list_node(l_parsing, (t_parsing_list *)node);
+			if (do_it_at_pipe(l_token, l_parsing) == NULL)
+				return (NULL);
 			l_parsing = l_parsing->next;
 		}
 		l_token = l_token->next;
 	}
 	return (head);
 }
-	//print parsing list
-	// print_parsing_list(l_parsing);

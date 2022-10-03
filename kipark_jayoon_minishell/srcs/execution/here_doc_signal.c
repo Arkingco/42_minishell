@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:39:37 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/03 17:56:32 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 19:49:01 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,18 @@
 #include "here_doc.h"
 #include <readline/readline.h>
 #include <readline/history.h>
+
 void	here_doc_sig_handler(int signum)
 {
-	if (signum != SIGINT)
-		return ;
-	printf("\n");
-	exit(1);
+	if (signum == SIGINT)
+	{
+		printf("\n");
+		exit(1);
+	}
 }
 
 void set_here_doc_sig_handler()
 {
 	signal(SIGINT, here_doc_sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }
