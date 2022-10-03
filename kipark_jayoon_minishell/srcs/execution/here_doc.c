@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/02 20:06:23 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 17:53:12 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,13 @@
 #include "here_doc.h"
 #include "execution.h"
 #include "exit_status.h"
+#include <stdio.h>
 #include <unistd.h>
 #include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
-static void	init_exit_status(int status)
+static int	get_exit_status(int status)
 {
 	int	return_code;
 	int	signal_number;
@@ -42,79 +43,72 @@ static void	init_exit_status(int status)
 				signal_number = SIGCONT;
 		}			
 	}
-	g_exit_status = return_code + signal_number;
+	return (g_exit_status = return_code + signal_number);
 }
 
-t_here_doc *new_here_doc(int fd)
+void here_doc_child(char *limiter, int *fd)
 {
-	t_here_doc *here_doc;
+	char		*line;
+	char		*pipe_line;
+	const int 	limiter_size = ft_strlen(limiter);
 
-	here_doc = ft_safe_malloc(sizeof(t_here_doc));
-	here_doc->read_end = fd;
-	here_doc->next = NULL;
-}
-
-void add_here_doc(t_here_doc *here_doc, int fd)
-{
-	t_here_doc *this_here_doc;
-
-	this_here_doc = here_doc->next;
-	while (this_here_doc)
-	{
-		this_here_doc = this_here_doc->next;
-	}
-	this_here_doc->next = nwe_here_doc(fd);
-}
-
-void run_here_doc_child(char *limiter, int *fd)
-{
-	char	*str;
-	const int limiter_size = ft_strlen(limiter);
-
-	set_terminal_sighadle();
+	set_here_doc_sig_handler();
 	while(1)
 	{
-		str = readline("> ");
-		if (ft_strncmp(limiter, str, limiter_size + 1) == 0)
-			break;
-		write(fd[1], str, ft_strlen(str));
+		line = readline("> ");
+		if (line)
+		{
+			if (ft_strncmp(limiter, line, limiter_size + 1) == 0)
+			{
+				free(line);
+				break;
+			}
+			pipe_line = ft_safe_strjoin(line, "\n");
+			write(fd[1], pipe_line, ft_strlen(pipe_line));
+			free(pipe_line);
+			free(line);
+		}
+		else
+		{
+			free(line);
+			break ;
+		}
 	}
+	// test
+		// char buffer[100];
+		// read(fd[0], buffer, 100);
+		// printf("%s", buffer);
+	// ------------------------
 	safe_close(fd[0]);
 	safe_close(fd[1]);
-	return ;
+	exit(0);
 }
 
-void run_here_doc_parent(t_here_doc *l_here_doc, int *fd)
+void	tour_parsing_cmd_redir(t_redir_chunk *cmd_redir, t_here_doc *l_here_doc)
 {
-	int status;
-
-	safe_close(fd[1]);
-	wait(&status);
-	if (status == SIGINT)
-		return(free_all_hereDock(l_here_doc));
-	else
-		add_here_doc(l_here_doc, fd[0]);
-}
-
-void	run_here_doc_cmd(t_parsing_list *this_cmd, t_here_doc *l_here_doc)
-{
-	t_redir_chunk	*this_cmd_redir;
 	int				fd[2];
 	int				pid;
+	int				status;
 
-	this_cmd_redir = this_cmd->redir_iter->l_input;
-	while (this_cmd_redir)
+	while (cmd_redir)
 	{
-		if (ft_strncmp(this_cmd_redir->redir, "<<", 3) == 0)
+		if (ft_strncmp(cmd_redir->redir, "<<", 3) == 0)
 		{
 			safe_pipe(fd);
 			pid = safe_fork();
 			if(pid == 0)
-				run_here_doc_child(this_cmd_redir->file_name, fd);
+				here_doc_child(cmd_redir->file_name, fd);
 			else
-				run_here_doc_parent(l_here_doc, fd);
+			{
+				safe_close(fd[1]);
+				wait(&status);
+				if (get_exit_status(status) == 1)
+					return(free_all_here_doc(l_here_doc));
+				else
+					add_here_doc(l_here_doc, fd[0]);	
+			}
 		}
-		this_cmd_redir = this_cmd_redir->next;
+		cmd_redir = cmd_redir->next;
 	}
 }
 
@@ -123,14 +117,16 @@ t_here_doc *init_here_doc(t_parsing_list *l_parsing)
 	t_parsing_list	*this_cmd;
 	t_here_doc		*l_here_doc;
 
-	l_here_doc = ft_safe_malloc(l_here_doc);
+	l_here_doc = ft_safe_malloc(sizeof(t_here_doc));
 	l_here_doc->next = NULL;
 	l_here_doc->read_end = 0;
 	this_cmd = l_parsing;
 	while (this_cmd)
 	{
-		run_here_doc_this_cmd(this_cmd, l_here_doc);
+		if (this_cmd->redir_iter != NULL && \
+										this_cmd->redir_iter->l_input != NULL)
+			tour_parsing_cmd_redir(this_cmd->redir_iter->l_input, l_here_doc);
 		this_cmd = this_cmd->next;
 	}
-	return (NULL);
+	return (l_here_doc);
 }

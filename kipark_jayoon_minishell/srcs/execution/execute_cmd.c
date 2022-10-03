@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 20:04:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 16:35:49 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 #include "execution.h"
 #include "libft.h"
 #include "parser.h"
+#include "here_doc.h"
 
 // printf
 #include <stdio.h>
-
 
 static size_t	count_the_number_of_processes(t_parsing_list *l_parsing)
 {
@@ -37,9 +37,11 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
 	t_info_process	info_proc;
+	t_here_doc		*here_doc;
 	int				fd[3];
 
-	
+	here_doc = init_here_doc(l_parsing);
+	print_here_doc(here_doc);
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	else

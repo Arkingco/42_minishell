@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 15:22:15 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 14:49:09 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ int main(int argc, char **argv, char **envp)
 			l_parsing = NULL;
 		}
 		else
+		{
+			// free(line);
 			exit_readline_return_null();
+		}
 	}
 	return (0);
 }
