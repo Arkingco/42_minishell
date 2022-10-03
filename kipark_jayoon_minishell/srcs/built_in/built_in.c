@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:42:38 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 20:47:20 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 
 int	is_built_in(t_simple_cmd *simple_cmd)
 {
+	if (!simple_cmd)
+		return (0);
 	if (!ft_strncmp(simple_cmd->str, "cd", 3))
 		return (1);
 	else if (!ft_strncmp(simple_cmd->str, "echo", 5))

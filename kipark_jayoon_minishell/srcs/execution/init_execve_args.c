@@ -40,10 +40,15 @@ static void	init_path(t_args_execve *p_args, char **envp)
 			break ;
 		envp++;
 	}
-	str_path = *envp + 5;
-	p_args->path = ft_split(str_path, ':');
-	ft_check_error(E_LIBFT, (ssize_t)p_args->path);
-	strjoin_slash_to_path(p_args);
+	if (*envp != NULL)
+	{
+		str_path = *envp + 5;
+		p_args->path = ft_split(str_path, ':');
+		ft_check_error(E_LIBFT, (ssize_t)p_args->path);
+		strjoin_slash_to_path(p_args);
+	}
+	else
+		p_args->path = NULL;
 }
 
 static int	count_num_args(t_simple_cmd *l_simple_cmd)
@@ -80,6 +85,7 @@ void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 {
 	int	num_args;
 
+	num_args = 0;
 	init_path(p_args, envp);
 	num_args = count_num_args(l_parsing->l_simple_cmd);
 	init_argv(l_parsing, p_args, num_args);

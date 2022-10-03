@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 15:22:15 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 20:23:14 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,18 @@ int main(int argc, char **argv, char **envp)
 	t_token 		*token;
 	t_parsing_list	*l_parsing;
 	t_env			*l_env;
+
+	//test
+	// int	i = 2;
 	
 	l_parsing = NULL;
 	token = NULL;
 	init_terminal();
 	check_argument(argc, argv);
 	l_env = set_shell_env_list(envp);
+
+	//test
+	// while (i--)
 	while (1)
 	{
 		line = readline("minishell$ ");

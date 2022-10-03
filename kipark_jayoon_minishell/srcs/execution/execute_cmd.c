@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 15:57:59 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/03 17:05:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 // printf
 #include <stdio.h>
-
 
 static size_t	count_the_number_of_processes(t_parsing_list *l_parsing)
 {
