@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/04 16:09:36 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/04 21:54:48 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 	}
 	// simple cmd 없을 때 정상적으로 redirection 실행하면 정상 종료!
 	// 실패하면 1로 비정상 종료!
-	exit(1);
+	exit(0);
 }
 
 	// if (info_proc->idx_curr_proc != 0)
