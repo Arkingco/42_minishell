@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 17:57:36 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 16:56:29 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,6 @@ typedef struct s_fd_using_dup2
 	int	output;
 }	t_fd_using_dup2;
 
-// typedef struct s_info_fd
-// {
-// 	t_fd_using_dup2	updated_fd;
-// 	int				pipefd[2];
-// }	t_info_fd;
-
 typedef struct s_info_process
 {
 	pid_t	pid;
@@ -49,7 +43,7 @@ typedef struct s_info_process
 	size_t	num_proc;
 }	t_info_process;
 
-// main
+/* main */
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env);
 void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 			char **envp);

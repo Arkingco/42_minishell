@@ -6,13 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/02 19:49:33 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 16:56:48 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "exit_status.h"
 #include <stdlib.h>
-// #include <sys/wait.h>
+#include <sys/wait.h>
 #include <unistd.h>
 
 static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
@@ -26,6 +26,9 @@ static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
 	while (i < num_process)
 	{
 		wait_pid = wait(&stat_loc);
+		// wait이 성공했을 때만 i 를 올려주는 것 고려하기
+		// if (wait_pid != -1)
+		// 	i++;
 		if (wait_pid == last_fork_pid)
 			this_stat_loc = stat_loc;
 		i++;

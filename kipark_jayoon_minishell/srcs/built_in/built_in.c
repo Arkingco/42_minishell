@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 13:26:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/03 21:16:40 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 16:56:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 int	is_built_in(t_simple_cmd *simple_cmd)
 {
-	if (simple_cmd == NULL)
+	if (!simple_cmd)
 		return (0);
 	if (!ft_strncmp(simple_cmd->str, "cd", 3))
 		return (1);
