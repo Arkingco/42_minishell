@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/28 15:59:18 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 21:26:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,13 @@
 
 # include "lexer.h"
 
-void	init_terminal(void);
+typedef enum e_terminal_type
+{
+	DEFAULT_TERMINAL,
+	HERE_DOC_TERMINAL
+} t_terminal_type;
+
+void	init_terminal(t_terminal_type t_type);
 void	exit_readline_return_null(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:24:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/03 17:43:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 10:10:18 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_here_doc
 
 t_here_doc	*init_here_doc(t_parsing_list *l_parsing);
 t_here_doc	*new_here_doc(int fd);;
-void		free_all_here_doc(t_here_doc *here_doc);
+t_here_doc	*free_all_here_doc(t_here_doc *here_doc, int this_here_doc_fd);
 void		add_here_doc(t_here_doc *here_doc, int fd);
 void		print_here_doc(t_here_doc *here_doc);
 void		set_here_doc_sig_handler();

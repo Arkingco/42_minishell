@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 21:15:13 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 21:28:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,22 @@ static void	set_terminal_sig_handler()
 	// 시그널로 끝나면 마지막에 개행
 }
 
-void	init_terminal(void)
+static void	set_terminal_sig_handler_here_doc()
 {
-	set_terminal_sig_handler();
-	set_terminal_prompt_sigint();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	init_terminal(t_terminal_type t_type)
+{
+	if (t_type == DEFAULT_TERMINAL)
+	{
+		set_terminal_sig_handler();
+		set_terminal_prompt_sigint();
+	}
+	else if(t_type == HERE_DOC_TERMINAL)
+	{
+		set_terminal_sig_handler_here_doc();
+		return ;
+	}
 }

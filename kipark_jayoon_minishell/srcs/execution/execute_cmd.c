@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 20:07:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 09:54:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,13 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
 	t_args_execve	args_execve;
 	t_info_process	info_proc;
-	t_here_doc		*here_doc;
+	t_here_doc		*l_here_doc;
 	int				fd[3];
 
-	here_doc = init_here_doc(l_parsing);
-	print_here_doc(here_doc);
+	l_here_doc = init_here_doc(l_parsing);
+	if (l_here_doc == NULL)
+		return ;
+	print_here_doc(l_here_doc);
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	else
@@ -73,4 +75,5 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 		wait_all_child(info_proc.pid, info_proc.num_proc);
 		ft_safe_free(args_execve.envp);
 	}
+	free_all_here_doc(l_here_doc);
 }

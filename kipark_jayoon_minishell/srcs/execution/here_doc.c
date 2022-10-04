@@ -6,12 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/03 20:01:33 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 10:51:17 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include "parser.h"
+#include "terminal.h"
 #include "here_doc.h"
 #include "execution.h"
 #include "exit_status.h"
@@ -59,32 +60,28 @@ void here_doc_child(char *limiter, int *fd)
 		if (line)
 		{
 			if (ft_strncmp(limiter, line, limiter_size + 1) == 0)
-			{
-				free(line);
 				break;
-			}
 			pipe_line = ft_safe_strjoin(line, "\n");
 			write(fd[1], pipe_line, ft_strlen(pipe_line));
 			free(pipe_line);
 			free(line);
 		}
 		else
-		{
-			free(line);
 			break ;
-		}
 	}
 	// test
 		// char buffer[100];
 		// read(fd[0], buffer, 100);
 		// printf("%s", buffer);
 	// ------------------------
+	free(line);
 	safe_close(fd[0]);
 	safe_close(fd[1]);
 	exit(0);
 }
 
-void	tour_parsing_cmd_redir(t_redir_chunk *cmd_redir, t_here_doc *l_here_doc)
+static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
+														t_here_doc *l_here_doc)
 {
 	int				fd[2];
 	int				pid;
@@ -103,30 +100,38 @@ void	tour_parsing_cmd_redir(t_redir_chunk *cmd_redir, t_here_doc *l_here_doc)
 				safe_close(fd[1]);
 				wait(&status);
 				if (get_exit_status(status) == 1)
-					return(free_all_here_doc(l_here_doc));
+					return (free_all_here_doc(l_here_doc, fd[0]));
 				else
 					add_here_doc(l_here_doc, fd[0]);	
 			}
 		}
 		cmd_redir = cmd_redir->next;
 	}
+	return (l_here_doc);
 }
 
 t_here_doc *init_here_doc(t_parsing_list *l_parsing)
 {
-	t_parsing_list	*this_cmd;
 	t_here_doc		*l_here_doc;
+	t_redir_iter	*this_redir_iter;
 
+	init_terminal(HERE_DOC_TERMINAL);
 	l_here_doc = ft_safe_malloc(sizeof(t_here_doc));
 	l_here_doc->next = NULL;
 	l_here_doc->read_end = 0;
-	this_cmd = l_parsing;
-	while (this_cmd)
+	while (l_parsing)
 	{
-		if (this_cmd->redir_iter != NULL && \
-										this_cmd->redir_iter->l_input != NULL)
-			tour_parsing_cmd_redir(this_cmd->redir_iter->l_input, l_here_doc);
-		this_cmd = this_cmd->next;
+		this_redir_iter = l_parsing->redir_iter;
+		if (this_redir_iter != NULL && this_redir_iter->l_input != NULL)
+		{
+			if(tour_cmd_redir(this_redir_iter->l_input, l_here_doc) == NULL)
+			{
+				init_terminal(DEFAULT_TERMINAL);
+				return (NULL);
+			}
+		}
+		l_parsing = l_parsing->next;
 	}
+	init_terminal(DEFAULT_TERMINAL);
 	return (l_here_doc);
 }
