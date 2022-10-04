@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:22:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/04 10:51:03 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 15:54:48 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,15 @@ t_here_doc  *free_all_here_doc(t_here_doc *here_doc, int this_here_doc_fd)
 	t_here_doc	*here_this_token;
 	t_here_doc	*next;
 
-	safe_close(this_here_doc_fd);
+	if (this_here_doc_fd != 0)
+		safe_close(this_here_doc_fd);
 	here_this_token = here_doc;
 	while (here_this_token)
 	{
 		next = here_this_token->next;
 		if (here_this_token->read_end != 0)
 		{
-			printf("close fd : %d\n", here_this_token->read_end);
+			// printf("close fd : %d\n", here_this_token->read_end);
 			safe_close(here_this_token->read_end);
 		}
 		free(here_this_token);
@@ -65,7 +66,6 @@ void  print_here_doc(t_here_doc *here_doc)
 	t_here_doc	*this_here_doc;
 
 	this_here_doc = here_doc->next;
-	printf("this is call print_here_doc 61\n");
 	while (this_here_doc)
 	{
 		printf("here_doc fd : %d\n", this_here_doc->read_end);

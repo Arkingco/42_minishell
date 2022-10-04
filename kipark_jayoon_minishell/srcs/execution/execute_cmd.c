@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/04 09:54:03 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 15:59:28 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,5 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 		wait_all_child(info_proc.pid, info_proc.num_proc);
 		ft_safe_free(args_execve.envp);
 	}
-	free_all_here_doc(l_here_doc);
+	free_all_here_doc(l_here_doc, 0);
 }

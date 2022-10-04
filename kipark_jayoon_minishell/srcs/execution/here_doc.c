@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/04 10:51:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 10:53:46 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,11 +69,6 @@ void here_doc_child(char *limiter, int *fd)
 		else
 			break ;
 	}
-	// test
-		// char buffer[100];
-		// read(fd[0], buffer, 100);
-		// printf("%s", buffer);
-	// ------------------------
 	free(line);
 	safe_close(fd[0]);
 	safe_close(fd[1]);
@@ -83,9 +78,9 @@ void here_doc_child(char *limiter, int *fd)
 static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 														t_here_doc *l_here_doc)
 {
-	int				fd[2];
-	int				pid;
-	int				status;
+	int	fd[2];
+	int	pid;
+	int	status;
 
 	while (cmd_redir)
 	{
