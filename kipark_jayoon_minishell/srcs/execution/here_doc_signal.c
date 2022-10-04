@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   do_it_parent.c                                     :+:      :+:    :+:   */
+/*   here_doc_signal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 16:12:13 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/03 17:39:37 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/04 10:51:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "execution.h"
+#include <unistd.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "here_doc.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-void	do_it_parent(int *fd, t_info_process *info_proc)
+void	here_doc_sig_handler(int signum)
 {
-	if (info_proc->num_proc > 1)
+	if (signum == SIGINT)
 	{
-		if (info_proc->idx_curr_proc != 0)
-			safe_close(fd[2]);
-		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-		{
-			safe_close(fd[1]);
-			fd[2] = fd[0];
-		}
+		printf("\n");
+		exit(1);
 	}
+}
+
+void set_here_doc_sig_handler()
+{
+	signal(SIGINT, here_doc_sig_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

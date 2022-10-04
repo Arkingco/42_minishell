@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 20:23:14 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:56:29 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int main(int argc, char **argv, char **envp)
 	
 	l_parsing = NULL;
 	token = NULL;
-	init_terminal();
+	init_terminal(DEFAULT_TERMINAL);
 	check_argument(argc, argv);
 	l_env = set_shell_env_list(envp);
 
@@ -84,7 +84,10 @@ int main(int argc, char **argv, char **envp)
 			l_parsing = NULL;
 		}
 		else
+		{
+			// free(line);
 			exit_readline_return_null();
+		}
 	}
 	return (0);
 }

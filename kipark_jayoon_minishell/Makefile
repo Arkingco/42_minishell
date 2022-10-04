@@ -65,7 +65,10 @@ SRCS_EXECUTION				:=	do_it_child.c \
 								safe_dup2.c \
 								safe_fork.c \
 								safe_pipe.c \
-								wait_all_child.c
+								wait_all_child.c \
+								here_doc.c \
+								here_doc_add.c \
+								here_doc_signal.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
 SRCS_BUILT_IN				:=	built_in.c		\
