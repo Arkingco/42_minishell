@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 22:12:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:09:36 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,8 @@ void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 			safe_dup2(fd[2], 0);
 			safe_close(fd[2]);
 		}
+
+		// 고치기!!!
 		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
 		{
 			safe_close(fd[0]);
