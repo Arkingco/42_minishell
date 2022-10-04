@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 15:03:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:39:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	*do_it_at_redirection(t_token *l_token, t_parsing_list *l_parsing)
 		return (print_syntax_error(l_token));
 	if (l_parsing->redir_iter == NULL)
 		init_redir_iter(l_parsing);
-	node = init_redir_chunk_node(l_token->str, l_token->next->str);
+	node = init_redir_chunk_node(l_token->type, l_token->next->str);
 	if (l_token->type == T_INPUT_REDIR || l_token->type == T_HERE_DOC)
 		add_redir_chunk_node(&l_parsing->redir_iter->l_input,
 			(t_redir_chunk *)node);
@@ -53,9 +53,11 @@ static void	*do_it_at_pipe(t_token *l_token, t_parsing_list *l_parsing)
 	return (node);
 }
 
-static t_parsing_list	*init_parser(t_parsing_list **l_parsing)
+static t_parsing_list	*init_parser(t_parsing_list **l_parsing,
+		t_token **l_token)
 {
 	*l_parsing = init_parsing_list();
+	*l_token = (*l_token)->next;
 	return (*l_parsing);
 }
 
@@ -66,7 +68,7 @@ t_parsing_list	*parse_tokenized_data(t_token *l_token)
 
 	if (!l_token->next || l_token->next->type == T_PIPE)
 		return ((t_parsing_list *)print_syntax_error(l_token->next));
-	head = init_parser(&l_parsing);
+	head = init_parser(&l_parsing, &l_token);
 	while (l_token)
 	{
 		if (is_word(l_token->type))

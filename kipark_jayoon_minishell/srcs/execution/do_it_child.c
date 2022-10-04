@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 14:36:15 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/04 16:09:36 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,49 +31,107 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 		ft_safe_free(file_path);
 		i++;
 	}
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(p_args->argv[0], 2);
-	ft_putstr_fd(": command not found\n", 2);
+	ft_multi_putendl_fd("minishell: ", p_args->argv[0],
+		": command not found", 2);
 	ft_safe_free_two_dimentions_arr(p_args->path);
 	ft_safe_free_two_dimentions_arr(p_args->argv);
 	exit(127);
 }
 
-// static void	init_input_fd(t_redir_chunk *l_input, int *fd)
-// {
-// 	while (l_input)
-// 	{
-// 		if (l_input->)
-// 		fd[2] = open(l_input->file_name)
-// 		l_input = l_input->next;
-// 	}
-// }
+static int	safe_open(char *path, int oflag)
+{
+	int	fd;
+	
+	fd = 0;
+	if (oflag == O_RDONLY)
+	{
+		fd = open(path, oflag);
+		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
+	}
+	else if (oflag == (O_TRUNC | O_WRONLY | O_CREAT))
+	{
+		fd = open(path, oflag, 0666);
+		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
+	}
+	else
+	{
+		fd = open(path, oflag, 0666);
+		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
+	}
+	return (fd);
+}
 
-// static void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd)
-// {
-// 	if (redir_iter == NULL)
-// 		return ;
-// 	init_input_fd(redir_iter->l_input, fd);
-// 	init_output_fd(redir_iter->l_output, fd);
-// }
+static void	init_input_fd(t_redir_chunk *l_input, int *fd)
+{
+	if (fd[2] != 0)
+		safe_close(fd[2]);
+	while (l_input)
+	{
+		if (l_input->type == T_INPUT_REDIR)
+			fd[2] = safe_open(l_input->file_name, O_RDONLY);
+
+		// here_doc
+		else
+		{
+		}
+		if (l_input->next)
+			safe_close(fd[2]);
+		l_input = l_input->next;
+	}
+}
+
+static void	init_output_fd(t_redir_chunk *l_output, int *fd)
+{
+	if (fd[1] != 1)
+		safe_close(fd[1]);
+	while (l_output)
+	{
+		if (l_output->type == T_OUTPUT_REDIR)
+			fd[1] = safe_open(l_output->file_name,
+						O_TRUNC | O_WRONLY | O_CREAT);
+		else
+			fd[1] = safe_open(l_output->file_name,
+						O_APPEND | O_WRONLY | O_CREAT);
+		if (l_output->next)
+			safe_close(fd[1]);
+		l_output = l_output->next;
+	}
+}
+
+static void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd)
+{
+	if (redir_iter->l_input)
+		init_input_fd(redir_iter->l_input, fd);
+	if (redir_iter->l_output)
+		init_output_fd(redir_iter->l_output, fd);
+}
 
 void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 			int *fd, t_info_process *info_proc)
 {
-	init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
-	// init_fd_by_redirection(l_parsing->redir_iter, fd);
-	if (fd[2] != 0)
+	if (l_parsing->redir_iter)
+		init_fd_by_redirection(l_parsing->redir_iter, fd);
+	if (l_parsing->l_simple_cmd)
 	{
-		safe_dup2(fd[2], 0);
-		safe_close(fd[2]);
+		init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
+		if (fd[2] != 0)
+		{
+			safe_dup2(fd[2], 0);
+			safe_close(fd[2]);
+		}
+
+		// 고치기!!!
+		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
+		{
+			safe_close(fd[0]);
+			safe_dup2(fd[1], 1);
+			safe_close(fd[1]);
+		}
+		execve_cmd(p_args_execve, p_args_execve->envp);
 	}
-	if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-	{
-		safe_close(fd[0]);
-		safe_dup2(fd[1], 1);
-		safe_close(fd[1]);
-	}
-	execve_cmd(p_args_execve, p_args_execve->envp);
+	// simple cmd 없을 때 정상적으로 redirection 실행하면 정상 종료!
+	// 실패하면 1로 비정상 종료!
+	exit(1);
 }
 
 	// if (info_proc->idx_curr_proc != 0)

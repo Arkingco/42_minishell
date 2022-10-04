@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:26:17 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 21:27:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/03 17:54:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ char	**init_curr_envp(t_env *l_env)
 	char	**curr_envp;
 	size_t	num_env;
 
+	num_env = 0;
 	num_env = count_env(l_env);
 	curr_envp = ft_safe_malloc(sizeof(char *) * (num_env + 1));
 	put_in_str_in_curr_envp(curr_envp, l_env);
