@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/04 10:53:46 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/04 16:58:50 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 
 	while (cmd_redir)
 	{
-		if (ft_strncmp(cmd_redir->redir, "<<", 3) == 0)
+		if (cmd_redir->type == T_HERE_DOC)
 		{
 			safe_pipe(fd);
 			pid = safe_fork();
