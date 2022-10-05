@@ -42,32 +42,32 @@ SRCS_LEXICAL_ANALYSIS		:=	lexer_util.c			\
 SRCS_LEXICAL_ANALYSIS		:=	$(addprefix $(DIR_LEXICAL_ANALYSIS)/, $(SRCS_LEXICAL_ANALYSIS))
 
 SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
-								add_redir_chunk_node.c \
-								add_simple_cmd_node.c \
-								free_parsing_list.c \
-								init_parsing_list.c \
+								add_redir_chunk_node.c 	\
+								add_simple_cmd_node.c 	\
+								free_parsing_list.c 	\
+								init_parsing_list.c 	\
 								init_redir_chunk_node.c \
-								init_simple_cmd_node.c \
-								is_redirection.c \
-								is_word.c \
-								parser.c \
-								init_redir_iter.c \
+								init_simple_cmd_node.c 	\
+								is_redirection.c 		\
+								is_word.c 				\
+								parser.c 				\
+								init_redir_iter.c		\
 								is_pipe.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS_EXECUTION				:=	do_it_child.c \
-								do_it_parent.c \
-								execute_cmd.c \
-								init_curr_envp.c \
-								init_execve_args.c \
-								is_single_cmd.c \
-								safe_close.c \
-								safe_dup2.c \
-								safe_fork.c \
-								safe_pipe.c \
-								wait_all_child.c \
-								here_doc.c \
-								here_doc_add.c \
+SRCS_EXECUTION				:=	do_it_child.c 			\
+								do_it_parent.c 			\
+								execute_cmd.c 			\
+								init_curr_envp.c 		\
+								init_execve_args.c 		\
+								is_single_cmd.c			\
+								safe_close.c 			\
+								safe_dup2.c 			\
+								safe_fork.c 			\
+								safe_pipe.c 			\
+								wait_all_child.c 		\
+								here_doc.c 				\
+								here_doc_add.c 			\
 								here_doc_signal.c
 SRCS_EXECUTION				:=	$(addprefix $(DIR_EXECUTION)/, $(SRCS_EXECUTION))
 
@@ -85,7 +85,7 @@ SRCS_ERROR					:=	print_syntax_error_pipe.c \
 								printf_syntax_error.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
-SRCS						:=	$(SRCS_MAIN)				\
+SRCS						=	$(SRCS_MAIN)				\
 								$(SRCS_TERMINAL)			\
 								$(SRCS_LEXICAL_ANALYSIS)	\
 								$(SRCS_SYNTAX_ANALYSIS)		\
@@ -93,22 +93,20 @@ SRCS						:=	$(SRCS_MAIN)				\
 								$(SRCS_BUILT_IN)			\
 								$(SRCS_ERROR)
 
-OBJS						:=	$(SRCS:.c=.o)
+OBJS						=	$(SRCS:.c=.o)
 
-ifdef DEBUG_FLAG
+ifdef DEBUG_FLAG 
 	CFLAGS += $(DEBUG)
 endif
 
 all: $(NAME)
 
-$(NAME)		: $(LIBFT) $(OBJS)
+$(NAME)		: $(OBJS)
+	make -C $(DIR_LIBFT) all
 	$(CC) $(CFLAGS) $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
-
-$(LIBFT)	:
-	make -C $(DIR_LIBFT) all
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
