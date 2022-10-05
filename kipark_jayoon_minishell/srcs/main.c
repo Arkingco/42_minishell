@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 15:21:02 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:59:35 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ static void	syntax_error_continue(char *line, t_token *token, \
 	free_all(line, token, l_parsing);
 }
 
-//norm
-#include "exit_status.h"
 int main(int argc, char **argv, char **envp)
 {
 	char			*line;
@@ -46,17 +44,11 @@ int main(int argc, char **argv, char **envp)
 	t_parsing_list	*l_parsing;
 	t_env			*l_env;
 
-	//test
-	// int	i = 2;
-	
 	l_parsing = NULL;
 	token = NULL;
 	init_terminal(DEFAULT_TERMINAL);
 	check_argument(argc, argv);
 	l_env = set_shell_env_list(envp);
-
-	//test
-	// while (i--)
 	while (1)
 	{
 		line = readline("minishell$ ");

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 15:54:27 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:23:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ static int	safe_open(char *path, int oflag)
 	return (fd);
 }
 
-static void	init_input_fd(t_redir_chunk *l_input, int *fd)
+static void	init_input_fd(t_redir_chunk *l_input, int *fd,
+				t_here_doc *l_here_doc)
 {
 	if (fd[2] != 0)
 		safe_close(fd[2]);
@@ -80,6 +81,8 @@ static void	init_input_fd(t_redir_chunk *l_input, int *fd)
 			fd[2] = safe_open(l_input->file_name, O_RDONLY);
 		else
 		{
+			fd[2] = l_here_doc->read_end;
+			l_here_doc = l_here_doc->next;
 		}
 		if (l_input->next)
 			safe_close(fd[2]);
@@ -105,20 +108,21 @@ static void	init_output_fd(t_redir_chunk *l_output, int *fd)
 	}
 }
 
-static void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd)
+static void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
+				t_here_doc *l_here_doc)
 {
 	if (redir_iter->l_input)
-		init_input_fd(redir_iter->l_input, fd);
+		init_input_fd(redir_iter->l_input, fd, l_here_doc);
 	if (redir_iter->l_output)
 		init_output_fd(redir_iter->l_output, fd);
 }
 
-void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
-			int *fd, t_info_process *info_proc)
+void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd,
+			t_here_doc *l_here_doc)
 {
 	if (l_parsing->redir_iter)
-		init_fd_by_redirection(l_parsing->redir_iter, fd);
-	if (fd[0] != 0 && info_proc->idx_curr_proc != info_proc->num_proc - 1)
+		init_fd_by_redirection(l_parsing->redir_iter, fd, l_here_doc);
+	if (fd[0] != 0 && info_cmd->idx_curr_proc != info_cmd->num_proc - 1)
 		safe_close(fd[0]);
 	if (fd[1] != 1)
 	{
@@ -132,8 +136,9 @@ void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 	}
 	if (l_parsing->l_simple_cmd)
 	{
-		init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
-		execve_cmd(p_args_execve, p_args_execve->envp);
+		init_execve_args(l_parsing, &info_cmd->args_execve,
+			info_cmd->args_execve.envp);
+		execve_cmd(&info_cmd->args_execve, info_cmd->args_execve.envp);
 	}
 	exit(0);
 }

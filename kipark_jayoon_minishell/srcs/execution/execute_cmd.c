@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 14:41:46 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:51:08 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@
 #include "libft.h"
 #include "parser.h"
 #include "here_doc.h"
-
-// printf
-#include <stdio.h>
 
 static size_t	count_the_number_of_processes(t_parsing_list *l_parsing)
 {
@@ -40,40 +37,49 @@ static void	init_std_fd(int *fd)
 	fd[2] = 0;
 }
 
+static void	init_valiable(int *fd, t_info_cmd *info_cmd,
+				t_parsing_list *l_parsing, t_env **l_env)
+{
+	*l_env = (*l_env)->next;
+	info_cmd->l_here_doc = info_cmd->l_here_doc->next;
+	init_std_fd(fd);
+	info_cmd->idx_curr_proc = 0;
+	info_cmd->num_proc = count_the_number_of_processes(l_parsing);
+	info_cmd->args_execve.envp = init_curr_envp(*l_env);
+}
+
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 {
-	t_args_execve	args_execve;
-	t_info_process	info_proc;
-	t_here_doc		*l_here_doc;
+	t_info_cmd		info_cmd;
+	t_here_doc		*head_here_doc;
 	int				fd[3];
 
-	l_here_doc = init_here_doc(l_parsing);
-	if (l_here_doc == NULL)
+	info_cmd.l_here_doc = init_here_doc(l_parsing);
+	if (info_cmd.l_here_doc == NULL)
 		return ;
-	print_here_doc(l_here_doc);
+	print_here_doc(info_cmd.l_here_doc);
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	else
 	{
-		init_std_fd(fd);
-		info_proc.idx_curr_proc = 0;
-		info_proc.num_proc = count_the_number_of_processes(l_parsing);
-		l_env = l_env->next;
-		args_execve.envp = init_curr_envp(l_env);
+	head_here_doc = info_cmd.l_here_doc;
+		init_valiable(fd, &info_cmd, l_parsing, &l_env);
 		while (l_parsing)
 		{
 			if (l_parsing->next)
 				safe_pipe(fd);
-			info_proc.pid = safe_fork();
-			if (info_proc.pid == 0)
-				do_it_child(l_parsing, &args_execve, fd, &info_proc);
+			info_cmd.pid = safe_fork();
+			if (info_cmd.pid == 0)
+				do_it_child(l_parsing, &info_cmd, fd, info_cmd.l_here_doc);
 			else
-				do_it_parent(fd, &info_proc);
-			info_proc.idx_curr_proc++;
+				do_it_parent(l_parsing->redir_iter,
+					&info_cmd.l_here_doc, fd, &info_cmd);
+			info_cmd.idx_curr_proc++;
 			l_parsing = l_parsing->next;
 		}
-		wait_all_child(info_proc.pid, info_proc.num_proc);
-		ft_safe_free(args_execve.envp);
+		wait_all_child(info_cmd.pid, info_cmd.num_proc);
+		ft_safe_free(info_cmd.args_execve.envp);
 	}
-	free_all_here_doc(l_here_doc, 0);
+	// built in 일 때 here doc 고려 안 함
+	free_all_here_doc(head_here_doc, 0);
 }
