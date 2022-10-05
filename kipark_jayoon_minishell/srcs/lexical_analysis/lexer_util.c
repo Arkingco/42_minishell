@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/21 18:05:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 17:00:56 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 21:09:39 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	check_readline_quote_close(char *rl)
 		{
 			type = rl[i];
 			i++;
-			while(rl[i] != '\0' && rl[i] != type)
+			while (rl[i] != '\0' && rl[i] != type)
 				i++;
 		}
 		if (rl[i] == '\0')

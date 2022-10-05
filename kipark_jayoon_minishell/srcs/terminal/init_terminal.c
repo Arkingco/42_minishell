@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 21:28:45 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 21:05:40 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,25 +30,22 @@ static void	sig_handler(int signum)
 	}
 }
 
-static void	set_terminal_prompt_sigint()
+static void	set_terminal_prompt_sigint(void)
 {
-	struct termios  term;
+	struct termios	term;
 
 	tcgetattr(1, &term);
 	term.c_lflag &= ~(ECHOCTL);
 	tcsetattr(1, 0, &term);
 }
 
-static void	set_terminal_sig_handler()
+static void	set_terminal_sig_handler(void)
 {
 	signal(SIGINT, sig_handler);
 	signal(SIGQUIT, SIG_IGN);
-	// 기본 핸들러 동작을 하하게  함 
-	// signal(SIGQUIT, SIG_DFL);
-	// 시그널로 끝나면 마지막에 개행
 }
 
-static void	set_terminal_sig_handler_here_doc()
+static void	set_terminal_sig_handler_here_doc(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -61,7 +58,7 @@ void	init_terminal(t_terminal_type t_type)
 		set_terminal_sig_handler();
 		set_terminal_prompt_sigint();
 	}
-	else if(t_type == HERE_DOC_TERMINAL)
+	else if (t_type == HERE_DOC_TERMINAL)
 	{
 		set_terminal_sig_handler_here_doc();
 		return ;

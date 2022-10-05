@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_safe_free_two_dimentions_arr.c                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 21:47:14 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 21:49:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 21:19:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_safe_free_two_dimentions_arr(char **arr)
 {
 	size_t	i;
-	
+
 	if (!arr)
 		return ;
 	i = 0;

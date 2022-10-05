@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 17:39:37 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/04 10:51:07 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 21:07:42 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	here_doc_sig_handler(int signum)
 	}
 }
 
-void set_here_doc_sig_handler()
+void set_here_doc_sig_handler(void)
 {
 	signal(SIGINT, here_doc_sig_handler);
 	signal(SIGQUIT, SIG_IGN);
