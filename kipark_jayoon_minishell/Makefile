@@ -85,7 +85,7 @@ SRCS_ERROR					:=	print_syntax_error_pipe.c \
 								printf_syntax_error.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
-SRCS						=	$(SRCS_MAIN)				\
+SRCS						:=	$(SRCS_MAIN)				\
 								$(SRCS_TERMINAL)			\
 								$(SRCS_LEXICAL_ANALYSIS)	\
 								$(SRCS_SYNTAX_ANALYSIS)		\
@@ -93,9 +93,9 @@ SRCS						=	$(SRCS_MAIN)				\
 								$(SRCS_BUILT_IN)			\
 								$(SRCS_ERROR)
 
-OBJS						=	$(SRCS:.c=.o)
+OBJS						:=	$(SRCS:.c=.o)
 
-ifdef DEBUG_FLAG 
+ifdef DEBUG_FLAG
 	CFLAGS += $(DEBUG)
 endif
 
