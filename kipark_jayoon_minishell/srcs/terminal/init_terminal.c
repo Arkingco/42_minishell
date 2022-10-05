@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 16:40:11 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/03 21:28:45 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ static void	sig_handler(int signum)
 		rl_replace_line("", 1);
 		rl_redisplay();
 	}
-	else if (signum == SIGQUIT)
-	{
-		rl_on_new_line();
-		rl_redisplay();
-	}
 }
 
 static void	set_terminal_prompt_sigint()
@@ -47,11 +42,28 @@ static void	set_terminal_prompt_sigint()
 static void	set_terminal_sig_handler()
 {
 	signal(SIGINT, sig_handler);
-	signal(SIGQUIT, sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+	// 기본 핸들러 동작을 하하게  함 
+	// signal(SIGQUIT, SIG_DFL);
+	// 시그널로 끝나면 마지막에 개행
 }
 
-void	init_terminal(void)
+static void	set_terminal_sig_handler_here_doc()
 {
-	set_terminal_sig_handler();
-	set_terminal_prompt_sigint();
+	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+}
+
+void	init_terminal(t_terminal_type t_type)
+{
+	if (t_type == DEFAULT_TERMINAL)
+	{
+		set_terminal_sig_handler();
+		set_terminal_prompt_sigint();
+	}
+	else if(t_type == HERE_DOC_TERMINAL)
+	{
+		set_terminal_sig_handler_here_doc();
+		return ;
+	}
 }

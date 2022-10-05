@@ -1,27 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.h                                         :+:      :+:    :+:   */
+/*   here_doc_signal.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 21:26:45 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/03 17:39:37 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/04 10:51:07 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMINAL_H
-# define TERMINAL_H
+#include <unistd.h>
+#include <signal.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include "here_doc.h"
+#include <readline/readline.h>
+#include <readline/history.h>
 
-# include "lexer.h"
-
-typedef enum e_terminal_type
+void	here_doc_sig_handler(int signum)
 {
-	DEFAULT_TERMINAL,
-	HERE_DOC_TERMINAL
-} t_terminal_type;
+	if (signum == SIGINT)
+	{
+		printf("\n");
+		exit(1);
+	}
+}
 
-void	init_terminal(t_terminal_type t_type);
-void	exit_readline_return_null(void);
-
-#endif
+void set_here_doc_sig_handler()
+{
+	signal(SIGINT, here_doc_sig_handler);
+	signal(SIGQUIT, SIG_IGN);
+}

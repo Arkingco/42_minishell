@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/02 17:06:21 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/03 16:20:37 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,4 @@ void	env_add(t_env *env_head, char *env_str)
 	while (curr->next != NULL)
 		curr = curr->next;
 	curr->next = new_env_node(env_str);
-	
 }

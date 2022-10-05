@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/04 21:54:48 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 14:41:38 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,24 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 	char	*file_path;
 
 	i = 0;
-	while (p_args->path[i])
+	if (p_args->path)
 	{
-		file_path = ft_safe_strjoin(p_args->path[i], p_args->argv[0]);
-		execve(file_path, p_args->argv, envp);
-		ft_safe_free(file_path);
-		i++;
+		while (p_args->path[i])
+		{
+			file_path = ft_safe_strjoin(p_args->path[i], p_args->argv[0]);
+			execve(file_path, p_args->argv, envp);
+			ft_safe_free(file_path);
+			i++;
+		}
+		ft_multi_putendl_fd("minishell: ", p_args->argv[0],
+			": command not found", 2);
 	}
-	ft_multi_putendl_fd("minishell: ", p_args->argv[0],
-		": command not found", 2);
+	else
+	{
+		execve(p_args->argv[0], p_args->argv, envp);
+		ft_multi_putendl_fd("minishell: ", p_args->argv[0],
+			": No such file or directory", 2);
+	}
 	ft_safe_free_two_dimentions_arr(p_args->path);
 	ft_safe_free_two_dimentions_arr(p_args->argv);
 	exit(127);
@@ -69,8 +78,6 @@ static void	init_input_fd(t_redir_chunk *l_input, int *fd)
 	{
 		if (l_input->type == T_INPUT_REDIR)
 			fd[2] = safe_open(l_input->file_name, O_RDONLY);
-
-		// here_doc
 		else
 		{
 		}
@@ -111,22 +118,21 @@ void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 {
 	if (l_parsing->redir_iter)
 		init_fd_by_redirection(l_parsing->redir_iter, fd);
+	if (fd[0] != 0 && info_proc->idx_curr_proc != info_proc->num_proc - 1)
+		safe_close(fd[0]);
+	if (fd[1] != 1)
+	{
+		safe_dup2(fd[1], 1);
+		safe_close(fd[1]);
+	}
+	if (fd[2] != 0)
+	{
+		safe_dup2(fd[2], 0);
+		safe_close(fd[2]);
+	}
 	if (l_parsing->l_simple_cmd)
 	{
 		init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
-		if (fd[2] != 0)
-		{
-			safe_dup2(fd[2], 0);
-			safe_close(fd[2]);
-		}
-
-		// 고치기!!!
-		if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-		{
-			safe_close(fd[0]);
-			safe_dup2(fd[1], 1);
-			safe_close(fd[1]);
-		}
 		execve_cmd(p_args_execve, p_args_execve->envp);
 	}
 	// simple cmd 없을 때 정상적으로 redirection 실행하면 정상 종료!
