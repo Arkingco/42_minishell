@@ -2,7 +2,7 @@ NAME						=	minishell
 
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
-DEBUG						=	-g -fsanitize=address
+DEBUG						=	-g
 
 LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
@@ -102,7 +102,7 @@ endif
 all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) -g $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@

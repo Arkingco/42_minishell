@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/04 16:56:29 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 21:03:09 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,17 +46,12 @@ int main(int argc, char **argv, char **envp)
 	t_parsing_list	*l_parsing;
 	t_env			*l_env;
 
-	//test
-	// int	i = 2;
-	
 	l_parsing = NULL;
 	token = NULL;
 	init_terminal(DEFAULT_TERMINAL);
 	check_argument(argc, argv);
 	l_env = set_shell_env_list(envp);
 
-	//test
-	// while (i--)
 	while (1)
 	{
 		line = readline("minishell$ ");

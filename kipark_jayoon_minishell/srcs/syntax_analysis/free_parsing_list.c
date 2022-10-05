@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:07:53 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 20:17:25 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 20:36:09 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	free_parsing_list(t_parsing_list *l_parsing)
 {
 	t_parsing_list *next;
 
-	next = NULL;
+	next = l_parsing;
 	if (l_parsing == NULL)
 		return ;
-	while (next)
+	while (l_parsing)
 	{
 		next = l_parsing->next;
 		if (l_parsing->l_simple_cmd)
@@ -59,7 +59,7 @@ void	free_parsing_list(t_parsing_list *l_parsing)
 			free(l_parsing->redir_iter);
 		}
 		free(l_parsing);
-	}	
-	l_parsing = NULL;
+		l_parsing = next;
+	}
 	return ;
 }
