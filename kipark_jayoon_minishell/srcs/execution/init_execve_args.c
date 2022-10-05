@@ -85,8 +85,10 @@ void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 {
 	int	num_args;
 
-	num_args = 0;
-	init_path(p_args, envp);
+	if (!ft_strchr(l_parsing->l_simple_cmd->str, '/'))
+		init_path(p_args, envp);
+	else
+		p_args->path = NULL;
 	num_args = count_num_args(l_parsing->l_simple_cmd);
 	init_argv(l_parsing, p_args, num_args);
 }

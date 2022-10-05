@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 14:41:38 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:54:27 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,19 +135,5 @@ void	do_it_child(t_parsing_list *l_parsing, t_args_execve *p_args_execve,
 		init_execve_args(l_parsing, p_args_execve, p_args_execve->envp);
 		execve_cmd(p_args_execve, p_args_execve->envp);
 	}
-	// simple cmd 없을 때 정상적으로 redirection 실행하면 정상 종료!
-	// 실패하면 1로 비정상 종료!
 	exit(0);
 }
-
-	// if (info_proc->idx_curr_proc != 0)
-	// {
-	// 	safe_dup2(fd[2], 0);
-	// 	safe_close(fd[2]);
-	// }
-	// if (info_proc->idx_curr_proc != info_proc->num_proc - 1)
-	// {
-	// 	safe_close(fd[0]);
-	// 	safe_dup2(fd[1], 1);
-	// 	safe_close(fd[1]);
-	// }

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 13:56:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/05 15:21:34 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	init_exit_status(int status)
 		return_code = WEXITSTATUS(status);
 	else
 	{
-		return_code = 127;
+		return_code = 128;
 		if (WIFSIGNALED(status))
 			signal_number = WTERMSIG(status);
 		else
