@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 15:33:31 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 18:21:16 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "libft.h"
 #include "parser.h"
 #include "here_doc.h"
+#include "terminal.h"
 
 static size_t	count_the_number_of_processes(t_parsing_list *l_parsing)
 {
@@ -93,6 +94,7 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 		run_single_built_in(l_parsing, &info_cmd, fd, l_env_head);
 	else
 	{
+		init_terminal(EXECUTE_TERMINAL);
 		while (l_parsing)
 		{
 			if (l_parsing->next)
@@ -106,6 +108,7 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 			l_parsing = l_parsing->next;
 		}
 		wait_all_child(info_cmd.pid, info_cmd.num_proc);
+		init_terminal(DEFAULT_TERMINAL);
 	}
 	ft_safe_free(info_cmd.args_execve.envp);
 	// built in 일 때 here doc 고려 안 함
