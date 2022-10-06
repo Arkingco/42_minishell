@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execution.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 11:06:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 14:32:53 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ typedef struct s_info_cmd
 	size_t			num_proc;
 	t_args_execve	args_execve;
 	t_here_doc		*l_here_doc;
+	t_env			*l_env;
 }	t_info_cmd;
 
 /* main */
@@ -51,10 +52,11 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env);
 void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 			char **envp);
 void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd);
-void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd);
+void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
+													int *fd, t_env *l_head_env);
 char	**init_curr_envp(t_env *l_env);
-void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
-				t_here_doc *l_here_doc);
+void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd, \
+														t_here_doc *l_here_doc);
 
 /* safe func */
 int		safe_fork(void);

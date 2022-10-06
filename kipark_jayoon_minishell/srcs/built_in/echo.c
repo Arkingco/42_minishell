@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:31:59 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 10:29:31 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 15:03:15 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ int	built_in_echo(t_simple_cmd *simple_cmd)
 	while (simple_cmd)
 	{
 		ft_putstr_fd(simple_cmd->str, 1);
-		ft_putstr_fd(" ", 1);
+		if (simple_cmd->next != NULL)
+			ft_putstr_fd(" ", 1);
 		simple_cmd = simple_cmd->next;
 	}
 	if (echo_n_option)

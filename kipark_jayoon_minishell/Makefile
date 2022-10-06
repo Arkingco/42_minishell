@@ -2,7 +2,7 @@ NAME						=	minishell
 
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
-DEBUG						=	-g
+DEBUG						=	-g -fsnitize=address
 
 LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
