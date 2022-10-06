@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/27 20:28:59 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 16:38:55 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	built_in_cd(t_simple_cmd *simple_cmd, t_env *env)
 	else
 	{
 		ft_putendl_fd(strerror(errno), 2);
-		return (cd_exit_status = errno);
+		return (cd_exit_status = 1);
 	}
 	return (0);
 }

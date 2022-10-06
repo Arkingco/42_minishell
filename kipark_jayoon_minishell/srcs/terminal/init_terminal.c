@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 10:52:20 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 17:59:58 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static void	set_terminal_sig_handler(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
-static void	set_terminal_sig_handler_here_doc(void)
+static void	set_terminal_sig_ign(void)
 {
 	signal(SIGINT, SIG_IGN);
 	signal(SIGQUIT, SIG_IGN);
@@ -59,9 +59,9 @@ void	init_terminal(t_terminal_type t_type)
 		set_terminal_sig_handler();
 		set_terminal_prompt_sigint();
 	}
-	else if (t_type == HERE_DOC_TERMINAL)
+	else if (t_type == HERE_DOC_TERMINAL || t_type == EXECUTE_TERMINAL)
 	{
-		set_terminal_sig_handler_here_doc();
+		set_terminal_sig_ign();
 		return ;
 	}
 }

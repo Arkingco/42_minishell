@@ -6,12 +6,13 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 11:25:31 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 17:17:22 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 #include "libft.h"
+#include "exit_status.h"
 #include <stdio.h>
 
 int	is_all_digit(char *str)
@@ -34,7 +35,10 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 
 	exit_exit_status = 0;
 	if (simple_cmd->next == NULL)
-		exit(0);
+	{
+		ft_putendl_fd("exit", 2);
+		exit(g_exit_status);
+	}
 	else if (simple_cmd->next->next != NULL)
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
