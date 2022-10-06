@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/05 15:19:14 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:24:49 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ static int	get_exit_status(int status)
 	return (g_exit_status = return_code + signal_number);
 }
 
-void here_doc_child(char *limiter, int *fd)
+void	here_doc_child(char *limiter, int *fd)
 {
 	char		*line;
 	char		*pipe_line;
-	const int 	limiter_size = ft_strlen(limiter);
+	const int	limiter_size = ft_strlen(limiter);
 
 	set_here_doc_sig_handler();
-	while(1)
+	while (1)
 	{
 		line = readline("> ");
 		if (line)
 		{
 			if (ft_strncmp(limiter, line, limiter_size + 1) == 0)
-				break;
+				break ;
 			pipe_line = ft_safe_strjoin(line, "\n");
 			write(fd[1], pipe_line, ft_strlen(pipe_line));
 			free(pipe_line);
@@ -88,7 +88,7 @@ static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 		{
 			safe_pipe(fd);
 			pid = safe_fork();
-			if(pid == 0)
+			if (pid == 0)
 				here_doc_child(cmd_redir->file_name, fd);
 			else
 			{
@@ -97,7 +97,7 @@ static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 				if (get_exit_status(status) == 1)
 					return (free_all_here_doc(l_here_doc, fd[0]));
 				else
-					add_here_doc(l_here_doc, fd[0]);	
+					add_here_doc(l_here_doc, fd[0]);
 			}
 		}
 		cmd_redir = cmd_redir->next;
@@ -105,7 +105,7 @@ static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 	return (l_here_doc);
 }
 
-t_here_doc *init_here_doc(t_parsing_list *l_parsing)
+t_here_doc	*init_here_doc(t_parsing_list *l_parsing)
 {
 	t_here_doc		*l_here_doc;
 	t_redir_iter	*this_redir_iter;
@@ -119,7 +119,7 @@ t_here_doc *init_here_doc(t_parsing_list *l_parsing)
 		this_redir_iter = l_parsing->redir_iter;
 		if (this_redir_iter != NULL && this_redir_iter->l_input != NULL)
 		{
-			if(tour_cmd_redir(this_redir_iter->l_input, l_here_doc) == NULL)
+			if (tour_cmd_redir(this_redir_iter->l_input, l_here_doc) == NULL)
 			{
 				init_terminal(DEFAULT_TERMINAL);
 				return (NULL);

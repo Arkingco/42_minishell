@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:23:29 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:01:37 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 #include <fcntl.h>
 #include "libft.h"
 #include "parser.h"
-
-//
-#include <stdio.h>
 
 static void	execve_cmd(t_args_execve *p_args, char **envp)
 {
@@ -47,81 +44,10 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 	exit(127);
 }
 
-static int	safe_open(char *path, int oflag)
-{
-	int	fd;
-	
-	fd = 0;
-	if (oflag == O_RDONLY)
-	{
-		fd = open(path, oflag);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
-	}
-	else if (oflag == (O_TRUNC | O_WRONLY | O_CREAT))
-	{
-		fd = open(path, oflag, 0666);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
-	}
-	else
-	{
-		fd = open(path, oflag, 0666);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)fd);
-	}
-	return (fd);
-}
-
-static void	init_input_fd(t_redir_chunk *l_input, int *fd,
-				t_here_doc *l_here_doc)
-{
-	if (fd[2] != 0)
-		safe_close(fd[2]);
-	while (l_input)
-	{
-		if (l_input->type == T_INPUT_REDIR)
-			fd[2] = safe_open(l_input->file_name, O_RDONLY);
-		else
-		{
-			fd[2] = l_here_doc->read_end;
-			l_here_doc = l_here_doc->next;
-		}
-		if (l_input->next)
-			safe_close(fd[2]);
-		l_input = l_input->next;
-	}
-}
-
-static void	init_output_fd(t_redir_chunk *l_output, int *fd)
-{
-	if (fd[1] != 1)
-		safe_close(fd[1]);
-	while (l_output)
-	{
-		if (l_output->type == T_OUTPUT_REDIR)
-			fd[1] = safe_open(l_output->file_name,
-						O_TRUNC | O_WRONLY | O_CREAT);
-		else
-			fd[1] = safe_open(l_output->file_name,
-						O_APPEND | O_WRONLY | O_CREAT);
-		if (l_output->next)
-			safe_close(fd[1]);
-		l_output = l_output->next;
-	}
-}
-
-static void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
-				t_here_doc *l_here_doc)
-{
-	if (redir_iter->l_input)
-		init_input_fd(redir_iter->l_input, fd, l_here_doc);
-	if (redir_iter->l_output)
-		init_output_fd(redir_iter->l_output, fd);
-}
-
-void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd,
-			t_here_doc *l_here_doc)
+void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd)
 {
 	if (l_parsing->redir_iter)
-		init_fd_by_redirection(l_parsing->redir_iter, fd, l_here_doc);
+		init_fd_by_redirection(l_parsing->redir_iter, fd, info_cmd->l_here_doc);
 	if (fd[0] != 0 && info_cmd->idx_curr_proc != info_cmd->num_proc - 1)
 		safe_close(fd[0]);
 	if (fd[1] != 1)

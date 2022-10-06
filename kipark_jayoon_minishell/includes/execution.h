@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:35:42 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:06:17 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,18 @@ typedef struct s_info_cmd
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env);
 void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 			char **envp);
-void	do_it_parent(t_redir_iter *redir_iter, t_here_doc **pp_l_here_doc,
-			int *fd, t_info_cmd *info_cmd);
-void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd,
-			t_here_doc *l_here_doc);
+void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd);
+void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd);
 char	**init_curr_envp(t_env *l_env);
+void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
+				t_here_doc *l_here_doc);
 
 /* safe func */
 int		safe_fork(void);
 void	safe_pipe(int *fd);
 void	safe_close(int fd);
 void	safe_dup2(int from, int to);
+int		safe_open(char *path, int oflag);
 
 /* wait */
 void	wait_all_child(pid_t last_fork_pid, size_t num_process);

@@ -6,22 +6,21 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:35:12 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 10:49:36 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parser.h"
 
-void	do_it_parent(t_redir_iter *redir_iter, t_here_doc **pp_l_here_doc,
-			int *fd, t_info_cmd *info_cmd)
+void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd)
 {
 	if (redir_iter)
 	{
 		while (redir_iter->l_input)
 		{
 			if (redir_iter->l_input->type == T_HERE_DOC)
-				*pp_l_here_doc = (*pp_l_here_doc)->next;
+				info_cmd->l_here_doc = info_cmd->l_here_doc->next;
 			redir_iter->l_input = redir_iter->l_input->next;
 		}
 	}

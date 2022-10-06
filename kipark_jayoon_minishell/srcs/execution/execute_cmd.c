@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:51:08 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 10:50:04 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,11 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 	if (info_cmd.l_here_doc == NULL)
 		return ;
 	print_here_doc(info_cmd.l_here_doc);
+	head_here_doc = info_cmd.l_here_doc;
 	if (is_single_cmd(l_parsing->next) && is_built_in(l_parsing->l_simple_cmd))
 		execute_bulit_in(l_parsing->l_simple_cmd, l_env, SINGLE_CMD);
 	else
 	{
-	head_here_doc = info_cmd.l_here_doc;
 		init_valiable(fd, &info_cmd, l_parsing, &l_env);
 		while (l_parsing)
 		{
@@ -70,10 +70,9 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 				safe_pipe(fd);
 			info_cmd.pid = safe_fork();
 			if (info_cmd.pid == 0)
-				do_it_child(l_parsing, &info_cmd, fd, info_cmd.l_here_doc);
+				do_it_child(l_parsing, &info_cmd, fd);
 			else
-				do_it_parent(l_parsing->redir_iter,
-					&info_cmd.l_here_doc, fd, &info_cmd);
+				do_it_parent(l_parsing->redir_iter, fd, &info_cmd);
 			info_cmd.idx_curr_proc++;
 			l_parsing = l_parsing->next;
 		}
