@@ -61,6 +61,7 @@ SRCS_EXECUTION				:=	do_it_child.c 			\
 								init_curr_envp.c 		\
 								init_fd_by_redirection.c\
 								init_execve_args.c 		\
+								is_last_cmd.c			\
 								is_single_cmd.c			\
 								safe_close.c 			\
 								safe_dup2.c 			\

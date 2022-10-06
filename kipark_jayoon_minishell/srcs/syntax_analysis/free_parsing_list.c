@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 14:07:53 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 11:56:05 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:35:33 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	free_redir_chunk_list(t_redir_chunk *head)
 
 void	free_parsing_list(t_parsing_list *l_parsing)
 {
-	t_parsing_list *next;
+	t_parsing_list	*next;
 
 	next = l_parsing;
 	if (l_parsing == NULL)

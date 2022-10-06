@@ -1,18 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.h                                      :+:      :+:    :+:   */
+/*   is_last_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:22:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 16:46:48 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/06 18:04:26 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/06 18:05:43 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_STATUS_H
-# define EXIT_STATUS_H
+#include "execution.h"
 
-int	g_exit_status;
-
-#endif
+int	is_last_cmd(t_info_cmd *info_cmd)
+{
+	if (info_cmd->idx_curr_proc == info_cmd->num_proc - 1)
+		return (1);
+	return (0);
+}
