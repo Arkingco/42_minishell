@@ -59,11 +59,13 @@ SRCS_EXECUTION				:=	do_it_child.c 			\
 								do_it_parent.c 			\
 								execute_cmd.c 			\
 								init_curr_envp.c 		\
+								init_fd_by_redirection.c\
 								init_execve_args.c 		\
 								is_single_cmd.c			\
 								safe_close.c 			\
 								safe_dup2.c 			\
 								safe_fork.c 			\
+								safe_open.c				\
 								safe_pipe.c 			\
 								wait_all_child.c 		\
 								here_doc.c 				\

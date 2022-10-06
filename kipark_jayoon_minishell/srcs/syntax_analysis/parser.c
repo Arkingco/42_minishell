@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/04 16:56:54 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 11:22:13 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static void	*do_it_at_redirection(t_token *l_token, t_parsing_list *l_parsing)
 static void	*do_it_at_pipe(t_token *l_token, t_parsing_list *l_parsing)
 {
 	t_parsing_list	*node;
-	
+
 	if (!l_token->next || !is_pipe(l_token->next->type))
 		return (print_syntax_error(l_token));
 	node = init_parsing_list();

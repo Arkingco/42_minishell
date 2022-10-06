@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/05 21:08:28 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 11:56:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int	get_exit_status(int status)
 		return_code = WEXITSTATUS(status);
 	else
 	{
-		return_code = 127;
+		return_code = 128;
 		if (WIFSIGNALED(status))
 			signal_number = WTERMSIG(status);
 		else
@@ -95,7 +95,7 @@ static t_here_doc	*tour_cmd_redir(t_redir_chunk *cmd_redir, \
 				if (get_exit_status(status) == 1)
 					return (free_all_here_doc(l_here_doc, fd[0]));
 				else
-					add_here_doc(l_here_doc, fd[0]);	
+					add_here_doc(l_here_doc, fd[0]);
 			}
 		}
 		cmd_redir = cmd_redir->next;
