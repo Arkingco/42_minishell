@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:06:42 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 16:00:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 typedef enum e_terminal_type
 {
 	DEFAULT_TERMINAL,
-	HERE_DOC_TERMINAL
+	HERE_DOC_TERMINAL,
+	EXECUTE_TERMINAL
 }	t_terminal_type;
 
 void	init_terminal(t_terminal_type t_type);

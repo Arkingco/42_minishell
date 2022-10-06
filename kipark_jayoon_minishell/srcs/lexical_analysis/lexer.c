@@ -6,13 +6,15 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/19 14:36:24 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 10:51:47 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 17:12:28 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 #include "libft.h"
 #include "env.h"
+#include "error.h"
+#include "lexer.h"
 #include <stdio.h>
 
 int	get_quote_type_return_index(char *rl, int i, \
@@ -119,7 +121,8 @@ t_token	*tokenize(t_env *env_head, char *readline)
 	init_token_dummy_node(token_head);
 	if (check_readline_quote_close(readline))
 	{
-		ft_putendl_fd("syntax error", 2);
+		token_free(token_head);
+		print_quote_error();
 		return (NULL);
 	}
 	read_readline(env_head, readline, token_head);

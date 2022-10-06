@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 16:18:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 11:24:49 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 15:40:09 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*get_env_value(t_env *env_head, char *env_key)
 
 	env_list = env_head->next;
 	if (*env_key == '?')
-		return (ft_safe_strdup(ft_itoa(g_exit_status)));
+		return (ft_itoa(g_exit_status));
 	while (env_list)
 	{
 		if (ft_strncmp(env_key, env_list->key, env_key_size + 1) == 0)
