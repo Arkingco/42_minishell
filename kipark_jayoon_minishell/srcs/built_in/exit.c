@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 15:48:02 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 17:17:22 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,10 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 
 	exit_exit_status = 0;
 	if (simple_cmd->next == NULL)
+	{
+		ft_putendl_fd("exit", 2);
 		exit(g_exit_status);
+	}
 	else if (simple_cmd->next->next != NULL)
 	{
 		ft_putendl_fd("exit: too many arguments", 2);

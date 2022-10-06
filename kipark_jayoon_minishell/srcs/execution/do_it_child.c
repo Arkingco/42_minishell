@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 14:45:37 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 17:56:49 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,26 @@
 #include "parser.h"
 #include "built.h"
 #include "env.h"
+#include "signal.h"
+#include "terminal.h"
+
+static void	sig_int_signal(int signum)
+{	
+	if (signum == SIGINT)
+		exit(SIGINT);
+}
+
+static void	sig_quit_signal(int signum)
+{
+	if (signum == SIGQUIT)
+		exit(SIGQUIT);
+}
+
+static void	set_signal_child(void)
+{
+	signal(SIGINT, sig_int_signal);
+	signal(SIGQUIT, sig_quit_signal);
+}
 
 static void	execve_cmd(t_args_execve *p_args, char **envp)
 {
@@ -50,6 +70,7 @@ static void	execve_cmd(t_args_execve *p_args, char **envp)
 void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
 													int *fd, t_env *l_head_env)
 {
+	set_signal_child();
 	if (l_parsing->redir_iter)
 		init_fd_by_redirection(l_parsing->redir_iter, fd, info_cmd->l_here_doc);
 	if (fd[0] != 0 && info_cmd->idx_curr_proc != info_cmd->num_proc - 1)
