@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 11:06:17 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:06:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd);
 void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd);
 char	**init_curr_envp(t_env *l_env);
 void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
-				t_here_doc *l_here_doc);
+			t_here_doc *l_here_doc);
 
 /* safe func */
 int		safe_fork(void);
@@ -66,7 +66,8 @@ int		safe_open(char *path, int oflag);
 /* wait */
 void	wait_all_child(pid_t last_fork_pid, size_t num_process);
 
-// utils
+/* utils */
 int		is_single_cmd(t_parsing_list *next);
+int		is_last_cmd(t_info_cmd *info_cmd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 17:28:47 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 18:07:24 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, int *fd)
 {
 	if (l_parsing->redir_iter)
 		init_fd_by_redirection(l_parsing->redir_iter, fd, info_cmd->l_here_doc);
-	if (fd[0] != 0 && info_cmd->idx_curr_proc != info_cmd->num_proc - 1)
+	if (fd[0] != 0 && !is_last_cmd(info_cmd))
 		safe_close(fd[0]);
 	if (fd[1] != 1)
 	{
