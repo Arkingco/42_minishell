@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_it_parent.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 18:06:58 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 18:32:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd)
 			safe_close(fd[2]);
 			fd[2] = 0;
 		}
-		if (info_cmd->idx_curr_proc != info_cmd->num_proc - 1)
+		if (!is_last_cmd(info_cmd))
 		{
 			safe_close(fd[1]);
 			fd[1] = 1;
