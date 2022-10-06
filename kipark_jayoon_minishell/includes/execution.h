@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 18:10:00 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 18:27:21 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_info_cmd
 	size_t			num_proc;
 	t_args_execve	args_execve;
 	t_here_doc		*l_here_doc;
-	t_env			*l_env;
 }	t_info_cmd;
 
 /* main */
