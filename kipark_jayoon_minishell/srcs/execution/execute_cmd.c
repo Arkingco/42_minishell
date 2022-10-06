@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 10:50:04 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 17:36:45 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,5 @@ void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env)
 		wait_all_child(info_cmd.pid, info_cmd.num_proc);
 		ft_safe_free(info_cmd.args_execve.envp);
 	}
-	// built in 일 때 here doc 고려 안 함
 	free_all_here_doc(head_here_doc, 0);
 }
