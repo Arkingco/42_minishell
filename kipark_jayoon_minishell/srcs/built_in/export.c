@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:44:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 10:24:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_correct_export_syntax(char *str)
 		return (0);
 	while (str[i] != '\0' && str[i] != '=')
 	{
-		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]))
+		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
 			return (0);
 		++i;
 	}
