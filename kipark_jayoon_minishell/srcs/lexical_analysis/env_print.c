@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 16:43:00 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 10:46:18 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	print_env_list(t_env *env_head)
 	while (env_list)
 	{
 		if (env_list->value != NULL)
-			printf("%s=%s\n", env_list->key, env_list->value);
+			ft_multi_putendl_fd(env_list->key, "=", env_list->value, 1);
 		env_list = env_list->next;
 	}
 }

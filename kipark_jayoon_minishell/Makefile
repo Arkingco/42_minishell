@@ -81,8 +81,7 @@ SRCS_BUILT_IN				:=	built_in.c		\
 								unset.c	
 SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
 
-SRCS_ERROR					:=	print_syntax_error_pipe.c \
-								printf_syntax_error.c
+SRCS_ERROR					:=	printf_syntax_error.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)				\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 13:44:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/03 14:49:34 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:19:16 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "lexer.h"
 
-void	*print_syntax_error_pipe(void);
 void	*print_syntax_error(t_token *l_token);
 
 #endif

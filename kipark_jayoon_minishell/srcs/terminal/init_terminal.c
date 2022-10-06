@@ -6,24 +6,25 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 14:37:01 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 21:05:40 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 10:52:20 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "terminal.h"
-#include <signal.h>
 #include <stdio.h>
-#include <readline/readline.h>
-#include <readline/history.h>
 #include <unistd.h>
-#include <termios.h>
+#include <signal.h>
 #include <stdlib.h>
+#include <termios.h>
+#include <readline/history.h>
+#include <readline/readline.h>
+#include "terminal.h"
+#include "libft.h"
 
 static void	sig_handler(int signum)
 {
 	if (signum == SIGINT)
 	{
-		printf("\n");
+		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
 		rl_replace_line("", 1);
 		rl_redisplay();

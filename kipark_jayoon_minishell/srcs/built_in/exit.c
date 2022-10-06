@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:44:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 11:25:31 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,20 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 		exit(0);
 	else if (simple_cmd->next->next != NULL)
 	{
-		printf("exit: too many arguments\n");
+		ft_putendl_fd("exit: too many arguments", 2);
 		return (exit_exit_status = 1);
 	}
 	else
 	{
 		if (is_all_digit(simple_cmd->next->str))
 		{
-			printf("exit\n");
+			ft_putendl_fd("exit", 2);
 			exit(ft_atoi(simple_cmd->next->str));
 		}
 		else
 		{
-			printf("minishell\n: exit: %s: numeric argument required\n", \
-														simple_cmd->next->str);
+			ft_multi_putendl_fd("exit\nminishell: exit: ", \
+					simple_cmd->next->str, ": numeric argument required", 2);
 			exit(255);
 		}
 	}
