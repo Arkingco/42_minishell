@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:45 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:44:57 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 11:21:24 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_correct_export_syntax(char *str)
 		return (0);
 	while (str[i] != '\0' && str[i] != '=')
 	{
-		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]))
+		if (!ft_isdigit(str[i]) && !ft_isalpha(str[i]) && str[i] != '_')
 			return (0);
 		++i;
 	}
@@ -61,9 +61,18 @@ static void	print_export(t_env *env)
 	while (this_env)
 	{
 		if (this_env->value == NULL)
-			printf("declare -x %s\n", this_env->key);
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putendl_fd(this_env->key, 1);
+		}
 		else
-			printf("declare -x %s=\"%s\"\n", this_env->key, this_env->value);
+		{
+			ft_putstr_fd("declare -x ", 1);
+			ft_putstr_fd(this_env->key, 1);
+			ft_putstr_fd("=\"", 1);
+			ft_putstr_fd(this_env->value, 1);
+			ft_putstr_fd("\"\n", 1);
+		}
 		this_env = this_env->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:51:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:51:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 15:19:25 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,15 @@ void	expand_and_join_before_after_words(t_env *env_head, char **str, int *i)
 char	*expand_this_word_token(t_env *env_head, char *expand_str)
 {
 	int	i;
+	int	in_double_quote_flag;
 
 	i = 0;
+	in_double_quote_flag = 0;
 	while (expand_str[i] != '\0')
 	{
-		if (expand_str[i] == M_SINGLE_QUOTE)
+		if (expand_str[i] == '"')
+			in_double_quote_flag = !in_double_quote_flag;
+		if (expand_str[i] == M_SINGLE_QUOTE && in_double_quote_flag == 0)
 			pass_sigle_quote(expand_str, &i);
 		else
 			if (expand_str[i] == M_DOLLAR_EXPAND)

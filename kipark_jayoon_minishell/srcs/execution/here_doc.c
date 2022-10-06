@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/02 17:13:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 11:24:49 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:00 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ static int	get_exit_status(int status)
 void	here_doc_child(char *limiter, int *fd)
 {
 	char		*line;
-	char		*pipe_line;
 	const int	limiter_size = ft_strlen(limiter);
 
 	set_here_doc_sig_handler();
@@ -61,9 +60,8 @@ void	here_doc_child(char *limiter, int *fd)
 		{
 			if (ft_strncmp(limiter, line, limiter_size + 1) == 0)
 				break ;
-			pipe_line = ft_safe_strjoin(line, "\n");
-			write(fd[1], pipe_line, ft_strlen(pipe_line));
-			free(pipe_line);
+			write(fd[1], line, ft_strlen(line));
+			write(fd[1], "\n", 1);
 			free(line);
 		}
 		else

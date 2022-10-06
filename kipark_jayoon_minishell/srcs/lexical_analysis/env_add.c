@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/03 16:20:37 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/05 16:45:34 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@ static t_env	*get_dup_env(t_env *env, char *str)
 {
 	char		*str_key;
 	t_env		*this_env;
-	const int	str_key_size = ft_strlen(str_key);
+	int			str_key_size;
 
 	str_key = get_env_key(str);
+	str_key_size = ft_strlen(str_key);
 	this_env = env->next;
 	while (this_env)
 	{

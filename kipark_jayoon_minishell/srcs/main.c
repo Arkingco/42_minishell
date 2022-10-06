@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/05 15:59:35 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 11:56:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,13 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "env.h"
 #include "lexer.h"
 #include "parser.h"
 #include "terminal.h"
 #include "execution.h"
 #include "minishell.h"
-#include "env.h"
+#include "exit_status.h"
 
 static void	check_argument(int argc, char **argv)
 {
@@ -40,7 +41,7 @@ static void	syntax_error_continue(char *line, t_token *token, \
 int main(int argc, char **argv, char **envp)
 {
 	char			*line;
-	t_token 		*token;
+	t_token			*token;
 	t_parsing_list	*l_parsing;
 	t_env			*l_env;
 
@@ -73,10 +74,7 @@ int main(int argc, char **argv, char **envp)
 			l_parsing = NULL;
 		}
 		else
-		{
-			// free(line);
 			exit_readline_return_null();
-		}
 	}
 	return (0);
 }

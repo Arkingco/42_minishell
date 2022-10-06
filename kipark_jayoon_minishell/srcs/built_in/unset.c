@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 15:43:01 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 11:17:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 													ft_strlen(simple_cmd->str))
 		{
 			ft_multi_putendl_fd("minishell: '", simple_cmd->str, \
-											"':not a valid identifier\n", 2);
+											"':not a valid identifier", 2);
 			unset_exit_status = 1;
 		}
 		else
