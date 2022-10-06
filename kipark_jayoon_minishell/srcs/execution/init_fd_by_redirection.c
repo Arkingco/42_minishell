@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 11:01:28 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 11:28:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:46:12 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void	init_output_fd(t_redir_chunk *l_output, int *fd)
 }
 
 void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
-				t_here_doc *l_here_doc)
+			t_here_doc *l_here_doc)
 {
 	if (redir_iter->l_input)
 		init_input_fd(redir_iter->l_input, fd, l_here_doc);

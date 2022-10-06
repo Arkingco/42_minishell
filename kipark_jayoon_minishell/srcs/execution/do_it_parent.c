@@ -6,22 +6,22 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:22:13 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 18:32:57 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:09:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "execution.h"
 #include "parser.h"
 
-void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd)
+void	do_it_parent(int *fd, t_info_cmd *info_cmd)
 {
-	if (redir_iter)
+	if (info_cmd->this_l_input)
 	{
-		while (redir_iter->l_input)
+		while (info_cmd->this_l_input)
 		{
-			if (redir_iter->l_input->type == T_HERE_DOC)
+			if (info_cmd->this_l_input->type == T_HERE_DOC)
 				info_cmd->l_here_doc = info_cmd->l_here_doc->next;
-			redir_iter->l_input = redir_iter->l_input->next;
+			info_cmd->this_l_input = info_cmd->this_l_input->next;
 		}
 	}
 	if (info_cmd->num_proc > 1)

@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 18:30:21 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/06 21:46:32 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ typedef struct s_info_cmd
 	size_t			num_proc;
 	t_args_execve	args_execve;
 	t_here_doc		*l_here_doc;
+	t_redir_chunk	*this_l_input;
 }	t_info_cmd;
 
 /* main */
 void	execute_cmd(t_parsing_list *l_parsing, t_env *l_env);
 void	init_execve_args(t_parsing_list *l_parsing, t_args_execve *p_args,
 			char **envp);
-void	do_it_parent(t_redir_iter *redir_iter, int *fd, t_info_cmd *info_cmd);
+void	do_it_parent(int *fd, t_info_cmd *info_cmd);
 void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
 													int *fd, t_env *l_head_env);
 char	**init_curr_envp(t_env *l_env);

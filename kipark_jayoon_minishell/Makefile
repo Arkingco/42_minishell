@@ -3,6 +3,7 @@ NAME						=	minishell
 CC							=	cc
 CFLAGS						=	-Wall -Wextra -Werror
 DEBUG						=	-g -fsanitize=address
+LEAKS						=	-g
 
 LIBFT_FLAGS 				=	-L$(DIR_LIBFT) -lft
 INCS_FLAGS					=	-I $(DIR_LIBFT) -I $(DIR_INCS)
@@ -101,10 +102,14 @@ ifdef DEBUG_FLAG
 	CFLAGS += $(DEBUG)
 endif
 
+ifdef LEAKS_FLAG
+	CFLAGS += $(LEAKS)
+endif
+
 all: $(NAME)
 
 $(NAME)		: $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) -g $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
+	$(CC) $(CFLAGS) $(RL_LIB) $(LIBFT_FLAGS) $(OBJS) -o $@
 
 %.o			: %.c
 	$(CC) $(CFLAGS) $(RL_INCLUDE) $(INCS_FLAGS) -c $< -o $@
@@ -114,6 +119,9 @@ $(LIBFT)	:
 
 debug: 
 	$(MAKE) DEBUG_FLAG=1
+
+leaks:
+	$(MAKE) LEAKS_FLAG=1
 
 clean:
 	rm -rf $(OBJS) $(NAME).dSYM
