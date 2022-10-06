@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:22:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 18:27:04 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 18:32:26 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ t_here_doc	*free_all_here_doc(t_here_doc *here_doc, int this_here_doc_fd)
 	{
 		next = this_here_doc->next;
 		if (this_here_doc->read_end != 0)
-		{
-			printf("here doc free \n");
 			safe_close(this_here_doc->read_end);
-		}
 		free(this_here_doc);
 		this_here_doc = next;
 	}
