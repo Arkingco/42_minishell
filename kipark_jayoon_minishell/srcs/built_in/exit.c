@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 10:47:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 13:50:08 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 {
 	if (simple_cmd->next == NULL)
 	{
-		ft_putendl_fd("exit", 2);
+		ft_putendl_fd("exit", 1);
 		exit(g_exit_status);
 	}
 	else if (simple_cmd->next->next != NULL)
@@ -45,7 +45,7 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 	{
 		if (is_all_digit(simple_cmd->next->str))
 		{
-			ft_putendl_fd("exit", 2);
+			ft_putendl_fd("exit", 1);
 			exit(ft_atoi(simple_cmd->next->str));
 		}
 		else

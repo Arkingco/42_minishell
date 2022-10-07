@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_it_child.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 10:53:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 17:41:36 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,22 +21,10 @@
 #include "signal.h"
 #include "terminal.h"
 
-static void	sig_int_signal(int signum)
-{	
-	if (signum == SIGINT)
-		exit(SIGINT);
-}
-
-static void	sig_quit_signal(int signum)
-{
-	if (signum == SIGQUIT)
-		exit(SIGQUIT);
-}
-
 static void	set_signal_child(void)
 {
-	signal(SIGINT, sig_int_signal);
-	signal(SIGQUIT, sig_quit_signal);
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
 }
 
 static void	safe_dup2_and_close(int from, int to)
@@ -49,6 +37,7 @@ void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
 													int *fd, t_env *l_head_env)
 {
 	set_signal_child();
+	set_terminal_prompt_sigint_print();
 	if (l_parsing->redir_iter)
 		init_fd_by_redirection(l_parsing->redir_iter, fd, info_cmd->l_here_doc);
 	if (fd[0] != 0 && !is_last_cmd(info_cmd))
