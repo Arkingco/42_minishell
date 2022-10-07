@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   is_exceed_max_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 13:44:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 10:27:55 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/07 10:24:02 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/07 10:40:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "execution.h"
+#include "libft.h"
 
-# include "lexer.h"
-
-void	*print_syntax_error(t_token *l_token);
-void	*print_quote_error(void);
-void	is_exceed_max_fd(int fd);
-
-#endif
+void	is_exceed_max_fd(int fd)
+{
+	if (fd > 250)
+	{
+		safe_close(fd);
+		ft_putendl_fd("Fd exceeds max!", 2);
+		exit(1);
+	}
+}

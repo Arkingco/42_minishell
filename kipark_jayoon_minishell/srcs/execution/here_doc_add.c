@@ -3,14 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   here_doc_add.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:22:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 18:27:04 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 10:43:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <error.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -51,10 +50,7 @@ t_here_doc	*free_all_here_doc(t_here_doc *here_doc, int this_here_doc_fd)
 	{
 		next = this_here_doc->next;
 		if (this_here_doc->read_end != 0)
-		{
-			printf("here doc free \n");
 			safe_close(this_here_doc->read_end);
-		}
 		free(this_here_doc);
 		this_here_doc = next;
 	}
@@ -67,8 +63,5 @@ void	print_here_doc(t_here_doc *here_doc)
 
 	this_here_doc = here_doc->next;
 	while (this_here_doc)
-	{
-		printf("here_doc fd : %d\n", this_here_doc->read_end);
 		this_here_doc = this_here_doc->next;
-	}
 }

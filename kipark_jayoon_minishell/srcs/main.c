@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 22:33:07 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 10:45:26 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	syntax_error_continue(char *line, t_token *token, \
 	free_all(line, token, l_parsing);
 }
 
-static void run_minishell_process(t_env *l_env, char *line)
+static void	run_minishell_process(t_env *l_env, char *line)
 {
 	t_token			*token;
 	t_parsing_list	*l_parsing;
@@ -62,7 +62,7 @@ static void run_minishell_process(t_env *l_env, char *line)
 	free_all(line, token, l_parsing);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	char			*line;
 	t_token			*token;

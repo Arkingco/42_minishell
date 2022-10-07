@@ -56,9 +56,11 @@ SRCS_SYNTAX_ANALYSIS		:=	add_parsing_list_node.c \
 								is_pipe.c
 SRCS_SYNTAX_ANALYSIS		:=	$(addprefix $(DIR_SYNTAX_ANALYSIS)/, $(SRCS_SYNTAX_ANALYSIS))
 
-SRCS_EXECUTION				:=	do_it_child.c 			\
+SRCS_EXECUTION				:=	count_num_processes.c	\
+								do_it_child.c 			\
 								do_it_parent.c 			\
 								execute_cmd.c 			\
+								execve_cmd.c			\
 								init_curr_envp.c 		\
 								init_fd_by_redirection.c\
 								init_execve_args.c 		\
@@ -85,7 +87,8 @@ SRCS_BUILT_IN				:=	built_in.c		\
 								unset.c	
 SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
 
-SRCS_ERROR					:=	printf_syntax_error.c
+SRCS_ERROR					:=	printf_syntax_error.c	\
+								is_exceed_max_fd.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)				\

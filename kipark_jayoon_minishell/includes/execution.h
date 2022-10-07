@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 21:46:32 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 11:03:36 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,9 @@
 # include "here_doc.h"
 # include "parser.h"
 # include <stdlib.h>
+
+# define TEMP_STDIN		254
+# define TEMP_STDOUT	255
 
 typedef enum e_execute_cmd_division
 {
@@ -57,6 +60,7 @@ void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
 char	**init_curr_envp(t_env *l_env);
 void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
 			t_here_doc *l_here_doc);
+void	execve_cmd(t_args_execve *p_args, char **envp);
 
 /* safe func */
 int		safe_fork(void);
@@ -69,6 +73,7 @@ int		safe_open(char *path, int oflag);
 void	wait_all_child(pid_t last_fork_pid, size_t num_process);
 
 /* utils */
+size_t	count_num_processes(t_parsing_list *l_parsing);
 int		is_single_cmd(t_parsing_list *next);
 int		is_last_cmd(t_info_cmd *info_cmd);
 
