@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 17:28:48 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 19:58:05 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ int	main(int argc, char **argv, char **envp)
 	l_parsing = NULL;
 	token = NULL;
 	check_argument(argc, argv);
-	init_terminal(DEFAULT_TERMINAL);
 	l_env = set_shell_env_list(envp);
 	while (1)
 	{
