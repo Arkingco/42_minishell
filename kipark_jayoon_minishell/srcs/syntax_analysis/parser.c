@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 11:22:13 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:08:55 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	*do_it_at_redirection(t_token *l_token, t_parsing_list *l_parsing)
 	t_redir_chunk	*node;
 
 	if (!l_token->next || l_token->next->type != T_WORD)
-		return (print_syntax_error(l_token));
+		return (print_syntax_error());
 	if (l_parsing->redir_iter == NULL)
 		init_redir_iter(l_parsing);
 	node = init_redir_chunk_node(l_token->type, l_token->next->str);
@@ -47,28 +47,14 @@ static void	*do_it_at_pipe(t_token *l_token, t_parsing_list *l_parsing)
 	t_parsing_list	*node;
 
 	if (!l_token->next || !is_pipe(l_token->next->type))
-		return (print_syntax_error(l_token));
+		return (print_syntax_error());
 	node = init_parsing_list();
 	add_parsing_list_node(l_parsing, (t_parsing_list *)node);
 	return (node);
 }
 
-static t_parsing_list	*init_parser(t_parsing_list **l_parsing,
-		t_token **l_token)
+static int	run_while(t_parsing_list *l_parsing, t_token *l_token)
 {
-	*l_parsing = init_parsing_list();
-	*l_token = (*l_token)->next;
-	return (*l_parsing);
-}
-
-t_parsing_list	*parse_tokenized_data(t_token *l_token)
-{
-	t_parsing_list	*l_parsing;
-	t_parsing_list	*head;
-
-	if (!l_token->next || l_token->next->type == T_PIPE)
-		return ((t_parsing_list *)print_syntax_error(l_token->next));
-	head = init_parser(&l_parsing, &l_token);
 	while (l_token)
 	{
 		if (is_word(l_token->type))
@@ -76,16 +62,37 @@ t_parsing_list	*parse_tokenized_data(t_token *l_token)
 		else if (is_redirection(l_token->type))
 		{
 			if (do_it_at_redirection(l_token, l_parsing) == NULL)
-				return (NULL);
+				return (0);
 			l_token = l_token->next;
 		}
 		else
 		{
 			if (do_it_at_pipe(l_token, l_parsing) == NULL)
-				return (NULL);
+				return (0);
 			l_parsing = l_parsing->next;
 		}
 		l_token = l_token->next;
 	}
-	return (head);
+	return (1);
+}
+
+t_parsing_list	*parse_tokenized_data(t_token *l_token)
+{
+	t_parsing_list	*l_parsing;
+	int				is_syntax_right;
+
+	l_parsing = NULL;
+	if (!l_token->next)
+		return (print_syntax_error());
+	if (l_token->next->type == T_PIPE)
+		return (print_syntax_error());
+	l_parsing = init_parsing_list();
+	l_token = l_token->next;
+	is_syntax_right = run_while(l_parsing, l_token);
+	if (is_syntax_right == 0)
+	{
+		free_parsing_list(l_parsing);
+		return (NULL);
+	}
+	return (l_parsing);
 }

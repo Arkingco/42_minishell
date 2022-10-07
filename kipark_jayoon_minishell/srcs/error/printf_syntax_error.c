@@ -6,20 +6,19 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 13:42:48 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 22:37:59 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 19:10:26 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "exit_status.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
 #include "libft.h"
-#include "exit_status.h"
+#include "parser.h"
 
-void	*print_syntax_error(t_token *l_token)
+void	*print_syntax_error(void)
 {
-	if (!l_token)
-		return (NULL);
 	g_exit_status = 258;
 	ft_putendl_fd("minishell: syntax error near unexpected token", 2);
 	return (NULL);
