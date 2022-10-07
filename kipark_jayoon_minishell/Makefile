@@ -67,8 +67,11 @@ SRCS_EXECUTION				:=	count_num_processes.c	\
 								init_execve_args.c 		\
 								is_last_cmd.c			\
 								is_single_cmd.c			\
+								parent_init_fd_redir.c	\
+								run_single_built_in.c	\
 								safe_close.c 			\
 								safe_dup2.c 			\
+								safe_dup2_and_close.c	\
 								safe_fork.c 			\
 								safe_open.c				\
 								safe_pipe.c 			\
@@ -89,7 +92,8 @@ SRCS_BUILT_IN				:=	built_in.c		\
 SRCS_BUILT_IN				:=	$(addprefix $(DIR_BUILT_IN)/, $(SRCS_BUILT_IN))
 
 SRCS_ERROR					:=	printf_syntax_error.c	\
-								is_exceed_max_fd.c
+								is_exceed_max_fd.c		\
+								is_system_call_error.c
 SRCS_ERROR					:=	$(addprefix $(DIR_ERROR)/, $(SRCS_ERROR))
 
 SRCS						:=	$(SRCS_MAIN)				\

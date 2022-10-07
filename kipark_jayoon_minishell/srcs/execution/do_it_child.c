@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   do_it_child.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 17:41:36 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 20:00:58 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,6 @@ static void	set_signal_child(void)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
-}
-
-static void	safe_dup2_and_close(int from, int to)
-{
-	safe_dup2(from, to);
-	safe_close(from);
 }
 
 void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \

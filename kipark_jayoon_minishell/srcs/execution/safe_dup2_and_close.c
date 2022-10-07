@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   safe_dup2_and_close.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 13:44:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 19:08:54 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/07 16:04:26 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/07 16:04:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include "execution.h"
 
-# include "lexer.h"
-
-void	*print_syntax_error(void);
-void	*print_quote_error(void);
-void	is_exceed_max_fd(int fd);
-int		is_system_call_error(int data, char *file_name);
-
-#endif
+void	safe_dup2_and_close(int from, int to)
+{
+	safe_dup2(from, to);
+	safe_close(from);
+}
