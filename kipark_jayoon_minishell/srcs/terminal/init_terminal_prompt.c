@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   terminal.h                                         :+:      :+:    :+:   */
+/*   init_terminal_prompt.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 16:56:21 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/07 16:54:38 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/07 17:32:19 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TERMINAL_H
-# define TERMINAL_H
+#include "terminal.h"
+#include <termios.h>
 
-# include "lexer.h"
-
-typedef enum e_terminal_type
+void	set_terminal_prompt_sigint_not_print(void)
 {
-	DEFAULT_TERMINAL,
-	HERE_DOC_TERMINAL,
-	EXECUTE_TERMINAL
-}	t_terminal_type;
+	struct termios	term;
 
-void	init_terminal(t_terminal_type t_type);
-void	exit_readline_return_null(void);
-void	set_terminal_prompt_sigint_not_print(void);
-void	set_terminal_prompt_sigint_print(void);
+	tcgetattr(1, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(1, 0, &term);
+}
 
-#endif
+void	set_terminal_prompt_sigint_print(void)
+{
+	struct termios	term;
+
+	tcgetattr(1, &term);
+	term.c_lflag |= (ECHOCTL);
+	tcsetattr(1, 0, &term);
+}

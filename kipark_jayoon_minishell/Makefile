@@ -25,8 +25,9 @@ DIR_ERROR					:=	$(DIR_SRCS)/error
 SRCS_MAIN					:=	main.c
 SRCS_MAIN					:=	$(addprefix $(DIR_SRCS)/, $(SRCS_MAIN))
 
-SRCS_TERMINAL				:=	exit_terminal.c		\
-								init_terminal.c		\
+SRCS_TERMINAL				:=	exit_terminal.c			\
+								init_terminal.c			\
+								init_terminal_prompt.c	\
 								free_terminal.c
 SRCS_TERMINAL				:=	$(addprefix $(DIR_TERMINAL)/, $(SRCS_TERMINAL))
 

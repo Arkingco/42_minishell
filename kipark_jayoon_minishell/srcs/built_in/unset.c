@@ -6,13 +6,14 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 11:17:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 17:44:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "built.h"
 #include "parser.h"
 #include "libft.h"
+#include "env.h"
 #include <stdio.h>
 
 static void	env_node_free(t_env *env_node)
@@ -48,6 +49,25 @@ static void	delete_env_node(char *str, t_env *env)
 	return ;
 }
 
+static int	is_env_key_word(char c)
+{
+	if (ft_isalpha(c) || ft_isdigit(c) || c == '_')
+		return (1);
+	return (0);
+}
+
+static int	unset_get_env_key_size(char *env_key)
+{
+	int	i;
+
+	i = 0;
+	if (*env_key == '?' || ft_isdigit(*env_key))
+		return (0);
+	while (is_env_key_word(env_key[i]))
+		++i;
+	return (i);
+}
+
 int	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 {
 	int	unset_exit_status;
@@ -58,7 +78,7 @@ int	built_in_unset(t_simple_cmd *simple_cmd, t_env *env)
 	simple_cmd = simple_cmd->next;
 	while (simple_cmd)
 	{
-		if ((size_t)get_env_key_size(simple_cmd->str) != \
+		if ((size_t)unset_get_env_key_size(simple_cmd->str) != \
 													ft_strlen(simple_cmd->str))
 		{
 			ft_multi_putendl_fd("minishell: '", simple_cmd->str, \
