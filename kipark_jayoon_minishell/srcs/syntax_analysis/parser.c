@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 20:08:41 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 20:24:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ t_parsing_list	*parse_tokenized_data(t_token *l_token)
 
 	l_parsing = NULL;
 	if (!l_token->next)
-		return (print_syntax_error());
+		return (NULL);
 	if (l_token->next->type == T_PIPE)
 		return (print_syntax_error());
 	l_parsing = init_parsing_list();
