@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:37:08 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 16:05:18 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:00:03 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,8 @@ void	init_fd_by_redirection(t_redir_iter *redir_iter, int *fd,
 int		parent_init_fd_redir(t_redir_iter *redir_iter, int *fd,
 			t_here_doc *l_here_doc);
 void	execve_cmd(t_args_execve *p_args, char **envp);
+void	run_single_built_in(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
+													int *fd, t_env *l_head_env);
 
 /* safe func */
 int		safe_fork(void);

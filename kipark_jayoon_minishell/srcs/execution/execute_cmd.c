@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 20:38:11 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 17:40:10 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 18:01:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,38 +37,6 @@ static void	init_valiable(int *fd, t_info_cmd *info_cmd,
 	info_cmd->idx_curr_proc = 0;
 	info_cmd->num_proc = count_num_processes(l_parsing);
 	info_cmd->args_execve.envp = init_curr_envp(l_env->next);
-}
-
-void	run_single_built_in(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
-													int *fd, t_env *l_head_env)
-{
-	int	temp_fd[2];
-	int	is_success;
-
-	is_success = 1;
-	temp_fd[0] = dup(0);
-	temp_fd[1] = dup(1);
-	safe_dup2(0, temp_fd[0]);
-	safe_dup2(1, temp_fd[1]);
-	if (l_parsing->redir_iter)
-		is_success = parent_init_fd_redir(l_parsing->redir_iter, fd,
-				info_cmd->l_here_doc);
-	if (is_success)
-	{
-		if (fd[1] != 1)
-		{
-			safe_dup2(fd[1], 1);
-			safe_close(fd[1]);
-		}
-		if (fd[2] != 0)
-		{
-			safe_dup2(fd[2], 0);
-			safe_close(fd[2]);
-		}
-		execute_bulit_in(l_parsing->l_simple_cmd, l_head_env, SINGLE_CMD);
-	}
-	safe_dup2_and_close(temp_fd[0], 0);
-	safe_dup2_and_close(temp_fd[1], 1);
 }
 
 static void	run_multi_cmd(t_parsing_list *l_parsing, int *fd, \

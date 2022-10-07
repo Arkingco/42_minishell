@@ -67,6 +67,7 @@ SRCS_EXECUTION				:=	count_num_processes.c	\
 								is_last_cmd.c			\
 								is_single_cmd.c			\
 								parent_init_fd_redir.c	\
+								run_single_built_in.c	\
 								safe_close.c 			\
 								safe_dup2.c 			\
 								safe_dup2_and_close.c	\
