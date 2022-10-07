@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:56 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 17:44:10 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 19:23:52 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	unset_get_env_key_size(char *env_key)
 	int	i;
 
 	i = 0;
-	if (*env_key == '?' || ft_isdigit(*env_key))
+	if (ft_isdigit(*env_key))
 		return (0);
 	while (is_env_key_word(env_key[i]))
 		++i;
