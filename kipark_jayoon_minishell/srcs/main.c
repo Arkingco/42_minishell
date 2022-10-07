@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 11:00:37 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 18:38:44 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 20:00:44 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,11 @@ int	main(int argc, char **argv, char **envp)
 
 	l_parsing = NULL;
 	token = NULL;
-	init_terminal(DEFAULT_TERMINAL);
 	check_argument(argc, argv);
 	l_env = set_shell_env_list(envp);
 	while (1)
 	{
+		init_terminal(DEFAULT_TERMINAL);
 		line = readline("minishell-0.1$ ");
 		if (line)
 			run_minishell_process(l_env, line);

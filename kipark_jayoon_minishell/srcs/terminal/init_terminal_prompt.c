@@ -1,20 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit_status.h                                      :+:      :+:    :+:   */
+/*   init_terminal_prompt.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/26 14:22:41 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 19:40:38 by kipark           ###   ########seoul.kr  */
+/*   Created: 2022/10/07 16:54:38 by kipark            #+#    #+#             */
+/*   Updated: 2022/10/07 17:32:19 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXIT_STATUS_H
-# define EXIT_STATUS_H
+#include "terminal.h"
+#include <termios.h>
 
-# define SIGINT_EXIT 130
+void	set_terminal_prompt_sigint_not_print(void)
+{
+	struct termios	term;
 
-int	g_exit_status;
+	tcgetattr(1, &term);
+	term.c_lflag &= ~(ECHOCTL);
+	tcsetattr(1, 0, &term);
+}
 
-#endif
+void	set_terminal_prompt_sigint_print(void)
+{
+	struct termios	term;
+
+	tcgetattr(1, &term);
+	term.c_lflag |= (ECHOCTL);
+	tcsetattr(1, 0, &term);
+}

@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/16 12:14:26 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 16:00:36 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 16:56:21 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@ typedef enum e_terminal_type
 
 void	init_terminal(t_terminal_type t_type);
 void	exit_readline_return_null(void);
+void	set_terminal_prompt_sigint_not_print(void);
+void	set_terminal_prompt_sigint_print(void);
 
 #endif
