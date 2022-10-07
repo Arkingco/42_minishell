@@ -3,58 +3,32 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/04 23:12:48 by jayoon            #+#    #+#             */
-/*   Updated: 2022/09/24 15:46:40 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 20:08:57 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h" 
 
-static char	*allocate_str_by_length(size_t s_len, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
+	char			*str;
+	size_t			i;
+	unsigned int	s_length;
 
-	if (s_len < len)
-		str = (char *)malloc(sizeof(char) * (s_len + 1));
-	else
-		str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
-	return (str);
-}
-
-static void	copy_s_to_ret(t_str *ps, unsigned int start, size_t s_len, \
-							size_t len)
-{
-	size_t	i;
-
+	s_length = ft_strlen(s);
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (str == 0)
+		return (0);
 	i = 0;
-	if (start < s_len)
+	while (start < s_length && s[start] != '\0' && len > i)
 	{
-		while (i < len)
-		{
-			if (ps->src[i] == '\0')
-				break ;
-			ps->dst[i] = ps->src[start + i];
-			i++;
-		}
+		str[i] = s[start];
+		++i;
+		++start;
 	}
-	ps->dst[i] = '\0';
-}
-
-char	*ft_substr(const char *s, unsigned int start, size_t len)
-{
-	t_str	str;
-	size_t	s_len;
-
-	if (!s)
-		return (NULL);
-	str.src = (char *)s;
-	s_len = ft_strlen(s);
-	str.dst = allocate_str_by_length(s_len, len);
-	if (str.dst)
-		copy_s_to_ret(&str, start, s_len, len);
-	return (str.dst);
+	str[i] = '\0';
+	return (str);
 }

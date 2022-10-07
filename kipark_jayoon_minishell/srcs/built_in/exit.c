@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 17:17:22 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 10:47:07 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ int	is_all_digit(char *str)
 
 int	built_in_exit(t_simple_cmd *simple_cmd)
 {
-	int	exit_exit_status;
-
-	exit_exit_status = 0;
 	if (simple_cmd->next == NULL)
 	{
 		ft_putendl_fd("exit", 2);
@@ -42,7 +39,7 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 	else if (simple_cmd->next->next != NULL)
 	{
 		ft_putendl_fd("exit: too many arguments", 2);
-		return (exit_exit_status = 1);
+		return (g_exit_status = 1);
 	}
 	else
 	{
@@ -58,5 +55,5 @@ int	built_in_exit(t_simple_cmd *simple_cmd)
 			exit(255);
 		}
 	}
-	return (exit_exit_status = 0);
+	return (g_exit_status = 0);
 }
