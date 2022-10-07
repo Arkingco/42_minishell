@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:02:32 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 19:08:55 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 20:08:41 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ static void	*do_it_at_pipe(t_token *l_token, t_parsing_list *l_parsing)
 	return (node);
 }
 
-static int	run_while(t_parsing_list *l_parsing, t_token *l_token)
+static int	create_parsing_list(t_parsing_list *l_parsing, t_token *l_token)
 {
 	while (l_token)
 	{
@@ -88,7 +88,7 @@ t_parsing_list	*parse_tokenized_data(t_token *l_token)
 		return (print_syntax_error());
 	l_parsing = init_parsing_list();
 	l_token = l_token->next;
-	is_syntax_right = run_while(l_parsing, l_token);
+	is_syntax_right = create_parsing_list(l_parsing, l_token);
 	if (is_syntax_right == 0)
 	{
 		free_parsing_list(l_parsing);
