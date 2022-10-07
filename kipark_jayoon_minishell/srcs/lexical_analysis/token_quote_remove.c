@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/27 11:09:42 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 16:52:50 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 21:08:40 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 static void	remove_quote_in_quotes_str(int *i, int *j, char *str, char quote)
 {
-	if (check_readline_quote_close(str))
+	if (check_readline_quote_close(str + *i))
 	{
 		while (str[*i] != '\0')
 		{
@@ -27,7 +27,7 @@ static void	remove_quote_in_quotes_str(int *i, int *j, char *str, char quote)
 	else
 	{
 		++(*i);
-		while (str[*i] != quote && str[*i] != '\0')
+		while (str[*i] != quote)
 		{
 			str[*j] = str[*i];
 			++(*j);
