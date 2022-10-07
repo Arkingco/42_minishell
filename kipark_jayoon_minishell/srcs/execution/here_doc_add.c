@@ -6,11 +6,10 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/03 13:22:55 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 18:32:26 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/07 11:54:12 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
 #include <error.h>
 #include <unistd.h>
 #include <sys/wait.h>
@@ -64,8 +63,5 @@ void	print_here_doc(t_here_doc *here_doc)
 
 	this_here_doc = here_doc->next;
 	while (this_here_doc)
-	{
-		printf("here_doc fd : %d\n", this_here_doc->read_end);
 		this_here_doc = this_here_doc->next;
-	}
 }

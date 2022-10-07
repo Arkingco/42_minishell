@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   printf_syntax_error.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 13:42:48 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/06 17:47:47 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/06 22:37:59 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	*print_syntax_error(t_token *l_token)
 	return (NULL);
 }
 
-void	*print_quote_error()
+void	*print_quote_error(void)
 {
 	g_exit_status = 1;
 	ft_putendl_fd("minishell: quote not ended", 2);

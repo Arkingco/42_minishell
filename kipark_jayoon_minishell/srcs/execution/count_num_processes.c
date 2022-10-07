@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   count_the_number_of_processes.c                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/02 13:44:29 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 10:27:55 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/07 11:01:24 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/07 11:03:02 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#include <stdlib.h>
+#include "parser.h"
 
-# include "lexer.h"
+size_t	count_num_processes(t_parsing_list *l_parsing)
+{
+	size_t	num;
 
-void	*print_syntax_error(t_token *l_token);
-void	*print_quote_error(void);
-void	is_exceed_max_fd(int fd);
-
-#endif
+	num = 0;
+	while (l_parsing)
+	{
+		num++;
+		l_parsing = l_parsing->next;
+	}
+	return (num);
+}
