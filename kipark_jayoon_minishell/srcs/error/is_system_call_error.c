@@ -1,36 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_error.c                                   :+:      :+:    :+:   */
+/*   is_system_call_error.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 18:08:03 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 14:53:19 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/07 15:07:40 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/07 17:03:22 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
 
-void	ft_check_error(t_error e, ssize_t data)
+int	is_system_call_error(int data, char *file_name)
 {
-	ssize_t	ret;
-
-	if (e == E_LIBFT && data == 0)
+	if (data == -1)
 	{
-		ret = ft_putstr_fd("Error: libft error\n", 2);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
-		exit(1);
+		ft_multi_putendl_fd("minishell: ", file_name, \
+			": No such file or directory", 2);
+		return (1);
 	}
-	else if (e == E_SYSTEM_CALL && data == -1)
-	{
-		perror("system call");
-		exit(1);
-	}
-	else if (e == E_MALLOC && data == 0)
-	{
-		perror("malloc");
-		exit(1);
-	}
+	return (0);
 }

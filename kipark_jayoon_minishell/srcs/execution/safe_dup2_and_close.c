@@ -1,36 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_error.c                                   :+:      :+:    :+:   */
+/*   safe_dup2_and_close.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 18:08:03 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 14:53:19 by jayoon           ###   ########.fr       */
+/*   Created: 2022/10/07 16:04:26 by jayoon            #+#    #+#             */
+/*   Updated: 2022/10/07 16:04:51 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdio.h>
+#include "execution.h"
 
-void	ft_check_error(t_error e, ssize_t data)
+void	safe_dup2_and_close(int from, int to)
 {
-	ssize_t	ret;
-
-	if (e == E_LIBFT && data == 0)
-	{
-		ret = ft_putstr_fd("Error: libft error\n", 2);
-		ft_check_error(E_SYSTEM_CALL, (ssize_t)ret);
-		exit(1);
-	}
-	else if (e == E_SYSTEM_CALL && data == -1)
-	{
-		perror("system call");
-		exit(1);
-	}
-	else if (e == E_MALLOC && data == 0)
-	{
-		perror("malloc");
-		exit(1);
-	}
+	safe_dup2(from, to);
+	safe_close(from);
 }

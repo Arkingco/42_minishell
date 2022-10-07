@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 14:14:56 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 10:53:23 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/07 16:04:25 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,6 @@ static void	set_signal_child(void)
 {
 	signal(SIGINT, sig_int_signal);
 	signal(SIGQUIT, sig_quit_signal);
-}
-
-static void	safe_dup2_and_close(int from, int to)
-{
-	safe_dup2(from, to);
-	safe_close(from);
 }
 
 void	do_it_child(t_parsing_list *l_parsing, t_info_cmd *info_cmd, \
