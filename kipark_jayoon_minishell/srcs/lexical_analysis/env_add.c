@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 12:08:19 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/05 16:45:34 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 11:06:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static t_env	*get_dup_env(t_env *env, char *str)
 	return (NULL);
 }
 
-t_env	*new_env_node(char *env_str)
+static t_env	*new_env_node(char *env_str)
 {
 	t_env		*new_env;
 	const int	equal_index = ft_strchr_index(env_str, '=');

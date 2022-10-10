@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 13:21:31 by kipark            #+#    #+#             */
-/*   Updated: 2022/09/28 16:58:24 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 11:06:03 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,5 @@ t_env	*set_shell_env_list(char **envp);
 // env_list.c
 void	env_add(t_env *env_head, char *env_str);
 void	print_env_list(t_env *env_head);
-t_env	*new_env_node(char *env_str);
-
-// env.c
-void	set_env_list(t_env *env_head, char **envp);
 
 #endif
