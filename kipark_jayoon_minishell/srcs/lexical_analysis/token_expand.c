@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 15:51:00 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/05 15:19:25 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 11:00:10 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static char	*expand_and_join_words(t_env *env_head, char *str, int *i)
 	return (expand_str);
 }
 
-void	expand_and_join_before_after_words(t_env *env_head, char **str, int *i)
+static void	expand_and_join_before_after_words(t_env *env_head, \
+															char **str, int *i)
 {
 	char	*temp_str;
 	char	*before_str;

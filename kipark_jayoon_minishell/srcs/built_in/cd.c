@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:27 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/06 16:38:55 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 11:17:38 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <stdio.h>
 #include "exit_status.h"
 
-void	update_pwd(t_env *env)
+static void	update_pwd(t_env *env)
 {
 	char	*curr_pwd;
 	char	*new_pwd;

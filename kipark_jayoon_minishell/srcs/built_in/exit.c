@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 18:16:43 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 21:27:06 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 11:17:23 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "exit_status.h"
 #include <stdio.h>
 
-int	is_all_digit(char *str)
+static int	is_all_digit(char *str)
 {
 	int	i;
 
