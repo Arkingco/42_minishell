@@ -6,7 +6,7 @@
 /*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 18:21:25 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 19:41:20 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 10:44:42 by kipark           ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static int	init_stat_loc_after_wait(pid_t last_fork_pid, size_t num_process)
 		wait_pid = wait(&stat_loc);
 		if (wait_pid != -1)
 			i++;
-		if (init_exit_status(stat_loc) == SIGINT_EXIT)
+		if (init_exit_status(stat_loc) == SIGINT_EXIT || \
+									init_exit_status(stat_loc) == SIGQUIT_EXIT)
 			is_stat_sig_int = 1;
 		if (wait_pid == last_fork_pid)
 			this_stat_loc = stat_loc;
