@@ -6,7 +6,7 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:07:40 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 17:03:22 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:36:29 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ int	is_system_call_error(int data, char *file_name)
 {
 	if (data == -1)
 	{
-		ft_multi_putendl_fd("minishell: ", file_name, \
-			": No such file or directory", 2);
+		ft_putstr_fd("minishell: ", 2);
+		perror(file_name);
 		return (1);
 	}
 	return (0);

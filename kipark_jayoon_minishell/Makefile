@@ -143,4 +143,4 @@ re:
 	make fclean
 	make all
 
-.PHONY: all clean fclean re debug
+.PHONY: all clean fclean re debug leaks

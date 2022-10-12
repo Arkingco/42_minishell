@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kipark <kipark@student.42seoul.kr>         +#+  +:+       +#+        */
+/*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 17:31:59 by kipark            #+#    #+#             */
-/*   Updated: 2022/10/07 18:20:17 by kipark           ###   ########seoul.kr  */
+/*   Updated: 2022/10/10 14:47:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ static int	is_only_echo_option(char *str, char c)
 	int	i;
 
 	i = 0;
+	if (str[i] == '\0')
+		return (0);
 	while (str[i] != '\0')
 	{
 		if (str[i] != c)

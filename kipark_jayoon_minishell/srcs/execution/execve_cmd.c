@@ -6,13 +6,14 @@
 /*   By: jayoon <jayoon@student.42seoul.kr>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 10:49:03 by jayoon            #+#    #+#             */
-/*   Updated: 2022/10/07 10:49:53 by jayoon           ###   ########.fr       */
+/*   Updated: 2022/10/10 15:59:28 by jayoon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <errno.h>
 #include "execution.h"
 #include "libft.h"
+#include <stdio.h>
 
 static void	execve_include_path(t_args_execve *p_args, char **envp)
 {
@@ -32,12 +33,12 @@ static void	execve_include_path(t_args_execve *p_args, char **envp)
 	}
 	if (is_permission_denied)
 	{
-		ft_multi_putendl_fd("minishell: ", p_args->argv[0],
-			": Permission denied", 2);
+		ft_putstr_fd("minishell: ", 2);
+		perror(p_args->argv[0]);
 		exit(126);
 	}
-	ft_multi_putendl_fd("minishell: ", p_args->argv[0], \
-		": command not found", 2);
+	ft_putstr_fd("minishell: ", 2);
+	perror(p_args->argv[0]);
 	exit(127);
 }
 
@@ -46,12 +47,12 @@ static void	execve_include_slash_or_no_path(t_args_execve *p_args, char **envp)
 	execve(p_args->argv[0], p_args->argv, envp);
 	if (errno == EACCES)
 	{
-		ft_multi_putendl_fd("minishell: ", p_args->argv[0],
-			": Permission denied", 2);
+		ft_putstr_fd("minishell: ", 2);
+		perror(p_args->argv[0]);
 		exit(126);
 	}
-	ft_multi_putendl_fd("minishell: ", p_args->argv[0], \
-		": No such file or directory", 2);
+	ft_putstr_fd("minishell: ", 2);
+	perror(p_args->argv[0]);
 	exit(127);
 }
 
